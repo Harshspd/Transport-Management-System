@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Configuration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #374151;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .alert-danger {
+            background-color: #fecaca;
+            color: #b91c1c;
+            border: 1px solid #b91c1c;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="page-title">System Configuration</h1>
+
+        <form id="configForm">
+            <div id="errorContainer" class="alert alert-danger hidden"></div>
+            <div id="successContainer" class="alert alert-success hidden"></div>
+
+            <section>
+                <h2 class="section-title">General Settings</h2>
+                <div class="form-group">
+                    <label for="appName">Application Name:</label>
+                    <input type="text" id="appName" name="appName" value="3PL TMS">
+                </div>
+                <div class="form-group">
+                    <label for="baseCurrency">Base Currency:</label>
+                    <select id="baseCurrency" name="baseCurrency">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                        </select>
+                </div>
+                 <div class="form-group">
+                    <label for="timezone">Timezone:</label>
+                    <select id="timezone" name="timezone">
+                        <option value="America/Los_Angeles">America/Los_Angeles</option>
+                        <option value="America/New_York">America/New_York</option>
+                        <option value="Europe/London">Europe/London</option>
+                        <option value="Asia/Kolkata">Asia/Kolkata</option>
+                    </select>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Email Settings</h2>
+                <div class="form-group">
+                    <label for="smtpHost">SMTP Host:</label>
+                    <input type="text" id="smtpHost" name="smtpHost" placeholder="smtp.example.com">
+                </div>
+                <div class="form-group">
+                    <label for="smtpPort">SMTP Port:</label>
+                    <input type="number" id="smtpPort" name="smtpPort" value="587">
+                </div>
+                <div class="form-group">
+                    <label for="smtpUsername">SMTP Username:</label>
+                    <input type="text" id="smtpUsername" name="smtpUsername">
+                </div>
+                <div class="form-group">
+                    <label for="smtpPassword">SMTP Password:</label>
+                    <input type="password" id="smtpPassword" name="smtpPassword">
+                </div>
+                <div class="form-group">
+                    <label for="senderEmail">Sender Email:</label>
+                    <input type="email" id="senderEmail" name="senderEmail">
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Notification Settings</h2>
+                <div class="form-group">
+                    <label for="notificationChannels">Notification Channels:</label>
+                    <select id="notificationChannels" name="notificationChannels" multiple>
+                        <option value="email">Email</option>
+                        <option value="sms">SMS</option>
+                        <option value="push">Push Notifications</option>
+                    </select>
+                    <small class="text-gray-500">Select the channels to use for sending notifications.</small>
+                </div>
+                <div class="form-group">
+                    <label for="emailTemplates">Email Templates:</label>
+                    <textarea id="emailTemplates" name="emailTemplates">
+                        {
+                            "shipment_confirmation": "Your shipment has been confirmed with ID: {shipment_id}",
+                            "dispatch_notification": "Your shipment is dispatched. ETA: {eta}",
+                            "delivery_confirmation": "Your shipment has been delivered."
+                        }
+                    </textarea>
+                    <small class="text-gray-500">JSON format for email templates. Use placeholders like {shipment_id}, {eta}.</small>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">API Keys</h2>
+                 <div class="form-group">
+                    <label for="googleMapsApiKey">Google Maps API Key:</label>
+                    <input type="text" id="googleMapsApiKey" name="googleMapsApiKey" placeholder="AIza...">
+                </div>
+                <div class="form-group">
+                    <label for="smsApiKey">SMS API Key:</label>
+                    <input type="text" id="smsApiKey" name="smsApiKey" placeholder="Your SMS API Key">
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Configuration</button>
+                <button type="reset" class="btn-secondary">Reset to Defaults</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const configForm = document.getElementById('configForm');
+        const appNameInput = document.getElementById('appName');
+        const baseCurrencySelect = document.getElementById('baseCurrency');
+        const timezoneSelect = document.getElementById('timezone');
+        const smtpHostInput = document.getElementById('smtpHost');
+        const smtpPortInput = document.getElementById('smtpPort');
+        const smtpUsernameInput = document.getElementById('smtpUsername');
+        const smtpPasswordInput = document.getElementById('smtpPassword');
+        const senderEmailInput = document.getElementById('senderEmail');
+        const notificationChannelsSelect = document.getElementById('notificationChannels');
+        const emailTemplatesInput = document.getElementById('emailTemplates');
+        const googleMapsApiKeyInput = document.getElementById('googleMapsApiKey');
+        const smsApiKeyInput = document.getElementById('smsApiKey');
+        const errorContainer = document.getElementById('errorContainer');
+        const successContainer = document.getElementById('successContainer');
+
+        // Function to show error message
+        function showError(message) {
+            errorContainer.textContent = message;
+            errorContainer.classList.remove('hidden');
+            successContainer.classList.add('hidden');
+        }
+
+        // Function to show success message
+        function showSuccess(message) {
+            successContainer.textContent = message;
+            successContainer.classList.remove('hidden');
+            errorContainer.classList.add('hidden');
+        }
+
+        // Event listener for form submission
+        configForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Perform validation (optional)
+            if (!appNameInput.value.trim()) {
+                showError('Please enter an application name.');
+                return;
+            }
+            if (!senderEmailInput.value.trim()) {
+                showError('Please enter a sender email.');
+                return;
+            }
+
+            // Get form values
+            const appName = appNameInput.value;
+            const baseCurrency = baseCurrencySelect.value;
+            const timezone = timezoneSelect.value;
+            const smtpHost = smtpHostInput.value;
+            const smtpPort = parseInt(smtpPortInput.value);
+            const smtpUsername = smtpUsernameInput.value;
+            const smtpPassword = smtpPasswordInput.value;
+            const senderEmail = senderEmailInput.value;
+            const notificationChannels = Array.from(notificationChannelsSelect.selectedOptions).map(option => option.value);
+            const emailTemplates = emailTemplatesInput.value;
+            const googleMapsApiKey = googleMapsApiKeyInput.value;
+            const smsApiKey = smsApiKeyInput.value;
+
+
+            // In a real application, you would send this data to the server to save it
+            console.log('Configuration Data:', {
+                appName,
+                baseCurrency,
+                timezone,
+                smtpHost,
+                smtpPort,
+                smtpUsername,
+                smtpPassword,
+                senderEmail,
+                notificationChannels,
+                emailTemplates,
+                googleMapsApiKey,
+                smsApiKey
+            });
+
+            showSuccess('Configuration saved successfully!');
+        });
+
+        // Event listener for reset button
+        configForm.addEventListener('reset', () => {
+            errorContainer.classList.add('hidden');
+            successContainer.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

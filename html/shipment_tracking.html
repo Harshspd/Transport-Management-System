@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Tracking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 rounded-lg">
+    <div class="container max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Shipment Tracking</h1>
+
+        <div class="mb-4">
+            <label for="statusFilter" class="block text-gray-700 text-sm font-bold mb-2">Filter by Status:</label>
+            <select id="statusFilter" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="all">All Shipments</option>
+                <option value="open">Open</option>
+                <option value="in-transit">In Transit</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-200 text-gray-700">
+                    <tr>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Shipment ID</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Pickup Date</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Delivery Date</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Vehicle Number</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Driver Name</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white" id="shipmentTableBody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="editShipmentForm" class="hidden bg-gray-50 rounded-lg p-6 mt-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Shipment</h2>
+            <form id="shipmentForm" class="space-y-4">
+                <div class="form-group">
+                    <label for="editShipmentId">Shipment ID:</label>
+                    <input type="text" id="editShipmentId" readonly class="bg-gray-100">
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">Status:</label>
+                    <select id="editStatus">
+                        <option value="open">Open</option>
+                        <option value="in-transit">In Transit</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editPickupDate">Pickup Date:</label>
+                    <input type="date" id="editPickupDate">
+                </div>
+                <div class="form-group">
+                    <label for="editDeliveryDate">Delivery Date:</label>
+                    <input type="date" id="editDeliveryDate">
+                </div>
+                <div class="form-group">
+                    <label for="editVehicleNumber">Vehicle Number:</label>
+                    <input type="text" id="editVehicleNumber">
+                </div>
+                <div class="form-group">
+                    <label for="editDriverName">Driver Name:</label>
+                    <input type="text" id="editDriverName">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelEditBtn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cancel</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const shipmentTableBody = document.getElementById('shipmentTableBody');
+        const statusFilter = document.getElementById('statusFilter');
+        const editShipmentForm = document.getElementById('editShipmentForm');
+        const shipmentForm = document.getElementById('shipmentForm');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+
+        let editingShipmentId = null;
+
+        const shipments = [
+            { id: "SHP-001", status: "open", pickupDate: "2024-07-20", deliveryDate: "2024-07-22", vehicleNumber: "KA-01-AB-1234", driverName: "John Doe" },
+            { id: "SHP-002", status: "in-transit", pickupDate: "2024-07-21", deliveryDate: "2024-07-23", vehicleNumber: "TN-05-CD-5678", driverName: "Jane Smith" },
+            { id: "SHP-003", status: "delivered", pickupDate: "2024-07-18", deliveryDate: "2024-07-20", vehicleNumber: "MH-12-EF-9012", driverName: "Mike Johnson" },
+            { id: "SHP-004", status: "cancelled", pickupDate: "2024-07-22", deliveryDate: "2024-07-24", vehicleNumber: "KL-07-GH-3456", driverName: "Alice Brown" },
+            { id: "SHP-005", status: "open", pickupDate: "2024-07-23", deliveryDate: "2024-07-25", vehicleNumber: "AP-16-IJ-6789", driverName: "Bob Williams" },
+        ];
+
+        function getStatusBadge(status) {
+            switch (status) {
+                case "open":
+                    return `<span class="inline-block bg-yellow-200 text-yellow-700 px-2 py-1 rounded-full text-xs font-semibold">Open</span>`;
+                case "in-transit":
+                    return `<span class="inline-block bg-blue-200 text-blue-700 px-2 py-1 rounded-full text-xs font-semibold">In Transit</span>`;
+                case "delivered":
+                    return `<span class="inline-block bg-green-200 text-green-700 px-2 py-1 rounded-full text-xs font-semibold">Delivered</span>`;
+                case "cancelled":
+                    return `<span class="inline-block bg-red-200 text-red-700 px-2 py-1 rounded-full text-xs font-semibold">Cancelled</span>`;
+                default:
+                    return `<span class="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs font-semibold">Unknown</span>`;
+            }
+        }
+
+        function populateShipmentTable(filteredShipments) {
+            shipmentTableBody.innerHTML = '';
+            filteredShipments.forEach(shipment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm"><a href="#" class="text-blue-600 hover:underline">${shipment.id}</a></td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">${getStatusBadge(shipment.status)}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">${shipment.pickupDate}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">${shipment.deliveryDate}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">${shipment.vehicleNumber}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">${shipment.driverName}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="flex space-x-2">
+                            <button class="edit-btn bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline" data-shipment-id="${shipment.id}"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline" data-shipment-id="${shipment.id}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                shipmentTableBody.appendChild(row);
+            });
+        }
+
+        function filterAndDisplayShipments() {
+            const selectedStatus = statusFilter.value;
+            let filteredShipments = [];
+
+            if (selectedStatus === 'all') {
+                filteredShipments = shipments;
+            } else {
+                filteredShipments = shipments.filter(shipment => shipment.status === selectedStatus);
+            }
+            populateShipmentTable(filteredShipments);
+        }
+
+        function showEditForm(shipmentId) {
+            editingShipmentId = shipmentId;
+            const shipment = shipments.find(s => s.id === shipmentId);
+
+            if (!shipment) {
+                alert('Shipment not found.');
+                return;
+            }
+
+            editShipmentForm.classList.remove('hidden');
+            document.getElementById('editShipmentId').value = shipment.id;
+            document.getElementById('editStatus').value = shipment.status;
+            document.getElementById('editPickupDate').value = shipment.pickupDate;
+            document.getElementById('editDeliveryDate').value = shipment.deliveryDate;
+            document.getElementById('editVehicleNumber').value = shipment.vehicleNumber;
+            document.getElementById('editDriverName').value = shipment.driverName;
+        }
+
+        function updateShipment(event) {
+            event.preventDefault();
+
+            if (!editingShipmentId) {
+                alert('No shipment is being edited.');
+                return;
+            }
+
+            const updatedShipment = {
+                id: editingShipmentId,
+                status: document.getElementById('editStatus').value,
+                pickupDate: document.getElementById('editPickupDate').value,
+                deliveryDate: document.getElementById('editDeliveryDate').value,
+                vehicleNumber: document.getElementById('editVehicleNumber').value,
+                driverName: document.getElementById('editDriverName').value,
+            };
+
+            const index = shipments.findIndex(s => s.id === editingShipmentId);
+            if (index !== -1) {
+                shipments[index] = updatedShipment;
+            } else {
+                alert('Shipment to update not found.');
+                return;
+            }
+
+            filterAndDisplayShipments();
+            editShipmentForm.classList.add('hidden');
+            editingShipmentId = null;
+            alert('Shipment updated successfully.');
+        }
+
+        function deleteShipment(shipmentId) {
+            if (confirm(`Are you sure you want to delete shipment ${shipmentId}?`)) {
+                const index = shipments.findIndex(s => s.id === shipmentId);
+                if (index !== -1) {
+                    shipments.splice(index, 1);
+                } else {
+                    alert('Shipment to delete not found.');
+                    return;
+                }
+                filterAndDisplayShipments();
+                alert('Shipment deleted successfully.');
+            }
+        }
+
+        statusFilter.addEventListener('change', filterAndDisplayShipments);
+        cancelEditBtn.addEventListener('click', () => {
+            editShipmentForm.classList.add('hidden');
+            editingShipmentId = null;
+        });
+        shipmentForm.addEventListener('submit', updateShipment);
+
+        shipmentTableBody.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.classList.contains('edit-btn')) {
+                const shipmentId = target.dataset.shipmentId;
+                showEditForm(shipmentId);
+            } else if (target.classList.contains('delete-btn')) {
+                const shipmentId = target.dataset.shipmentId;
+                deleteShipment(shipmentId);
+            }
+        });
+
+        // Initial display: Show only open shipments
+        filterAndDisplayShipments();
+        statusFilter.value = "open";
+        filterAndDisplayShipments();
+
+    </script>
+</body>
+</html>

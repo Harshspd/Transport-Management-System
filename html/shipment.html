@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Booking Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Styles for the slide-in panel */
+        .slide-in-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 0;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            transition: width 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+        }
+        #slideInPanelContent{
+            height: 100vh;
+        }
+        .slide-in-panel.show {
+            width: 50%; /* Adjust as needed */
+        }
+        .slide-in-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .slide-in-panel-close {
+            cursor: pointer;
+            font-size: 24px;
+            color: #888;
+        }
+        .slide-in-panel-close:hover {
+            color: #222;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+        #overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 rounded-lg">
+    <div class="container max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Shipment Booking</h1>
+        <form id="shipmentForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Consigner Details</h2>
+                    <div class="flex">
+                        <select id="consigner" name="consigner" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <option value="">Select Consigner</option>
+                            <option value="" id="addConsigner">+ Add new Consigner</option>
+                            </select>
+                        <!-- <button type="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New</button> -->
+                    </div>
+                   <!-- 
+                    <div>
+                        <label for="consignerName" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                        <input type="text" id="consignerName" name="consignerName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="consignerName-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="consignerAddress" class="block text-gray-700 text-sm font-bold mb-2">Address:</label>
+                        <textarea id="consignerAddress" name="consignerAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        <div id="consignerAddress-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="consignerGSTIN" class="block text-gray-700 text-sm font-bold mb-2">GSTIN:</label>
+                        <input type="text" id="consignerGSTIN" name="consignerGSTIN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <div id="consignerGSTIN-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div> --> 
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Consignee Details</h2>
+                    <div>
+                        <!-- <label for="consignee" class="block text-gray-700 text-sm font-bold mb-2">Consignee:</label> -->
+                        <div class="flex">
+                            <select id="consignee" name="consignee" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <option value="">Select Consignee</option>
+                                 </select>
+                         <!--    <button type="button" id="addConsignee" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New</button> -->
+                        </div>
+                        <div id="consignee-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                  <!-- <div>
+                        <label for="consigneeName" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                        <input type="text" id="consigneeName" name="consigneeName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="consigneeName-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="consigneeAddress" class="block text-gray-700 text-sm font-bold mb-2">Address:</label>
+                        <textarea id="consigneeAddress" name="consigneeAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        <div id="consigneeAddress-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="consigneeContact" class="block text-gray-700 text-sm font-bold mb-2">Contact:</label>
+                        <input type="tel" id="consigneeContact" name="consigneeContact" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="consigneeContact-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Pickup Details</h2>
+                    <div>
+                        <label for="pickupLocation" class="block text-gray-700 text-sm font-bold mb-2">Location:</label>
+                        <input type="text" id="pickupLocation" name="pickupLocation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="pickupLocation-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="pickupDateTime" class="block text-gray-700 text-sm font-bold mb-2">Date/Time:</label>
+                        <input type="datetime-local" id="pickupDateTime" name="pickupDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="pickupDateTime-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Delivery Details</h2>
+                    <div>
+                        <label for="deliveryLocation" class="block text-gray-700 text-sm font-bold mb-2">Location:</label>
+                        <input type="text" id="deliveryLocation" name="deliveryLocation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                         <div id="deliveryLocation-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="deliveryDateTime" class="block text-gray-700 text-sm font-bold mb-2">Date/Time:</label>
+                        <input type="datetime-local" id="deliveryDateTime" name="deliveryDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="deliveryDateTime-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Goods Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="goodsDescription" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                        <textarea id="goodsDescription" name="goodsDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        <div id="goodsDescription-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="quantity-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="unitForChargedWeight" class="block text-gray-700 text-sm font-bold mb-2">Unit for Charged Weight:</label>
+                        <select id="unitForChargedWeight" name="unitForChargedWeight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <option value="">Select Unit</option>
+                            <option value="perKg">Per Kg</option>
+                            <option value="lpt">LPT (Less than Truckload)</option>
+                            <option value="ftl">FTL (Full Truckload)</option>
+                            <option value="turbo">Turbo</option>
+                        </select>
+                        <div id="unitForChargedWeight-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div id="weightField" style="display: none;">
+                        <label for="weightValue" class="block text-gray-700 text-sm font-bold mb-2">Charged Weight:</label>
+                        <input type="text" id="weightValue" name="weightValue" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <div id="weightValue-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>    
+                    
+                    <div>
+                        <label for="actualWeight" class="block text-gray-700 text-sm font-bold mb-2">Actual Weight:</label>
+                        <input type="text" id="actualWeight" name="actualWeight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <div id="actualWeight-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="actualDimensions" class="block text-gray-700 text-sm font-bold mb-2">Actual Dimensions:</label>
+                        <input type="text" id="actualDimensions" name="actualDimensions" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <div id="actualDimensions-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    
+                    <div>
+                        <label for="chargedDimensions" class="block text-gray-700 text-sm font-bold mb-2">Charged Dimensions:</label>
+                        <input type="text" id="chargedDimensions" name="chargedDimensions" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <div id="chargedDimensions-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    
+                    <div>
+                        <label for="goodsBillNo" class="block text-gray-700 text-sm font-bold mb-2">Bill No:</label>
+                        <input type="text" id="goodsBillNo" name="goodsBillNo" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="goodsBillNo-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="goodsValue" class="block text-gray-700 text-sm font-bold mb-2">Value:</label>
+                        <input type="text" id="goodsValue" name="goodsValue" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="goodsValue-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="mode" class="block text-gray-700 text-sm font-bold mb-2">Mode:</label>
+                    <select id="mode" name="mode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="">Select Mode</option>
+                        <option value="transport">Transport</option>
+                        <option value="doorDelivery">Door Delivery</option>
+                    </select>
+                    <div id="mode-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                </div>
+                
+            </div>
+            <div>
+                <label for="provider" class="block text-gray-700 text-sm font-bold mb-2">Provider:</label>
+                <div class="flex">
+                    <select id="providerType" name="providerType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="">Select Provider Type</option>
+                        <option value="owner">Owner</option>
+                        <option value="agency">Agency</option>
+                    </select>
+                    <select id="provider" name="provider" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="">Select Provider</option>
+                    </select>
+                    <button type="button" id="addProvider" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New</button>
+                </div>
+                <div id="provider-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Vehicle Details</h2>
+                    <div>
+                        <label for="vehicle" class="block text-gray-700 text-sm font-bold mb-2">Vehicle:</label>
+                        <div class="flex">
+                            <select id="vehicle" name="vehicle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <option value="">Select Vehicle</option>
+                                </select>
+                            <button type="button" id="addVehicle" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New</button>
+                        </div>
+                         <div id="vehicle-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="vehicleType" class="block text-gray-700 text-sm font-bold mb-2">Vehicle Type:</label>
+                        <select id="vehicleType" name="vehicleType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <option value="">Select Vehicle Type</option>
+                            <option value="truck">Truck</option>
+                            <option value="trailer">Trailer</option>
+                            <option value="pickup">Pickup Truck</option>
+                            <option value="van">Van</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div id="vehicleType-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="vehicleCapacityWeight" class="block text-gray-700 text-sm font-bold mb-2">Capacity (Weight):</label>
+                        <input type="text" id="vehicleCapacityWeight" name="vehicleCapacityWeight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="vehicleCapacityWeight-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <label for="vehicleCapacityVolume" class="block text-gray-700 text-sm font-bold mb-2">Capacity (Volume):</label>
+                        <input type="text" id="vehicleCapacityVolume" name="vehicleCapacityVolume" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <div id="vehicleCapacityVolume-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                    </div>
+                </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Driver Details</h2>
+                <div class="flex">
+                    <select id="driver" name="driver" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="">Select Driver</option>
+                        </select>
+                    <button type="button" id="addDriverBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New</button>
+                </div>
+                 <div id="driverFields">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="driverName" class="block text-gray-700 text-sm font-bold mb-2">Driver Name:</label>
+                            <input type="text" id="driverName" name="driverName[]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <div id="driverName-error-0" class="text-red-500 text-xs italic" style="display: none;"></div>
+                        </div>
+                        <div>
+                            <label for="driverLicenseNumber" class="block text-gray-700 text-sm font-bold mb-2">Driver License Number:</label>
+                            <input type="text" id="driverLicenseNumber" name="driverLicenseNumber[]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <div id="driverLicenseNumber-error-0" class="text-red-500 text-xs italic" style="display: none;"></div>
+                        </div>
+                    </div>
+                 </div>
+                <button type="button" id="addDriverBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2">Add New Driver</button>
+            </div>
+            
+            <div>
+                <label for="identityMark" class="block text-gray-700 text-sm font-bold mb-2">Identity Mark:</label>
+                <input type="text" id="identityMark" name="identityMark" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <div id="identityMark-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="ewayBillNumber" class="block text-gray-700 text-sm font-bold mb-2">Eway Bill Number:</label>
+                <input type="text" id="ewayBillNumber" name="ewayBillNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <div id="ewayBillNumber-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="specialInstructions" class="block text-gray-700 text-sm font-bold mb-2">Special Instructions:</label>
+                <textarea id="specialInstructions" name="specialInstructions" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                <div id="specialInstructions-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="serviceType" class="block text-gray-700 text-sm font-bold mb-2">Service Type:</label>
+                <select id="serviceType" name="serviceType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Service Type</option>
+                    <option value="standard">Standard</option>
+                    <option value="express">Express</option>
+                </select>
+                <div id="serviceType-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="documents" class="block text-gray-700 text-sm font-bold mb-2">Upload Documents:</label>
+                <input type="file" id="documents" name="documents[]" multiple class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <div id="documents-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Book Shipment</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="slideInPanel" class="slide-in-panel">
+        <div class="slide-in-panel-header">
+            <h2 id="slideInPanelTitle" class="text-xl font-semibold text-gray-800"></h2>
+            <span class="slide-in-panel-close" id="closePanel">&times;</span>
+        </div>
+        <div id="slideInPanelContent">
+            </div>
+    </div>
+    <div id="overlay"></div>
+    <script>
+        const vehicleDropdown = document.getElementById('vehicle');
+        const providerDropdown = document.getElementById('provider');
+        const consigneeDropdown = document.getElementById('consignee');
+        const consignerDropdown = document.getElementById('consigner');
+        const driverDropdown = document.getElementById('driver');
+        const addVehicleBtn = document.getElementById('addVehicle');
+        const addProviderBtn = document.getElementById('addProvider');
+        const addConsigneeBtn = document.getElementById('addConsignee');
+        const addConsignerBtn = document.getElementById('addConsigner');
+        const addDriverBtnElement = document.getElementById('addDriverBtn');
+
+
+        const slideInPanel = document.getElementById('slideInPanel');
+        const slideInPanelTitle = document.getElementById('slideInPanelTitle');
+        const slideInPanelContent = document.getElementById('slideInPanelContent');
+        const closePanel = document.getElementById('closePanel');
+        const overlay = document.getElementById('overlay');
+
+        const shipmentForm = document.getElementById('shipmentForm');
+
+        let vehicles = [
+            { id: 1, number: 'KA-01-AB-1234' },
+            { id: 2, number: 'TN-05-CD-5678' },
+            { id: "add", name: '+ Add New' },
+        ];
+        let providers = [
+            { id: 1, name: 'ABC Logistics' },
+            { id: 2, name: 'XYZ Transports' },
+            { id: "add", name: '+ Add New' },
+        ];
+        let consignees = [
+            { id: 1, name: 'Dell India' },
+            { id: 2, name: 'HP Pvt Ltd' },
+            { id: "add", name: '+ Add New' },
+        ];
+        let consigners = [
+            { id: 1, name: 'Reliance Industries' },
+            { id: 2, name: 'Tata Steel' },
+            { id: "add", name: '+ Add New' },
+        ];
+        let drivers = [
+            {id:1, name: "Shekhar"},
+            {id:2, name:"Ramesh"},
+            { id: "add", name: '+ Add New' },
+        ]
+
+        function populateDropdown(dropdown, items, valueKey, textKey,title="",url="") {
+            console.log(items);
+            console.log(dropdown);
+            dropdown.innerHTML = '<option value="">Select</option>';
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                dropdown.appendChild(option);
+            });
+
+            dropdown.addEventListener('change', () => {
+             // Check if the selected value is the "Add new Consigner" option
+            if (dropdown.value === 'add') {
+                // Call your function to show the slide-in panel
+                showSlideInPanel(title,url);
+            }
+        });
+        }
+        
+        
+        function showSlideInPanel(title, url) {
+            slideInPanelTitle.textContent = title;
+            slideInPanelContent.innerHTML = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>`;
+            slideInPanel.classList.add('show');
+            overlay.classList.add('show');
+        }
+
+        function closeSlideInPanel() {
+            slideInPanel.classList.remove('show');
+            overlay.classList.remove('show');
+            slideInPanelContent.innerHTML = ''; // Clear the content
+        }
+
+        addVehicleBtn.addEventListener('click', () => showSlideInPanel('Add Vehicle', 'vehicle.html'));
+        addProviderBtn.addEventListener('click', () => showSlideInPanel('Add Provider', 'provider.html'));
+        //addConsigneeBtn.addEventListener('click', () => showSlideInPanel('Add Consignee', 'consignees.html'));
+        //addConsignerBtn.addEventListener('click', () => showSlideInPanel('Add Consigner', 'consigners.html'));
+        addDriverBtnElement.addEventListener('click', () => showSlideInPanel('Add Driver', 'driver.html'));
+        closePanel.addEventListener('click', closeSlideInPanel);
+        overlay.addEventListener('click', closeSlideInPanel);
+
+        populateDropdown(vehicleDropdown, vehicles, 'id', 'number');
+        populateDropdown(providerDropdown, providers, 'id', 'name');
+        populateDropdown(consigneeDropdown, consignees, 'id', 'name',"Add Consignee", 'consignees.html');
+        populateDropdown(consignerDropdown, consigners, 'id', 'name','Add Consigner', 'consigners.html');
+        populateDropdown(driverDropdown, drivers, 'id', 'name');
+        const unitForChargedWeightSelect = document.getElementById('unitForChargedWeight');
+        const weightField = document.getElementById('weightField');
+
+        unitForChargedWeightSelect.addEventListener('change', function() {
+            if (this.value === 'perKg') {
+                weightField.style.display = 'block';
+            } else {
+                weightField.style.display = 'none';
+            }
+        });
+        shipmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+             let hasErrors = false;
+
+            const vehicle = document.getElementById('vehicle').value.trim();
+            const provider = document.getElementById('provider').value.trim();
+            const consignee = document.getElementById('consignee').value.trim();
+            const consigner = document.getElementById('consigner').value.trim();
+            const pickupDate = document.getElementById('pickupDate').value;
+            const deliveryDate = document.getElementById('deliveryDate').value;
+            const goodsDescription = document.getElementById('goodsDescription').value.trim();
+            const quantity = document.getElementById('quantity').value.trim();
+            const driver = document.getElementById('driver').value.trim();
+
+            if (!vehicle) {
+                formErrorResponse('vehicle-error', 'Vehicle is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('vehicle-error').style.display = 'none';
+            }
+            if (!provider) {
+                formErrorResponse('provider-error', 'Provider is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('provider-error').style.display = 'none';
+            }
+            if (!consignee) {
+                formErrorResponse('consignee-error', 'Consignee is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('consignee-error').style.display = 'none';
+            }
+            if (!consigner) {
+                formErrorResponse('consigner-error', 'Consigner is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('consigner-error').style.display = 'none';
+            }
+             if (!driver) {
+                formErrorResponse('driver-error', 'Driver is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('driver-error').style.display = 'none';
+            }
+            if (!pickupDate) {
+                formErrorResponse('pickupDate-error', 'Pickup Date is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('pickupDate-error').style.display = 'none';
+            }
+            if (!deliveryDate) {
+                formErrorResponse('deliveryDate-error', 'Delivery Date is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('deliveryDate-error').style.display = 'none';
+            }
+            if (!goodsDescription) {
+                formErrorResponse('goodsDescription-error', 'Goods Description is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('goodsDescription-error').style.display = 'none';
+            }
+            if (!quantity) {
+                formErrorResponse('quantity-error', 'Quantity is required');
+                hasErrors = true;
+            } else if (isNaN(quantity) || quantity <= 0) {
+                formErrorResponse('quantity-error', 'Invalid Quantity');
+                hasErrors = true;
+            } else {
+                document.getElementById('quantity-error').style.display = 'none';
+            }
+
+            if (!hasErrors) {
+                alert('Form submitted successfully!');
+                shipmentForm.reset();
+            }
+        });
+
+         function formErrorResponse(inputID, response) {
+            const errorElement = document.getElementById(inputID);
+            errorElement.textContent = response;
+            errorElement.style.display = 'block';
+        }
+        
+    </script>
+</body>
+</html>

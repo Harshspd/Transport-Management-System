@@ -1,0 +1,4 @@
+.env
+/uploads/*
+!/uploads/index.js
+/node_modules

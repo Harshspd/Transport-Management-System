@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+        .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            margin-top: 1rem;
+            position: relative; /* Make sure the container is a positioning context */
+        }
+        .chart-canvas {
+            /* width: 100%;  Declared in the style tag*/
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Dashboard</h1>
+
+        <div class="dashboard-container">
+            <div class="card">
+                <h2 class="card-title">Active Shipments</h2>
+                <div class="card-value">125</div>
+                <div class="chart-container">
+                    <canvas id="activeShipmentsChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Active Bookings</h2>
+                <div class="card-value">80</div>
+                 <div class="chart-container">
+                    <canvas id="activeBookingsChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Available Trucks</h2>
+                <div class="card-value">50</div>
+                 <div class="chart-container">
+                    <canvas id="availableTrucksChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Earnings (Month)</h2>
+                <div class="card-value">$250,000</div>
+                 <div class="chart-container">
+                    <canvas id="earningsChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Total Customers</h2>
+                <div class="card-value">550</div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">New Shipments (Today)</h2>
+                <div class="card-value">20</div>
+            </div>
+             <div class="card">
+                <h2 class="card-title">New Bookings (Today)</h2>
+                <div class="card-value">15</div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Average Delivery Time</h2>
+                <div class="card-value">3.5 Days</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the chart contexts
+        const activeShipmentsChartCtx = document.getElementById('activeShipmentsChart').getContext('2d');
+        const activeBookingsChartCtx = document.getElementById('activeBookingsChart').getContext('2d');
+        const availableTrucksChartCtx = document.getElementById('availableTrucksChart').getContext('2d');
+        const earningsChartCtx = document.getElementById('earningsChart').getContext('2d');
+
+        // Create the charts
+        const activeShipmentsChart = new Chart(activeShipmentsChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active', 'Pending'],
+                datasets: [{
+                    label: 'Shipments',
+                    data: [125, 30],
+                    backgroundColor: ['#3b82f6', '#d1d5db'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        const activeBookingsChart = new Chart(activeBookingsChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active', 'Scheduled'],
+                datasets: [{
+                    label: 'Bookings',
+                    data: [80, 20],
+                    backgroundColor: ['#10b981', '#d1d5db'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        const availableTrucksChart = new Chart(availableTrucksChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Available', 'In Use'],
+                datasets: [{
+                    label: 'Trucks',
+                    data: [50, 70],
+                    backgroundColor: ['#8b5cf6', '#d1d5db'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        const earningsChart = new Chart(earningsChartCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Earnings',
+                    data: [20000, 35000, 30000, 45000, 60000, 55000, 75000],
+                    backgroundColor: '#f59e0b', // Tailwind amber-500
+                    borderColor: '#f59e0b',
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

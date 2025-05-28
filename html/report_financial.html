@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .report-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .report-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .report-filter {
+            flex: 1 1 200px;
+        }
+        .report-filter label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .report-filter select, .report-filter input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .report-filter select:focus, .report-filter input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .report-table thead th {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d1d5db;
+        }
+        .report-table tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+        .report-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        .report-summary {
+            background-color: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #dcfce7;
+            margin-bottom: 2rem;
+        }
+        .report-summary h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #15803d;
+            margin-bottom: 1rem;
+        }
+        .report-summary p {
+            font-size: 1.25rem;
+            color: #16a34a;
+            font-weight: 700;
+        }
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+        @media (max-width: 768px) {
+            .report-filters {
+                flex-direction: column;
+            }
+            .report-filter {
+                flex: 1 1 auto;
+            }
+            .report-table thead {
+                display: none;
+            }
+            .report-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #d1d5db;
+                border-radius: 0.5rem;
+                padding: 1rem;
+            }
+            .report-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                padding: 0.5rem 0;
+            }
+            .report-table tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #374151;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .report-table tbody td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="report-title">Financial Report</h1>
+
+        <div class="report-filters">
+            <div class="report-filter">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="report-filter">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+            </div>
+            <div class="report-filter">
+                <label for="reportType">Report Type:</label>
+                <select id="reportType">
+                    <option value="">All Types</option>
+                    <option value="revenue">Revenue</option>
+                    <option value="expenses">Expenses</option>
+                    <option value="profit-loss">Profit/Loss</option>
+                </select>
+            </div>
+            <div class="report-filter">
+                <label for="customerId">Customer:</label>
+                <select id="customerId">
+                    <option value="">All Customers</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="report-table-container">
+            <table class="report-table" id="financialTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Customer Name</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+            <div class="no-data" id="noDataMessage" style="display:none;">No financial data found for the selected filters.</div>
+        </div>
+
+        <div class="report-summary" id="reportSummary" style="display:none;">
+            <h2>Financial Summary</h2>
+            <p>Total <span id="summaryType"></span>: <span id="totalAmount">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const financialTable = document.getElementById('financialTable');
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const reportTypeSelect = document.getElementById('reportType');
+        const customerSelect = document.getElementById('customerId');
+        const noDataMessage = document.getElementById('noDataMessage');
+        const reportSummary = document.getElementById('reportSummary');
+        const totalAmountElement = document.getElementById('totalAmount');
+        const summaryTypeElement = document.getElementById('summaryType');
+
+        // Sample data (replace with your actual data)
+        const financialData = [
+            { date: "2024-07-01", description: "Shipment Revenue", customerId: "CUST-001", customerName: "Acme Corp", type: "revenue", amount: 1500 },
+            { date: "2024-07-05", description: "Fuel Expense", customerId: "CUST-001", customerName: "Acme Corp", type: "expenses", amount: -500 },
+            { date: "2024-07-10", description: "Shipment Revenue", customerId: "CUST-002", customerName: "Beta Inc", type: "revenue", amount: 2000 },
+            { date: "2024-07-12", description: "Driver Salary", customerId: "CUST-002", customerName: "Beta Inc", type: "expenses", amount: -1000 },
+            { date: "2024-07-15", description: "Shipment Revenue", customerId: "CUST-003", customerName: "Gamma Co", type: "revenue", amount: 1800 },
+            { date: "2024-07-18", description: "Vehicle Maintenance", customerId: "CUST-003", customerName: "Gamma Co", type: "expenses", amount: -300 },
+            { date: "2024-07-20", description: "Shipment Revenue", customerId: "CUST-001", customerName: "Acme Corp", type: "revenue", amount: 1200 },
+            { date: "2024-07-22", description: "Office Rent", customerId: "CUST-001", customerName: "Acme Corp", type: "expenses", amount: -800 },
+            { date: "2024-07-25", description: "Shipment Revenue", customerId: "CUST-002", customerName: "Beta Inc", type: "revenue", amount: 2500 },
+            { date: "2024-07-28", description: "Marketing Expense", customerId: "CUST-002", customerName: "Beta Inc", type: "expenses", amount: -200 },
+        ];
+
+        const customers = [
+            { id: "CUST-001", name: "Acme Corp" },
+            { id: "CUST-002", name: "Beta Inc" },
+            { id: "CUST-003", name: "Gamma Co" },
+        ];
+
+        function populateDropdown(dropdown, items, valueKey, textKey) {
+            dropdown.innerHTML = '<option value="">All</option>'; // Clear existing options
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                dropdown.appendChild(option);
+            });
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function generateReport() {
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+            const reportType = reportTypeSelect.value;
+            const customerId = customerSelect.value;
+
+            const filteredData = financialData.filter(item => {
+                const itemDate = new Date(item.date);
+
+                const startDateMatch = !startDate || new Date(startDate) <= itemDate;
+                const endDateMatch = !endDate || new Date(endDate) >= itemDate;
+                const typeMatch = !reportType || item.type === reportType;
+                const customerMatch = !customerId || item.customerId === customerId;
+
+                return startDateMatch && endDateMatch && typeMatch && customerMatch;
+            });
+
+            financialTable.querySelector('tbody').innerHTML = ''; // Clear table body
+            if (filteredData.length === 0) {
+                noDataMessage.style.display = 'block';
+                reportSummary.style.display = 'none';
+            } else {
+                noDataMessage.style.display = 'none';
+                reportSummary.style.display = 'block';
+                let totalAmount = 0;
+                filteredData.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td data-label="Date">${formatDate(item.date)}</td>
+                        <td data-label="Description">${item.description}</td>
+                        <td data-label="Customer Name">${item.customerName}</td>
+                        <td data-label="Type">${item.type}</td>
+                        <td data-label="Amount">${item.amount.toFixed(2)}</td>
+                    `;
+                    financialTable.querySelector('tbody').appendChild(row);
+                    totalAmount += item.amount;
+                });
+
+                totalAmountElement.textContent = totalAmount.toFixed(2);
+                summaryTypeElement.textContent = reportType ? reportType.charAt(0).toUpperCase() + reportType.slice(1) : 'Amount';
+            }
+        }
+
+        // Event listeners for filter changes
+        startDateInput.addEventListener('change', generateReport);
+        endDateInput.addEventListener('change', generateReport);
+        reportTypeSelect.addEventListener('change', generateReport);
+        customerSelect.addEventListener('change', generateReport);
+
+        // Initial population of dropdowns and report
+        window.onload = function() {
+            populateDropdown(customerSelect, customers, 'id', 'name');
+            generateReport(); // Generate initial report
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMS System Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Styles for the split layout */
+        .main-container {
+            display: flex; /* Use flexbox for the layout */
+            height: 100vh; /* Make the container take up the full viewport height */
+        }
+        .menu-section {
+            width: 250px; /* Fixed width for the menu section */
+            background-color: white;
+            padding: 20px;
+            border-right: 1px solid #e2e8f0; /* Add a border to separate the menu */
+            overflow-y: auto; /* In case the menu is long, add scroll */
+        }
+        .content-section {
+            flex-grow: 1; /* Content section takes up the remaining space */
+            padding: 20px;
+            overflow-y: auto;  /* Add scroll for long content */
+        }
+        #content-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="main-container">
+        <nav class="menu-section">
+            <h1 class="text-xl font-semibold text-gray-800 mb-6">Transportation Management System</h1>
+            <ul class="space-y-2">
+                <li>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="dashboard.html" class="text-blue-600 content-link" data-url="dashboard.html">Dashboard</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="font-semibold text-gray-700">Operations</div>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="shipment_tracking.html" data-url="shipment_tracking.html" class="text-blue-600 content-link">Shipment Tracking</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="assign_vehicle.html" data-url="assign_vehicle.html" class="text-blue-600 content-link">Vehicle Assignment</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="rate.html" class="text-blue-600 content-link" data-url="rate.html">Rate Management</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="invoice.html" data-url="invoice.html" class="content-link  text-blue-600">Invoicing</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="font-semibold text-gray-700">Booking</div>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="shipment.html" class="text-blue-600 content-link" data-url="shipment.html">Shipment Booking</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="booking.html" class="text-blue-600 content-link" data-url="booking.html">Vehicle Booking</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="font-semibold text-gray-700">Master Management</div>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="consigners.html" class="text-blue-600 content-link" data-url="consigners.html">Consigners</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="consignees.html" class="text-blue-600 content-link" data-url="consignees.html">Consignees</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="driver.html" class="text-blue-600 content-link" data-url="driver.html">Drivers</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="vehicle.html" class="text-blue-600 content-link" data-url="vehicle.html">Vehicles</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="provider_detail.html" class="text-blue-600 content-link" data-url="provider_detail.html">Partners</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="font-semibold text-gray-700">Reports</div>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="report_shipment.html"  data-url="report_shipment.html" class="content-link text-blue-600">Shipment Reports</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="report_vehicle.html" data-url="report_vehicle.html" class="content-link text-blue-600">Vehicle Reports</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="report_financial.html" data-url="report_financial.html" class="content-link text-blue-600">Financial Reports</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="font-semibold text-gray-700">Settings</div>
+                    <ul class="ml-4 space-y-1">
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="user.html" data-url="new_user.html" class="content-link text-blue-600">User Management</a></li>
+                        <li class="hover:bg-gray-200 rounded-md p-2"><a href="settings.html" data-url="settings.html" class="content-link text-blue-600">Configurations</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="content-section" id="content-area">
+            <div class="header-section flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
+                <div class="button-group flex space-x-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openShipmentBooking()">Shipment Booking</button>
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openVehicleBooking()">Vehicle Booking</button>
+                    <a href="profile.html" data-url="profile.html" class="content-link text-blue-600">User</a>
+                </div>
+            </div>
+            <iframe id="content-frame" src="" frameborder="0"></iframe>
+        </main>
+    </div>
+
+    <script>
+        const contentLinks = document.querySelectorAll('.content-link');
+        const contentFrame = document.getElementById('content-frame');
+
+        contentLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                const url = this.dataset.url; // Get the URL from the data-url attribute
+
+                contentFrame.src = url;
+            });
+        });
+
+        function openShipmentBooking() {
+            contentFrame.src = "shipment.html";
+        }
+
+        function openVehicleBooking() {
+            contentFrame.src = "booking.html";
+        }
+    </script>
+</body>
+</html>

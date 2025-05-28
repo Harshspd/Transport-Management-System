@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Segoe UI !important;
+            margin: 20px;
+        }
+
+        .container {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            max-width: 990px;
+        }
+
+        .topmost {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .invoice-title {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .account-info {
+            width: 100%;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .logo {
+            float: left;
+            max-width: 120px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .account-details {
+            float: right;
+            text-align: right;
+            line-height: 1.6;
+            font-size: 14px;
+            width: calc(100% - 170px);
+        }
+
+        .middle-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .middle-section th,
+        .middle-section td {
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        .middle-section .left {
+            width: 33%;
+            line-height: 1.5;
+             font-size: 14px;
+        }
+
+        .middle-section .center,
+        .middle-section .right {
+            width: 33%;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .middle-section .center {
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .middle-section .right {
+            text-align: right;
+           
+        }
+
+        .dist {
+            margin-bottom: 5px;
+        }
+
+        .total-sec {
+            text-align: right;
+        }
+
+        hr {
+            border: 0;
+            border-top: 3px solid #000;
+        }
+
+        .items-table {
+            width: 100%;
+
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .items-table thead {
+            border-bottom: 1px solid #000;
+        }
+
+        .items-table th,
+        .items-table td {
+            padding: 8px 5px;
+            text-align: right;
+            vertical-align: middle;
+             text-align: center;
+        }
+
+        .items-table th.left-align,
+        .items-table td.left-align {
+            text-align: left;
+        }
+        .items-table td:first-child, .items-table th:first-child {
+            text-align: left; /* You can still left-align the first column if needed */
+        }
+
+        .items-table tbody tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .item-description {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .bottom-invoice-sec {
+            width: 100%;
+        }
+
+        .bottom-invoice-sec table {
+            width: 60%;
+            float: right;
+        }
+
+        .bottom-invoice-sec th,
+        .bottom-invoice-sec td {
+            padding: 2px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .bottom-invoice-sec th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .bottom-invoice-sec .total-label {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .bottom-invoice-sec .total-value {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .horizontal-line {
+            background-color: #f2f2f2;
+        }
+
+        .horizontal-line td {
+            padding: 1px;
+            height: 1px;
+        }
+
+        .subtotal td,
+        .discount td,
+        .gst td {
+            text-align: right;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .notes,
+        .terms {
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .notes-title,
+        .terms-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .notes-content,
+        .terms-content {
+            margin-left: 20px;
+            line-height: 1.5;
+        }
+
+        .subtotal td:first-child {
+            padding-left: 175px;
+        }
+
+        .section-header .discounts {
+            padding-left: 552px;
+        }
+
+        .section-header .taxes {
+            padding-left: 569px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topmost">
+        <div class="invoice-title">Tax Invoice</div>
+    </div>
+    <div class="account-info">
+        <div style="display: inline-block;">
+            <img src="{{account.logo}}" alt="Invoice Logo" class="logo" />
+          
+        </div>
+
+        <div class="account-details">
+            <div class="est_no dist"></div>
+            <p><strong>Invoice Number</strong></p>
+            <p>{{data.invoice_number}}</p>
+        </div>
+
+
+    </div>
+    </div>
+    <div class="container">
+        <div class="middle-section">
+            <table>
+                <tr>
+                    <td class="left">
+                        <p><strong>Billed To</strong></p>
+                        <p><i>{{data.client.client_id.name}}</i></p>
+                        <p>{{data.client.client_id.address.address_line_1}}</p>
+                        <p>{{data.client.client_id.address.address_line_2}}</p>
+                        {{#if data.client.client_id.address.city}}
+                        {{#if data.client.client_id.address.state}}
+                        <p>{{data.client.client_id.address.city}}, {{data.client.client_id.address.state}}</p>
+                        {{else}}
+                        <p>{{data.client.client_id.address.city}}</p>
+                        {{/if}}
+                        {{else}}
+                        {{#if data.client.client_id.address.state}}
+                        <p>{{data.client.client_id.address.state}}</p>
+                        {{/if}}
+                        {{/if}}
+                        <p>{{data.client.client_id.address.postal_code}}</p>
+                        <p>{{data.client.client_id.address.country_id.name}}</p>
+
+                        {{#if data.client.client_id.gstno}}
+                        <p>GST: {{data.client.client_id.gstno}}</p>
+                        {{/if}}
+                        {{#if data.client.client_id.panno}}
+                        <p>PAN:{{data.client.client_id.panno}}</p>
+                        {{/if}}
+                        {{#if data.client.client_id.company_registeration_no}}
+                        <p>Reg No.:{{data.client.client_id.company_registeration_no}}</p>
+                        {{/if}}
+                    </td>
+                    <td class="center">
+                        <p><strong>Paid To</strong></p>
+                        <p ><i>{{account.name}}</i></p>
+                        <p>{{account.address.address_line_1}}</p>
+                        <p>{{account.address.address_line_2}}</p>
+                        <p>
+                            {{#if account.address.country_id.name}}
+                            {{account.address.country_id.name}}
+                            {{/if}}
+                            {{#if account.address.country_id.name}}{{#if account.address.postal_code}},{{/if}}{{/if}}
+                            {{account.address.postal_code}}
+                        </p>
+                        <p>{{currency.name}}</p>
+                        <p>{{account.mobile}}</p>
+                        {{#if account.gstno}}
+                        <p>GST: {{account.gstno}}</p>
+                        {{/if}}
+                        {{#if account.panno}}
+                        <p>PAN:{{account.panno}}</p>
+                        {{/if}}
+                        {{#if account.company_registeration_no}}
+                        <p>Registration No.:{{account.company_registeration_no}}</p>
+                        {{/if}}
+                    </td>
+                    <td class="right">
+                        <div class="date dist">
+                            <p><strong>Invoice Date</strong></p>
+                            <p>{{data.issued_date}}</p>
+                        </div>
+
+                        <div class="date dist">
+                            <p><strong>Due Date</strong></p>
+                            <p>{{data.due_date}}</p>
+                        </div>
+
+                        {{#if data.reference_number}}
+                        <div class="ref_no dist">
+                            <p><strong>Reference</strong></p>
+                            <p>{{data.reference_number}}</p>
+                        </div>
+                        {{/if}}
+                        <div class="billing-period dist">
+                            <p><strong>Billing Period</strong></p>
+                            <p>{{formateDate data.billingPeriodStart}} - {{formateDate data.billingPeriodEnd}}</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="total-sec dist">
+            <p><strong>Total </strong> <strong>{{data.currency.currency}}&nbsp;&nbsp;{{formatFloat data.total}}</strong></p>
+           
+        </div>
+        <hr />
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th class="left-align">Item</th>
+                    <th>HSN</th>
+                    <th>Rate</th>
+                    <th>Qty</th>
+                    <th style="text-align: end;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.items}}
+                <tr>
+                    <td class="left-align">
+                        <span class="item-description">{{name}}</span><br />
+                    </td>
+                    <td>{{item.hsncode}}</td>
+                    <td>{{estimate.currency.currency}}{{formatFloat price}}</td>
+                    <td>{{quantity}}</td>
+                    <td style="text-align: end;" >{{estimate.currency.currency}}{{formatFloat line_total}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="bottom-invoice-sec">
+            <table>
+                <tr class="subtotal">
+                    <td>Subtotal</td>
+                    <td>{{formatFloat data.subtotal}}</td>
+                </tr>
+                {{#if data.discounts}}
+                {{#each data.discounts}}
+                {{#if rate}}
+                <tr class="discount">
+                    <td>{{name}} {{rate}}%</td>
+                    <td>-{{formatFloat amount}}</td>
+                </tr>
+                {{/if}}
+                {{/each}}
+                {{/if}}
+
+                <!-- Taxes Section -->
+
+
+                {{#if data.taxes}}
+
+                {{#each data.taxes}}
+                {{#if rate}}
+                <tr class="gst">
+                    <td>{{name}}&nbsp;&nbsp;{{rate}}%</td>
+                    <td>+{{formatFloat amount}}</td>
+                </tr>
+
+                {{/if}}
+                {{/each}}
+
+                {{/if}}
+
+                <tr class="horizontal-line">
+                    <td colspan="4"></td>
+                </tr>
+                <tr class="total">
+                    <td class="total-label">Total</td>
+                    <td class="total-value">{{data.currency.currency}}&nbsp;&nbsp;{{formatFloat data.total}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="clear"></div>
+        <div class="notes" style="padding-bottom:10px">
+            <p class="notes-title">Notes:</p>
+            {{#if data.notes}}
+        <p class="notes-content">{{{breakLines data.notes}}}</p>
+            {{/if}}
+        </div>
+
+
+        <div class="terms" style="padding-bottom:10px">
+
+            <p class="terms-title">Terms & Conditions:</p>
+            {{#if data.terms}}
+            <p class="terms-content">{{{breakLines data.terms}}}</p>
+            {{/if}}
+        </div>
+
+    </div>
+</body>
+
+</html>

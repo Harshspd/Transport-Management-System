@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Invoice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .table-container {
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        .invoice-table thead th {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d1d5db;
+        }
+        .invoice-table tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+        .invoice-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        .invoice-summary {
+            background-color: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: right;
+            border: 1px solid #dcfce7;
+            margin-bottom: 2rem;
+        }
+        .invoice-summary h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #15803d;
+            margin-bottom: 1rem;
+        }
+        .invoice-summary p {
+            font-size: 1.25rem;
+            color: #16a34a;
+            font-weight: 700;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #374151;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .alert-danger {
+            background-color: #fecaca;
+            color: #b91c1c;
+            border: 1px solid #b91c1c;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+        }
+        @media (max-width: 768px) {
+            .report-filters {
+                flex-direction: column;
+            }
+            .report-filter {
+                flex: 1 1 auto;
+            }
+            .invoice-table thead {
+                display: none;
+            }
+            .invoice-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #d1d5db;
+                border-radius: 0.5rem;
+                padding: 1rem;
+            }
+            .invoice-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                padding: 0.5rem 0;
+            }
+            .invoice-table tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #374151;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .invoice-table tbody td:last-child {
+                border-bottom: none;
+            }
+            .invoice-summary {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="page-title">Generate Invoice</h1>
+
+        <form id="invoiceForm">
+            <div id="errorContainer" class="alert alert-danger hidden"></div>
+            <div id="successContainer" class="alert alert-success hidden"></div>
+
+            <div class="form-group">
+                <label for="shipmentId">Shipment ID:</label>
+                <select id="shipmentId" name="shipmentId">
+                    <option value="">Select Shipment</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="invoiceDate">Invoice Date:</label>
+                <input type="date" id="invoiceDate" name="invoiceDate">
+            </div>
+
+            <div class="form-group">
+                <label for="paymentTerms">Payment Terms:</label>
+                <input type="text" id="paymentTerms" name="paymentTerms" value="Net 30 days">
+            </div>
+
+            <div class="table-container">
+                <table class="invoice-table" id="invoiceTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="invoice-summary">
+                <h2>Invoice Summary</h2>
+                <p>Subtotal: <span id="subtotal">0.00</span></p>
+                <p>GST (<span id="gstRate">0</span>%): <span id="gstAmount">0.00</span></p>
+                <p>Total: <span id="total">0.00</span></p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Generate Invoice</button>
+                <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+       const invoiceForm = document.getElementById('invoiceForm');
+       const shipmentIdSelect = document.getElementById('shipmentId');
+       const invoiceDateInput = document.getElementById('invoiceDate');
+       const paymentTermsInput = document.getElementById('paymentTerms');
+       const invoiceTable = document.getElementById('invoiceTable');
+       const subtotalElement = document.getElementById('subtotal');
+       const gstRateElement = document.getElementById('gstRate');
+       const gstAmountElement = document.getElementById('gstAmount');
+       const totalElement = document.getElementById('total');
+       const errorContainer = document.getElementById('errorContainer');
+       const successContainer = document.getElementById('successContainer');
+       const cancelBtn = document.getElementById('cancelBtn');
+
+        // Dummy data for shipments (replace with your actual data)
+        const shipments = [
+            { id: "SHP-001", orderId: "ORD-001", customerId: "CUST-001", customerName: "Acme Corp", pickupAddress: "123 Main St, CityA", deliveryAddress: "456 Oak Ave, CityB", items: [{ description: "Widget A", quantity: 10, rate: 100 }, { description: "Widget B", quantity: 5, rate: 200 }] },
+            { id: "SHP-002", orderId: "ORD-002", customerId: "CUST-002", customerName: "Beta Inc", pickupAddress: "789 Pine Ln, CityC", deliveryAddress: "101 Elm St, CityD", items: [{ description: "Product X", quantity: 20, rate: 50 }, { description: "Product Y", quantity: 10, rate: 150 }] },
+            { id: "SHP-003", orderId: "ORD-003", customerId: "CUST-001", customerName: "Acme Corp", pickupAddress: "222 Maple Dr, CityA", deliveryAddress: "333 Cedar Rd, CityE", items: [{ description: "Service 1", quantity: 1, rate: 500 }, { description: "Service 2", quantity: 2, rate: 300 }] },
+        ];
+
+        const gstRate = 18; // Example GST rate
+
+        function populateDropdown(dropdown, items, valueKey, textKey) {
+            dropdown.innerHTML = '<option value="">Select</option>'; // Clear existing options
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = textKey ? item[textKey] : item[valueKey];
+                dropdown.appendChild(option);
+            });
+        }
+
+        function showError(message) {
+            errorContainer.textContent = message;
+            errorContainer.classList.remove('hidden');
+            successContainer.classList.add('hidden');
+        }
+
+        function showSuccess(message) {
+            successContainer.textContent = message;
+            successContainer.classList.remove('hidden');
+            errorContainer.classList.add('hidden');
+        }
+
+        function validateForm() {
+            if (!shipmentIdSelect.value) {
+                showError('Please select a shipment.');
+                return false;
+            }
+            if (!invoiceDateInput.value) {
+                showError('Please enter an invoice date.');
+                return false;
+            }
+            return true;
+        }
+
+        function calculateInvoice(shipment) {
+            let subtotal = 0;
+            invoiceTable.querySelector('tbody').innerHTML = ''; // Clear existing items
+            shipment.items.forEach(item => {
+                const amount = item.quantity * item.rate;
+                subtotal += amount;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td data-label="Description">${item.description}</td>
+                    <td data-label="Quantity">${item.quantity}</td>
+                    <td data-label="Rate">${item.rate.toFixed(2)}</td>
+                    <td data-label="Amount">${amount.toFixed(2)}</td>
+                `;
+                invoiceTable.querySelector('tbody').appendChild(row);
+            });
+
+            const gstAmount = (subtotal * gstRate) / 100;
+            const total = subtotal + gstAmount;
+
+            subtotalElement.textContent = subtotal.toFixed(2);
+            gstRateElement.textContent = gstRate.toFixed(0);
+            gstAmountElement.textContent = gstAmount.toFixed(2);
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        // Populate the dropdowns
+        window.onload = function() {
+            populateDropdown(shipmentIdSelect, shipments, 'id');
+        }
+
+        shipmentIdSelect.addEventListener('change', () => {
+            const selectedShipmentId = shipmentIdSelect.value;
+            const selectedShipment = shipments.find(shipment => shipment.id === selectedShipmentId);
+            if (selectedShipment) {
+                calculateInvoice(selectedShipment);
+            } else {
+                // Clear the table and summary if no shipment is selected
+                invoiceTable.querySelector('tbody').innerHTML = '';
+                subtotalElement.textContent = '0.00';
+                gstAmountElement.textContent = '0.00';
+                totalElement.textContent = '0.00';
+            }
+        });
+
+        invoiceForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (validateForm()) {
+                const shipmentId = shipmentIdSelect.value;
+                const invoiceDate = invoiceDateInput.value;
+                const paymentTerms = paymentTermsInput.value;
+
+                const selectedShipment = shipments.find(shipment => shipment.id === shipmentId);
+
+                // In real scenario, you would save this invoice data to a database
+                console.log(`Invoice generated for Shipment ID: ${shipmentId} on ${invoiceDate} with Payment Terms: ${paymentTerms}`);
+                console.log("Invoice Details:", {
+                    shipment: selectedShipment,
+                    invoiceDate: invoiceDate,
+                    paymentTerms: paymentTerms,
+                    subtotal: subtotalElement.textContent,
+                    gstRate: gstRateElement.textContent,
+                    gstAmount: gstAmountElement.textContent,
+                    total: totalElement.textContent,
+                });
+
+                showSuccess('Invoice generated successfully!');
+                 // Reset the form
+                invoiceForm.reset();
+                invoiceTable.querySelector('tbody').innerHTML = '';
+                subtotalElement.textContent = '0.00';
+                gstAmountElement.textContent = '0.00';
+                totalElement.textContent = '0.00';
+                shipmentIdSelect.value = "";
+
+            }
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            invoiceForm.reset();
+            errorContainer.classList.add('hidden');
+            successContainer.classList.add('hidden');
+            invoiceTable.querySelector('tbody').innerHTML = '';
+            subtotalElement.textContent = '0.00';
+            gstAmountElement.textContent = '0.00';
+            totalElement.textContent = '0.00';
+            shipmentIdSelect.value = "";
+        });
+    </script>
+</body>
+</html>

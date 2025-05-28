@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 rounded-lg">
+    <div class="container max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Vehicle Details</h1>
+        <form id="vehicleForm" class="space-y-4">
+            <div>
+                <label for="vehicleNumber" class="block text-gray-700 text-sm font-bold mb-2">Vehicle Number:</label>
+                <input type="text" id="vehicleNumber" name="vehicleNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="vehicleNumber-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="vehicleType" class="block text-gray-700 text-sm font-bold mb-2">Vehicle Type:</label>
+                <select id="vehicleType" name="vehicleType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Vehicle Type</option>
+                    <option value="truck">Truck</option>
+                    <option value="trailer">Trailer</option>
+                    <option value="pickup">Pickup Truck</option>
+                    <option value="van">Van</option>
+                    <option value="other">Other</option>
+                </select>
+                <div id="vehicleType-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="vehicleCapacityWeight" class="block text-gray-700 text-sm font-bold mb-2">Capacity (Weight):</label>
+                <input type="text" id="vehicleCapacityWeight" name="vehicleCapacityWeight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="vehicleCapacityWeight-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="vehicleCapacityVolume" class="block text-gray-700 text-sm font-bold mb-2">Capacity (Volume):</label>
+                <input type="text" id="vehicleCapacityVolume" name="vehicleCapacityVolume" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="vehicleCapacityVolume-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save Vehicle Details</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('vehicleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let hasErrors = false;
+
+            const vehicleNumber = document.getElementById('vehicleNumber').value.trim();
+            const vehicleType = document.getElementById('vehicleType').value.trim();
+            const vehicleCapacityWeight = document.getElementById('vehicleCapacityWeight').value.trim();
+            const vehicleCapacityVolume = document.getElementById('vehicleCapacityVolume').value.trim();
+
+            if (!vehicleNumber) {
+                formErrorResponse('vehicleNumber-error', 'Vehicle Number is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('vehicleNumber-error').style.display = 'none';
+            }
+
+            if (!vehicleType) {
+                formErrorResponse('vehicleType-error', 'Vehicle Type is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('vehicleType-error').style.display = 'none';
+            }
+
+            if (!vehicleCapacityWeight) {
+                formErrorResponse('vehicleCapacityWeight-error', 'Capacity (Weight) is required');
+                hasErrors = true;
+            } else if (isNaN(vehicleCapacityWeight)) {
+                formErrorResponse('vehicleCapacityWeight-error', 'Capacity (Weight) must be a number');
+                hasErrors = true;
+            } else {
+                document.getElementById('vehicleCapacityWeight-error').style.display = 'none';
+            }
+
+            if (!vehicleCapacityVolume) {
+                formErrorResponse('vehicleCapacityVolume-error', 'Capacity (Volume) is required');
+                hasErrors = true;
+            } else if (isNaN(vehicleCapacityVolume)) {
+                formErrorResponse('vehicleCapacityVolume-error', 'Capacity (Volume) must be a number');
+                hasErrors = true;
+            } else {
+                document.getElementById('vehicleCapacityVolume-error').style.display = 'none';
+            }
+
+            if (!hasErrors) {
+                alert('Form submitted successfully!');
+                document.getElementById('vehicleForm').reset();
+            }
+        });
+
+        function formErrorResponse(inputID, response) {
+            const errorElement = document.getElementById(inputID);
+            errorElement.textContent = response;
+            errorElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

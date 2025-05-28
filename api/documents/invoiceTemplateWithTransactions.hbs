@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.container {
+    margin: auto;
+    margin-top: 50px;
+     /* Ensures full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+.topmost {
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Space between title and content below */
+}
+.invoice-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+.account-info {
+    width: 100%;
+    margin-top: 20px; /* Space between title and account info */
+    overflow: hidden; /* Clear floats */
+}
+.logo {
+    float: left;
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+}
+.account-details {
+    float: right;
+    text-align: right;
+    line-height: 1.6;
+    font-size: 14px;
+    width: calc(100% - 170px); /* Width adjustment to accommodate the logo */
+}
+.middle-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.middle-section th, .middle-section td {
+    padding: 8px; /* Reduced padding for closer spacing */
+    vertical-align: top;
+}
+.middle-section .left {
+    width: 43%;
+    line-height: 1.5;
+}
+.middle-section .center, .middle-section .right {
+    width: 25%;
+}
+.middle-section .center {
+    text-align: left;
+}
+.middle-section .right {
+    text-align: left;
+}
+.dist {
+    margin-bottom: 5px; /* Reduced margin for closer spacing */
+}
+.total-sec {
+    text-align: right;
+    margin-top: 15px; /* Adjusted margin for closer spacing */
+}
+hr {
+    border: 0;
+    border-top: 3px solid #000;
+    margin-top: 20px;
+}
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.items-table th, .items-table td {
+    padding: 8px; /* Reduced padding for closer spacing */
+    text-align: right;
+    vertical-align: top;
+}
+.items-table th.left-align, .items-table td.left-align {
+    text-align: left;
+}
+.items-table tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+.item-description {
+    font-weight: bold;
+    font-size: 16px;
+}
+.bottom-invoice-sec {
+    width: 100%;
+    margin-top: 40px;
+}
+.bottom-invoice-sec table {
+    width: 60%;
+    float: right;
+}
+.bottom-invoice-sec th, .bottom-invoice-sec td {
+    padding: 8px; /* Reduced padding for closer spacing */
+    text-align: left;
+    vertical-align: top;
+}
+.bottom-invoice-sec th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.bottom-invoice-sec .total-label {
+    text-align: right;
+    font-weight: bold;
+}
+.bottom-invoice-sec .total-value {
+    text-align: right;
+    font-weight: bold;
+}
+.horizontal-line {
+    background-color: #f2f2f2;
+}
+.horizontal-line td {
+    padding: 1px;
+    height: 1px;
+}
+.subtotal td, .discount td, .gst td {
+    text-align: right;
+}
+.clear {
+    clear: both;
+}
+.notes, .terms {
+    margin-top: 20px; /* Reduced margin for closer spacing */
+    font-size: 14px;
+}
+.notes-title, .terms-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.notes-content, .terms-content {
+    margin-left: 20px;
+    line-height: 1.5;
+}
+.subtotal td:first-child {
+    padding-left: 175px; /* Adjust this value as needed */
+}
+.section-header .discounts {
+    padding-left: 552px; /* Adjust this value as needed */
+   
+    /* Optional: to match your section header style */
+}
+.section-header .taxes{
+     padding-left: 569px;
+}
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                margin: 0;
+            }
+            .account-info, .bottom-invoice-sec {
+                page-break-inside: avoid;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="topmost">
+        <div class="invoice-title">Tax Invoice</div>
+    </div>
+    <div class="account-info">
+        <img src="{{invoice.account.logo}}" alt="Invoice Logo" class="logo" />
+        <div class="account-details">
+            <p>{{account.name}}</p>
+            <p>{{account.address.address_line_1}}</p>
+            <p>{{account.address.address_line_2}}</p>
+            <p>{{account.address.city}}, {{account.address.state}}</p>
+            <p>{{account.address.country_id.name}},{{account.address.postal_code}}</p>
+            <p>{{currency.name}}</p>
+            <p>{{account.mobile}}</p>
+            <p>GST:{{account.gstno}}</p>
+            <p>PAN:{{account.panno}}</p>
+            {{#if account.company_registeration_no}}
+            <p>Registration No.:{{account.company_registeration_no}}</p>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="middle-section">
+            <table>
+                <tr>
+                    <td class="left" >
+                        <p><strong>Billed To</strong></p>
+                        <p>{{invoice.client.client_id.name}}</p>
+                        <p>{{invoice.client.client_id.address.address_line_1}}</p>
+                        <p>{{invoice.client.client_id.address.address_line_2}}</p>
+                        <p>{{invoice.client.client_id.address.city}}, {{invoice.client.client_id.address.state}}</p>
+                        <p>{{invoice.client.client_id.address.postal_code}}</p>
+                        <p>{{invoice.client.client_id.address.country_id.name}}</p>
+                        <p>Client GST: {{invoice.client.client_id.gstno}}</p>
+                        <p>Client PAN: {{invoice.client.client_id.panno}}</p>
+                        {{#if data.client.client_id.company_registeration_no}}
+                        <p>Registration No.:{{invoice.client.client_id.company_registeration_no}}</p>
+                        {{/if}}
+                    </td>
+                    <td class="center" style="width:40%">
+                        <div class="date dist">
+                            <p><strong>Date Issued</strong></p>
+                            <p>{{invoice.issued_date}}</p>
+                        </div>
+                        <div class="est_no dist">
+                            <p><strong>Invoice Number</strong></p>
+                            <p>{{invoice.invoice_number}}</p>
+                        </div>
+                        {{#if invoice.reference_number}}
+                        <div class="ref_no dist">
+                            <p><strong>Reference</strong></p>
+                            <p>{{invoice.reference_number}}</p>
+                        </div>
+                        {{/if}}
+                        <div class="billing-period dist">
+                            <p><strong>Billing Period</strong></p>
+                            <p>{{formateDate data.billingPeriodStart}} - {{formateDate data.billingPeriodEnd}}</p>
+                        </div>
+                    </td>
+                    <td class="right">
+                        <p style="padding-right: 32px"><strong>Due Date</strong></p>
+                        <p>{{invoice.due_date}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <div class="total-sec dist">
+            <p><strong>Total</strong></p>
+            <p><strong>{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.total}}</strong></p>
+        </div>      
+                 <hr />
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th class="left-align">Item</th>
+                    <th>HSN</th>
+                    <th>Rate</th>
+                    <th>Qty</th>  
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each invoice.items}}
+                <tr>
+                    <td class="left-align">
+                        <span class="item-description">{{name}}</span><br />
+                        {{description}}
+                    </td>
+                    <td>{{item.hsncode}}</td>
+                    <td>{{estimate.currency.currency}}{{formatFloat price}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{estimate.currency.currency}}{{formatFloat line_total}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="bottom-invoice-sec">
+            <table>
+                <tr class="subtotal">
+                    <td>Subtotal</td>
+                    <td>{{formatFloat invoice.subtotal}}</td>
+                </tr>
+<!-- Discounts Section -->
+
+
+    {{#if invoice.discounts}}
+    {{#each invoice.discounts}}
+        {{#if rate}}
+            <tr class="discount">
+                <td>{{name}} {{rate}}%</td>
+                <td>-{{formatFloat amount}}</td>
+            </tr>
+        {{/if}}
+    {{/each}}
+{{/if}}
+
+<!-- Taxes Section -->
+
+ 
+{{#if invoice.taxes}}    
+
+    {{#each invoice.taxes}}
+        {{#if rate}}
+            <tr class="gst">
+                <td>{{name}}&nbsp;&nbsp;{{rate}}%</td>
+                <td>+{{formatFloat amount}}</td>
+            </tr>
+
+        {{/if}}
+    {{/each}}
+
+{{/if}}
+
+
+                <tr class="horizontal-line">
+                    <td colspan="2"></td>
+                </tr>
+                <tr class="total">
+                    <td class="total-label">Total</td>
+                    <td class="total-value">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.subtotal}}</td>
+                </tr>
+
+                    <tr class="total">
+                    <td class="total-label">Total Deposit Requested</td>
+                    <td class="total-value">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.total_deposit}}</td>
+                </tr>
+{{#each invoice.transactions}}
+    {{log this}}
+    {{#unless description}} <!-- This will check if the description is null, undefined, or an empty string -->
+        <tr class="deposit"> 
+            <td class="total-label">
+                {{date}}&nbsp;{{type}}
+            </td>
+            <td class="total-label">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat amount}}</td>
+        </tr>
+    {{/unless}}
+{{/each}}
+
+
+
+
+
+
+
+             
+                <tr class="payment">
+                    <td class="total-label">Payment</td>
+                    <td class="total-value">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.total_payment}}</td>
+                </tr>
+
+                               <tr class="total">
+                    <td class="total-label">Amount Due</td>
+                    <td class="total-value">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.amount_due}}</td>
+                </tr>
+
+
+                    <tr class="total">
+                    <td class="total-label">Total</td>
+                    <td class="total-value">{{invoice.currency.currency}}&nbsp;&nbsp;{{formatFloat invoice.total}}</td>
+                </tr>
+
+
+            </table>
+        </div>
+        <div class="clear"></div>
+        <div class="notes">
+            <p class="notes-title">Notes</p>
+            <p class="notes-content">{{invoice.notes}}</p>
+        </div>
+        <div class="terms">
+            <p class="terms-title">Terms & Conditions</p>
+            <p class="terms-content">{{invoice.terms}}</p>
+        </div>
+    </div>
+</body>
+</html>

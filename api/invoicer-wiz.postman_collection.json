@@ -1,0 +1,2668 @@
+{
+	"info": {
+		"_postman_id": "63c6889f-444f-4343-831b-ca1df2146537",
+		"name": "invoicer-wiz",
+		"description": "API v1 for manage invoicer app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "643223",
+		"_collection_link": "https://tenxtech.postman.co/workspace/My-Workspace~06ac215c-6038-446b-8417-82671196ef01/collection/643223-63c6889f-444f-4343-831b-ca1df2146537?action=share&source=collection_link&creator=643223"
+	},
+	"item": [
+		{
+			"name": "common",
+			"item": [
+				{
+					"name": "getcountry",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/countries/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"countries",
+								""
+							]
+						},
+						"description": "Get all countries from the database"
+					},
+					"response": []
+				}
+			],
+			"description": "contains global api"
+		},
+		{
+			"name": "taxes",
+			"item": [
+				{
+					"name": "get taxes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items/taxes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"taxes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "with data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/items/taxes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"taxes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "332"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14c-oFYMJv5FR5/A537UmBnfFTfdIOs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 May 2024 17:08:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"665778e93c47deffe599a5e7\",\n        \"name\": \" CGST 9\",\n        \"rate\": 9,\n        \"archived\": false,\n        \"created_on\": \"2024-05-29T18:50:17.526Z\",\n        \"updated_on\": \"2024-05-29T18:50:17.526Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"665778fd3c47deffe599a5ec\",\n        \"name\": \"SGST 9\",\n        \"rate\": 9,\n        \"archived\": false,\n        \"created_on\": \"2024-05-29T18:50:37.216Z\",\n        \"updated_on\": \"2024-05-29T18:50:37.216Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "delete tax",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items/taxes/665778e93c47deffe599a5e7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"taxes",
+								"665778e93c47deffe599a5e7"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "user24",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/items/taxes/665778e93c47deffe599a5e7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"taxes",
+										"665778e93c47deffe599a5e7"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "user24",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-FBGfjy6eJ4VFxqcNSklL5afuJFA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 May 2024 17:10:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Tax deleted successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "create tax",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"8% GST\", \"rate\": \"8\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items/taxes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"taxes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"8% GST\", \"rate\": \"8\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/items/taxes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"taxes"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bb-PNQklfq+lNX/HdL8TU+kzrYLW5Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 May 2024 18:30:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"tax\": {\n        \"name\": \"8% GST\",\n        \"rate\": 8,\n        \"archived\": false,\n        \"_id\": \"6658c5dba5259984fc772713\",\n        \"created_on\": \"2024-05-30T18:30:51.677Z\",\n        \"updated_on\": \"2024-05-30T18:30:51.677Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "client",
+			"item": [
+				{
+					"name": "create client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clients/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clients",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "client created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Mukesh kumar\",\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"email\": \"fdfso@nweclient.com\",\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "405"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"195-FjjrL47wZ9n45+cgzYz4mb9ftTs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:27:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Mukesh kumar\",\n    \"address\": {\n        \"address_line_1\": \"123 ABC Street\",\n        \"address_line_2\": \"Borivali Area\",\n        \"city\": \"Mumbai\",\n        \"state\": \"Maharashtra\",\n        \"postal_code\": \"400001\",\n        \"country_id\": \"65ff0858e43f1e99e22e671e\"\n    },\n    \"contact\": {\n        \"email\": \"fdfso@nweclient.com\",\n        \"mobile\": \"6575476545\"\n    },\n    \"archived\": false,\n    \"_id\": \"660537efdb175ba89550f02c\",\n    \"created_on\": \"2024-03-28T09:27:11.654Z\",\n    \"updated_on\": \"2024-03-28T09:27:11.654Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "client exists already",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Mukesh kumar\",\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"email\": \"fdfso@nweeclient.com\",\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-rq+gPDNfjsfWkg8dmv1FTLaZEGw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:27:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Client already exists fdfso@nweeclient.com\"\n}"
+						},
+						{
+							"name": "email or name must be provided",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-rHGlTgMiykcTnYO3nrZ6hqWsYwM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:28:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Either name or email must be provided\"\n}"
+						},
+						{
+							"name": "only email sent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"email\": \"fdfso@nclient.com\",\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "381"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17d-NXffAZAlWI3RAhgHR/emZVG36V4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:49:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": {\n        \"address_line_1\": \"123 ABC Street\",\n        \"address_line_2\": \"Borivali Area\",\n        \"city\": \"Mumbai\",\n        \"state\": \"Maharashtra\",\n        \"postal_code\": \"400001\",\n        \"country_id\": \"65ff0858e43f1e99e22e671e\"\n    },\n    \"contact\": {\n        \"email\": \"fdfso@nclient.com\",\n        \"mobile\": \"6575476545\"\n    },\n    \"archived\": false,\n    \"_id\": \"66053d1326cf405dd01eb7b4\",\n    \"created_on\": \"2024-03-28T09:49:07.571Z\",\n    \"updated_on\": \"2024-03-28T09:49:07.572Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "only name sent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Paritosh\",\r\n  \"address\": {\r\n    \"address_line_1\": \"123 ABC Street\",\r\n    \"address_line_2\": \"Borivali Area\",\r\n    \"city\": \"Mumbai\",\r\n    \"state\": \"Maharashtra\",\r\n    \"postal_code\": \"400001\",\r\n    \"country_id\": \"65ff0858e43f1e99e22e671e\"\r\n  },\r\n  \"contact\": {\r\n    \"mobile\": \"6575476545\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "371"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"173-VrG11bkqbtGTsL2UsQE/9uXUtV8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:50:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Paritosh\",\n    \"address\": {\n        \"address_line_1\": \"123 ABC Street\",\n        \"address_line_2\": \"Borivali Area\",\n        \"city\": \"Mumbai\",\n        \"state\": \"Maharashtra\",\n        \"postal_code\": \"400001\",\n        \"country_id\": \"65ff0858e43f1e99e22e671e\"\n    },\n    \"contact\": {\n        \"mobile\": \"6575476545\"\n    },\n    \"archived\": false,\n    \"_id\": \"66053d4a26cf405dd01eb7b6\",\n    \"created_on\": \"2024-03-28T09:50:02.274Z\",\n    \"updated_on\": \"2024-03-28T09:50:02.274Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "no data sent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-rHGlTgMiykcTnYO3nrZ6hqWsYwM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 09:50:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Either name or email must be provided\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Archive client",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clients/:clientId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clients",
+								":clientId"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "660433e7502632ab56c120fc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "client archived successfully",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientID/archive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientID",
+										"archive"
+									],
+									"variable": [
+										{
+											"key": "clientID",
+											"value": "65fd2cbf675b9965d3377993"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "470"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d6-WCcwMxytDB6fm3C9G1LiB6L4cgA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Mar 2024 03:59:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Client archived successfully\",\n    \"client\": {\n        \"address\": {\n            \"country\": {\n                \"code\": \"ZA\",\n                \"name\": \"South Africa\",\n                \"currency\": \"ZAR\"\n            },\n            \"address_line_1\": \"123 Main Street\",\n            \"address_line_2\": \"Apartment 1B\",\n            \"city\": \"Johannesburg\",\n            \"state\": \"Gauteng\",\n            \"postal_code\": 2000\n        },\n        \"contact\": {\n            \"mobile\": \"9876543210\"\n        },\n        \"_id\": \"65fd2cbf675b9965d3377993\",\n        \"name\": \"nshu g\",\n        \"active\": true,\n        \"archived\": true,\n        \"created_on\": \"2024-03-22T07:01:19.849Z\",\n        \"updated_on\": \"2024-03-22T07:01:19.849Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "client not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId/archive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId",
+										"archive"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "65fd2cbf675b9965d3377985"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-f9EdPMkc61zrIEm+mXnC1qURXhA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Mar 2024 04:02:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Client not found\"\n}"
+						},
+						{
+							"name": "client archived successfully",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "archived",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "660433e7502632ab56c120fc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "264"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"108-7dtmm4mnVNduPv7WzrIy8W5G1Qc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 11:23:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": {\n        \"state\": \"hyutf\"\n    },\n    \"contact\": {\n        \"email\": \"gunjeet@xte\",\n        \"mobile\": \"+27 123456789\"\n    },\n    \"_id\": \"660433e7502632ab56c120fc\",\n    \"name\": \"sidhu moosewala\",\n    \"active\": true,\n    \"archived\": true,\n    \"created_on\": \"2024-03-27T14:57:43.532Z\",\n    \"updated_on\": \"2024-03-27T14:57:43.532Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "updateclient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"sidhu moosewala\",\r\n  \"address\": {\r\n  \"state\": \"heaven\"},\r\n  \"archived\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/clients/:clientId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clients",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "660433e7502632ab56c120fc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "failed client update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Gunjeet \",\r\n  \"contact\":{\r\n  \"mobile\": \"9876543210\"\r\n},\r\n  \"active\": 45\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "195"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c3-E57a5rI6FihSyNQ0mpOLMP1mvrA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2024 07:58:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Failed to update client\",\n    \"error\": \"Client validation failed: active: Cast to Boolean failed for value \\\"45\\\" (type number) at path \\\"active\\\" because of \\\"CastError\\\"\"\n}"
+						},
+						{
+							"name": "client not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"nshu g\",\r\n  \"contact\":{\r\n  \"mobile\": \"9876543210\"\r\n},\r\n  \"active\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-f9EdPMkc61zrIEm+mXnC1qURXhA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2024 08:04:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Client not found\"\n}"
+						},
+						{
+							"name": "client updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"sidhu moosewala\",\r\n  \"address\": {\r\n  \"state\": \"hyutf\",\r\n\"address_line_1\": \"123 srt road\" },\r\n  \"archived\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "660433e7502632ab56c120fc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "363"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16b-a9yKsgHcb5Q628YkCs4/iCWdQM8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 11:29:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Client updated successfully\",\n    \"client\": {\n        \"address\": {\n            \"address_line_1\": \"123 srt road\",\n            \"state\": \"hyutf\"\n        },\n        \"contact\": {\n            \"email\": \"gunjeet@xte\",\n            \"mobile\": \"+27 123456789\"\n        },\n        \"_id\": \"660433e7502632ab56c120fc\",\n        \"name\": \"sidhu moosewala\",\n        \"active\": true,\n        \"archived\": false,\n        \"created_on\": \"2024-03-27T14:57:43.532Z\",\n        \"updated_on\": \"2024-03-27T14:57:43.532Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "empty body",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "660433e7502632ab56c120fc"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"47-Lt+2+IxJrgUxVa02uhmHLd1xbLg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 14:40:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Empty request body\",\n    \"message\": \"Request body cannot be empty\"\n}"
+						}
+					]
+				},
+				{
+					"name": "search client by name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jacob\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/clients/search?name=gunjeet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "gunjeet"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Client retrieved",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/search?name=gunjeet",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "gunjeet"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "942"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3ae-6YlbUNakVI51sKX/xkpKvGpLVtc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2024 07:46:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Client retrieved successfully\",\n    \"clients\": [\n        {\n            \"address\": {\n                \"country\": {\n                    \"code\": \"ZA\",\n                    \"name\": \"South Africa\",\n                    \"currency\": \"ZAR\"\n                },\n                \"address_line_1\": \"123 Main Street\",\n                \"address_line_2\": \"Apartment 1B\",\n                \"city\": \"Johannesburg\",\n                \"state\": \"Gauteng\",\n                \"postal_code\": 2000\n            },\n            \"contact\": {\n                \"email\": \"jrgjertre@example.com\",\n                \"mobile\": \"+27 123456789\"\n            },\n            \"_id\": \"65fd2e1280bee4ec40e2daf7\",\n            \"name\": \"d gunjeet\",\n            \"active\": true,\n            \"archived\": false,\n            \"created_on\": \"2024-03-22T07:06:58.047Z\",\n            \"updated_on\": \"2024-03-22T07:06:58.047Z\",\n            \"__v\": 0\n        },\n        {\n            \"address\": {\n                \"country\": {\n                    \"code\": \"ZA\",\n                    \"name\": \"South Africa\",\n                    \"currency\": \"ZAR\"\n                },\n                \"address_line_1\": \"123 Main Street\",\n                \"address_line_2\": \"Apartment 1B\",\n                \"city\": \"Johannesburg\",\n                \"state\": \"Gauteng\",\n                \"postal_code\": 2000\n            },\n            \"contact\": {\n                \"mobile\": \"+27 123456789\"\n            },\n            \"_id\": \"65fd32d8491a63255d2cfe15\",\n            \"name\": \"gunjeet\",\n            \"email\": \"j45@e.com\",\n            \"active\": true,\n            \"archived\": false,\n            \"created_on\": \"2024-03-22T07:27:20.180Z\",\n            \"updated_on\": \"2024-03-22T07:27:20.180Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "No client found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/search?name=Punit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Punit"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-S8Zk3vU5EAHL2YNX3K07LTpwuLU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 Mar 2024 07:52:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No clients found with the provided name\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Export clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/clients/export",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"export"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "exported cities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/export?fields=city",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"export"
+									],
+									"query": [
+										{
+											"key": "fields",
+											"value": "city"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/csv; charset=utf-8"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=clients.csv"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a7-01x+DT9JGYmiprPCveWltSXno1M\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 10 Apr 2024 17:11:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"address.city\"\r\n\"Mumbai\"\r\n\"iuyiu\"\r\n\"Anytown\"\r\n\"Anytown\"\r\n\"Mumbai\"\r\n\"Mumbai\"\r\n\"Mumbai\"\r\n\"Indore\"\r\n\"\"\r\n\"New York\"\r\n\"New York\"\r\n\"Mumbai\"\r\n\"Mumbai\"\r\n\"\"\r\n\"\"\r\n\"LA\"\r\n\"INDORE\""
+						},
+						{
+							"name": "name,email exported",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/export?fields=name,email&=email",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"export"
+									],
+									"query": [
+										{
+											"key": "fields",
+											"value": "name,email"
+										},
+										{
+											"key": "",
+											"value": "email"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/csv; charset=utf-8"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=clients.csv"
+								},
+								{
+									"key": "Content-Length",
+									"value": "574"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23e-1hqUEmARxXZKlKQWQaUQgVoNqa4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 10 Apr 2024 17:13:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"name\",\"contact.email\"\r\n\"ana de aramas\",\"gunjeet@xte\"\r\n\"gunjeet\",\r\n\"gunjeet\",\"gunjeet@10xtech.co.in\"\r\n\"\",\"\"\r\n\"gunjeet  \",\"gunjeet55@ech.co.in\"\r\n\"mahsh\",\"gunneey@iuhdg.com\"\r\n,\"gunneey@hdg.com\"\r\n\"John Doe\",\"john.doe@example.com\"\r\n\"John \",\r\n\"Mukesh kumar\",\"fdfso@nweeclient.com\"\r\n\"Mukesh kumar\",\"fdfso@nweclient.com\"\r\n\"Paritosh\",\r\n\"Gunadish samarwicrakam\",\"duwan@tgs.com\"\r\n\"miewrad dad \",\"\"\r\n\"Rinky\",\"xetad@guhf.com\"\r\n\"Rinku\",\"xiuouad@guhf.com\"\r\n\"Paritosh\",\"\"\r\n\"Paritosh\",\"\"\r\n\"gunjeet\",\"\"\r\n\"Mohit sharma\",\"\"\r\n\"Mohit sharma\",\"gunjeet@mhit.com\"\r\n\"Client ead \",\"diaoid@kljsf.oasd\""
+						},
+						{
+							"name": "invalid field",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/export?fields=linkedin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"export"
+									],
+									"query": [
+										{
+											"key": "fields",
+											"value": "linkedin"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-c2FDRih6kS2VGkBWJuWlYo1qVVo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 10 Apr 2024 17:16:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid field info option. undefined\",\n    \"message\": \"Failed to export clients\"\n}"
+						},
+						{
+							"name": "no field selected",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/export",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"export"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/csv; charset=utf-8"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=clients.csv"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2048"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"800-eqqoU43Kbw4hMhtZMonsO8wjJjQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 10 Apr 2024 17:23:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"name\",\"contact.email\",\"address.address_line_1\",\"address.address_line_2\",\"contact.mobile\",\"address.city\",\"address.state\",\"address.postal_code\",\"address.country_id\",\"archived\",\"estimatesCount\",\"invoicesCount\",\"summaryData\"\r\n\"ana de aramas\",\"gunjeet@xte\",\"123 Main Street\",\"Apartment 1B\",\"+27 123456789\",\"Mumbai\",\"Maharashtra\",\"2000\",,true,,,\r\n\"gunjeet\",,,,,,,,,true,,,\r\n\"gunjeet\",\"gunjeet@10xtech.co.in\",,,,,,,,true,,,\r\n\"\",\"\",\"\",\"\",\"\",\"iuyiu\",\"5454\",\"7989\",,true,,,\r\n\"gunjeet  \",\"gunjeet55@ech.co.in\",,,,,,,,true,,,\r\n\"mahsh\",\"gunneey@iuhdg.com\",,,,,,,,true,,,\r\n,\"gunneey@hdg.com\",,,,,,,,true,,,\r\n\"John Doe\",\"john.doe@example.com\",,,,\"Anytown\",\"CA\",,,true,,,\r\n\"John \",,,,,\"Anytown\",\"CA\",,,true,,,\r\n\"Mukesh kumar\",\"fdfso@nweeclient.com\",\"123 ABC Street\",\"Borivali Area\",\"6575476545\",\"Mumbai\",\"Maharashtra\",\"400001\",\"65ff0858e43f1e99e22e671e\",true,,,\r\n\"Mukesh kumar\",\"fdfso@nweclient.com\",\"123 ABC Street\",\"Borivali Area\",\"6575476545\",\"Mumbai\",\"Maharashtra\",\"400001\",\"65ff0858e43f1e99e22e671e\",true,,,\r\n\"Paritosh\",,\"123 ABC Street\",\"Borivali Area\",\"6575476545\",\"Mumbai\",\"Maharashtra\",\"400001\",\"65ff0858e43f1e99e22e671e\",true,,,\r\n\"Gunadish samarwicrakam\",\"duwan@tgs.com\",\"1213 adsahda esaf\",\"Street bumbre 43\",\"165465\",\"Indore\",\"Maharashtraa\",\"9034834\",,true,,,\r\n\"miewrad dad \",\"\",\"\",\"\",\"\",\"\",\"\",\"\",,true,,,\r\n\"Rinky\",\"xetad@guhf.com\",\"535 Main St\",\"Apt 101\",\"123-456-7890\",\"New York\",\"NY\",\"10001\",\"609b390667d7394e28ef31f1\",true,,,\r\n\"Rinku\",\"xiuouad@guhf.com\",\"535 Main St\",\"Apt 101\",\"123-456-7890\",\"New York\",\"NY\",\"10001\",\"609b390667d7394e28ef31f1\",true,,,\r\n\"Paritosh\",\"\",\"123 ABC Street\",\"Borivali Area\",\"6575476545\",\"Mumbai\",\"Maharashtra\",\"400001\",,true,,,\r\n\"Paritosh\",\"\",\"123 ABC Street\",\"Borivali Area\",\"6575476545\",\"Mumbai\",\"Maharashtra\",\"400001\",,true,,,\r\n\"gunjeet\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",,true,,,\r\n\"Mohit sharma\",\"\",\"\",\"\",\"64654\",\"\",\"\",\"\",,true,,,\r\n\"Mohit sharma\",\"gunjeet@mhit.com\",\"687v  bgsQS\",\"rOA \",\"456741321\",\"LA\",\"London\",\"414132176\",,true,,,\r\n\"Client ead \",\"diaoid@kljsf.oasd\",\"56 gktg \",\"viyh\",\"56465412\",\"INDORE\",\"MP\",\"4376434\",,true,,,"
+						}
+					]
+				},
+				{
+					"name": "getclientbyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/clients/:clientId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clients",
+								":clientId"
+							],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "660433e7502632ab56c120fc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "client retrieved",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "65fd2cbf675b9965d3377993"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "479"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1df-NzEZUylIirVHpdguzo1uTAcEyW4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 15:59:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Client details retrieved successfully\",\n    \"client\": {\n        \"address\": {\n            \"country\": {\n                \"code\": \"ZA\",\n                \"name\": \"South Africa\",\n                \"currency\": \"ZAR\"\n            },\n            \"address_line_1\": \"123 Main Street\",\n            \"address_line_2\": \"Apartment 1B\",\n            \"city\": \"Johannesburg\",\n            \"state\": \"Gauteng\",\n            \"postal_code\": 2000\n        },\n        \"contact\": {\n            \"mobile\": \"9876543210\"\n        },\n        \"_id\": \"65fd2cbf675b9965d3377993\",\n        \"name\": \"nshu g\",\n        \"active\": true,\n        \"archived\": true,\n        \"created_on\": \"2024-03-22T07:01:19.849Z\",\n        \"updated_on\": \"2024-03-22T07:01:19.849Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "client not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/:clientId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										":clientId"
+									],
+									"variable": [
+										{
+											"key": "clientId",
+											"value": "65fd2cbf675b9965d3377978"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-f9EdPMkc61zrIEm+mXnC1qURXhA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Mar 2024 16:00:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Client not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get archived clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/clients/archived",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"clients",
+								"archived"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "fetched archived clients",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/clients/archived",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"clients",
+										"archived"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1043"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"413-8J0Q5G1JSQ7xrwzbLkfCX8AZzVs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Mar 2024 05:16:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Archived clients fetched successfully\",\n    \"clients\": [\n        {\n            \"address\": {\n                \"state\": \"heaven\"\n            },\n            \"contact\": {\n                \"email\": \"gunjeet@xte\",\n                \"mobile\": \"+27 123456789\"\n            },\n            \"_id\": \"660433d2502632ab56c120f9\",\n            \"name\": \"sidhu moosewala\",\n            \"active\": true,\n            \"archived\": true,\n            \"created_on\": \"2024-03-27T14:57:22.786Z\",\n            \"updated_on\": \"2024-03-27T14:57:22.786Z\",\n            \"__v\": 0\n        },\n        {\n            \"address\": {\n                \"state\": \"heaven\"\n            },\n            \"contact\": {\n                \"email\": \"gunjeet@xte\",\n                \"mobile\": \"+27 123456789\"\n            },\n            \"_id\": \"660433e7502632ab56c120fc\",\n            \"name\": \"sidhu moosewala\",\n            \"active\": true,\n            \"archived\": true,\n            \"created_on\": \"2024-03-27T14:57:43.532Z\",\n            \"updated_on\": \"2024-03-27T14:57:43.532Z\",\n            \"__v\": 0\n        },\n        {\n            \"address\": {\n                \"country\": {\n                    \"code\": \"ZA\",\n                    \"name\": \"South Africa\",\n                    \"currency\": \"ZAR\"\n                },\n                \"address_line_1\": \"123 Main Street\",\n                \"address_line_2\": \"Apartment 1B\",\n                \"city\": \"Mumbai\",\n                \"state\": \"Maharashtra\",\n                \"postal_code\": 2000\n            },\n            \"contact\": {\n                \"email\": \"gunjeet@xte\",\n                \"mobile\": \"+27 123456789\"\n            },\n            \"_id\": \"6604367221ec58056f00c250\",\n            \"name\": \"rohit sharma\",\n            \"active\": true,\n            \"archived\": true,\n            \"created_on\": \"2024-03-27T15:08:34.988Z\",\n            \"updated_on\": \"2024-03-27T15:08:34.988Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "items",
+			"item": [
+				{
+					"name": "Get items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "fetched items successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/items/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "691"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b3-YVtFxePHtYz5iu3WFpOJ4Ac6bAk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 08:47:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"663095c7d92e534229fb64f0\",\n        \"description\": \"This is a sample item description.\",\n        \"taxable\": false,\n        \"archived\": false,\n        \"taxes\": [],\n        \"created_on\": \"2024-04-30T06:55:03.094Z\",\n        \"updated_on\": \"2024-04-30T06:55:03.094Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66309654d92e534229fb64f2\",\n        \"name\": \"My Item1\",\n        \"description\": \"This is a sample item description.\",\n        \"taxable\": false,\n        \"archived\": false,\n        \"taxes\": [],\n        \"created_on\": \"2024-04-30T06:57:24.176Z\",\n        \"updated_on\": \"2024-04-30T06:57:24.176Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66309659d92e534229fb64f4\",\n        \"name\": \"My Item1\",\n        \"description\": \"This is a sample item description.\",\n        \"taxable\": false,\n        \"archived\": false,\n        \"taxes\": [],\n        \"created_on\": \"2024-04-30T06:57:29.683Z\",\n        \"updated_on\": \"2024-04-30T06:57:29.683Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get archived items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/archived",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"archived"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "archived items fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/items/archived",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"archived"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "236"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ec-3Hd+02ObE2IfGKBJzy7qtnCuVKk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 08:46:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6630959cd92e534229fb64ee\",\n        \"name\": \"My Item1\",\n        \"description\": \"This is a sample item description.\",\n        \"taxable\": false,\n        \"archived\": true,\n        \"taxes\": [],\n        \"created_on\": \"2024-04-30T06:54:20.146Z\",\n        \"updated_on\": \"2024-04-30T06:54:20.147Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Search item by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/searchitem?name=test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								"searchitem"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "no items found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/items/searchitem?name=ni sahd",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"searchitem"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "ni sahd"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-hirOckT9Lqj+xv2FhrYBdybZtDU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 08:50:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No items found with the provided name\"\n}"
+						},
+						{
+							"name": "item successfully retreived",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/items/searchitem?name=dummy",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										"searchitem"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "dummy"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"130-Vt30pfRMg+lRDl4gy6waFq3CbpU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 08:51:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Items retrieved successfully\",\n    \"items\": [\n        {\n            \"_id\": \"6630959cd92e534229fb64ee\",\n            \"name\": \"Dummy Item\",\n            \"description\": \"This is a sample item description.\",\n            \"taxable\": false,\n            \"archived\": true,\n            \"taxes\": [],\n            \"created_on\": \"2024-04-30T06:54:20.146Z\",\n            \"updated_on\": \"2024-04-30T06:54:20.147Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Archive item",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"archived\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/items/:itemId?=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								":itemId"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "6630b37cd435a981db7b49ac"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "item archived",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"archived\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/items/:itemId?=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										":itemId"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "itemId",
+											"value": "6630959cd92e534229fb64ee"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "236"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ec-T3MHDK0597h87e7TxxY3YyTXJfo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 09:12:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"archived\": true,\n    \"_id\": \"6630959cd92e534229fb64ee\",\n    \"name\": \"Dummy Item\",\n    \"description\": \"This is a sample item description.\",\n    \"taxable\": false,\n    \"taxes\": [],\n    \"created_on\": \"2024-04-30T06:54:20.146Z\",\n    \"updated_on\": \"2024-04-30T06:54:20.147Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "copyitem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/items/:itemId/copy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"items",
+								":itemId",
+								"copy"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "6630b37cd435a981db7b49ac"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "item copied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/items/:itemId/copy",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"items",
+										":itemId",
+										"copy"
+									],
+									"variable": [
+										{
+											"key": "itemId",
+											"value": "66309654d92e534229fb64f2"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "240"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f0-bZ9jS3mw1vW34ow8Ha0NC+nyjGE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Apr 2024 09:02:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"My Item1 copy\",\n    \"description\": \"This is a sample item description.\",\n    \"taxable\": false,\n    \"archived\": false,\n    \"taxes\": [],\n    \"_id\": \"6630b3a1ab027f5b76a167f4\",\n    \"created_on\": \"2024-04-30T09:02:25.298Z\",\n    \"updated_on\": \"2024-04-30T09:02:25.298Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 8pt;
+            line-height: 1.4;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 5px;
+            border: 1px solid black;
+            vertical-align: top;
+        }
+        .header-table td {
+            border: none;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .no-border {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Header Table with Distributor, Consignee, and Invoice Information -->
+    <table>
+        <tr>
+            <td style="width: 50%;">
+                <div class="bold">{{account.name}}</div>
+                <p>{{account.address.address_line_1}}</p>
+                <p>{{account.address.address_line_2}}</p>
+                {{#if account.license_number}}<p>DL No: {{account.license_number}}</p>{{/if}}
+                {{#if account.gstno}}<p>GSTIN/UIN: {{account.gstno}}</p>{{/if}}
+                <p>Email: <a href="mailto:{{account.account_email}}">{{account.account_email}}</a></p>
+                <p>State: {{account.address.state}}, Code: {{account.address.state_code}}</p>
+            </td>
+            <td rowspan="3" style="width: 50%;padding: 0%;" >
+                <table style="width: 100%; border-collapse: collapse; margin:0%">
+                    <tr>
+                        <td><strong>Invoice No.</strong> {{data.invoice_number}}</td>
+                        <td><strong>Dated</strong> {{data.issued_date}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Delivery Note</strong> {{data.delivery_note}}</td>
+                        <td><strong>Mode/Terms of Payment</strong> {{data.payment_terms}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reference No. & Date</strong> {{data.reference_number}} dt. {{data.reference_date}}</td>
+                        <td><strong>Other References</strong> {{data.other_references}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Buyer’s Order No.</strong> {{data.order_number}}</td>
+                        <td><strong>Dated</strong> {{data.order_date}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dispatch Doc No.</strong> {{data.dispatch_document}}</td>
+                        <td><strong>Delivery Note Date</strong> {{data.delivery_note_date}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dispatched through</strong> {{data.dispatch_through}}</td>
+                        <td><strong>Destination</strong> {{data.destination}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Terms of Delivery</strong> {{data.terms}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Billing Period</strong> {{formateDate data.billingPeriodStart}} -{{ formateDate data.billingPeriodEnd}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center"><strong>E-Invoice:</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p><strong>IRN:</strong> '37e8ae552d5011a7545d192a618685bad5f3d130007e185514deba82a9e6-a956'</p>
+                            <p><strong>Ack No:</strong> '132419183948827'</p>
+                            <p><strong>Ack Date:</strong> '7-Aug-24'</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bold">Buyer Bill (Bill to)</div>
+                <div><i>{{data.client.client_id.name}}</i></div>
+                <div>{{data.client.client_id.address.address_line_1}}</div>
+                <div>{{data.client.client_id.address.address_line_2}}</div>
+                <div>{{data.client.client_id.address.city}}, {{data.client.client_id.address.state}} Pincode {{data.client.client_id.address.postal_code}}</div>
+                {{#if data.client.client_id.gstno}}<div>GSTIN/UIN: {{data.client.client_id.gstno}}</div>{{/if}}
+                <div>State: {{data.client.client_id.address.state}}, Code: {{data.client.client_id.state_code}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bold">Consignee (Ship to)</div>
+                <div><i>{{data.client.client_id.name}}</i></div>
+                <div>{{data.client.client_id.address.address_line_1}}</div>
+                <div>{{data.client.client_id.address.address_line_2}}</div>
+                <div>{{data.client.client_id.address.city}}, {{data.client.client_id.address.state}} Pincode {{data.client.client_id.address.postal_code}}</div>
+                <div>GSTIN/UIN: {{data.client.client_id.gstno}}</div>
+                <div>State: {{data.client.client_id.address.state}}, Code: {{data.client.client_id.address?.state_code}}</div>
+                <div>Email: {{data.client.client_id.contact.email}}</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Itemized List -->
+    <table style="margin-top: -1px;">
+        <!-- Main headers row -->
+        <tr>
+            <th rowspan="2">Sl No.</th>
+            <th rowspan="2">Description of Goods</th>
+            <th rowspan="2">Batch</th>
+            <th rowspan="2">Expiry</th>
+            <th rowspan="2">HSN/SAC</th>
+            <th rowspan="2">MRP/Rate per</th>
+            <th colspan="2">Quantity</th>
+            <th rowspan="2">Disc. %</th>
+            <th rowspan="2">Amount</th>
+            <th rowspan="2">Taxable</th>
+
+            <!-- Tax headers with two sub-columns for each tax -->
+            {{#each data.taxes}}
+                <th colspan="2">{{name}}</th>
+            {{/each}}
+            <th rowspan="2">Total</th>
+        </tr>
+
+        <!-- Sub-columns for Rate and Amount under each tax -->
+        <tr>
+            <th>Billed</th>
+            <th>Shipped</th>
+            {{#each data.taxes}}
+                <th>Rate</th>
+                <th>Amount</th>
+            {{/each}}
+        </tr>
+
+        <!-- Items rows -->
+        {{#each data.items}}
+        <tr>
+            <td>{{add @index 1}}</td>
+            <td><span class="item-description">{{name}}</span></td>
+            <td>{{batchNo}}</td>
+            <td>{{formateDate expDate}}</td>
+            <td>{{item.hsncode}}</td>
+            <td>{{estimate.currency.currency}}{{formatFloat price}}</td>
+            <td>{{quantity}}</td>
+            <td>{{quantity}}</td>
+            <td>{{discount}}</td>
+            <td>{{estimate.currency.currency}}{{formatFloat line_total}}</td>
+            <td>{{formatFloat line_total}}</td>
+
+            <!-- Tax Rate and Amount for each item -->
+            {{#each ../data.taxes}}
+                {{#with (lookup ../itemTaxAmounts @index)}}
+                    <td>{{default rate 0}}%</td>
+                    <td>{{estimate.currency.currency}}{{default amount 0}}</td>
+                {{else}}
+                    <td></td>
+                    <td></td>
+                {{/with}}
+            {{/each}}
+
+            <!-- Item total with tax -->
+            <td>{{estimate.currency.currency}}{{itemwiseTotalWithTax}}</td>
+        </tr>
+        {{/each}}
+
+        <!-- Grand Total -->
+        <tr>
+            <!-- Base columns are 10; add 2 for each tax, plus 1 for the final Total column -->
+            {{!-- Calculate dynamic colspan based on the total columns --}}
+            <td colspan="{{calculateColspan data.taxes.length}}" class="text-right"><strong>Grand Total:</strong></td>
+            <td><strong>₹{{formatFloat data.total}}</strong></td>
+        </tr>
+    </table>
+
+</body>
+</html>

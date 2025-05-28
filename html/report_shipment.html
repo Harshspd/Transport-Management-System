@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .report-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .report-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .report-filter {
+            flex: 1 1 200px;
+        }
+        .report-filter label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .report-filter select, .report-filter input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .report-filter select:focus, .report-filter input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .report-table thead th {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d1d5db;
+        }
+        .report-table tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+        .report-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        .report-summary {
+            background-color: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #dcfce7;
+            margin-bottom: 2rem;
+        }
+        .report-summary h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #15803d;
+            margin-bottom: 1rem;
+        }
+        .report-summary p {
+            font-size: 1.25rem;
+            color: #16a34a;
+            font-weight: 700;
+        }
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+        @media (max-width: 768px) {
+            .report-filters {
+                flex-direction: column;
+            }
+            .report-filter {
+                flex: 1 1 auto;
+            }
+            .report-table thead {
+                display: none;
+            }
+            .report-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #d1d5db;
+                border-radius: 0.5rem;
+                padding: 1rem;
+            }
+            .report-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                padding: 0.5rem 0;
+            }
+            .report-table tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #374151;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+            .report-table tbody td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="report-title">Shipment Report</h1>
+
+        <div class="report-filters">
+            <div class="report-filter">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="report-filter">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+            </div>
+            <div class="report-filter">
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="">All Statuses</option>
+                    <option value="open">Open</option>
+                    <option value="in-transit">In Transit</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="report-filter">
+                <label for="customerId">Customer:</label>
+                <select id="customerId">
+                    <option value="">All Customers</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="report-table-container">
+            <table class="report-table" id="shipmentTable">
+                <thead>
+                    <tr>
+                        <th>Shipment ID</th>
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Pickup Date</th>
+                        <th>Delivery Date</th>
+                        <th>Status</th>
+                        <th>Vehicle Number</th>
+                        <th>Driver Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+            <div class="no-data" id="noDataMessage" style="display:none;">No shipments found for the selected filters.</div>
+        </div>
+
+        <div class="report-summary" id="reportSummary" style="display:none;">
+            <h2>Shipment Summary</h2>
+            <p>Total Shipments: <span id="totalShipments">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const shipmentTable = document.getElementById('shipmentTable');
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const statusSelect = document.getElementById('status');
+        const customerSelect = document.getElementById('customerId');
+        const noDataMessage = document.getElementById('noDataMessage');
+        const reportSummary = document.getElementById('reportSummary');
+        const totalShipmentsElement = document.getElementById('totalShipments');
+
+        // Sample data (replace with your actual data)
+        const shipments = [
+            { id: "SHP-001", orderId: "ORD-001", customerId: "CUST-001", customerName: "Acme Corp", pickupDate: "2024-07-15", deliveryDate: "2024-07-20", status: "in-transit", vehicleNumber: "TRK-123", driverName: "John Doe" },
+            { id: "SHP-002", orderId: "ORD-002", customerId: "CUST-002", customerName: "Beta Inc", pickupDate: "2024-07-16", deliveryDate: "2024-07-21", status: "open", vehicleNumber: "TRK-456", driverName: "Jane Smith" },
+            { id: "SHP-003", orderId: "ORD-003", customerId: "CUST-001", customerName: "Acme Corp", pickupDate: "2024-07-18", deliveryDate: "2024-07-22", status: "delivered", vehicleNumber: "TRK-789", driverName: "Mike Johnson" },
+            { id: "SHP-004", orderId: "ORD-004", customerId: "CUST-003", customerName: "Gamma Co", pickupDate: "2024-07-20", deliveryDate: "2024-07-24", status: "cancelled", vehicleNumber: "TRK-101", driverName: "Alice Brown" },
+            { id: "SHP-005", orderId: "ORD-005", customerId: "CUST-002", customerName: "Beta Inc", pickupDate: "2024-07-22", deliveryDate: "2024-07-25", status: "open", vehicleNumber: "TRK-202", driverName: "Bob Williams" },
+            { id: "SHP-006", orderId: "ORD-006", customerId: "CUST-003", customerName: "Gamma Co", pickupDate: "2024-07-10", deliveryDate: "2024-07-15", status: "delivered", vehicleNumber: "TRK-303", driverName: "Charlie Davis" },
+            { id: "SHP-007", orderId: "ORD-007", customerId: "CUST-001", customerName: "Acme Corp", pickupDate: "2024-07-12", deliveryDate: "2024-07-18", status: "in-transit", vehicleNumber: "TRK-404", driverName: "Diana Miller" },
+            { id: "SHP-008", orderId: "ORD-008", customerId: "CUST-004", customerName: "Delta Ltd", pickupDate: "2024-07-19", deliveryDate: "2024-07-23", status: "open", vehicleNumber: "TRK-505", driverName: "Ethan Wilson" },
+            { id: "SHP-009", orderId: "ORD-009", customerId: "CUST-004", customerName: "Delta Ltd", pickupDate: "2024-07-21", deliveryDate: "2024-07-26", status: "in-transit", vehicleNumber: "TRK-606", driverName: "Fiona Green" },
+            { id: "SHP-010", orderId: "ORD-010", customerId: "CUST-005", customerName: "Epsilon Co", pickupDate: "2024-07-23", deliveryDate: "2024-07-27", status: "delivered", vehicleNumber: "TRK-707", driverName: "George Black" },
+        ];
+
+        const customers = [
+            { id: "CUST-001", name: "Acme Corp" },
+            { id: "CUST-002", name: "Beta Inc" },
+            { id: "CUST-003", name: "Gamma Co" },
+            { id: "CUST-004", name: "Delta Ltd" },
+            { id: "CUST-005", name: "Epsilon Co" },
+        ];
+
+        function populateDropdown(dropdown, items, valueKey, textKey) {
+            dropdown.innerHTML = '<option value="">All</option>'; // Clear existing options
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                dropdown.appendChild(option);
+            });
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function generateReport() {
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+            const status = statusSelect.value;
+            const customerId = customerSelect.value;
+
+            const filteredShipments = shipments.filter(shipment => {
+                const pickupDate = new Date(shipment.pickupDate);
+
+                const startDateMatch = !startDate || new Date(startDate) <= pickupDate;
+                const endDateMatch = !endDate || new Date(endDate) >= pickupDate;
+                const statusMatch = !status || shipment.status === status;
+                const customerMatch = !customerId || shipment.customerId === customerId;
+
+                return startDateMatch && endDateMatch && statusMatch && customerMatch;
+            });
+
+            shipmentTable.querySelector('tbody').innerHTML = ''; // Clear table body
+            if (filteredShipments.length === 0) {
+                noDataMessage.style.display = 'block';
+                reportSummary.style.display = 'none';
+            } else {
+                noDataMessage.style.display = 'none';
+                reportSummary.style.display = 'block';
+                filteredShipments.forEach(shipment => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td data-label="Shipment ID">${shipment.id}</td>
+                        <td data-label="Order ID">${shipment.orderId}</td>
+                        <td data-label="Customer Name">${shipment.customerName}</td>
+                        <td data-label="Pickup Date">${formatDate(shipment.pickupDate)}</td>
+                        <td data-label="Delivery Date">${formatDate(shipment.deliveryDate)}</td>
+                        <td data-label="Status">${shipment.status}</td>
+                        <td data-label="Vehicle Number">${shipment.vehicleNumber}</td>
+                        <td data-label="Driver Name">${shipment.driverName}</td>
+                    `;
+                    shipmentTable.querySelector('tbody').appendChild(row);
+                });
+
+                totalShipmentsElement.textContent = filteredShipments.length;
+            }
+        }
+
+        // Event listeners for filter changes
+        startDateInput.addEventListener('change', generateReport);
+        endDateInput.addEventListener('change', generateReport);
+        statusSelect.addEventListener('change', generateReport);
+        customerSelect.addEventListener('change', generateReport);
+
+        // Initial population of dropdowns and report
+        window.onload = function() {
+            populateDropdown(customerSelect, customers, 'id', 'name');
+            generateReport(); // Generate initial report
+        };
+    </script>
+</body>
+</html>

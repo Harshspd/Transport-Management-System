@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Vehicle to Shipment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #374151;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .alert-danger {
+            background-color: #fecaca;
+            color: #b91c1c;
+            border: 1px solid #b91c1c;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Assign Vehicle to Shipment</h1>
+
+        <form id="assignVehicleForm">
+            <div id="errorContainer" class="alert alert-danger hidden"></div>
+            <div id="successContainer" class="alert alert-success hidden"></div>
+
+            <div class="form-group">
+                <label for="shipmentId">Shipment ID:</label>
+                <select id="shipmentId" name="shipmentId">
+                    <option value="">Select Shipment</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="providerId">Provider:</label>
+                <select id="providerId" name="providerId">
+                    <option value="">Select Provider</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicleId">Vehicle Number:</label>
+                <select id="vehicleId" name="vehicleId">
+                    <option value="">Select Vehicle</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="driverId">Driver Name:</label>
+                <select id="driverId" name="driverId">
+                    <option value="">Select Driver</option>
+                     </select>
+            </div>
+
+            <div class="form-group">
+                <label for="assignmentDate">Assignment Date:</label>
+                <input type="date" id="assignmentDate" name="assignmentDate">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Assign Vehicle</button>
+                <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+       const assignVehicleForm = document.getElementById('assignVehicleForm');
+       const shipmentIdSelect = document.getElementById('shipmentId');
+       const vehicleIdSelect = document.getElementById('vehicleId');
+       const driverIdSelect = document.getElementById('driverId');
+       const assignmentDateInput = document.getElementById('assignmentDate');
+       const errorContainer = document.getElementById('errorContainer');
+       const successContainer = document.getElementById('successContainer');
+       const cancelBtn = document.getElementById('cancelBtn');
+       const providerIdSelect = document.getElementById('providerId');
+
+        // Dummy data for shipments, vehicles, and drivers
+        const shipments = [
+            { id: "SHP-001", orderId: "ORD-001", pickupAddress: "123 Main St, CityA", deliveryAddress: "456 Oak Ave, CityB" },
+            { id: "SHP-002", orderId: "ORD-002", pickupAddress: "789 Pine Ln, CityC", deliveryAddress: "101 Elm St, CityD" },
+            { id: "SHP-003", orderId: "ORD-003", pickupAddress: "222 Maple Dr, CityA", deliveryAddress: "333 Cedar Rd, CityE" },
+        ];
+
+        const vehicles = [
+            { id: "VCL-001", number: "KA-01-AB-1234", type: "Truck" },
+            { id: "VCL-002", number: "TN-05-CD-5678", type: "Trailer" },
+            { id: "VCL-003", number: "MH-12-EF-9012", type: "Truck" },
+        ];
+
+       const drivers = [
+            { id: "DRV-001", name: "John Doe" },
+            { id: "DRV-002", name: "Jane Smith" },
+            { id: "DRV-003", name: "David Lee" },
+       ];
+
+        const providers = [
+            { id: "PVD-001", name: "Provider A" },
+            { id: "PVD-002", name: "Provider B" },
+        ];
+
+        function populateDropdown(dropdown, items, valueKey, textKey) {
+            dropdown.innerHTML = '<option value="">Select</option>'; // Clear existing options
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                dropdown.appendChild(option);
+            });
+        }
+
+        function showError(message) {
+            errorContainer.textContent = message;
+            errorContainer.classList.remove('hidden');
+            successContainer.classList.add('hidden');
+        }
+
+        function showSuccess(message) {
+            successContainer.textContent = message;
+            successContainer.classList.remove('hidden');
+            errorContainer.classList.add('hidden');
+        }
+
+        function validateForm() {
+            if (!shipmentIdSelect.value) {
+                showError('Please select a shipment.');
+                return false;
+            }
+            if (!providerIdSelect.value) {
+                showError('Please select a Provider.');
+                return false;
+            }
+            if (!vehicleIdSelect.value) {
+                showError('Please select a vehicle.');
+                return false;
+            }
+             if (!driverIdSelect.value) {
+                showError('Please select a driver.');
+                return false;
+            }
+            if (!assignmentDateInput.value) {
+                showError('Please enter an assignment date.');
+                return false;
+            }
+
+            const selectedDate = new Date(assignmentDateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Compare only the date part
+
+            if (selectedDate < today) {
+                showError('Assignment date cannot be in the past.');
+                return false;
+            }
+
+            return true;
+        }
+
+        // Populate the dropdowns
+        window.onload = function() {
+            populateDropdown(shipmentIdSelect, shipments, 'id', 'id');
+            populateDropdown(vehicleIdSelect, vehicles, 'id', 'number');
+            populateDropdown(driverIdSelect, drivers, 'id', 'name');
+            populateDropdown(providerIdSelect, providers, 'id', 'name');
+        }
+
+        assignVehicleForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (validateForm()) {
+                // Simulate the assignment process
+                const shipmentId = shipmentIdSelect.value;
+                const vehicleId = vehicleIdSelect.value;
+                const driverId = driverIdSelect.value;
+                const assignmentDate = assignmentDateInput.value;
+                const providerId = providerIdSelect.value;
+
+                console.log(`Vehicle ${vehicleId} assigned to shipment ${shipmentId} with Driver ${driverId} and Provider ${providerId} on ${assignmentDate}`);
+                showSuccess(`Vehicle assigned successfully!`);
+
+                 // Reset the form
+                assignVehicleForm.reset();
+                shipmentIdSelect.value = "";
+                vehicleIdSelect.value = "";
+                driverIdSelect.value = "";
+                providerIdSelect.value = "";
+            }
+        });
+
+        cancelBtn.addEventListener('click', () => {
+             assignVehicleForm.reset();
+             errorContainer.classList.add('hidden');
+             successContainer.classList.add('hidden');
+             shipmentIdSelect.value = "";
+             vehicleIdSelect.value = "";
+             driverIdSelect.value = "";
+             providerIdSelect.value = "";
+        });
+
+    </script>
+</body>
+</html>

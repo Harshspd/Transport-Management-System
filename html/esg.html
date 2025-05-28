@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logix ESG Report 2021</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="chart-renderer.js"></script>
+  <script src="chart-renderer-env.js"></script>
+  <script src="chart-renderer-gov.js"></script>
+
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Main Cover Page -->
+  <section class="h-screen bg-blue-900 text-white flex flex-col justify-center items-center text-center p-10">
+    <img src="logo-placeholder.png" alt="Logix Logo" class="w-32 h-32 mb-4" />
+    <h1 class="text-4xl font-bold mb-2">Logix Transport Solutions</h1>
+    <h2 class="text-2xl">Environmental, Social & Governance (ESG) Annual Report</h2>
+    <p class="mt-2 text-lg">For the Year Ended December 31, 2021</p>
+    <p class="mt-4 italic text-xl">"Delivering Responsibly, Growing Sustainably"</p>
+  </section>
+
+  <!-- Introduction & CEO Message -->
+  <section class="max-w-4xl mx-auto p-10">
+    <h2 class="text-3xl font-semibold mb-6">Introduction & CEO Message</h2>
+    <p class="mb-4">At Logix Transport Solutions, our vision is to become the most sustainable and responsible logistics
+      partner in the industry. Our mission is to reduce environmental impact, empower communities, and uphold ethical
+      governance in every delivery.</p>
+    <p class="mb-4">This report outlines our 2021 ESG performance and details initiatives across our Environmental,
+      Social, and Governance pillars. It covers the entire calendar year and applies to operations across all regions
+      where we operate.</p>
+    <p class="mb-6 font-semibold">— CEO Name, Chief Executive Officer</p>
+  </section>
+
+  <!-- Section Cover - Environment -->
+  <section class="bg-green-100 p-10 text-center">
+    <h2 class="text-4xl font-bold text-green-800">Environmental Responsibility</h2>
+    <p class="mt-2 text-xl text-green-700">Investing in Green Logistics for a Cleaner Tomorrow</p>
+  </section>
+  <!-- Environmental Responsibility Section -->
+  <!-- Environmental Responsibility Section -->
+  <section class="max-w-4xl mx-auto p-10">
+    <!-- 1. Introduction to Environmental Responsibility -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Introduction to Environmental Responsibility</h2>
+      <p class="text-lg mb-4">At Logix Transport Solutions, we are committed to minimizing our environmental footprint.
+        In 2021, we focused on sustainable energy, reducing waste, and carbon emissions. Our goal is to reach carbon
+        neutrality by 2030.</p>
+      <p class="text-lg mb-4">This section details our efforts in reducing environmental impact and promoting
+        sustainable practices across all our operations.</p>
+    </div>
+
+    <!-- 2. Carbon Emissions Reduction -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Carbon Emissions Reduction</h2>
+      <p class="text-lg mb-4">In 2021, we achieved a **15%** reduction in carbon emissions. Our goal is to reduce
+        emissions by **50%** by 2025 through increased use of renewable energy and more efficient transportation
+        methods.</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Transitioned **30%** of our fleet to electric vehicles.</li>
+        <li>Invested in **solar energy** for our facilities.</li>
+        <li>Implemented a **carbon offset program** for flights and operations.</li>
+      </ul>
+      <!-- Chart Placeholder for Carbon Emissions Reduction -->
+      <div class="my-4">
+        <canvas id="carbonEmissionsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Additional sections omitted for brevity... -->
+    <!-- 2. Carbon Footprint Reduction -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Carbon Footprint Reduction</h2>
+      <p class="text-lg mb-4">We reduced our Scope 1 and 2 GHG emissions by **12%** compared to the previous year. Key
+        initiatives contributing to this reduction included:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Deployment of **20 electric vehicles** in urban areas, reducing transportation-related emissions.</li>
+        <li>Optimization of shipping routes to reduce fuel consumption.</li>
+        <li>Increased use of rail and water-based transport to reduce reliance on trucks.</li>
+      </ul>
+      <p class="text-lg mb-4">Our target is to reduce emissions by **20%** over the next five years.</p>
+      <!-- Chart Placeholder for Carbon Footprint -->
+      <div class="my-4">
+        <canvas id="carbonFootprintChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+    <!-- Renewable Energy Chart Section -->
+    <div>
+      <h2>Renewable Energy Usage</h2>
+      <canvas id="renewableEnergyChart" width="400" height="200"></canvas>
+    </div>
+    <!-- 3. Energy Efficiency Initiatives -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Energy Efficiency Initiatives</h2>
+      <p class="text-lg mb-4">In 2021, we focused on energy-saving measures across our facilities and warehouses,
+        including:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Transitioned **30%** of warehouse lighting to energy-efficient LED systems.</li>
+        <li>Installed solar panels at **3 regional hubs**, generating **400 MWh** of clean energy annually.</li>
+        <li>Enhanced heating, ventilation, and air conditioning (HVAC) systems to optimize energy use.</li>
+      </ul>
+      <p class="text-lg mb-4">As a result, we have achieved an energy cost reduction of **15%** compared to 2020.</p>
+      <!-- Chart Placeholder for Energy Savings -->
+      <div class="my-4">
+        <canvas id="energySavingsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 4. Sustainable Transportation & Fleet -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Sustainable Transportation & Fleet</h2>
+      <p class="text-lg mb-4">In 2021, we introduced a fleet of **electric delivery vehicles** in urban areas. This
+        initiative is part of our long-term goal to achieve a **50% reduction** in vehicle emissions by 2025.</p>
+      <p class="text-lg mb-4">We also implemented an AI-powered fleet management system that optimizes route planning,
+        improving fuel efficiency and reducing emissions from our diesel trucks.</p>
+      <!-- Case Study Placeholder -->
+      <p class="italic text-lg mb-4">*Case Study:* Our partnership with XYZ Electric Vehicles allowed us to reduce
+        emissions by **25%** in high-density urban areas, benefiting both the environment and operational costs.</p>
+      <!-- Chart Placeholder for Fleet Emissions -->
+      <div class="my-4">
+        <canvas id="fleetEmissionsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 5. Waste Management & Circular Economy -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Waste Management & Circular Economy</h2>
+      <p class="text-lg mb-4">We are committed to reducing waste across our operations. In 2021, we achieved a **75%
+        recycling rate** and diverted over **65 tons** of packaging waste through reuse programs.</p>
+      <p class="text-lg mb-4">Additionally, we launched a waste-to-energy partnership with local facilities,
+        transforming non-recyclable waste into renewable energy.</p>
+      <p class="text-lg mb-4">We aim to achieve **80%** waste diversion by 2025.</p>
+      <!-- Chart Placeholder for Waste Diversion -->
+      <div class="my-4">
+        <canvas id="wasteDiversionChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 6. Sustainable Sourcing & Green Procurement -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Sustainable Sourcing & Green Procurement</h2>
+      <p class="text-lg mb-4">We updated our procurement policies to prioritize sustainability, ensuring that **80%** of
+        our suppliers meet rigorous environmental standards. We also partnered with eco-friendly vendors to promote
+        sustainable materials and packaging.</p>
+      <p class="text-lg mb-4">As part of this initiative, we’ve launched a supplier engagement program to help educate
+        and encourage our vendors to adopt green practices.</p>
+      <!-- Chart Placeholder for Supplier Engagement -->
+      <div class="my-4">
+        <canvas id="supplierEngagementChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 7. Water Conservation Efforts -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Water Conservation Efforts</h2>
+      <p class="text-lg mb-4">In 2021, we implemented several water-saving initiatives, including the installation of
+        **rainwater harvesting** systems and optimizing water usage in our facilities. This helped us reduce water
+        consumption by **10%** compared to 2020.</p>
+      <p class="text-lg mb-4">We also worked with local authorities to ensure that our water use does not affect
+        community resources.</p>
+      <!-- Chart Placeholder for Water Usage Reduction -->
+      <div class="my-4">
+        <canvas id="waterConservationChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 8. Biodiversity & Conservation Projects -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Biodiversity & Conservation Projects</h2>
+      <p class="text-lg mb-4">Logix Transport Solutions has committed to biodiversity conservation through partnerships
+        with local NGOs to restore ecosystems impacted by logistics activities. In 2021, we planted over **10,000
+        trees** as part of our restoration initiatives.</p>
+      <p class="text-lg mb-4">Additionally, we contributed to wildlife conservation efforts through funding wildlife
+        corridors and protecting endangered species.</p>
+      <!-- Chart Placeholder for Biodiversity Impact -->
+      <div class="my-4">
+        <canvas id="biodiversityImpactChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 9. Employee & Community Engagement -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Employee & Community Engagement</h2>
+      <p class="text-lg mb-4">Our employees are at the heart of our sustainability efforts. In 2021, we held **40**
+        environmental training sessions and engaged **1,400 volunteer hours** in green initiatives.</p>
+      <p class="text-lg mb-4">We also partnered with local communities to promote environmental awareness and action,
+        helping them improve their sustainability practices.</p>
+      <!-- Community Story Placeholder -->
+      <p class="italic text-lg mb-4">*Community Story:* Our employee-led tree planting initiative in the Riverside
+        District engaged over **200 volunteers**, planting more than **5,000 trees**.</p>
+      <!-- Chart Placeholder for Volunteer Hours -->
+      <div class="my-4">
+        <canvas id="volunteerHoursChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 10. Future Goals & Environmental Impact Growth -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Future Goals & Environmental Impact Growth</h2>
+      <p class="text-lg mb-4">Looking ahead, we are committed to expanding our environmental efforts with the following
+        goals:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Achieving **carbon neutrality** by 2030.</li>
+        <li>Reducing **waste generation** by **40%** by 2025.</li>
+        <li>Increasing **renewable energy** usage in our facilities to **70%** by 2024.</li>
+      </ul>
+      <p class="text-lg mb-4">We are confident that these initiatives will lead to a more sustainable future, both for
+        our company and for the world.</p>
+      <!-- Chart Placeholder for Environmental Goals -->
+      <div class="my-4">
+        <canvas id="environmentalGoalsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- Section Cover - Social -->
+  <section class="bg-yellow-100 p-10 text-center">
+    <h2 class="text-4xl font-bold text-yellow-800">Social Responsibility</h2>
+    <p class="mt-2 text-xl text-yellow-700">Empowering People, Building Communities</p>
+  </section>
+  <!-- Social Responsibility Section -->
+  <!-- Social Responsibility Section -->
+  <section class="max-w-4xl mx-auto p-10">
+
+    <!-- 1. Introduction to Social Responsibility -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Introduction to Social Responsibility</h2>
+      <p class="text-lg mb-4">At Logix Transport Solutions, we recognize the importance of social responsibility and its
+        impact on communities. Our initiatives focus on improving lives, fostering diversity, and empowering
+        underrepresented groups.</p>
+      <p class="text-lg mb-4">In 2021, we initiated several key programs in education, health, and community engagement,
+        demonstrating our commitment to making a positive impact in society.</p>
+    </div>
+
+    <!-- 2. Diversity, Equity, and Inclusion -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Diversity, Equity, and Inclusion</h2>
+      <p class="text-lg mb-4">We have been focused on creating an inclusive workplace. In 2021, we achieved a **35%**
+        female representation in our workforce and a **20%** increase in hiring employees from diverse racial and ethnic
+        backgrounds.</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Launched internal diversity training programs.</li>
+        <li>Established employee resource groups for women, LGBTQ+ employees, and minority groups.</li>
+        <li>Expanded mentorship programs to support underrepresented groups.</li>
+      </ul>
+      <!-- Chart Placeholder for Diversity and Inclusion -->
+      <div class="my-4">
+        <canvas id="diversityChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 3. Employee Wellbeing and Support -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Employee Wellbeing and Support</h2>
+      <p class="text-lg mb-4">Logix Transport Solutions is committed to the wellbeing of its employees. In 2021, we
+        expanded mental health support programs and introduced a flexible work-from-home policy.</p>
+      <p class="text-lg mb-4">We conducted employee satisfaction surveys, achieving an **85%** satisfaction rate. Key
+        areas of focus included work-life balance, healthcare benefits, and career development opportunities.</p>
+      <!-- Chart Placeholder for Employee Wellbeing -->
+      <div class="my-4">
+        <canvas id="employeeWellbeingChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 4. Community Engagement & Volunteer Programs -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Community Engagement & Volunteer Programs</h2>
+      <p class="text-lg mb-4">We engaged in several community outreach programs. Our employees volunteered a total of
+        **3,500 hours** in various causes, including education, environmental conservation, and local charity events.
+      </p>
+      <p class="text-lg mb-4">We partnered with local non-profits to support underprivileged communities, helping with
+        food banks, shelter support, and youth education initiatives.</p>
+      <!-- Chart Placeholder for Volunteer Hours -->
+      <div class="my-4">
+        <canvas id="volunteerHoursChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 5. Education & Youth Empowerment -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Education & Youth Empowerment</h2>
+      <p class="text-lg mb-4">In 2021, we launched an educational outreach program, impacting over **5,000 students** in
+        underprivileged communities. We provided scholarships, mentorship, and career counseling for high school and
+        college students.</p>
+      <p class="text-lg mb-4">Our partnership with **Tech For All** helped students from marginalized communities gain
+        access to digital literacy courses and internships in tech companies.</p>
+      <!-- Chart Placeholder for Educational Outreach -->
+      <div class="my-4">
+        <canvas id="educationOutreachChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 6. Health & Wellness Initiatives -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Health & Wellness Initiatives</h2>
+      <p class="text-lg mb-4">We conducted health and wellness initiatives, including free medical check-ups and mental
+        health workshops for employees and local communities. Our goal is to improve access to healthcare and support
+        mental well-being.</p>
+      <p class="text-lg mb-4">We partnered with **Health4All** to offer free vaccination clinics and health screenings
+        to underserved communities, impacting over **10,000 individuals**.</p>
+      <!-- Chart Placeholder for Health Initiatives -->
+      <div class="my-4">
+        <canvas id="healthWellnessChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 7. Gender Equality & Women's Empowerment -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Gender Equality & Women's Empowerment</h2>
+      <p class="text-lg mb-4">Our organization has committed to fostering gender equality. In 2021, we reached **40%**
+        female leadership representation, doubling the previous year’s percentage.</p>
+      <p class="text-lg mb-4">We launched a women’s empowerment initiative, focusing on leadership training and support
+        for female employees in the logistics sector, which is traditionally male-dominated.</p>
+      <!-- Chart Placeholder for Women's Empowerment -->
+      <div class="my-4">
+        <canvas id="womensEmpowermentChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 8. Accessibility & Inclusion for Disabled Employees -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Accessibility & Inclusion for Disabled Employees</h2>
+      <p class="text-lg mb-4">We prioritize accessibility in our workplace by ensuring that **100%** of our offices are
+        compliant with the Americans with Disabilities Act (ADA). We also introduced flexible working hours for
+        employees with disabilities.</p>
+      <p class="text-lg mb-4">Our partnership with **Enable Inc.** helped us design better accessibility features in our
+        office spaces and provide assistive technologies for employees.</p>
+      <!-- Chart Placeholder for Accessibility Initiatives -->
+      <div class="my-4">
+        <canvas id="accessibilityChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 9. Housing & Shelter Programs -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Housing & Shelter Programs</h2>
+      <p class="text-lg mb-4">We partnered with local organizations to build affordable housing in underserved areas. In
+        2021, we helped construct **150 homes** for low-income families.</p>
+      <p class="text-lg mb-4">Additionally, we supported **5,000** families through emergency shelter programs during
+        natural disasters and extreme weather conditions.</p>
+      <!-- Chart Placeholder for Housing Impact -->
+      <div class="my-4">
+        <canvas id="housingImpactChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 10. Future Goals & Social Impact Growth -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Future Goals & Social Impact Growth</h2>
+      <p class="text-lg mb-4">Looking ahead, we are committed to expanding our social responsibility efforts. Our goals
+        include:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Increasing our **female leadership** representation to **50%** by 2025.</li>
+        <li>Engaging **10,000** employees in volunteer and mentorship programs by 2023.</li>
+        <li>Expanding our **educational outreach** programs to impact **15,000** students by 2024.</li>
+      </ul>
+      <p class="text-lg mb-4">We are confident that with these initiatives, we will continue to make a significant
+        social impact and contribute to a more equitable society.</p>
+      <!-- Chart Placeholder for Social Impact Goals -->
+      <div class="my-4">
+        <canvas id="socialImpactGoalsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Section Cover - Governance -->
+  <section class="bg-gray-200 p-10 text-center">
+    <h2 class="text-4xl font-bold text-gray-800">Governance</h2>
+    <p class="mt-2 text-xl text-gray-700">Leading with Integrity and Transparency</p>
+  </section>
+  <!-- Governance Responsibility Section -->
+  <section class="max-w-4xl mx-auto p-10">
+
+    <!-- 1. Introduction to Governance -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Introduction to Governance</h2>
+      <p class="text-lg mb-4">Corporate governance refers to the systems and processes through which companies are
+        directed and controlled. We believe in transparency, accountability, and ethical decision-making to build trust
+        with our stakeholders.</p>
+      <p class="text-lg mb-4">This section details our governance framework and practices that ensure the integrity of
+        our operations and long-term sustainability.</p>
+    </div>
+
+    <!-- 2. Leadership & Board Structure -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Leadership & Board Structure</h2>
+      <p class="text-lg mb-4">We have a diverse leadership team and board structure that supports the long-term goals of
+        the company. The board consists of industry experts who bring a wealth of experience in technology, finance, and
+        sustainability.</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>CEO: John Doe</li>
+        <li>COO: Jane Smith</li>
+        <li>CFO: Mark Johnson</li>
+        <li>Board Members: 8 (6 independent, 2 non-executive)</li>
+      </ul>
+      <!-- Table of Leadership and Board -->
+      <div class="my-4">
+        <table class="table-auto w-full border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="p-2 text-left">Position</th>
+              <th class="p-2 text-left">Name</th>
+              <th class="p-2 text-left">Role</th>
+              <th class="p-2 text-left">Experience</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2">CEO</td>
+              <td class="p-2">John Doe</td>
+              <td class="p-2">Chief Executive Officer</td>
+              <td class="p-2">15 years in tech leadership</td>
+            </tr>
+            <tr>
+              <td class="p-2">COO</td>
+              <td class="p-2">Jane Smith</td>
+              <td class="p-2">Chief Operating Officer</td>
+              <td class="p-2">12 years in operations management</td>
+            </tr>
+            <tr>
+              <td class="p-2">CFO</td>
+              <td class="p-2">Mark Johnson</td>
+              <td class="p-2">Chief Financial Officer</td>
+              <td class="p-2">20 years in corporate finance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. Corporate Governance Code -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Corporate Governance Code</h2>
+      <p class="text-lg mb-4">Our governance practices are aligned with global best practices, ensuring ethical conduct,
+        fairness, and transparency in all our dealings. We adhere to the corporate governance code which covers:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Board composition and independence</li>
+        <li>Risk management and compliance</li>
+        <li>Transparency and disclosure policies</li>
+      </ul>
+      <!-- FontAwesome Governance Icon -->
+      <div class="text-center">
+        <i class="fas fa-gavel text-4xl text-blue-600"></i>
+      </div>
+    </div>
+
+    <!-- 4. Risk Management Framework -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Risk Management Framework</h2>
+      <p class="text-lg mb-4">We identify and manage risks in various areas including financial, operational,
+        environmental, and legal risks. Our Risk Management Framework includes:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Identification of risks</li>
+        <li>Risk assessment and prioritization</li>
+        <li>Implementing controls and mitigations</li>
+      </ul>
+      <!-- Chart Placeholder for Risk Assessment -->
+      <div class="my-4">
+        <canvas id="riskAssessmentChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 5. Compliance and Ethics -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Compliance and Ethics</h2>
+      <p class="text-lg mb-4">We are committed to complying with all applicable laws, regulations, and ethical
+        standards. Our ethics program includes:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Annual ethics training for all employees</li>
+        <li>Whistleblower protection mechanisms</li>
+        <li>Code of conduct for employees and board members</li>
+      </ul>
+      <!-- FontAwesome Compliance Icon -->
+      <div class="text-center">
+        <i class="fas fa-balance-scale text-4xl text-green-600"></i>
+      </div>
+    </div>
+
+    <!-- 6. Audit Committee -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Audit Committee</h2>
+      <p class="text-lg mb-4">Our Audit Committee ensures the integrity of financial statements and compliance with
+        regulatory requirements. The committee is responsible for:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Overseeing internal controls</li>
+        <li>Engaging with external auditors</li>
+        <li>Reviewing quarterly and annual financial statements</li>
+      </ul>
+      <!-- Table of Audit Committee Members -->
+      <div class="my-4">
+        <table class="table-auto w-full border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="p-2 text-left">Name</th>
+              <th class="p-2 text-left">Role</th>
+              <th class="p-2 text-left">Experience</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2">Emily White</td>
+              <td class="p-2">Chairperson</td>
+              <td class="p-2">15 years in auditing</td>
+            </tr>
+            <tr>
+              <td class="p-2">Michael Green</td>
+              <td class="p-2">Member</td>
+              <td class="p-2">10 years in financial compliance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7. Stakeholder Engagement -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Stakeholder Engagement</h2>
+      <p class="text-lg mb-4">We value transparency in our relationships with stakeholders. Our stakeholder engagement
+        process includes:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Regular shareholder meetings</li>
+        <li>Annual stakeholder reports</li>
+        <li>Feedback channels for employees and clients</li>
+      </ul>
+      <!-- FontAwesome Stakeholder Icon -->
+      <div class="text-center">
+        <i class="fas fa-users text-4xl text-orange-600"></i>
+      </div>
+    </div>
+
+    <!-- 8. Executive Compensation -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Executive Compensation</h2>
+      <p class="text-lg mb-4">Our compensation program is designed to align the interests of executives with long-term
+        shareholder value. It includes:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Base salary and performance-based incentives</li>
+        <li>Stock options tied to company performance</li>
+        <li>Health benefits and retirement plans</li>
+      </ul>
+      <!-- Chart Placeholder for Executive Compensation -->
+      <div class="my-4">
+        <canvas id="compensationChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 9. Anti-Corruption Measures -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Anti-Corruption Measures</h2>
+      <p class="text-lg mb-4">We have a strict anti-corruption policy and take measures to prevent bribery and
+        corruption in all business operations. Measures include:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Regular anti-corruption training for employees</li>
+        <li>Monitoring financial transactions</li>
+        <li>Reporting and addressing incidents of corruption</li>
+      </ul>
+      <!-- FontAwesome Anti-Corruption Icon -->
+      <div class="text-center">
+        <i class="fas fa-shield-alt text-4xl text-red-600"></i>
+      </div>
+    </div>
+
+    <!-- 10. Governance Future Goals -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold mb-4">Governance Future Goals</h2>
+      <p class="text-lg mb-4">We are committed to continually improving our governance practices. Our future goals
+        include:</p>
+      <ul class="list-disc pl-5 mb-4">
+        <li>Enhancing board diversity</li>
+        <li>Increasing transparency in financial disclosures</li>
+        <li>Strengthening anti-corruption measures</li>
+      </ul>
+      <!-- Chart Placeholder for Governance Goals -->
+      <div class="my-4">
+        <canvas id="governanceGoalsChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Include Chart.js -->
+
+</body>
+
+</html>

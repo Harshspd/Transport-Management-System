@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: #6b7280;
+            border: 2px solid #d1d5db;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .profile-info p {
+            font-size: 1rem;
+            color: #4b5563;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+        .form-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #374151;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .alert-danger {
+            background-color: #fecaca;
+            color: #b91c1c;
+            border: 1px solid #b91c1c;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container">
+        <h1 class="page-title">User Profile</h1>
+
+        <div id="errorContainer" class="alert alert-danger hidden"></div>
+        <div id="successContainer" class="alert alert-success hidden"></div>
+
+        <div class="profile-header">
+            <div class="profile-avatar" id="userAvatar">
+                </div>
+            <div class="profile-info">
+                <h2 id="userName">John Doe</h2>
+                <p id="userRole">Role: Admin</p>
+                <p id="userEmail">Email: john.doe@example.com</p>
+            </div>
+        </div>
+
+        <form id="profileForm">
+            <section>
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" value="John">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" value="Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="john.doe@example.com">
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Change Password</h2>
+                <div class="form-group">
+                    <label for="currentPassword">Current Password:</label>
+                    <input type="password" id="currentPassword" name="currentPassword">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password:</label>
+                    <input type="password" id="newPassword" name="newPassword">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Update Profile</button>
+                <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const profileForm = document.getElementById('profileForm');
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const emailInput = document.getElementById('email');
+        const currentPasswordInput = document.getElementById('currentPassword');
+        const newPasswordInput = document.getElementById('newPassword');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const userNameElement = document.getElementById('userName');
+        const userRoleElement = document.getElementById('userRole');
+        const userEmailElement = document.getElementById('userEmail');
+        const userAvatarElement = document.getElementById('userAvatar');
+        const errorContainer = document.getElementById('errorContainer');
+        const successContainer = document.getElementById('successContainer');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+
+        // Dummy user data (replace with actual data from your application)
+        const currentUser = {
+            id: "USER-001",
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            role: "Admin",
+            avatar: "JD", // Or URL to an image
+        };
+
+        function showError(message) {
+            errorContainer.textContent = message;
+            errorContainer.classList.remove('hidden');
+            successContainer.classList.add('hidden');
+        }
+
+        function showSuccess(message) {
+            successContainer.textContent = message;
+            successContainer.classList.remove('hidden');
+            errorContainer.classList.add('hidden');
+        }
+
+        // Function to validate the form
+        function validateForm() {
+            if (!firstNameInput.value.trim()) {
+                showError('Please enter your first name.');
+                return false;
+            }
+            if (!lastNameInput.value.trim()) {
+                showError('Please enter your last name.');
+                return false;
+            }
+            if (!emailInput.value.trim()) {
+                showError('Please enter your email address.');
+                return false;
+            }
+            if (newPasswordInput.value.trim() || confirmPasswordInput.value.trim()) {
+                if (!currentPasswordInput.value.trim()) {
+                    showError('Please enter your current password to change your password.');
+                    return false;
+                }
+                if (newPasswordInput.value.length < 8) {
+                    showError('New password must be at least 8 characters long.');
+                    return false;
+                }
+                if (newPasswordInput.value !== confirmPasswordInput.value) {
+                    showError('New password and confirm password do not match.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Function to update the user profile
+        function updateUserProfile(event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                // In a real application, you would send this data to the server to update the user profile
+                currentUser.firstName = firstNameInput.value;
+                currentUser.lastName = lastNameInput.value;
+                currentUser.email = emailInput.value;
+
+                // Update the displayed information
+                userNameElement.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                userEmailElement.textContent = `Email: ${currentUser.email}`;
+                showSuccess('Profile updated successfully!');
+
+                if (newPasswordInput.value.trim()) {
+                  //also update password.
+                  console.log("new password", newPasswordInput.value)
+                }
+                // Reset password fields
+                currentPasswordInput.value = '';
+                newPasswordInput.value = '';
+                confirmPasswordInput.value = '';
+            }
+        }
+
+        // Initial setup: Populate the form with the user's current data
+        window.onload = function() {
+            userNameElement.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+            userRoleElement.textContent = `Role: ${currentUser.role}`;
+            userEmailElement.textContent = `Email: ${currentUser.email}`;
+            userAvatarElement.textContent = currentUser.avatar; // Or set the image source if using an image URL
+
+
+            firstNameInput.value = currentUser.firstName;
+            lastNameInput.value = currentUser.lastName;
+            emailInput.value = currentUser.email;
+
+            profileForm.addEventListener('submit', updateUserProfile);
+            cancelBtn.addEventListener('click', () => {
+                profileForm.reset();
+                errorContainer.classList.add('hidden');
+                successContainer.classList.add('hidden');
+            });
+        };
+    </script>
+</body>
+</html>

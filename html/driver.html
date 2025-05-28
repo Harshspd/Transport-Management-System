@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Details Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 rounded-lg">
+    <div class="container max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Driver Details</h1>
+        <form id="driverForm" class="space-y-4">
+            <div>
+                <label for="driverName" class="block text-gray-700 text-sm font-bold mb-2">Driver Name:</label>
+                <input type="text" id="driverName" name="driverName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="driverName-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="driverLicenseNumber" class="block text-gray-700 text-sm font-bold mb-2">Driver License Number:</label>
+                <input type="text" id="driverLicenseNumber" name="driverLicenseNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="driverLicenseNumber-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="driverContactNumber" class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</label>
+                <input type="tel" id="driverContactNumber" name="driverContactNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <div id="driverContactNumber-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <div>
+                <label for="driverAddress" class="block text-gray-700 text-sm font-bold mb-2">Driver Address:</label>
+                <textarea id="driverAddress" name="driverAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                <div id="driverAddress-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save Driver Details</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('driverForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let hasErrors = false;
+
+            const driverName = document.getElementById('driverName').value.trim();
+            const driverLicenseNumber = document.getElementById('driverLicenseNumber').value.trim();
+            const driverContactNumber = document.getElementById('driverContactNumber').value.trim();
+             const driverAddress = document.getElementById('driverAddress').value.trim();
+
+            if (!driverName) {
+                formErrorResponse('driverName-error', 'Driver Name is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('driverName-error').style.display = 'none';
+            }
+
+            if (!driverLicenseNumber) {
+                formErrorResponse('driverLicenseNumber-error', 'Driver License Number is required');
+                hasErrors = true;
+            }  else {
+                document.getElementById('driverLicenseNumber-error').style.display = 'none';
+            }
+
+            if (!driverContactNumber) {
+                formErrorResponse('driverContactNumber-error', 'Contact Number is required');
+                hasErrors = true;
+            } else if (!/^[0-9]{10}$/.test(driverContactNumber)) {
+                formErrorResponse('driverContactNumber-error', 'Invalid Contact Number format');
+                hasErrors = true;
+            } else {
+                document.getElementById('driverContactNumber-error').style.display = 'none';
+            }
+            if (!driverAddress) {
+                formErrorResponse('driverAddress-error', 'Driver Address is required');
+                hasErrors = true;
+            } else {
+                document.getElementById('driverAddress-error').style.display = 'none';
+            }
+
+
+            if (!hasErrors) {
+                alert('Form submitted successfully!');
+                document.getElementById('driverForm').reset();
+            }
+        });
+
+        function formErrorResponse(inputID, response) {
+            const errorElement = document.getElementById(inputID);
+            errorElement.textContent = response;
+            errorElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

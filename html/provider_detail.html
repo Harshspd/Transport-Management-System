@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Details View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Tab styles */
+        .tab-link {
+            display: inline-block;
+            padding: 10px 15px;
+            border-bottom: 2px solid transparent;
+            margin-right: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #555;
+        }
+        .tab-link:hover {
+            border-bottom-color: #007bff;
+            color: #007bff;
+        }
+        .tab-link.active {
+            border-bottom-color: #007bff;
+            color: #007bff;
+            font-weight: 700;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 rounded-lg">
+    <div class="container max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Provider Details View</h1>
+        <div class="flex justify-between mb-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href='provider.html'">Edit Provider Details</button>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="window.location.href='shipment.html'">Add Shipment Booking</button>
+        </div>
+        <div class="tab-container">
+            <div class="tab-links">
+                <span class="tab-link active" data-tab="providerDetails">Provider Details</span>
+                <span class="tab-link" data-tab="vehiclesProvided">Vehicles Provided</span>
+                <span class="tab-link" data-tab="driversList">Drivers List</span>
+                <span class="tab-link" data-tab="shipmentBookings">Shipment Bookings</span>
+            </div>
+            <div class="tab-contents">
+                <div id="providerDetails" class="tab-content active">
+                    </div>
+                <div id="vehiclesProvided" class="tab-content">
+                    </div>
+                <div id="driversList" class="tab-content">
+                    </div>
+                <div id="shipmentBookings" class="tab-content">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const providerData = {
+            name: "ABC Logistics",
+            type: "Agency",
+            contactNumber: "9876543210",
+            address: "123, Main Road, Anytown",
+            gstin: "29AAAAA1234B1Z9"
+        };
+
+        const vehiclesData = [
+            { number: "KA-01-AB-1234", type: "Truck", driverName: "John Doe", shipmentId: "SHP001" },
+            { number: "TN-05-CD-5678", type: "Trailer", driverName: "Jane Smith", shipmentId: "SHP002" },
+            { number: "MH-12-EF-9012", type: "Pickup Truck", driverName: "Mike Johnson", shipmentId: "SHP003" }
+        ];
+
+        const driversData = [
+            { name: "John Doe", licenseNumber: "DL1234567890" },
+            { name: "Jane Smith", licenseNumber: "DL9876543210" },
+            { name: "Mike Johnson", licenseNumber: "DL2468135790" }
+        ];
+
+        const shipmentBookingsData = [
+            { bookingId: "BOOK101", rateNegotiated: "Rs. 10,000" },
+            { bookingId: "BOOK102", rateNegotiated: "Rs. 15,000" },
+            { bookingId: "BOOK103", rateNegotiated: "Rs. 12,000" }
+        ];
+
+        function populateProviderDetails() {
+            const container = document.getElementById("providerDetails");
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><span class="font-semibold text-gray-700">Provider Name:</span></div>
+                        <div>${providerData.name}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><span class="font-semibold text-gray-700">Provider Type:</span></div>
+                        <div>${providerData.type}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><span class="font-semibold text-gray-700">Contact Number:</span></div>
+                        <div>${providerData.contactNumber}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><span class="font-semibold text-gray-700">Provider Address:</span></div>
+                        <div>${providerData.address}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><span class="font-semibold text-gray-700">GSTIN:</span></div>
+                        <div>${providerData.gstin}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function populateVehiclesProvided() {
+            const container = document.getElementById("vehiclesProvided");
+            if (vehiclesData.length === 0) {
+                container.innerHTML = "<p>No vehicles provided.</p>";
+                return;
+            }
+            let html = "<div class='overflow-x-auto'><table class='min-w-full leading-normal shadow-md rounded-lg overflow-hidden'>";
+            html += "<thead class='bg-gray-200 text-gray-700'>";
+            html += "<tr>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Vehicle Number</th>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Type</th>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Driver</th>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Shipment ID</th>";
+            html += "</tr>";
+            html += "</thead>";
+            html += "<tbody class='bg-white'>";
+            vehiclesData.forEach(vehicle => {
+                html += "<tr>";
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${vehicle.number}</td>`;
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${vehicle.type}</td>`;
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${vehicle.driverName}</td>`;
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${vehicle.shipmentId}</td>`;
+                html += "</tr>";
+            });
+            html += "</tbody>";
+            html += "</table></div>";
+            container.innerHTML = html;
+        }
+
+        function populateDriversList() {
+            const container = document.getElementById("driversList");
+            if (driversData.length === 0) {
+                container.innerHTML = "<p>No drivers listed.</p>";
+                return;
+            }
+            let html = "<div class='overflow-x-auto'><table class='min-w-full leading-normal shadow-md rounded-lg overflow-hidden'>";
+            html += "<thead class='bg-gray-200 text-gray-700'>";
+            html += "<tr>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Name</th>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>License Number</th>";
+            html += "</tr>";
+            html += "</thead>";
+            html += "<tbody class='bg-white'>";
+            driversData.forEach(driver => {
+                html += "<tr>";
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${driver.name}</td>`;
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${driver.licenseNumber}</td>`;
+                html += "</tr>";
+            });
+            html += "</tbody>";
+            html += "</table></div>";
+            container.innerHTML = html;
+        }
+
+        function populateShipmentBookings() {
+            const container = document.getElementById("shipmentBookings");
+            if (shipmentBookingsData.length === 0) {
+                container.innerHTML = "<p>No shipment bookings.</p>";
+                return;
+            }
+            let html = "<div class='overflow-x-auto'><table class='min-w-full leading-normal shadow-md rounded-lg overflow-hidden'>";
+            html += "<thead class='bg-gray-200 text-gray-700'>";
+            html += "<tr>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Booking ID</th>";
+            html += "<th class='px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider'>Rate Negotiated</th>";
+            html += "</tr>";
+            html += "</thead>";
+            html += "<tbody class='bg-white'>";
+            shipmentBookingsData.forEach(booking => {
+                html += "<tr>";
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${booking.bookingId}</td>`;
+                html += `<td class='px-5 py-5 border-b border-gray-200 text-sm'>${booking.rateNegotiated}</td>`;
+                html += "</tr>";
+            });
+            html += "</tbody>";
+            html += "</table></div>";
+            container.innerHTML = html;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populateProviderDetails();
+            populateVehiclesProvided();
+            populateDriversList();
+            populateShipmentBookings();
+
+            const tabLinks = document.querySelectorAll(".tab-link");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            tabLinks.forEach(tabLink => {
+                tabLink.addEventListener("click", function() {
+                    const tabName = this.dataset.tab;
+                    tabLinks.forEach(link => link.classList.remove("active"));
+                    tabContents.forEach(content => content.classList.remove("active"));
+                    document.getElementById(tabName).classList.add("active");
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
