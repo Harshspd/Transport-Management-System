@@ -29,9 +29,9 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  
+   console.log(req.body)
 
-  const { email, password ,companyName,firstName,lastName } = req.body;
+  const { email, password ,companyName,fName,lName } = req.body;
   if (!email || !password || !validateEmail(email) || !validatePassword(password)) {
     return res.status(400).json({
       message: 'Failed to create account',
@@ -47,15 +47,17 @@ export const signup = async (req, res) => {
         error: 'User Already Exists',
       });
     }
-    const encryptedPassword = await hashPassword(password);
+   
     const newAddress = new Address({});
     const newAdd = await newAddress.save();
-    const newAccount = new Account({ account_email: email, address: newAdd._id, name:companyName,first_name:firstName,last_name:lastName });
+    const newAccount = new Account({ account_email: email, address: newAdd._id, name:companyName,first_name:fName,last_name:lName });
     const newAcc = await newAccount.save();
+     const encryptedPassword = await hashPassword(password);
     const newUser = new User({
-      email, account_id: newAcc._id,
+      email, account_id: newAcc._id,password: encryptedPassword 
     });
     await newUser.save();
+    
     const token = jwt.sign({ _id: newUser.id, email: newUser.email,account_id:newUser.account_id }, process.env.SECRET);
     
     res.status(200).json({
