@@ -15,5 +15,8 @@ const connection = async () => {
     console.error('Error connecting to MongoDB:', error.message);
   }
 };
+mongoose.set('bufferCommands', false);
+mongoose.set('serverSelectionTimeoutMS', 50000);
+
 
 export default connection;
