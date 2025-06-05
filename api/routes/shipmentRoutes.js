@@ -3,7 +3,7 @@ import { createShipment, getAllShipments } from '../controllers/shipmentControll
 
 const router = express.Router();
 
-router.post('/shipments', createShipment);
-router.get('/shipments', getAllShipments);
+router.post('/', createShipment);
+router.get('/', getAllShipments);
 
 export default router;

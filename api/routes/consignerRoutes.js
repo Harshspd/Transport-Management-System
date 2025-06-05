@@ -3,7 +3,9 @@ import { createConsigner, getAllConsigners } from '../controllers/consignerContr
 
 const router = express.Router();
 
-router.post('/conigners', createConsigner);
-router.get('/consigners', getAllConsigners);
+
+router.post('/', createConsigner);         
+router.get('/', getAllConsigners);
+
 
 export default router;

@@ -3,7 +3,7 @@ import { createConsignee, getAllConsignees } from '../controllers/consigneeContr
 
 const router = express.Router();
 
-router.post('/consignees', createConsignee);
-router.get('/consignees', getAllConsignees);
+router.post('/', createConsignee);
+router.get('/', getAllConsignees);
 
 export default router;

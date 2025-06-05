@@ -5,11 +5,14 @@ import { Server as SocketServer } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import connection from './config/db.js'; 
 
 // Load env vars
 dotenv.config();
+connection(); 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 5000;
+
 
 // Middleware
 app.use(cors());
