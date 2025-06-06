@@ -24,20 +24,9 @@ app.get("/", (req, res) => {
 });
 
 // Import Routes
-import authRoutes from './routes/authRoutes.js';
-import consignerRoutes from './routes/consignerRoutes.js';
-import consigneeRoutes from './routes/consigneeRoutes.js';
-import driverRoutes from './routes/driverRoutes.js';
-import vehicleRoutes from './routes/vehicleRoutes.js';
-import shipmentRoutes from './routes/shipmentRoutes.js';
+
 
 // Use Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/consigners', consignerRoutes);
-app.use('/api/consignees', consigneeRoutes);
-app.use('/api/drivers', driverRoutes);
-app.use('/api/vehicles', vehicleRoutes);
-app.use('/api/shipments', shipmentRoutes);
 
 // Socket.io Setup
 const server = http.createServer(app);

@@ -1,10 +1,10 @@
 import express from 'express';
 import { createVehicle, getAllVehicles } from '../controllers/vehicleController.js';
-import multer from 'multer';
+import { upload } from '../controllers/uploadFiles.mjs'; 
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/rcs/' });
 
+// Use custom multer config that handles filename + path
 router.post('/', upload.single('rcFile'), createVehicle);
 router.get('/', getAllVehicles);
 

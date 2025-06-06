@@ -22,6 +22,12 @@ import purchase from "./routes/purchaseRouter.js";
 import inventory from "./routes/inventoryRouter.js";
 import processInvoices from "./cron/overdueReminder.mjs";
 import { initializeWebSocket } from "./socket.js";
+import authRoutes from './routes/authRoutes.js';
+import consignerRoutes from './routes/consignerRoutes.js';
+import consigneeRoutes from './routes/consigneeRoutes.js';
+import driverRoutes from './routes/driverRoutes.js';
+import vehicleRoutes from './routes/vehicleRoutes.js';
+import shipmentRoutes from './routes/shipmentRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -65,6 +71,13 @@ app.use("/api/dashboard", dashboard);
 app.use("/api/purchase", purchase);
 app.use("/api/inventory", inventory);
 app.use("/api/industry",industryRouter);
+app.use('/api/auth', authRoutes);
+app.use('/api/consigners', consignerRoutes);
+app.use('/api/consignees', consigneeRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/shipments', shipmentRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
