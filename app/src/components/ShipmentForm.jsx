@@ -1,172 +1,249 @@
 import React from 'react'
+import { useState } from 'react';
 
 export default function ShipmentForm() {
+    const [formData, setFormData] = useState({
+        Consigner: '',
+        Consignee: '',
+        DeliveryLocation: '',
+        DateTime: '',
+        Description: '',
+        Quantity: '',
+        BillNo: '',
+        Value: '',
+        Mode: '',
+        ActualDimensions: '',
+        ChargedDimensions: '',
+        UnitWeight: '',
+        ActualWeight: '',
+        ChargedWeight: '',
+        Instructions: '',
+        Driver: '',
+        Vehicle: '',
+        ServiceType: '',
+        Provider: '',
+        EwayBill: '',
+    });
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState("");
+
+    const consigners = ['Reliance Industry', 'Tata New'];
+    const consignees = ['Dell India', 'HP Pvt Lmt'];
+    const modes = ['Transport', 'Door Delivery'];
+    const serviceTypes = ['Standard', 'Express'];
+    const drivers = ['Balaji', 'Punith'];
+    const vehicles = ['KA 23 V 6272', 'MH 20 U 5485'];
+    const providerTypes = ['Owner', 'Agency'];
+    const unitWeights = ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo'];
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (value === '+Add new') {
+            openModal(name);
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    };
+
+    const openModal = (type) => {
+        setModalType(type);
+        setShowModal(true);
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
+        setModalType("");
+    }
+
+    const renderOptions = (options, name) => (
+        [
+            ...options.map((item) => <option key={item} value={item}>{item}</option>),
+            <option key="add-new" value="+Add new">+Add new</option>
+        ]
+    );
+
     return (
         <div>
             <h1 className="text-xl font-semibold pb-2">Shipment Booking</h1>
-
-            <div className='grid grid-cols-[66%_34%] w-full gap-4'>                
+            <div className="grid grid-cols-[66%_34%] w-full gap-4">
                 <div className="w-full max-w-3xl bg-white rounded-lg shadow-md p-6 flex gap-6 ">
-
                     {/* Left Form Section */}
-                    <div className="flex-[3] space-y-4">
+                    <form className="flex-[3] space-y-4" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-sm font-medium mb-1">Consigner Details</label>
-                            <select className="w-full border rounded-lg p-2 h-10.5">
-                                <option className='text-gray-300'>Select</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-1">Consigner Details</label>
-                            <select
-                                className="w-full border text-gray-500 rounded-lg p-2 h-10.5"
-                                style={{ color: '#ABABAB' }}>
-                                <option value="">Select</option>
+                            <label className="block text-sm font-medium mb-1">Consigner</label>
+                            <select name="Consigner" onChange={handleChange} value={formData.Consigner} className="w-full border rounded-lg p-2 h-10.5">
+                                <option value="" className="text-gray-300">Select</option>
+                                {renderOptions(consigners, 'Consigner')}
                             </select>
                         </div>
 
-
-                        {/* First Row */}
                         <div className="grid grid-cols-3 gap-4">
-
                             <div>
-                                <label className="block text-sm font-medium mb-1">Consignee Details</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select</option>
+                                <label className="block text-sm font-medium mb-1">Consignee</label>
+                                <select name="Consignee" onChange={handleChange} value={formData.Consignee} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select</option>
+                                    {consignees.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Delivery Location</label>
-                                <input type="text" className="w-full border rounded-lg p-2" />
+                                <input name="DeliveryLocation" onChange={handleChange} value={formData.DeliveryLocation} type="text" className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Date/Time</label>
-                                <input type="datetime-local" className="w-full border rounded-lg p-2" />
+                                <input name="DateTime" onChange={handleChange} value={formData.DateTime} type="datetime-local" className="w-full border rounded-lg p-2" />
                             </div>
                         </div>
 
-                        {/* Second Row */}
-                        <div className="grid grid-cols-3 gap-4">
-
-                        </div>
-
-                        {/* Goods Details Title */}
                         <h2 className="text-lg font-medium">Goods Details</h2>
 
-                        {/* Goods Details Form */}
                         <div className="grid grid-cols-3 gap-4">
                             <div className="row-span-3">
-                                <label className="block text-sm font-medium mb-1 ">Descriptions :</label>
-                                <textarea className="w-full border rounded-lg p-2 h-55" />
+                                <label className="block text-sm font-medium mb-1">Description</label>
+                                <textarea name="Description" onChange={handleChange} value={formData.Description} className="w-full border rounded-lg p-2 h-55" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Quantity :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Quantity</label>
+                                <input name="Quantity" onChange={handleChange} value={formData.Quantity} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Bill No :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Bill No</label>
+                                <input name="BillNo" onChange={handleChange} value={formData.BillNo} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Value :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Value</label>
+                                <input name="Value" onChange={handleChange} value={formData.Value} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Mode :</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select Mode</option>
+                                <label className="block text-sm font-medium mb-1">Mode</label>
+                                <select name="Mode" onChange={handleChange} value={formData.Mode} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select Mode</option>
+                                    {modes.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Actual Dimensions :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Actual Dimensions</label>
+                                <input name="ActualDimensions" onChange={handleChange} value={formData.ActualDimensions} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Charged Dimensions :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Charged Dimensions</label>
+                                <input name="ChargedDimensions" onChange={handleChange} value={formData.ChargedDimensions} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Unit of Weight :</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select Unit</option>
+                                <label className="block text-sm font-medium mb-1">Unit of Weight</label>
+                                <select name="UnitWeight" onChange={handleChange} value={formData.UnitWeight} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select Unit</option>
+                                    {unitWeights.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Actual Weight :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Actual Weight</label>
+                                <input name="ActualWeight" onChange={handleChange} value={formData.ActualWeight} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Charged Weight :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Charged Weight</label>
+                                <input name="ChargedWeight" onChange={handleChange} value={formData.ChargedWeight} className="w-full border rounded-lg p-2" />
                             </div>
                             <div className="row-span-3">
-                                <label className="block text-sm font-medium mb-1">Special Instructions :</label>
-                                <textarea className="w-full border rounded-lg p-2 h-55" />
+                                <label className="block text-sm font-medium mb-1">Special Instructions</label>
+                                <textarea name="Instructions" onChange={handleChange} value={formData.Instructions} className="w-full border rounded-lg p-2 h-55" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Driver :</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select</option>
+                                <label className="block text-sm font-medium mb-1">Driver</label>
+                                <select name="Driver" onChange={handleChange} value={formData.Driver} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select</option>
+                                    {drivers.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Vehicle :</label>
-                                <input className="w-full border rounded-lg p-2" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Service Type :</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select Service Type</option>
+                                <label className="block text-sm font-medium mb-1">Vehicle</label>
+                                <select name="Vehicle" onChange={handleChange} value={formData.Vehicle} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select</option>
+                                    {vehicles.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Provider :</label>
-                                <select className="w-full border rounded-lg p-2 h-10.5">
-                                    <option>Select Provider Type</option>
+                                <label className="block text-sm font-medium mb-1">Service Type</label>
+                                <select name="ServiceType" onChange={handleChange} value={formData.ServiceType} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select Service Type</option>
+                                    {serviceTypes.map((item) => <option key={item} value={item}>{item}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">Eway Bill Number :</label>
-                                <input className="w-full border rounded-lg p-2" />
+                                <label className="block text-sm font-medium mb-1">Provider</label>
+                                <select name="Provider" onChange={handleChange} value={formData.Provider} className="w-full border rounded-lg p-2 h-10.5">
+                                    <option value="">Select Provider Type</option>
+                                    {providerTypes.map((item) => <option key={item} value={item}>{item}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Eway Bill Number</label>
+                                <input name="EwayBill" onChange={handleChange} value={formData.EwayBill} className="w-full border rounded-lg p-2" />
                             </div>
                         </div>
-                        <div className='flex justify-end'>
-                            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+
+                        <div className="flex justify-end">
+                            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                                 Book Shipment
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 {/* Right Preview Section */}
                 <div className="w-full bg-white rounded-lg shadow-md p-6">
                     <h2 className="flex justify-center font-semibold text-lg mb-4">Preview</h2>
                     <div className="grid grid-cols-2 gap-2 space-y-2 bg-gray-100 p-6 rounded-lg">
-                        {/* Replace below lines with dynamic values */}
-                        <p className='block text-sm font-medium'>Consigner Details : <strong>Balaji</strong></p>
-                        <p>Consigner Address : 36, 1st cross Anna Nagar, Mumbai</p>
-                        <p>Consignee Details : HP Pvt Lmt</p>
-                        <p>Delivery Location : 1st Block IT Park, Mumbai</p>
-                        <p>Date/Time : 21 Jan 2025 / 02:00 PM</p>
-                        <p>Description : Pellentesque elementum tortor pellentesque dignissim.</p>
-                        <p>Unit of Weight : 100 kg</p>
-                        <p>Quantity : 5 Piece</p>
-                        <p>Bill No : SH-001</p>
-                        <p>Value : 5 Piece</p>
-                        <p>Mode : Transport</p>
-                        <p>Actual Dimensions : 5 Piece</p>
-                        <p>Charged Dimensions : 5 Piece</p>
-                        <p>Actual Weight : 5 Piece</p>
-                        <p>Charged Weight : 5 Piece</p>
-                        <p>Driver : 5 Piece</p>
-                        <p>Special Instructions : </p>
-                        <p>Vehicle : 5 Piece</p>
-                        <p>Service Type : 5 Piece</p>
-                        <p>Provider : 5 Piece</p>
-                        <p>Eway Bill Number : 5 Piece</p>
+                        {Object.entries(formData).map(([key, value]) => (
+                            <p key={key} className="text-sm">{key.replace(/([A-Z])/g, ' $1')}: <strong> {value}</strong></p>
+                        ))}
                     </div>
                 </div>
             </div>
+            {/* Slide-in Modal */}
+            {showModal && (
+                <div className="fixed top-50 right-0 w-1/2 h-lg bg-white shadow-xl z-50 transition-transform duration-300">
+                    <div className="p-6">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-lg font-bold">Add {modalType.charAt(0).toUpperCase() + modalType.slice(1)}</h2>
+                            <button onClick={closeModal} className="text-gray-400 font-thin text-2xl">&times;</button>
+                        </div>
+                        <div className='p-4 rounded-lg border-15 border-gray-100'>
+                            <h2 className="text-lg font-medium pb-4">{modalType.charAt(0).toUpperCase() + modalType.slice(1)} Details</h2>
+
+                            <div className='grid grid-cols-2 gap-4 '>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Consigner Name :</label>
+                                    <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Contact Person :</label>
+                                    <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
+                                </div>
+                                <div className='row-span-2'>
+                                    <label className="block text-sm font-medium mb-1">Address :</label>
+                                    <textarea onChange={handleChange} className="w-full border rounded-lg p-2 h-32.5" ></textarea>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Contact Number :</label>
+                                    <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">GST IN :</label>
+                                    <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
+                                </div>
+                                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
