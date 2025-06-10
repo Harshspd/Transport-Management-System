@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
+import AddModal from "@/components/AddModal"
 
 export default function ShipmentForm() {
     const [formData, setFormData] = useState({
@@ -27,15 +28,19 @@ export default function ShipmentForm() {
 
     const [showModal, setShowModal] = useState(false);
     const [modalType, setModalType] = useState("");
+    const [newOptionValue, setNewOptionValue] = useState('');
 
-    const consigners = ['Reliance Industry', 'Tata New'];
-    const consignees = ['Dell India', 'HP Pvt Lmt'];
-    const modes = ['Transport', 'Door Delivery'];
-    const serviceTypes = ['Standard', 'Express'];
-    const drivers = ['Balaji', 'Punith'];
-    const vehicles = ['KA 23 V 6272', 'MH 20 U 5485'];
-    const providerTypes = ['Owner', 'Agency'];
-    const unitWeights = ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo'];
+    const [options, setOptions] = useState({
+        Consigner: ['Reliance Industry', 'Tata New'],
+        Consignee: ['Dell India', 'HP Pvt Lmt'],
+        Mode: ['Transport', 'Door Delivery'],
+        ServiceType: ['Standard', 'Express'],
+        Driver: ['Balaji', 'Punith'],
+        Vehicle: ['KA 23 V 6272', 'MH 20 U 5485'],
+        // Vehicle: ['Truck', 'Trailer', 'Pickup Truck', 'Van', 'Others']
+        Provider: ['Owner', 'Agency'],
+        UnitWeight: ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo']
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,20 +58,50 @@ export default function ShipmentForm() {
 
     const openModal = (type) => {
         setModalType(type);
+        setNewOptionValue('');
         setShowModal(true);
     }
 
     const closeModal = () => {
         setShowModal(false);
+        setNewOptionValue('');
         setModalType("");
     }
 
-    const renderOptions = (options, name) => (
+    const handleAddNew = () => {
+        if (newOptionValue.trim()) {
+            setOptions((prev) => ({
+                ...prev,
+                [modalType]: [...(prev[modalType] || []), newOptionValue.trim()]
+            }));
+            setFormData((prev) => ({ ...prev, [modalType]: newOptionValue.trim() }));
+            closeModal();
+        }
+    };
+
+    // const handleModalInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setNewModalData((prev) => ({ ...prev, [name]: value }));
+    // };
+    
+    const renderOptions = (items) => (
         [
-            ...options.map((item) => <option key={item} value={item}>{item}</option>),
+            ...items.map((item) => <option key={item} value={item}>{item}</option>),
             <option key="add-new" value="+Add new">+Add new</option>
         ]
     );
+
+    useEffect(() => {
+        const storedOptions = localStorage.getItem("shipmentOptions");
+        if (storedOptions) {
+            setOptions(JSON.parse(storedOptions));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("shipmentOptions", JSON.stringify(options));
+    }, [options]);
+    
 
     return (
         <div>
@@ -79,7 +114,7 @@ export default function ShipmentForm() {
                             <label className="block text-sm font-medium mb-1">Consigner</label>
                             <select name="Consigner" onChange={handleChange} value={formData.Consigner} className="w-full border rounded-lg p-2 h-10.5">
                                 <option value="" className="text-gray-300">Select</option>
-                                {renderOptions(consigners, 'Consigner')}
+                                {renderOptions(options.Consigner, 'Consigner')}
                             </select>
                         </div>
 
@@ -88,7 +123,7 @@ export default function ShipmentForm() {
                                 <label className="block text-sm font-medium mb-1">Consignee</label>
                                 <select name="Consignee" onChange={handleChange} value={formData.Consignee} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select</option>
-                                    {consignees.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.Consignee, 'Consignee')}
                                 </select>
                             </div>
                             <div>
@@ -110,7 +145,7 @@ export default function ShipmentForm() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Quantity</label>
-                                <input name="Quantity" onChange={handleChange} value={formData.Quantity} className="w-full border rounded-lg p-2" />
+                                <input type='number' name="Quantity" onChange={handleChange} value={formData.Quantity} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Bill No</label>
@@ -118,13 +153,13 @@ export default function ShipmentForm() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Value</label>
-                                <input name="Value" onChange={handleChange} value={formData.Value} className="w-full border rounded-lg p-2" />
+                                <input type='number' name="Value" onChange={handleChange} value={formData.Value} className="w-full border rounded-lg p-2" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Mode</label>
                                 <select name="Mode" onChange={handleChange} value={formData.Mode} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select Mode</option>
-                                    {modes.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.Mode, 'Mode')}
                                 </select>
                             </div>
                             <div>
@@ -139,7 +174,7 @@ export default function ShipmentForm() {
                                 <label className="block text-sm font-medium mb-1">Unit of Weight</label>
                                 <select name="UnitWeight" onChange={handleChange} value={formData.UnitWeight} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select Unit</option>
-                                    {unitWeights.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.UnitWeight, 'UnitWeight')}
                                 </select>
                             </div>
                             <div>
@@ -158,28 +193,28 @@ export default function ShipmentForm() {
                                 <label className="block text-sm font-medium mb-1">Driver</label>
                                 <select name="Driver" onChange={handleChange} value={formData.Driver} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select</option>
-                                    {drivers.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.Driver, 'Driver')}
                                 </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Vehicle</label>
                                 <select name="Vehicle" onChange={handleChange} value={formData.Vehicle} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select</option>
-                                    {vehicles.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.Vehicle, 'Vehicle')}
                                 </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Service Type</label>
                                 <select name="ServiceType" onChange={handleChange} value={formData.ServiceType} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select Service Type</option>
-                                    {serviceTypes.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.ServiceType, 'ServiceType')}
                                 </select>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Provider</label>
                                 <select name="Provider" onChange={handleChange} value={formData.Provider} className="w-full border rounded-lg p-2 h-10.5">
                                     <option value="">Select Provider Type</option>
-                                    {providerTypes.map((item) => <option key={item} value={item}>{item}</option>)}
+                                    {renderOptions(options.Provider, 'Provider')}
                                 </select>
                             </div>
                             <div>
@@ -207,6 +242,15 @@ export default function ShipmentForm() {
                 </div>
             </div>
             {/* Slide-in Modal */}
+
+            <AddModal
+                show={showModal}
+                type={modalType}
+                data={newModalData}
+                onClose={closeModal}
+                onChange={handleModalInputChange}
+                onAdd={handleAddNew}
+            />
             {showModal && (
                 <div className="fixed top-50 right-0 w-1/2 h-lg bg-white shadow-xl z-50 transition-transform duration-300">
                     <div className="p-6">
@@ -220,7 +264,7 @@ export default function ShipmentForm() {
                             <div className='grid grid-cols-2 gap-4 '>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Consigner Name :</label>
-                                    <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
+                                    <input type="text" value={newOptionValue} onChange={(e) => setNewOptionValue(e.target.value)} className="w-full border rounded-lg p-2 h-10.5" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Contact Person :</label>
@@ -238,7 +282,7 @@ export default function ShipmentForm() {
                                     <label className="block text-sm font-medium mb-1">GST IN :</label>
                                     <input type="text" onChange={handleChange} className="w-full border rounded-lg p-2 h-10.5" />
                                 </div>
-                                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+                                <button onClick={handleAddNew} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
                             </div>
                         </div>
                     </div>
