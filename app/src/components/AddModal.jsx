@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 
 export default function AddModal({ show, type, data, onClose, onChange, onAdd }) {
+
+    const [newOptionValue, setNewOptionValue] = useState('');
+    const [formData, setFormData] = useState({Vehicle: ''})
+
     const [options, setOptions] = useState({
         Vehicle: ['Truck', 'Trailer', 'Pickup Truck', 'Van', 'Others']
     });
@@ -12,6 +16,28 @@ export default function AddModal({ show, type, data, onClose, onChange, onAdd })
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
     };
+    const closeModal = () => {
+        setShowModal(false);
+        setNewOptionValue('');
+        setModalType("");
+    }
+    const handleAddNew = () => {
+        if (newOptionValue.trim()) {
+            setOptions((prev) => ({
+                ...prev,
+                [modalType]: [...(prev[modalType] || []), newOptionValue.trim()]
+            }));
+            setFormData((prev) => ({ ...prev, [modalType]: newOptionValue.trim() }));
+            closeModal();
+        }
+    };
+    const renderOptions = (items) => (
+        [
+            ...items.map((item) => <option key={item} value={item}>{item}</option>),
+            <option key="add-new" value="+Add new">+Add new</option>
+        ]
+    );
+
     const renderFields = () => {
         switch (type) {
             case 'Consigner':
@@ -181,7 +207,7 @@ export default function AddModal({ show, type, data, onClose, onChange, onAdd })
     };
 
     return (
-        <div className={`fixed top-0 right-0 w-1/2 h-full bg-white shadow-xl z-50 transform transition-transform duration-300 ${show ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`fixed top-10 right-0 w-1/2 h-60 bg-white shadow-xl z-50 transform transition-transform duration-300 ${show ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-bold">Add New {type.charAt(0).toUpperCase() + type.slice(1)}</h2>

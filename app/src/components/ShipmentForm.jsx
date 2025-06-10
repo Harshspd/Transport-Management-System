@@ -26,9 +26,12 @@ export default function ShipmentForm() {
         EwayBill: '',
     });
 
+    
+    
+    const [newOptionValue, setNewOptionValue] = useState('');
+    const [newModalData, setNewModalData] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [modalType, setModalType] = useState("");
-    const [newOptionValue, setNewOptionValue] = useState('');
 
     const [options, setOptions] = useState({
         Consigner: ['Reliance Industry', 'Tata New'],
@@ -79,10 +82,10 @@ export default function ShipmentForm() {
         }
     };
 
-    // const handleModalInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setNewModalData((prev) => ({ ...prev, [name]: value }));
-    // };
+    const handleModalInputChange = (e) => {
+            const { name, value } = e.target;
+            setNewModalData((prev) => ({ ...prev, [name]: value }));
+        };
     
     const renderOptions = (items) => (
         [
@@ -251,7 +254,7 @@ export default function ShipmentForm() {
                 onChange={handleModalInputChange}
                 onAdd={handleAddNew}
             />
-            {showModal && (
+            {/* {showModal && (
                 <div className="fixed top-50 right-0 w-1/2 h-lg bg-white shadow-xl z-50 transition-transform duration-300">
                     <div className="p-6">
                         <div className="flex justify-between items-center mb-4">
@@ -287,7 +290,7 @@ export default function ShipmentForm() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 }
