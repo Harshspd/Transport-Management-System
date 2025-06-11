@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import ShipmentBookingPage from "@/components/ShipmentBookingPage";
-
+import ShipmentForm from "@/components/ShipmentForm"
 
 export const metadata: Metadata = {
   title:
@@ -13,7 +12,7 @@ export default function Ecommerce() {
   return (
     <div>
       <div className = "col-span-12 space-y-6 xl:col-span-7">
-            <ShipmentBookingPage/>
+        <ShipmentForm />
         </div>
 {/* 
       <div className="col-span-12 xl:col-span-5">
