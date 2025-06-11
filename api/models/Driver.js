@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 
 const driverSchema = new mongoose.Schema({
-  name: { type: String },
+  contact: {
+    name: { type: String },
+    contact_number: { type: String },
+  },
   license_number: { type: String },
   address: { type: String },
-  contact_number: { type: String },
+  city: { type: String },
   license_file: { type: String }, // File path or URL
 }, { timestamps: true });
 

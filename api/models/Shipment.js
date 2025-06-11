@@ -20,8 +20,8 @@ const shipmentSchema = new mongoose.Schema({
     bill_no: { type: String },
     value: { type: Number },
     mode: { type: String },
-    actual_dimensions: { type: String },
-    charged_dimensions: { type: String },
+    actual_dimensions: { type: Number },
+    charged_dimensions: { type: Number },
     unit_of_weight: { type: String },
     actual_weight: { type: Number },
     charged_weight: { type: Number },
@@ -34,6 +34,11 @@ const shipmentSchema = new mongoose.Schema({
   service_type: { type: String },
   provider: { type: String },
   eway_bill_number: { type: String },
+  status: {
+  type: String,
+  enum: ['Open', 'In-Transit', 'Delivered'],
+  default: 'Open',
+},
 }, { timestamps: true });
 
 const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', shipmentSchema);

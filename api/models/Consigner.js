@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 
 const consignerSchema = new mongoose.Schema({
-  name: { type: String, index: true },
-  contact_person: { type: String },
+  contact: {
+    name: { type: String, index: true },
+    contact_person: { type: String },
+    contact_number: { type: String },
+  },
   address: { type: String },
-  contact_number: { type: String },
+  city: { type: String },
   gst_in: { type: String },
 }, { timestamps: true });
 
