@@ -5,7 +5,7 @@ export const createDriver = async (req, res) => {
   try {
     const driver = new Driver({
       ...req.body,
-      licenseFile: req.file?.path || '',
+      license_file: req.file?.path || '',
     });
     await driver.save();
     res.status(201).json({
@@ -28,5 +28,27 @@ export const getAllDrivers = async (req, res) => {
     });
   } catch (error) {
     serverError(res, error);
+  }
+};
+
+// Update
+export const updateDriver = async (req, res) => {
+  try {
+    const driver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!driver) return res.status(404).json({ message: 'Driver not found' });
+    res.json(driver);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Delete
+export const deleteDriver = async (req, res) => {
+  try {
+    const result = await Driver.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).json({ message: 'Driver not found' });
+    res.json({ message: 'Driver deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };

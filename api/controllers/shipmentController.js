@@ -63,3 +63,54 @@ export const getAllShipments = async (req, res) => {
     serverError(res, error);
   }
 };
+
+// update
+
+export const updateShipment = async (req, res) => {
+  try {
+    const shipment = await Shipment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
+    res.json(shipment);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// delete
+export const deleteShipment = async (req, res) => {
+  try {
+    const result = await Shipment.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).json({ message: 'Shipment not found' });
+    res.json({ message: 'Shipment deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const updateShipmentStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    // Validate input status
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered'];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({ message: 'Invalid status value' });
+    }
+
+    const updatedShipment = await Shipment.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedShipment) {
+      return res.status(404).json({ message: 'Shipment not found' });
+    }
+
+    res.json({ message: 'Shipment status updated', shipment: updatedShipment });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+

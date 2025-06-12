@@ -26,3 +26,25 @@ export const getAllConsigners = async (req, res) => {
     serverError(res, error);
   }
 };
+
+// Update
+export const updateConsigner = async (req, res) => {
+  try {
+    const consigner = await Consigner.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!consigner) return res.status(404).json({ message: 'Consigner not found' });
+    res.json(consigner);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Delete
+export const deleteConsigner = async (req, res) => {
+  try {
+    const result = await Consigner.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).json({ message: 'Consigner not found' });
+    res.json({ message: 'Consigner deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
