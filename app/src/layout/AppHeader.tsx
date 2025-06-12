@@ -5,7 +5,7 @@ import UserDropdown from "@/components/header/UserDropdown";
 import { useSidebar } from "@/context/SidebarContext";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState ,useEffect,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -156,21 +156,35 @@ const AppHeader: React.FC = () => {
           </div>
         </div>
         <div
-          className={`${
-            isApplicationMenuOpen ? "flex" : "hidden"
-          } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
+          className={`${isApplicationMenuOpen ? "flex" : "hidden"
+            } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
         >
-          <div className="flex items-center gap-2 2xsm:gap-3">
-            {/* <!-- Dark Mode Toggler --> */}
+          <div className="flex items-center gap-3 2xsm:gap-4">
+            {/* Shipment Booking Button */}
+            <Link href="/shipment-form">
+              <button className="px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700">
+                Shipment Booking
+              </button>
+            </Link>
+
+            {/* Vehicle Booking Button */}
+            <button
+              className="px-3 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-700"
+            >
+              Vehicle Booking
+            </button>
+
+            {/* Dark Mode Toggler */}
             <ThemeToggleButton />
+
             {/* <!-- Dark Mode Toggler --> */}
 
-           <NotificationDropdown /> 
+            <NotificationDropdown />
             {/* <!-- Notification Menu Area --> */}
           </div>
           {/* <!-- User Area --> */}
-          <UserDropdown /> 
-    
+          <UserDropdown />
+
         </div>
       </div>
     </header>

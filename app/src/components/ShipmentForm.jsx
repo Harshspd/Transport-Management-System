@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import AddModal from "@/components/AddModal"
 
-export default function ShipmentForm() {
+const ShipmentForm = () => {
     const [formData, setFormData] = useState({
         Consigner: '',
         Consignee: '',
@@ -157,6 +157,10 @@ export default function ShipmentForm() {
 
         return `${day}/${month}/${year}, ${formattedHours}:${minutes} ${ampm}`;
     };
+
+    useEffect(() => {
+        console.log("ShipmentForm loaded");
+    }, []);
 
     const isFormValid = Object.values(formData).some(value => value);
 
@@ -317,7 +321,8 @@ export default function ShipmentForm() {
                     <h2 className="flex justify-center font-semibold text-lg mb-4">Preview</h2>
                     <div className="grid grid-cols-2 gap-4 bg-gray-100 p-6 rounded-lg">
                         {Object.entries(formData).map(([key, value]) => (
-                            <p key={key} className="text-sm">{key.replace(/([A-Z])/g, ' $1')}: <strong> {formatValue(key, value)}</strong></p>
+                            <p key={key} className="text-sm">{key.replace(/([A-Z])/g, ' $1')}: <strong>{key === 'DateTime' ? formatValue(value) : value}</strong></p>
+
                         ))}
                     </div>
                 </div>
@@ -337,3 +342,4 @@ export default function ShipmentForm() {
         </div>
     );
 }
+export default ShipmentForm;

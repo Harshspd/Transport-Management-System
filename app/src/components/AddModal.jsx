@@ -98,7 +98,7 @@ const AddModal = ({ show, type, data, onClose, onChange, onAdd }) => {
     };
 
     return (
-        <div className="fixed top-50 right-0 w-1/2 h-lg bg-white shadow-xl z-50 transition-transform duration-300">
+        <div className="fixed top-17 right-0 w-1/2 h-full bg-white shadow-xl z-50 transition-transform duration-300">
             <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-bold">Add {modalTitles[type]}</h2>
