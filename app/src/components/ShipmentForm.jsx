@@ -119,12 +119,25 @@ const ShipmentForm = () => {
         setNewModalData((prev) => ({ ...prev, [modalType]: { ...prev[modalType], [name]: value } }));
     };
 
-    const renderOptions = (items) => (
-        [
-            ...items.map((item) => <option key={item} value={item}>{item}</option>),
-            <option key="add-new" value="+Add new">+Add new</option>
-        ]
-    );
+    // const renderOptions = (items) => (
+    //     [
+    //         ...items.map((item) => <option key={item} value={item}>{item}</option>),
+    //         <option key="add-new" value="+Add new">+Add new</option>
+    //     ]
+    // );
+
+    const renderOptions = (items, fieldName) => {
+        const baseOptions = items.map((item) => (
+            <option key={item} value={item}>{item}</option>
+        ));
+
+        // Don't show "+Add new" for specific fields
+        const noAddNewFields = ['Mode', 'UnitWeight', 'ServiceType', 'Provider'];
+
+        return noAddNewFields.includes(fieldName)
+            ? baseOptions
+            : [...baseOptions, <option key="add-new" value="+Add new">+Add new</option>];
+    };
 
     useEffect(() => {
         const storedOptions = localStorage.getItem("shipmentOptions");
