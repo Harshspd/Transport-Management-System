@@ -6,7 +6,6 @@ export const createShipment = async (req, res) => {
   try {
     const { consigner, consignee, driver, vehicle, ...rest } = req.body;
 
-    // Check if required fields are present
     if (!consigner || !consignee || !driver || !vehicle) {
       return res.status(400).json({
         message: 'Missing required fields',
@@ -14,7 +13,6 @@ export const createShipment = async (req, res) => {
       });
     }
 
-    // Validate and convert string IDs to ObjectId
     if (
       !mongoose.Types.ObjectId.isValid(consigner) ||
       !mongoose.Types.ObjectId.isValid(consignee) ||
@@ -27,13 +25,14 @@ export const createShipment = async (req, res) => {
       });
     }
 
-    // Create the shipment
     const shipment = await Shipment.create({
       consigner: new mongoose.Types.ObjectId(consigner),
       consignee: new mongoose.Types.ObjectId(consignee),
       driver: new mongoose.Types.ObjectId(driver),
       vehicle: new mongoose.Types.ObjectId(vehicle),
       ...rest,
+      created_by: req.user._id,
+      organization_id: req.user.account_id,
     });
 
     res.status(201).json({
@@ -48,11 +47,12 @@ export const createShipment = async (req, res) => {
 
 export const getAllShipments = async (req, res) => {
   try {
-    const shipments = await Shipment.find()
+    const shipments = await Shipment.find({ organization_id: req.user.account_id })
       .populate('consigner')
       .populate('consignee')
       .populate('driver')
-      .populate('vehicle');
+      .populate('vehicle')
+      .populate('created_by', 'email'); 
 
     res.status(200).json({
       message: 'Shipments fetched successfully',
@@ -64,11 +64,13 @@ export const getAllShipments = async (req, res) => {
   }
 };
 
-// update
-
 export const updateShipment = async (req, res) => {
   try {
-    const shipment = await Shipment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const shipment = await Shipment.findOneAndUpdate(
+      { _id: req.params.id, organization_id: req.user.account_id },
+      req.body,
+      { new: true }
+    );
     if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
     res.json(shipment);
   } catch (err) {
@@ -76,10 +78,12 @@ export const updateShipment = async (req, res) => {
   }
 };
 
-// delete
 export const deleteShipment = async (req, res) => {
   try {
-    const result = await Shipment.findByIdAndDelete(req.params.id);
+    const result = await Shipment.findOneAndDelete({
+      _id: req.params.id,
+      organization_id: req.user.account_id
+    });
     if (!result) return res.status(404).json({ message: 'Shipment not found' });
     res.json({ message: 'Shipment deleted successfully' });
   } catch (err) {
@@ -92,14 +96,13 @@ export const updateShipmentStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    // Validate input status
     const allowedStatuses = ['Open', 'In-Transit', 'Delivered'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status value' });
     }
 
-    const updatedShipment = await Shipment.findByIdAndUpdate(
-      id,
+    const updatedShipment = await Shipment.findOneAndUpdate(
+      { _id: id, organization_id: req.user.account_id }, 
       { status },
       { new: true }
     );
@@ -113,4 +116,3 @@ export const updateShipmentStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-

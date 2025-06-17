@@ -38,7 +38,17 @@ const shipmentSchema = new mongoose.Schema({
   type: String,
   enum: ['Open', 'In-Transit', 'Delivered'],
   default: 'Open',
-},
+  },
+   created_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+   },
+   organization_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account',
+    required: true,
+  },
 }, { timestamps: true });
 
 const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', shipmentSchema);
