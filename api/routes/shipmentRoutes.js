@@ -7,7 +7,7 @@ router.post('/', authCheck, createShipment);
 router.get('/', authCheck, getAllShipments);
 router.put('/:id', authCheck, updateShipment);
 router.delete('/:id', authCheck, deleteShipment);
-router.patch('/:id/status', updateShipmentStatus);
+router.patch('/:id/status',authCheck, updateShipmentStatus);
 
 /*router.post('/',  createShipment);
 router.get('/',  getAllShipments);

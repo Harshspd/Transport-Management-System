@@ -3,7 +3,11 @@ import { serverError } from '../helpers/responseUtility.mjs';
 
 export const createConsignee = async (req, res) => {
   try {
-    const consignee = await Consignee.create(req.body);
+    const consignee = await Consignee.create({
+  ...req.body,
+  created_by: req.user._id,
+  organization_id: req.user.account_id,
+});
     res.status(201).json({
       message: 'Consignee created successfully',
       data: consignee,
@@ -16,7 +20,7 @@ export const createConsignee = async (req, res) => {
 
 export const getAllConsignees = async (req, res) => {
   try {
-    const consignees = await Consignee.find();
+    const consignees = await Consignee.find({ organization_id: req.user.account_id });
     res.status(200).json({
       message: 'Consignees fetched successfully',
       data: consignees,
@@ -31,7 +35,11 @@ export const getAllConsignees = async (req, res) => {
 // Update Consignee
 export const updateConsignee = async (req, res) => {
   try {
-    const updated = await Consignee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+   const updated = await Consignee.findOneAndUpdate(
+  { _id: req.params.id, organization_id: req.user.account_id },
+  { ...req.body, updated_by: req.user._id },
+  { new: true }
+);
     if (!updated) return res.status(404).json({ message: 'Consignee not found' });
     res.status(200).json(updated);
   } catch (error) {
@@ -42,7 +50,10 @@ export const updateConsignee = async (req, res) => {
 //  Delete Consignee
 export const deleteConsignee = async (req, res) => {
   try {
-    const deleted = await Consignee.findByIdAndDelete(req.params.id);
+    const deleted = await Consignee.findOneAndDelete({
+  _id: req.params.id,
+  organization_id: req.user.account_id
+});
     if (!deleted) return res.status(404).json({ message: 'Consignee not found' });
     res.status(200).json({ message: 'Consignee deleted successfully' });
   } catch (error) {

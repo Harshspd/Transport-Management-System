@@ -6,6 +6,8 @@ export const createDriver = async (req, res) => {
     const driver = new Driver({
       ...req.body,
       license_file: req.file?.path || '',
+      created_by: req.user._id,
+      organization_id: req.user.account_id,
     });
     await driver.save();
     res.status(201).json({
@@ -20,7 +22,7 @@ export const createDriver = async (req, res) => {
 
 export const getAllDrivers = async (req, res) => {
   try {
-    const drivers = await Driver.find();
+    const drivers = await Driver.find({ organization_id: req.user.account_id });
     res.status(200).json({
       message: 'Drivers fetched successfully',
       data: drivers,
@@ -34,7 +36,11 @@ export const getAllDrivers = async (req, res) => {
 // Update
 export const updateDriver = async (req, res) => {
   try {
-    const driver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
+   const driver = await Driver.findOneAndUpdate(
+  { _id: req.params.id, organization_id: req.user.account_id },
+  { ...req.body, updated_by: req.user._id },
+  { new: true }
+);
     if (!driver) return res.status(404).json({ message: 'Driver not found' });
     res.json(driver);
   } catch (err) {
@@ -45,7 +51,10 @@ export const updateDriver = async (req, res) => {
 // Delete
 export const deleteDriver = async (req, res) => {
   try {
-    const result = await Driver.findByIdAndDelete(req.params.id);
+    const result = await Driver.findOneAndDelete({
+   _id: req.params.id,
+   organization_id: req.user.account_id
+});
     if (!result) return res.status(404).json({ message: 'Driver not found' });
     res.json({ message: 'Driver deleted successfully' });
   } catch (err) {

@@ -9,6 +9,10 @@ const driverSchema = new mongoose.Schema({
   address: { type: String },
   city: { type: String },
   license_file: { type: String }, // File path or URL
+  created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  organization_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Account', required: true },
+
 }, { timestamps: true });
 
 const Driver = mongoose.models.Driver || mongoose.model('Driver', driverSchema);

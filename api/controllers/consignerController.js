@@ -3,7 +3,11 @@ import { serverError } from '../helpers/responseUtility.mjs';
 
 export const createConsigner = async (req, res) => {
   try {
-    const consigner = await Consigner.create(req.body);
+    const consigner = await Consigner.create({
+  ...req.body,
+  created_by: req.user._id,
+  organization_id: req.user.account_id,
+});
     res.status(201).json({
       message: 'Consigner created successfully',
       data: consigner,
@@ -16,7 +20,7 @@ export const createConsigner = async (req, res) => {
 
 export const getAllConsigners = async (req, res) => {
   try {
-    const consigners = await Consigner.find();
+    const consigners = await Consigner.find({ organization_id: req.user.account_id });
     res.status(200).json({
       message: 'Consigners fetched successfully',
       data: consigners,
@@ -30,7 +34,11 @@ export const getAllConsigners = async (req, res) => {
 // Update
 export const updateConsigner = async (req, res) => {
   try {
-    const consigner = await Consigner.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const consigner = await Consigner.findOneAndUpdate(
+  { _id: req.params.id, organization_id: req.user.account_id },
+  { ...req.body, updated_by: req.user._id },
+  { new: true }
+);
     if (!consigner) return res.status(404).json({ message: 'Consigner not found' });
     res.json(consigner);
   } catch (err) {
@@ -41,7 +49,10 @@ export const updateConsigner = async (req, res) => {
 // Delete
 export const deleteConsigner = async (req, res) => {
   try {
-    const result = await Consigner.findByIdAndDelete(req.params.id);
+    const result = await Consigner.findOneAndDelete({
+  _id: req.params.id,
+  organization_id: req.user.account_id
+});
     if (!result) return res.status(404).json({ message: 'Consigner not found' });
     res.json({ message: 'Consigner deleted successfully' });
   } catch (err) {

@@ -44,6 +44,7 @@ const shipmentSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
    },
+   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
    organization_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',

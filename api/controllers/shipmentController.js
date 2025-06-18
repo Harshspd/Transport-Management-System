@@ -68,7 +68,7 @@ export const updateShipment = async (req, res) => {
   try {
     const shipment = await Shipment.findOneAndUpdate(
       { _id: req.params.id, organization_id: req.user.account_id },
-      req.body,
+       { ...req.body, updated_by: req.user._id },
       { new: true }
     );
     if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
@@ -103,8 +103,8 @@ export const updateShipmentStatus = async (req, res) => {
 
     const updatedShipment = await Shipment.findOneAndUpdate(
       { _id: id, organization_id: req.user.account_id }, 
-      { status },
-      { new: true }
+     { status, updated_by: req.user._id },
+     { new: true }
     );
 
     if (!updatedShipment) {

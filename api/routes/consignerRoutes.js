@@ -5,13 +5,15 @@ import {
   updateConsigner,
   deleteConsigner,
 } from '../controllers/consignerController.js';
+import { authCheck } from '../middlewares/authCheck.js';
+
 
 const router = express.Router();
 
-router.post('/', createConsigner);
-router.get('/', getAllConsigners);
+router.post('/',authCheck, createConsigner);
+router.get('/',authCheck, getAllConsigners);
 
-router.put('/:id', updateConsigner);   // Update
-router.delete('/:id', deleteConsigner); //  Delete
+router.put('/:id',authCheck, updateConsigner);   // Update
+router.delete('/:id',authCheck, deleteConsigner); //  Delete
 
 export default router;
