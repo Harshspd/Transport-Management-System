@@ -1,39 +1,14 @@
-import React, { useState } from 'react';
-import { saveModalEntry } from '../../app/utils/api.js';
+import React from 'react';
+import useModalForm from '@/hooks/useModalForm';
 
 const ConsignerModal = ({ show, onClose, onAdd }) => {
-    const [newOptionValue, setNewOptionValue] = useState('');
-    const [formData, setFormData] = useState({});
-
-    const closeModal = () => {
-        setNewOptionValue('');
-        setFormData({});
-        onClose();
-    };
-
-    const handleChange = (e) => {
-        const { name, value, files, type: inputType } = e.target;
-        if (inputType === 'file') {
-            setFormData({ ...formData, [name]: files[0] });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
-        console.log('Form data updated:', { ...formData, [name]: value });
-    };
-
-    const handleAddNew = async () => {
-        // Create entry with name from newOptionValue and other data from formData
-        const entry = { name: newOptionValue, ...formData };
-        console.log('Saving entry:', entry);
-
-        const response = await saveModalEntry('Consigner', entry);
-        if (response.success) {
-            onAdd('Consigner', entry);
-            closeModal();
-        } else {
-            alert('Error saving entry');
-        }
-    };
+    const {
+        newOptionValue,
+        handleChange,
+        handleNameChange,
+        handleAddNew,
+        closeModal,
+    } = useModalForm('Consigner', onAdd, onClose);
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
@@ -106,10 +81,7 @@ const ConsignerModal = ({ show, onClose, onAdd }) => {
                                             <input
                                                 type="text"
                                                 value={newOptionValue}
-                                                onChange={(e) => {
-                                                    setNewOptionValue(e.target.value);
-                                                    console.log('Name field updated:', e.target.value);
-                                                }}
+                                                onChange={handleNameChange}
                                                 className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
                                             />
                                         </div>
