@@ -12,7 +12,7 @@ const shipmentSchema = new mongoose.Schema({
     required: true,
   },
   delivery_location: { type: String, required: true },
-  date_time: { type: Date, required: true },
+  expected_delivery_date_and_time: { type: Date, },
 
   goods_details: {
     description: { type: String },

@@ -1,13 +1,36 @@
 import Consignee from '../models/Consignee.js';
 import { serverError } from '../helpers/responseUtility.mjs';
+import { validateRequiredFields, checkDuplicate } from '../helpers/validationUtility.mjs';
 
+// Create
 export const createConsignee = async (req, res) => {
   try {
+    // 1. Required fields check
+    const requiredFields = ['contact.name', 'contact.contact_number', 'address', 'city'];
+    const missingFields = validateRequiredFields(req.body, requiredFields);
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        message: `Missing required field${missingFields.length > 1 ? 's' : ''}: ${missingFields.join(', ')}`,
+        error: true,
+      });
+    }
+
+    // 2. Duplicate check (across all orgs, just by contact.name)
+    const duplicate = await checkDuplicate(Consignee, { 'contact.name': req.body.contact.name });
+    if (duplicate) {
+      return res.status(409).json({
+        message: 'Consignee with this name already exists',
+        error: true,
+      });
+    }
+
+    // 3. Save new
     const consignee = await Consignee.create({
-  ...req.body,
-  created_by: req.user._id,
-  organization_id: req.user.account_id,
-});
+      ...req.body,
+      created_by: req.user._id,
+      organization_id: req.user.account_id,
+    });
+
     res.status(201).json({
       message: 'Consignee created successfully',
       data: consignee,
@@ -18,6 +41,7 @@ export const createConsignee = async (req, res) => {
   }
 };
 
+// Get All
 export const getAllConsignees = async (req, res) => {
   try {
     const consignees = await Consignee.find({ organization_id: req.user.account_id });
@@ -31,32 +55,38 @@ export const getAllConsignees = async (req, res) => {
   }
 };
 
-
-// Update Consignee
+// Update
 export const updateConsignee = async (req, res) => {
   try {
-   const updated = await Consignee.findOneAndUpdate(
-  { _id: req.params.id, organization_id: req.user.account_id },
-  { ...req.body, updated_by: req.user._id },
-  { new: true }
-);
+    const updated = await Consignee.findOneAndUpdate(
+      { _id: req.params.id, organization_id: req.user.account_id },
+      { ...req.body, updated_by: req.user._id },
+      { new: true }
+    );
+
     if (!updated) return res.status(404).json({ message: 'Consignee not found' });
-    res.status(200).json(updated);
+
+    res.status(200).json({
+      message: 'Consignee updated successfully',
+      data: updated,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    serverError(res, error);
   }
 };
 
-//  Delete Consignee
+// Delete
 export const deleteConsignee = async (req, res) => {
   try {
     const deleted = await Consignee.findOneAndDelete({
-  _id: req.params.id,
-  organization_id: req.user.account_id
-});
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    });
+
     if (!deleted) return res.status(404).json({ message: 'Consignee not found' });
+
     res.status(200).json({ message: 'Consignee deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    serverError(res, error);
   }
 };

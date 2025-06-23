@@ -1,13 +1,36 @@
 import Consigner from '../models/Consigner.js';
 import { serverError } from '../helpers/responseUtility.mjs';
+import { validateRequiredFields, checkDuplicate } from '../helpers/validationUtility.mjs';
 
+// Create
 export const createConsigner = async (req, res) => {
   try {
+    // Step 1: Dynamic Required Field Validation
+    const requiredFields = ['contact.name', 'contact.contact_number', 'address', 'city'];
+    const missingFields = validateRequiredFields(req.body, requiredFields);
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        message: `Missing required field${missingFields.length > 1 ? 's' : ''}: ${missingFields.join(', ')}`,
+        error: true,
+      });
+    }
+
+    // Step 2: Duplicate Check on email (contact.name used here as key identifier)
+    const duplicate = await checkDuplicate(Consigner, { 'contact.name': req.body.contact.name });
+    if (duplicate) {
+      return res.status(409).json({
+        message: 'Consigner with this name already exists',
+        error: true,
+      });
+    }
+
+    // Step 3: Create
     const consigner = await Consigner.create({
-  ...req.body,
-  created_by: req.user._id,
-  organization_id: req.user.account_id,
-});
+      ...req.body,
+      created_by: req.user._id,
+      organization_id: req.user.account_id,
+    });
+
     res.status(201).json({
       message: 'Consigner created successfully',
       data: consigner,
@@ -18,6 +41,7 @@ export const createConsigner = async (req, res) => {
   }
 };
 
+// Get All
 export const getAllConsigners = async (req, res) => {
   try {
     const consigners = await Consigner.find({ organization_id: req.user.account_id });
@@ -35,14 +59,21 @@ export const getAllConsigners = async (req, res) => {
 export const updateConsigner = async (req, res) => {
   try {
     const consigner = await Consigner.findOneAndUpdate(
-  { _id: req.params.id, organization_id: req.user.account_id },
-  { ...req.body, updated_by: req.user._id },
-  { new: true }
-);
-    if (!consigner) return res.status(404).json({ message: 'Consigner not found' });
-    res.json(consigner);
+      { _id: req.params.id, organization_id: req.user.account_id },
+      { ...req.body, updated_by: req.user._id },
+      { new: true }
+    );
+
+    if (!consigner) {
+      return res.status(404).json({ message: 'Consigner not found' });
+    }
+
+    res.json({
+      message: 'Consigner updated successfully',
+      data: consigner,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    serverError(res, err);
   }
 };
 
@@ -50,12 +81,16 @@ export const updateConsigner = async (req, res) => {
 export const deleteConsigner = async (req, res) => {
   try {
     const result = await Consigner.findOneAndDelete({
-  _id: req.params.id,
-  organization_id: req.user.account_id
-});
-    if (!result) return res.status(404).json({ message: 'Consigner not found' });
+      _id: req.params.id,
+      organization_id: req.user.account_id
+    });
+
+    if (!result) {
+      return res.status(404).json({ message: 'Consigner not found' });
+    }
+
     res.json({ message: 'Consigner deleted successfully' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    serverError(res, err);
   }
 };
