@@ -6,8 +6,9 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsignee = async (req, res) => {
   try {
     // 1. Required fields check
-    const requiredFields = ['contact.name', 'contact.contact_number', 'address', 'city'];
-    const missingFields = validateRequiredFields(req.body, requiredFields);
+    const requiredFields = ['contact.name', 'contact.contact_number'];
+    const missingFields = validateRequiredFields(requiredFields, req.body);
+
     if (missingFields.length > 0) {
       return res.status(400).json({
         message: `Missing required field${missingFields.length > 1 ? 's' : ''}: ${missingFields.join(', ')}`,
@@ -15,16 +16,16 @@ export const createConsignee = async (req, res) => {
       });
     }
 
-    // 2. Duplicate check (across all orgs, just by contact.name)
-    const duplicate = await checkDuplicate(Consignee, { 'contact.name': req.body.contact.name });
+    // 2. Duplicate check on contact number
+    const duplicate = await checkDuplicate(Consignee, { 'contact.contact_number': req.body.contact.contact_number });
     if (duplicate) {
       return res.status(409).json({
-        message: 'Consignee with this name already exists',
+        message: 'Consignee with this contact number already exists',
         error: true,
       });
     }
 
-    // 3. Save new
+    // 3. Save new consignee
     const consignee = await Consignee.create({
       ...req.body,
       created_by: req.user._id,

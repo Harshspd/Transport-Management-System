@@ -6,7 +6,7 @@ import {validateRequiredFields , checkDuplicate } from '../helpers/validationUti
 export const createVehicle = async (req, res) => {
   try {
     const requiredFields = ['vehicle_number', 'vehicle_type', 'capacity_weight', 'rc_number'];
-    const missing = checkMissingFields(req.body, requiredFields);
+    const missing = validateRequiredFields(requiredFields, req.body);
     if (missing.length > 0) {
       return res.status(400).json({ message: `Missing required field(s): ${missing.join(', ')}`, error: true });
     }

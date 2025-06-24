@@ -6,8 +6,9 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsigner = async (req, res) => {
   try {
     // Step 1: Dynamic Required Field Validation
-    const requiredFields = ['contact.name', 'contact.contact_number', 'address', 'city'];
-    const missingFields = validateRequiredFields(req.body, requiredFields);
+    const requiredFields = ['contact.name', 'contact.contact_number'];
+    const missingFields = validateRequiredFields(requiredFields, req.body);
+
     if (missingFields.length > 0) {
       return res.status(400).json({
         message: `Missing required field${missingFields.length > 1 ? 's' : ''}: ${missingFields.join(', ')}`,
@@ -15,11 +16,11 @@ export const createConsigner = async (req, res) => {
       });
     }
 
-    // Step 2: Duplicate Check on email (contact.name used here as key identifier)
-    const duplicate = await checkDuplicate(Consigner, { 'contact.name': req.body.contact.name });
+    // Step 2: Duplicate Check on contact.contact_number
+    const duplicate = await checkDuplicate(Consigner, { 'contact.contact_number': req.body.contact.contact_number });
     if (duplicate) {
       return res.status(409).json({
-        message: 'Consigner with this name already exists',
+        message: 'Consigner with this contact number already exists',
         error: true,
       });
     }

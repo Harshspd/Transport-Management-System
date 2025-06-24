@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const driverSchema = new mongoose.Schema({
   contact: {
     name: { type: String },
-    contact_number: { type: String },
+    contact_number: { type: Number },
   },
   license_number: { type: String },
   address: { type: String },
