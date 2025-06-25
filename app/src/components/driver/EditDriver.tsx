@@ -1,14 +1,14 @@
 import React from 'react';
 import useModalForm from '@/hooks/useModalForm';
 
-const DriverModal = ({ show, onClose, onAdd }) => {
+const EditDriver = ({ show, onClose, onSave , onCancel }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleAddNew,
         closeModal,
-    } = useModalForm('Driver', onAdd, onClose);
+    } = useModalForm('Driver', onClose);
 
     const fields = [
         { label: 'Contact Number', name: 'contactNumber', type: 'text' },
@@ -122,4 +122,4 @@ const DriverModal = ({ show, onClose, onAdd }) => {
     );
 };
 
-export default DriverModal; 
+export default EditDriver; 
