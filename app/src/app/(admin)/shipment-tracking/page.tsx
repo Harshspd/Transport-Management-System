@@ -6,8 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import Badge from "@/components/ui/badge/Badge";
-import Image from "next/image";
+// import Badge from "@/components/ui/badge/Badge";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 
@@ -29,6 +28,21 @@ const shipmentData = [
     },
     {
         bilityNo: "SHP-002",
+        bilityDate: "2025-05-08",
+        party: "EternoCare",
+        town: "Chandigarh",
+        weight: "1550",
+        cases: 245,
+        agent: "Chaudhary",
+        deliveryDate: "2025-05-08",
+        vehicleNumber: "KA-01-AB-1234",
+        driver: {
+            name: "Ravi Kumar",
+            phone: "9876543210",
+        },
+    },
+    {
+        bilityNo: "SHP-003",
         bilityDate: "2025-05-08",
         party: "EternoCare",
         town: "Chandigarh",
