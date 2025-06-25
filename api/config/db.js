@@ -11,9 +11,14 @@ const connection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log("✅ MongoDB connected"); // <-- moved outside the connect options
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error.message);
+    console.error('❌ Error connecting to MongoDB:', error.message);
   }
 };
+
+// Optional settings
+// mongoose.set('bufferCommands', false);
+// mongoose.set('serverSelectionTimeoutMS', 50000);
 
 export default connection;
