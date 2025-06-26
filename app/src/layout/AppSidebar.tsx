@@ -36,8 +36,8 @@ const navItems: NavItem[] = [
     icon: <BoxCubeIcon />,
     name: "Shipment",
     subItems: [
-      { name: "Shipment Booking", path: "/shipment-form", pro: false },
-      { name: "Shipment Tracking", path: "/shipment-tracking", pro: false },
+      { name: "Shipment Booking", path: "/shipment/edit", pro: false },
+      { name: "Shipment Tracking", path: "/shipment/tracking", pro: false },
     ],
   },
   {

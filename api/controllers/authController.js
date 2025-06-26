@@ -65,7 +65,7 @@ export const signup = async (req, res) => {
       user:newUser,
       message: 'Account created successfully',
       error: false,
-      
+      success:true
     });
   } catch (error) { serverError(res, error); }
 };
@@ -180,3 +180,4 @@ export const changeAccountEmail = async (req, res) => {
     serverError(res, error); 
   }
 };
+

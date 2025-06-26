@@ -1,46 +1,52 @@
 'use client';
-import React, { useEffect } from 'react'
-import ConsignerModal from "@/components/modals/ConsignerModal"
-import ConsigneeModal from "@/components/modals/ConsigneeModal"
-import DriverModal from "@/components/modals/DriverModal"
-import VehicleModal from "@/components/modals/VehicleModal"
-import ComponentCard from './common/ComponentCard';
-import Label from './form/Label';
-import Select from './form/Select';
-import Input from './form/input/InputField';
-import TextArea from './form/input/TextArea';
-import Form from './form/Form';
+import React, { useEffect } from 'react';
+import ConsigneeModal from "@/components/modals/ConsigneeModal";
+import VehicleModal from "@/components/modals/VehicleModal";
+import ComponentCard from '../common/ComponentCard';
+import Label from '../form/Label';
+import Select from '../form/Select';
+import Input from '../form/input/InputField';
+import TextArea from '../form/input/TextArea';
+import Form from '../form/Form';
 import { ChevronDownIcon } from '@/icons/index';
 import useShipmentForm from '@/hooks/useShipmentForm';
+import { SlideModal } from '../ui/slide-modal';
+import EditDriver from '@/components/driver/EditDriver';
+import EditConsigner from '@/components/consigner/EditConsigner';
+import DefaultModal from '../example/ModalExample/DefaultModal';
+import { useModal } from '@/hooks/useModal';
 
-const ShipmentForm = () => {
+const ShipmentForm: React.FC = () => {
+    
+    const handleAddNewTrigger = (name:string) => {
+        switch (name) {
+            case 'Consigner': return consignerModal.openModal();
+            //case 'Consignee': return consigneeModal.openModal();
+            //case 'Driver': return driverModal.openModal();
+            //case 'Vehicle': return vehicleModal.openModal();
+        }
+    };
     const {
-        // State
         formData,
-        showConsignerModal,
-        showConsigneeModal,
-        showDriverModal,
-        showVehicleModal,
         errors,
         options,
         isFormValid,
-
-        // Actions
         handleChange,
         handleSubmit,
-        openModal,
-        closeModal,
         handleAddNew,
         renderOptions,
         formatValue,
-    } = useShipmentForm();
+    } = useShipmentForm(handleAddNewTrigger);
 
+    const consignerModal = useModal();
+
+  
     useEffect(() => {
         console.log("ShipmentForm loaded");
     }, []);
-
+    
     return (
-        <ComponentCard>
+       <ComponentCard title="Shipment Booking">
             <div>
                 <h1 className="text-xl font-semibold pb-2 text-gray-800 dark:text-white">Shipment Booking</h1>
                 <div className="grid grid-cols-[66%_34%] w-full gap-4">
@@ -327,9 +333,21 @@ const ShipmentForm = () => {
 
 
                 </div>
-
+                {/* Modals */}
+                
+                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
+                    <EditConsigner onSave={handleAddNew} onCancel={consignerModal.closeModal} />
+                </SlideModal>
+                {/* <ConsigneeModal show={showConsigneeModal} onClose={() => closeModal('Consignee')} onAdd={handleAddNew} />
+                <VehicleModal show={showVehicleModal} onClose={() => closeModal('Vehicle')} onAdd={handleAddNew} />
+                <Modal isOpen={showDriverModal} onClose={() => closeModal('Driver')}>
+                    <EditDriver
+                        onCancel={() => closeModal('Driver')}
+                        onSave={handleAddNew}
+                    />
+                </Modal> */}
                 {/* Individual Modals */}
-                <ConsignerModal
+                {/* <ConsignerModal
                     show={showConsignerModal}
                     onClose={() => closeModal('Consigner')}
                     onAdd={handleAddNew}
@@ -351,9 +369,10 @@ const ShipmentForm = () => {
                     show={showVehicleModal}
                     onClose={() => closeModal('Vehicle')}
                     onAdd={handleAddNew}
-                />
+                /> */}
             </div>
         </ComponentCard>
     );
-}
+};
+
 export default ShipmentForm;

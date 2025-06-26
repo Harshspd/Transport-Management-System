@@ -29,20 +29,22 @@ export const otpCheck = async (req, res, next) => {
 
 export const authCheck = async (req, res, next) => {
   try {
-    const token = req.header('Authorization') || '';
-    if (!token) {
+    const authHeader = req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({
         message: 'You need to login first',
         error: 'Unauthorized',
       });
     }
+    const token = authHeader.split(' ')[1];
+
     try {
       const decoded = jwt.verify(token, process.env.SECRET);
       req.user = decoded;
       next();
     } catch (err) {
       console.log(err);
-      return res.status(401).json({ message: 'Unauthorized.You need to login' });
+      return res.status(401).json({ message: 'Unauthorized. You need to login' });
     }
   } catch (err) {
     return serverError(res, err);

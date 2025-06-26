@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { signin, signup, generateOTP, changePassword, unlockAccount, changeAccountEmail } from '../controllers/authController.js';
+import { signin, signup, generateOTP, changePassword, unlockAccount, changeAccountEmail} from '../controllers/authController.js';
 import { authCheck, otpCheck,accountLockCheck } from '../middlewares/authCheck.js';
 
 router.post('/login',accountLockCheck,signin)

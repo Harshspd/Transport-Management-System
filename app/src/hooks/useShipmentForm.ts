@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const useShipmentForm = () => {
+
+const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
     const [formData, setFormData] = useState({
         Consigner: '',
         Consignee: '',
@@ -24,12 +25,12 @@ const useShipmentForm = () => {
         EwayBill: '',
     });
 
-    const [showConsignerModal, setShowConsignerModal] = useState(false);
-    const [showConsigneeModal, setShowConsigneeModal] = useState(false);
-    const [showDriverModal, setShowDriverModal] = useState(false);
-    const [showVehicleModal, setShowVehicleModal] = useState(false);
+    //const [showConsignerModal, setShowConsignerModal] = useState(false);
+    //const [showConsigneeModal, setShowConsigneeModal] = useState(false);
+    //const [showDriverModal, setShowDriverModal] = useState(false);
+    //const [showVehicleModal, setShowVehicleModal] = useState(false);
     const [errors, setErrors] = useState({});
-
+    
     const [options, setOptions] = useState({
         Consigner: ['Reliance Industry', 'Tata New'],
         Consignee: ['Dell India', 'HP Pvt Lmt'],
@@ -68,7 +69,7 @@ const useShipmentForm = () => {
         }
 
         if (value === '+Add new') {
-            openModal(name);
+            onAddNewTrigger(name);
         } else {
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
@@ -110,7 +111,7 @@ const useShipmentForm = () => {
         });
     };
 
-    const openModal = (type) => {
+    /*const openModal = (type) => {
         console.log('Opening modal for type:', type);
         switch (type) {
             case 'Consigner':
@@ -128,9 +129,9 @@ const useShipmentForm = () => {
             default:
                 console.log('Unknown modal type:', type);
         }
-    };
+    };*/
 
-    const closeModal = (type) => {
+    /*const closeModal = (type) => {
         switch (type) {
             case 'Consigner':
                 setShowConsignerModal(false);
@@ -147,7 +148,7 @@ const useShipmentForm = () => {
             default:
                 console.log('Unknown modal type:', type);
         }
-    };
+    };*/
 
     const handleAddNew = async (type, newEntry) => {
         console.log('handleAddNew called with:', { type, newEntry });
@@ -164,7 +165,7 @@ const useShipmentForm = () => {
                 setFormData((prev) => ({ ...prev, [type]: newEntry.name.trim() }));
 
                 // Close the modal
-                closeModal(type);
+                //closeModal(type);
 
                 console.log(`Successfully added new ${type}:`, newEntry.name.trim());
             } catch (error) {
@@ -211,10 +212,10 @@ const useShipmentForm = () => {
     return {
         // State
         formData,
-        showConsignerModal,
-        showConsigneeModal,
-        showDriverModal,
-        showVehicleModal,
+        //showConsignerModal,
+        //showConsigneeModal,
+        //showDriverModal,
+        //showVehicleModal,
         errors,
         options,
         isFormValid,
@@ -222,8 +223,8 @@ const useShipmentForm = () => {
         // Actions
         handleChange,
         handleSubmit,
-        openModal,
-        closeModal,
+        //openModal,
+        //closeModal,
         handleAddNew,
         renderOptions,
         formatValue,
