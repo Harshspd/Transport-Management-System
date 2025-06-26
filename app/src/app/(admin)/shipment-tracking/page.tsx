@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
     Table,
@@ -6,9 +7,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-// import Badge from "@/components/ui/badge/Badge";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
+import Select from "@/components/form/Select";
+import { PencilIcon, TrashBinIcon } from "@/icons";
+import Button from "@/components/ui/button/Button";
 
 const shipmentData = [
     {
@@ -56,7 +59,13 @@ const shipmentData = [
             phone: "9876543210",
         },
     },
-    
+
+];
+
+const statusOptions = [
+    { value: "open", label: "Open" },
+    { value: "in-transit", label: "In-Transit" },
+    { value: "delivered", label: "Delivered" },
 ];
 
 const columns = [
@@ -70,9 +79,24 @@ const columns = [
     "Delivery Date",
     "Vehicle Number",
     "Driver",
+    "Status",
+    "Actions",
 ];
 
 export default function ShipmentTracking() {
+    // Add status state for each row
+    const [statuses, setStatuses] = React.useState(
+        shipmentData.map(() => "open")
+    );
+
+    const handleStatusChange = (idx: number, value: string) => {
+        setStatuses((prev) => {
+            const updated = [...prev];
+            updated[idx] = value;
+            return updated;
+        });
+    };
+
     return (
         <div>
             <PageBreadcrumb pageTitle="Shipment Tracking" />
@@ -133,6 +157,42 @@ export default function ShipmentTracking() {
                                                         <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
                                                             {row.driver.phone}
                                                         </span>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell className="px-4 py-3 text-start">
+                                                    <Select
+                                                        options={statusOptions}
+                                                        defaultValue={statuses[idx]}
+                                                        onChange={(value) => handleStatusChange(idx, value)}
+                                                        className={
+                                                            statuses[idx] === "open"
+                                                                ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
+                                                                : statuses[idx] === "in-transit"
+                                                                    ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
+                                                                    : "bg-green-200 text-green-900 border-green-400 dark:bg-green-800 dark:text-green-100"
+                                                        }
+                                                    />
+                                                </TableCell>
+                                                <TableCell className="px-4 py-3 text-start">
+                                                    <div className="flex gap-2">
+                                                        <Button
+                                                            size="sm"
+                                                            variant="outline"
+                                                            startIcon={<PencilIcon width={18} height={18} />}
+                                                            className="!p-2 border border-gray-200 bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-900 dark:border-yellow-700"
+                                                            onClick={() => {/* handle edit */ }}
+                                                        >
+                                                            {""}
+                                                        </Button>
+                                                        <Button
+                                                            size="sm"
+                                                            variant="outline"
+                                                            startIcon={<TrashBinIcon width={18} height={18} />}
+                                                            className="!p-2 border border-gray-200 bg-red-50 hover:bg-red-100 dark:bg-red-900 dark:border-red-700"
+                                                            onClick={() => {/* handle delete */ }}
+                                                        >
+                                                            {""}
+                                                        </Button>
                                                     </div>
                                                 </TableCell>
                                             </TableRow>
