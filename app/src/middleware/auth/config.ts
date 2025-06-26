@@ -16,13 +16,13 @@ export interface AuthConfig {
 
 export const defaultConfig: AuthConfig = {
   backendType: 'local',
-  apiUrl: '/api/auth',
+  apiUrl: 'api/auth',
   tokenKey: 'auth_token',
   endpoints: {
     login: 'auth/login',
     register: 'auth/register',
     logout: '/logout',
     verify: '/verify',
-    user: '/user'
+    user: 'user'
   }
 };

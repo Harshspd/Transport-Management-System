@@ -29,6 +29,7 @@ export const config = {
     '/profile/:path*',
     '/settings/:path*',
     '/projects/:path*',
+    '/shipment/:path*',
     // Auth routes (for redirection if already logged in)
     '/auth/:path*',
   ],
