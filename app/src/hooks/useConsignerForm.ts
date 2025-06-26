@@ -41,7 +41,7 @@ const useConsignerForm = (onSave:any, onCancel:any) => {
                         contact: {
                             name: "Kanika hard coding to be implemneted",
                             contact_person: "Kanika hard coding to be implemneted",
-                            contact_number: "9987671362",
+                            contact_number: "9987671378",
                         },
                         address: '',
                         city: '',
