@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsignee = async (req, res) => {
   try {
     // 1. Required fields check
-    const requiredFields = ['contact.name', 'contact.contact_number'];
+    const requiredFields = ['contact.name'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {
@@ -16,14 +16,17 @@ export const createConsignee = async (req, res) => {
       });
     }
 
-    // 2. Duplicate check on contact number
-    const duplicate = await checkDuplicate(Consignee, { 'contact.contact_number': req.body.contact.contact_number });
-    if (duplicate) {
-      return res.status(409).json({
-        message: 'Consignee with this contact number already exists',
-        error: true,
-      });
+    // 2. Duplicate check on gst 
+     if (req.body.gst_in) {
+      const duplicate = await checkDuplicate(Consignee, { gst_in: req.body.gst_in });
+      if (duplicate) {
+        return res.status(409).json({
+          message: 'Consignee with this GST number already exists',
+          error: true,
+        });
+      }
     }
+
 
     // 3. Save new consignee
     const consignee = await Consignee.create({

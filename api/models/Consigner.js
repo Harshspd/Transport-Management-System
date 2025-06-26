@@ -8,6 +8,7 @@ const consignerSchema = new mongoose.Schema({
   },
   address: { type: String },
   city: { type: String },
+  state : { type: String },
   gst_in: { type: String },
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

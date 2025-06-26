@@ -1,0 +1,909 @@
+{
+	"info": {
+		"_postman_id": "c3f87f54-b4cd-4262-b59f-c6ad84dca1b6",
+		"name": "Shipment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45603136",
+		"_collection_link": "https://harsh-159942.postman.co/workspace/Harsh's-Workspace~85e170a7-9581-4d35-8fbf-8b9616e32e3e/collection/45603136-c3f87f54-b4cd-4262-b59f-c6ad84dca1b6?action=share&source=collection_link&creator=45603136"
+	},
+	"item": [
+		{
+			"name": "Consignee",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consignees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Ritesh\",\r\n    \"contact_person\": \"SPD Mehta\",\r\n    \"contact_number\": \"1234567812\"\r\n  },\r\n  \"address\":\"gorahkpur, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consignees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Ritesh jiii\",\r\n    \"contact_person\": \"SPD harsh\",\r\n    \"contact_number\": \"1234567812\"\r\n  },\r\n  \"address\":\"gorahkpur, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consignees/684fb8684e695a241718be95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees",
+								"684fb8684e695a241718be95"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consignees/6841566b35f38fcb6049f958",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees",
+								"6841566b35f38fcb6049f958"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consigner",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consigners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Global Transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\": \"9811122233\"\r\n  },\r\n  \"address\": \"Plot 45, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H1Z2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consigners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Harsh SPD transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\": \"1234567890\"\r\n  },\r\n  \"address\": \"Plot 45, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H1Z2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consigners/684fb4f44e695a241718be90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners",
+								"684fb4f44e695a241718be90"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consigners/6841342357961ce281b82422",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners",
+								"6841342357961ce281b82422"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contact[name]",
+									"value": "Harsh10x",
+									"type": "text"
+								},
+								{
+									"key": "license_number",
+									"value": "DL042019123456",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Ayodhya",
+									"type": "text"
+								},
+								{
+									"key": "contact[contact_number]",
+									"value": "9415917682",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "kanpur",
+									"type": "text"
+								},
+								{
+									"key": "licenseFile",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contact[name]",
+									"value": "SPDHARSH",
+									"type": "text"
+								},
+								{
+									"key": "license_number",
+									"value": "DL042019123456",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Transport nagar",
+									"type": "text"
+								},
+								{
+									"key": "contact[contact_number]",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Kanpur",
+									"type": "text"
+								},
+								{
+									"key": "licenseFile",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/drivers/684fbc9e4e695a241718be9a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers",
+								"684fbc9e4e695a241718be9a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/drivers/684156e6f399afadb850efe1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers",
+								"684156e6f399afadb850efe1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicle_number",
+									"value": "MH12AB1234",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_type",
+									"value": "Truck",
+									"type": "text"
+								},
+								{
+									"key": "capacity_weight",
+									"value": "12000",
+									"type": "text"
+								},
+								{
+									"key": "capacity_volume",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "rc_number",
+									"value": "RC123456789",
+									"type": "text"
+								},
+								{
+									"key": "rc_file",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicle_number",
+									"value": "MH12AB1234",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_type",
+									"value": "Truck",
+									"type": "text"
+								},
+								{
+									"key": "capacity_weight",
+									"value": "15000",
+									"type": "text"
+								},
+								{
+									"key": "capacity_volume",
+									"value": "40",
+									"type": "text"
+								},
+								{
+									"key": "rc_number",
+									"value": "RC123456789",
+									"type": "text"
+								},
+								{
+									"key": "rc_file",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles/684fc700c8dcbf8d9e8051e2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles",
+								"684fc700c8dcbf8d9e8051e2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles/68415823a070a6a90dba881f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles",
+								"68415823a070a6a90dba881f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shipment booking",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "post request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"consigner\": \"684928914309f49e25530a92\",  \r\n  \"consignee\": \"684928e94309f49e25530a94\",  \r\n  \"driver\": \"6849297b4309f49e25530a98\",    \r\n  \"vehicle\": \"684929594309f49e25530a96\",   \r\n  \"delivery_location\": \"NOIDA\",\r\n  \"date_time\": \"2025-06-10T12:00:00.000Z\",\r\n  \"goods_details\": {\r\n    \"description\": \"SPD-HARSH\",\r\n    \"quantity\": 100,\r\n    \"bill_no\": \"SHP-009\",\r\n    \"value\": 85000,\r\n    \"mode\": \"Air\",\r\n    \"actual_dimensions\": 200,\r\n    \"charged_dimensions\": 220,\r\n    \"unit_of_weight\": \"kg\",\r\n    \"actual_weight\": 1200,\r\n    \"charged_weight\": 1250,\r\n    \"special_instructions\": \"Temperature sensitive cargo\"\r\n  },\r\n  \"service_type\": \"Express Delivery\",\r\n  \"provider\": \"HealthGo\",\r\n  \"eway_bill_number\": \"EW654321098\",\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"consigner\": \"684928914309f49e25530a92\",  \r\n  \"consignee\": \"684928e94309f49e25530a94\",  \r\n  \"driver\": \"6849297b4309f49e25530a98\",    \r\n  \"vehicle\": \"684929594309f49e25530a96\",   \r\n  \"delivery_location\": \"NOIDA\",\r\n  \"date_time\": \"2025-06-10T12:00:00.000Z\",\r\n  \"goods_details\": {\r\n    \"description\": \"SPD-HARSH\",\r\n    \"quantity\": 100,\r\n    \"bill_no\": \"SHP-009\",\r\n    \"value\": 100000,\r\n    \"mode\": \"Land\",\r\n    \"actual_dimensions\": 200,\r\n    \"charged_dimensions\": 220,\r\n    \"unit_of_weight\": \"kg\",\r\n    \"actual_weight\": 1000,\r\n    \"charged_weight\": 1250,\r\n    \"special_instructions\": \"Temperature sensitive cargo\"\r\n  },\r\n  \"service_type\": \"Express Delivery\",\r\n  \"provider\": \"HealthGo\",\r\n  \"eway_bill_number\": \"EW654321098\",\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/684fec7ac8dcbf8d9e8051f0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"684fec7ac8dcbf8d9e8051f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/68416cd982b3b1950e45002f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"68416cd982b3b1950e45002f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "get token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDc0NTczMywiZXhwIjoxNzUwODMyMTMzfQ.3eaLuYm2v9tpqvzZze7YK9qgxeIaA-JA2JCK6spmYCc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123456@hi\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123456@hi\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "799"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31f-vm3iiWAqDBZpb2jGJhl7Yh++VXM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Jun 2025 06:20:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"_id\": \"684959a8c83df52490b92c44\",\n        \"email\": \"spd1234@gmail.com\",\n        \"account_id\": \"684959a8c83df52490b92c42\",\n        \"__v\": 0,\n        \"no_of_attempts\": 0,\n        \"last_login_attempt_time\": \"2025-06-25T11:00:40.850Z\"\n    },\n    \"account\": {\n        \"_id\": \"684959a8c83df52490b92c42\",\n        \"account_email\": \"spd1234@gmail.com\",\n        \"address\": {\n            \"_id\": \"684959a8c83df52490b92c40\",\n            \"country_id\": null,\n            \"__v\": 0\n        },\n        \"fiscal_year\": {\n            \"start_month\": 1,\n            \"end_month\": 12,\n            \"start_day\": 1,\n            \"end_day\": 31\n        },\n        \"invoiceSettings\": {\n            \"prefix\": \"INV-\"\n        },\n        \"__v\": 0\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDkxODgzNSwiZXhwIjoxNzUxMDA1MjM1fQ.wLVaBjy0fbSBWSZOSrDxJ6J5up0DESXEJpEO9rM78gI\",\n    \"message\": \"Logged in successfully\",\n    \"error\": false,\n    \"success\": true\n}"
+						},
+						{
+							"name": "invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123hi\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "99"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"63-kULnsPBw6M7TAEDCvhnNAFgJiBo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Jun 2025 06:21:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password not matched.Attempts left:4\",\n    \"error\": \"Invalid Credentials:Incorrect Password\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "shipment status",
+			"item": [
+				{
+					"name": "update status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"Delivered\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/68492a834309f49e25530a9a/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"68492a834309f49e25530a9a",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userunderorganisation",
+			"item": [
+				{
+					"name": "adding new user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDE1NTkxNX0.dktY3JB7MmyvBtuL6FaYveWoSRtqN1-cKQuVRrb1mFs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"spdharsh1234@gmail.com\",\r\n  \"password\": \"UserPass@123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register-under-org",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register-under-org"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

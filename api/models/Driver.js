@@ -8,6 +8,7 @@ const driverSchema = new mongoose.Schema({
   license_number: { type: String },
   address: { type: String },
   city: { type: String },
+  state : { type: String },
   license_file: { type: String }, // File path or URL
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
