@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,38 +12,45 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         .dashboard-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
+
         .card {
             background-color: white;
             border-radius: 0.5rem;
             padding: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
+
         .card-title {
             font-size: 1.25rem;
             font-weight: 500;
             color: #374151;
             margin-bottom: 0.75rem;
         }
+
         .card-value {
             font-size: 2rem;
             font-weight: 700;
             color: #1f2937;
         }
+
         .chart-container {
             width: 100%;
             height: 200px;
             margin-top: 1rem;
-            position: relative; /* Make sure the container is a positioning context */
+            position: relative;
+            /* Make sure the container is a positioning context */
         }
+
         .chart-canvas {
             /* width: 100%;  Declared in the style tag*/
             height: 100%;
@@ -52,6 +60,7 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100 p-6">
     <div class="container mx-auto">
         <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Dashboard</h1>
@@ -67,21 +76,21 @@
             <div class="card">
                 <h2 class="card-title">Active Bookings</h2>
                 <div class="card-value">80</div>
-                 <div class="chart-container">
+                <div class="chart-container">
                     <canvas id="activeBookingsChart" class="chart-canvas"></canvas>
                 </div>
             </div>
             <div class="card">
                 <h2 class="card-title">Available Trucks</h2>
                 <div class="card-value">50</div>
-                 <div class="chart-container">
+                <div class="chart-container">
                     <canvas id="availableTrucksChart" class="chart-canvas"></canvas>
                 </div>
             </div>
             <div class="card">
                 <h2 class="card-title">Earnings (Month)</h2>
                 <div class="card-value">$250,000</div>
-                 <div class="chart-container">
+                <div class="chart-container">
                     <canvas id="earningsChart" class="chart-canvas"></canvas>
                 </div>
             </div>
@@ -93,7 +102,7 @@
                 <h2 class="card-title">New Shipments (Today)</h2>
                 <div class="card-value">20</div>
             </div>
-             <div class="card">
+            <div class="card">
                 <h2 class="card-title">New Bookings (Today)</h2>
                 <div class="card-value">15</div>
             </div>
@@ -208,4 +217,5 @@
         });
     </script>
 </body>
+
 </html>

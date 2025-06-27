@@ -1,23 +1,25 @@
 import React from 'react';
-import useDriverForm from '@/hooks/useDriverForm';
+import useConsigneeForm from '@/hooks/useConsigneeForm';
 
-interface EditDriverProps {
+interface EditConsigneeProps {
     onSave: (type: string, data: any) => void;
 }
 
-const EditDriver: React.FC<EditDriverProps> = (onSave) => {
+const EditConsignee: React.FC<EditConsigneeProps> = (onSave) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useDriverForm('Driver', onSave);
+    } = useConsigneeForm('Consignee', onSave);
 
     const fields = [
+        { label: 'Contact Person', name: 'contactPerson', type: 'text' },
+        { label: 'Address', name: 'address', type: 'textarea' },
+        { label: 'City', name: 'city', type: 'text' },
+        { label: 'State', name: 'state', type: 'text' },
         { label: 'Contact Number', name: 'contactNumber', type: 'text' },
-        { label: 'License Number', name: 'licenseNumber', type: 'text' },
-        { label: 'License Upload', name: 'licenseFile', type: 'file' },
-        { label: 'Address', name: 'address', type: 'textarea' }
+        { label: 'GST IN', name: 'gstin', type: 'text' }
     ];
 
     const renderField = (field: any) => {
@@ -53,18 +55,18 @@ const EditDriver: React.FC<EditDriverProps> = (onSave) => {
 
     const getLeftFields = () => {
         return [
-            { label: 'Driver Name', name: 'name', type: 'text' },
+            { label: 'Consignee Name', name: 'name', type: 'text' },
             ...fields.filter(f => f.name === 'address')
         ];
     };
 
     const getRightFields = () => {
-        return fields.filter(f => f.name !== 'address');
+        return fields.filter(f => f.name !== 'address' && f.name !== 'city' && f.name !== 'state');
     };
 
     return (
         <div className='p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'>
-            <h2 className="text-lg font-medium pb-4 text-gray-800 dark:text-white">Driver Details</h2>
+            <h2 className="text-lg font-medium pb-4 text-gray-800 dark:text-white">Consigner Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Left Column */}
                 <div className="flex flex-col gap-4">
@@ -92,6 +94,16 @@ const EditDriver: React.FC<EditDriverProps> = (onSave) => {
                         }
                         return null;
                     })}
+                    {/* City field after Address */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">City :</label>
+                        <input
+                            type="text"
+                            name="city"
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
+                        />
+                    </div>
                 </div>
 
                 {/* Right Column */}
@@ -102,6 +114,15 @@ const EditDriver: React.FC<EditDriverProps> = (onSave) => {
                             {renderField(field)}
                         </div>
                     ))}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">State :</label>
+                        <input
+                            type="text"
+                            name="state"
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
+                        />
+                    </div>
                 </div>
 
                 {/* Save Button Only */}
@@ -118,4 +139,4 @@ const EditDriver: React.FC<EditDriverProps> = (onSave) => {
     );
 };
 
-export default EditDriver; 
+export default EditConsignee; 

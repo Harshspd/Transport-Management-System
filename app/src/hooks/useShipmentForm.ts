@@ -165,7 +165,7 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
                 setFormData((prev) => ({ ...prev, [type]: newEntry.name.trim() }));
 
                 // Close the modal
-                closeModal(type);
+                //closeModal(type);
 
                 console.log(`Successfully added new ${type}:`, newEntry.name.trim());
             } catch (error) {
