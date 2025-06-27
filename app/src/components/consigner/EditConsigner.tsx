@@ -2,34 +2,34 @@ import React from 'react';
 import useConsignerForm from '@/hooks/useConsignerForm';
 
 interface EditConsignerProps {
-  onSave: (type: string, data: any) => void;
-  onCancel: () => void;
+    onSave: (type: string, data: any) => void;
 }
 
-const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel }) => {
+const EditConsigner: React.FC<EditConsignerProps> = (onSave) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-        handleCancel
-    } = useConsignerForm('Consigner');
-    
+    } = useConsignerForm('Consigner', onSave);
+
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
         { label: 'Address', name: 'address', type: 'textarea' },
+        { label: 'City', name: 'city', type: 'text' },
+        { label: 'State', name: 'state', type: 'text' },
         { label: 'Contact Number', name: 'contactNumber', type: 'text' },
         { label: 'GST IN', name: 'gstin', type: 'text' }
     ];
 
-    const renderField = (field) => {
+    const renderField = (field: any) => {
         if (field.type === 'textarea') {
             return (
                 <textarea
                     name={field.name}
                     onChange={handleChange}
                     className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
-                    rows={4}
+                    rows={5}
                 ></textarea>
             );
         }
@@ -56,12 +56,12 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel }) => {
     const getLeftFields = () => {
         return [
             { label: 'Consigner Name', name: 'name', type: 'text' },
-            ...fields.filter(f => f.name === 'address')
+            ...fields.filter(f => f.name === 'address' || f.name === 'city' || f.name === 'state')
         ];
     };
 
     const getRightFields = () => {
-        return fields.filter(f => f.name !== 'address');
+        return fields.filter(f => f.name !== 'address' && f.name !== 'city' && f.name !== 'state');
     };
 
     return (
@@ -84,36 +84,51 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel }) => {
                                 </div>
                             );
                         }
-                        return (
-                            <div key={idx}>
-                                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
-                                {renderField(field)}
-                            </div>
-                        );
+                        if (field.name === 'address') {
+                            return (
+                                <div key={idx} className="md:col-span-2">
+                                    <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
+                                    {renderField(field)}
+                                </div>
+                            );
+                        }
+                        if (field.name === 'city') {
+                            return (
+                                <div key={idx}>
+                                    <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
+                                    {renderField(field)}
+                                </div>
+                            );
+                        }
+                        return null;
                     })}
                 </div>
 
                 {/* Right Column */}
                 <div className="flex flex-col gap-4">
+
                     {getRightFields().map((field, idx) => (
                         <div key={idx}>
                             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
                             {renderField(field)}
                         </div>
                     ))}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">State :</label>
+                        <input
+                            type="text"
+                            name="state"
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
+                        />
+                    </div>
                 </div>
 
-                {/* Save Button*/}
-                <div className="col-span-1 md:col-span-2">
+                {/* Save Button Only */}
+                <div className="col-span-1 md:col-span-2 mt-4">
                     <button
                         onClick={handleSave}
-                        className="w-full mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
-                    >
-                        Save
-                    </button>
-                    <button
-                        onClick={handleCancel}
-                        className="w-full mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
+                        className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
                     >
                         Save
                     </button>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { saveModalEntry } from '@/utils/api.js';
-import { createConsigner } from '@/utils/api/consignerApi';
-import { Consigner } from '@/types/consigner';
+import { createConsignee } from '@/utils/api/consigneeApi';
+import { Consignee } from '@/types/consignee';
 
-const useConsignerForm = (onSave:any, onCancel:any) => {
+const useConsigneeForm = (onSave:any, onCancel:any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState({});
 
@@ -37,7 +37,7 @@ const useConsignerForm = (onSave:any, onCancel:any) => {
         // Create entry with name from newOptionValue and other data from formData
         const entry = { name: newOptionValue, ...formData };
         console.log('Saving entry:', entry);
-        const data:Consigner ={
+        const data:Consignee ={
                         contact: {
                             name: "Kanika hard coding to be implemneted",
                             contact_person: "Kanika hard coding to be implemneted",
@@ -48,9 +48,9 @@ const useConsignerForm = (onSave:any, onCancel:any) => {
                         gst_in: '',
                         };
 
-        const response = await createConsigner(data);
+        const response = await createConsignee(data);
         if (response.success) {
-            onSave("Consigner", response);
+            onSave("Consignee", response);
         } else {
             alert('Error saving entry');
         }
@@ -69,4 +69,4 @@ const useConsignerForm = (onSave:any, onCancel:any) => {
     };
 };
 
-export default useConsignerForm; 
+export default useConsigneeForm; 
