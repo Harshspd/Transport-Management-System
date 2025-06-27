@@ -4,7 +4,7 @@ const consignerSchema = new mongoose.Schema({
   contact: {
     name: { type: String, index: true },
     contact_person: { type: String },
-    contact_number: { type: Number},
+    contact_number: { type: String},
   },
   address: { type: String },
   city: { type: String },
