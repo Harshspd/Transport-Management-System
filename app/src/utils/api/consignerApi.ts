@@ -14,8 +14,17 @@ export const getConsigners = async () => {
 };
 
 export const createConsigner = async (data:Consigner) => {
+    const token = localStorage.getItem('token'); // Get JWT token from localStorage
     try {
-        const response = await axiosInstance.post(API_ENDPOINT,data);
+        const response = await axiosInstance.post(
+            API_ENDPOINT,
+            data,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
         return response.data;
     } catch (error) {
         console.error('Error fetching contact lists:', error);

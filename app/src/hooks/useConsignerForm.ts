@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { saveModalEntry } from '@/utils/api.js';
 import { createConsigner } from '@/utils/api/consignerApi';
 import { Consigner } from '@/types/consigner';
 
-const useConsignerForm = (onSave:any, onCancel:any) => {
+const useConsignerForm = (type: string, onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState<any>({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const resetForm = () => {
         setNewOptionValue('');
         setFormData({});
-    };
-
-    const handleCancel = () => {
-        resetForm();
-        onCancel();
     };
 
     const handleChange = (e: any) => {
@@ -24,48 +20,57 @@ const useConsignerForm = (onSave:any, onCancel:any) => {
         } else {
             setFormData({ ...formData, [name]: value });
         }
-        console.log('Form data updated:', { ...formData, [name]: value });
     };
 
-    const handleNameChange = (e: any ) => {
+    const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
-        console.log('Name field updated:', value);
     };
 
     const handleSave = async () => {
-        // Create entry with name from newOptionValue and other data from formData
-        const entry = { name: newOptionValue, ...formData };
-        console.log('Saving entry:', entry);
-        const data:Consigner ={
-                        contact: {
-                            name: "Kanika hard coding to be implemneted",
-                            contact_person: "Kanika hard coding to be implemneted",
-                            contact_number: "9987671378",
-                        },
-                        address: '',
-                        city: '',
-                        gst_in: '',
-                        };
-
-        const response = await createConsigner(data);
-        if (response.success) {
-            onSave("Consigner", response);
-        } else {
-            alert('Error saving entry');
+        setError('');
+        if (!newOptionValue) {
+            setError('Consigner Name is required');
+            return;
+        }
+        setLoading(true);
+        try {
+            // Build Consigner payload from form fields
+            const data: Consigner = {
+                contact: {
+                    name: newOptionValue,
+                    contact_person: formData.contactPerson || '',
+                    contact_number: formData.contactNumber || '',
+                },
+                address: formData.address || '',
+                city: formData.city || '',
+                gst_in: formData.gstin || '',
+                // Optionally add state if your backend supports it
+                // state: formData.state || '',
+            };
+            const response = await createConsigner(data);
+            if (response && response.contact && response.contact.name) {
+                onSave(type, { name: response.contact.name });
+                resetForm();
+            } else {
+                setError('Error saving consigner');
+            }
+        } catch (err) {
+            setError('Error saving consigner');
+        } finally {
+            setLoading(false);
         }
     };
 
     return {
-        // State
         newOptionValue,
         formData,
-
-        // Actions
+        loading,
+        error,
         handleChange,
         handleNameChange,
         handleSave,
-        handleCancel
+        resetForm,
     };
 };
 
