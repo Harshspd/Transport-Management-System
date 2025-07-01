@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={`${outfit.className} dark:bg-gray-900`}>
       <AuthProvider
           config={{
-            backendType: process.env.NEXT_PUBLIC_AUTH_BACKEND as any || 'node',
+            backendType: 'node',
             apiUrl: process.env.NEXT_PUBLIC_API_URL || '/api/auth',
           }}
         >

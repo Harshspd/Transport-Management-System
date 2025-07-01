@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { saveModalEntry } from '@/utils/api.js';
 import { createConsignee } from '@/utils/api/consigneeApi';
 import { Consignee } from '@/types/consignee';
 
-const useConsigneeForm = (onSave:any, onCancel:any) => {
+const useConsigneeForm = (type: string, onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState<any>({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const resetForm = () => {
         setNewOptionValue('');
         setFormData({});
-    };
-
-    const handleCancel = () => {
-        resetForm();
-        onCancel();
     };
 
     const handleChange = (e: any) => {
@@ -27,45 +23,58 @@ const useConsigneeForm = (onSave:any, onCancel:any) => {
         console.log('Form data updated:', { ...formData, [name]: value });
     };
 
-    const handleNameChange = (e: any ) => {
+    const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
         console.log('Name field updated:', value);
     };
 
     const handleSave = async () => {
-        // Create entry with name from newOptionValue and other data from formData
-        const entry = { name: newOptionValue, ...formData };
-        console.log('Saving entry:', entry);
-        const data:Consignee ={
-                        contact: {
-                            name: "Kanika hard coding to be implemneted",
-                            contact_person: "Kanika hard coding to be implemneted",
-                            contact_number: "9987671378",
-                        },
-                        address: '',
-                        city: '',
-                        gst_in: '',
-                        };
-
-        const response = await createConsignee(data);
-        if (response.success) {
-            onSave("Consignee", response);
-        } else {
-            alert('Error saving entry');
+        setError('');
+        if (!newOptionValue) {
+            setError('Consignee Name is required');
+            return false;
+        }
+        setLoading(true);
+        try {
+            const data: Consignee = {
+                contact: {
+                    name: newOptionValue,
+                    contact_person: formData.contactPerson || '',
+                    contact_number: formData.contactNumber || '',
+                },
+                address: formData.address || '',
+                city: formData.city || '',
+                gst_in: formData.gstin || '',
+                state: formData.state || '',
+            };
+            const response = await createConsignee(data);
+            if (response && response.contact && response.contact.name) {
+                alert('New Consignee saved');
+                onSave(type, { name: response.contact.name });
+                resetForm();
+                return true;
+            } else {
+                setError('Error saving consignee');
+                return false;
+            }
+        } catch (err) {
+            setError('Error saving consignee');
+            return false;
+        } finally {
+            setLoading(false);
         }
     };
 
     return {
-        // State
         newOptionValue,
         formData,
-
-        // Actions
+        loading,
+        error,
         handleChange,
         handleNameChange,
         handleSave,
-        handleCancel
+        resetForm,
     };
 };
 

@@ -5,13 +5,15 @@ interface EditConsignerProps {
     onSave: (type: string, data: any) => void;
 }
 
-const EditConsigner: React.FC<EditConsignerProps> = (onSave) => {
+const EditConsigner: React.FC<EditConsignerProps> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useConsignerForm('Consigner', onSave);
+    } = useConsignerForm('Consigner', (type: string, data: any) => {
+        onSave(type, data);
+    });
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
@@ -123,8 +125,6 @@ const EditConsigner: React.FC<EditConsignerProps> = (onSave) => {
                         />
                     </div>
                 </div>
-
-                {/* Save Button Only */}
                 <div className="col-span-1 md:col-span-2 mt-4">
                     <button
                         onClick={handleSave}

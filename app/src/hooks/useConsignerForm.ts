@@ -20,22 +20,23 @@ const useConsignerForm = (type: string, onSave: any) => {
         } else {
             setFormData({ ...formData, [name]: value });
         }
+        console.log('Form data updated:', { ...formData, [name]: value });
     };
 
     const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
+        console.log('Name field updated:', value);
     };
 
     const handleSave = async () => {
         setError('');
         if (!newOptionValue) {
             setError('Consigner Name is required');
-            return;
+            return false;
         }
         setLoading(true);
         try {
-            // Build Consigner payload from form fields
             const data: Consigner = {
                 contact: {
                     name: newOptionValue,
@@ -45,18 +46,21 @@ const useConsignerForm = (type: string, onSave: any) => {
                 address: formData.address || '',
                 city: formData.city || '',
                 gst_in: formData.gstin || '',
-                // Optionally add state if your backend supports it
-                // state: formData.state || '',
+                state: formData.state || '',
             };
             const response = await createConsigner(data);
             if (response && response.contact && response.contact.name) {
+                alert('New Consigner saved');
                 onSave(type, { name: response.contact.name });
                 resetForm();
+                return true;
             } else {
                 setError('Error saving consigner');
+                return false;
             }
         } catch (err) {
             setError('Error saving consigner');
+            return false;
         } finally {
             setLoading(false);
         }

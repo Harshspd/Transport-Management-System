@@ -9,6 +9,7 @@ export interface Consignee {
   contact: ContactInfo;
   address?: string;
   city?: string;
+  state?: string;
   gst_in?: string;
   created_by?: string; // User ID (ObjectId as string)
   updated_by?: string; // User ID (optional)

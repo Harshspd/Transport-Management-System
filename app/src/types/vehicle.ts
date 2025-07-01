@@ -1,15 +1,18 @@
 export interface ContactInfo {
   name: string;
-  contact_person?: string;
-  contact_number?: string;
+  vehicle_number?: string;
 }
 
 export interface Vehicle {
-  _id?: string; // If fetched from DB
-  contact: ContactInfo;
-  address?: string;
+  _id?: string; // If fetched from DB 
+  contact: ContactInfo; 
+  vehicle_type?: string;
+  capacity_weight?: number;
+  capacity_volume?: number;
+  rc_number?: string;
+  rc_file?: string;
   city?: string;
-  gst_in?: string;
+  state?: string;
   created_by?: string; // User ID (ObjectId as string)
   updated_by?: string; // User ID (optional)
   organization_id?: string; // Account ID

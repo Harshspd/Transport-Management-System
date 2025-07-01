@@ -48,6 +48,18 @@ const ShipmentForm: React.FC = () => {
         console.log("ShipmentForm loaded");
     }, []);
 
+    const handleAddNewAndClose = async (type: keyof typeof options, newEntry: any) => {
+        const success = await handleAddNew(type, newEntry);
+        if (success) {
+            switch (type) {
+                case 'Consigner': consignerModal.closeModal(); break;
+                case 'Consignee': consigneeModal.closeModal(); break;
+                case 'Driver': driverModal.closeModal(); break;
+                case 'Vehicle': vehicleModal.closeModal(); break;
+            }
+        }
+    };
+
     return (
         <ComponentCard title="Shipment Booking">
             <div>
@@ -339,53 +351,17 @@ const ShipmentForm: React.FC = () => {
                 {/* Modals */}
 
                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
-                    <EditConsigner onSave={handleAddNew}  />
+                    <EditConsigner onSave={handleAddNewAndClose} />
                 </SlideModal>
                 <SlideModal title='Add Consignee' isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
-                    <EditConsignee onSave={handleAddNew}  />
+                    <EditConsignee onSave={handleAddNewAndClose} />
                 </SlideModal>
                 <SlideModal title='Add Driver' isOpen={driverModal.isOpen} onClose={driverModal.closeModal}>
-                    <EditDriver onSave={handleAddNew}  />
+                    <EditDriver onSave={handleAddNewAndClose} />
                 </SlideModal>
                 <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
-                    <EditVehicle onSave={handleAddNew}  />
+                    <EditVehicle onSave={handleAddNewAndClose} />
                 </SlideModal>
-
-
-
-
-                {/* <ConsigneeModal show={showConsigneeModal} onClose={() => closeModal('Consignee')} onAdd={handleAddNew} />
-                <VehicleModal show={showVehicleModal} onClose={() => closeModal('Vehicle')} onAdd={handleAddNew} />
-                <Modal isOpen={showDriverModal} onClose={() => closeModal('Driver')}>
-                    <EditDriver
-                        onCancel={() => closeModal('Driver')}
-                        onSave={handleAddNew}
-                    />
-                </Modal> */}
-                {/* Individual Modals */}
-                {/* <ConsignerModal
-                    show={showConsignerModal}
-                    onClose={() => closeModal('Consigner')}
-                    onAdd={handleAddNew}
-                />
-
-                <ConsigneeModal
-                    show={showConsigneeModal}
-                    onClose={() => closeModal('Consignee')}
-                    onAdd={handleAddNew}
-                />
-
-                <DriverModal
-                    show={showDriverModal}
-                    onClose={() => closeModal('Driver')}
-                    onAdd={handleAddNew}
-                />
-
-                <VehicleModal
-                    show={showVehicleModal}
-                    onClose={() => closeModal('Vehicle')}
-                    onAdd={handleAddNew}
-                /> */}
             </div>
         </ComponentCard>
     );

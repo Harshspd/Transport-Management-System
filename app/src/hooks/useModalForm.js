@@ -32,7 +32,6 @@ const useModalForm = (modalType, onAdd, onClose) => {
     };
 
     const handleAddNew = async () => {
-        // Create entry with name from newOptionValue and other data from formData
         const entry = { name: newOptionValue, ...formData };
         console.log('Saving entry:', entry);
 
@@ -46,11 +45,8 @@ const useModalForm = (modalType, onAdd, onClose) => {
     };
 
     return {
-        // State
         newOptionValue,
         formData,
-
-        // Actions
         handleChange,
         handleNameChange,
         handleAddNew,
