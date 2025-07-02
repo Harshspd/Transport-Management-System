@@ -147,7 +147,7 @@ const useShipmentForm = () => {
             case 'Vehicle': return vehicleModal.openModal();
         }
     };
-
+    
     const validateForm = () => {
         const newErrors: ShipmentFormErrors = {};
         if (!formData.Consigner) newErrors.Consigner = 'Consigner is required';
@@ -224,6 +224,12 @@ const useShipmentForm = () => {
                 }
                 setOptions((prev) => ({ ...prev, [type]: updatedList }));
                 setFormData((prev) => ({ ...prev, [type]: newEntry._id }));
+                switch (type) {
+                    case 'Consigner': return consignerModal.closeModal();
+                    case 'Consignee': return consigneeModal.closeModal();
+                    case 'Driver': return driverModal.closeModal();
+                    case 'Vehicle': return vehicleModal.closeModal();
+                }
                 return true;
             } catch (error) {
                 console.error('Error adding new entry:', error);
