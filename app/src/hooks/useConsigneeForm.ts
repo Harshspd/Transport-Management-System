@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createConsignee } from '@/utils/api/consigneeApi';
 import { Consignee } from '@/types/consignee';
 
-const useConsigneeForm = (type: string, onSave: any) => {
+const useConsigneeForm = (onSave) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -38,20 +38,21 @@ const useConsigneeForm = (type: string, onSave: any) => {
         setLoading(true);
         try {
             const data: Consignee = {
+                name: newOptionValue,
                 contact: {
-                    name: newOptionValue,
-                    contact_person: formData.contactPerson || '',
-                    contact_number: formData.contactNumber || '',
+                    person: formData.contactPerson || '',
+                    phone: formData.contactNumber || '',
                 },
-                address: formData.address || '',
-                city: formData.city || '',
-                gst_in: formData.gstin || '',
-                state: formData.state || '',
+                address: {
+                    adddress_line_1: formData.address || '',
+                    city: formData.city || '',
+                    state: formData.state || '',
+                },
+                gstin: formData.gstin || '',
             };
             const response = await createConsignee(data);
-            if (response && response.contact && response.contact.name) {
-                alert('New Consignee saved');
-                onSave(type, { name: response.contact.name });
+            if (response) {
+                onSave(response.data);
                 resetForm();
                 return true;
             } else {

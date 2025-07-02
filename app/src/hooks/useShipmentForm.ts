@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { getConsigners } from '@/utils/api/consignerApi';
 import { getConsignees } from '@/utils/api/consigneeApi';
 import { getDrivers } from '@/utils/api/driverApi';
-import { getVehicles } from '@/utils/api/vehicle';
+import { getVehicles } from '@/utils/api/vehicleApi';
 import { createShipment } from '@/utils/api/shipmentApi';
+import { toast } from 'react-toastify';
+import { useModal } from '@/hooks/useModal';
 
 interface OptionType {
     value: string;
@@ -14,11 +16,12 @@ interface ShipmentFormData {
     Consigner: string;
     Consignee: string;
     DeliveryLocation: string;
-    DateTime: string;
+    ExpectedDeliveryDateTime: string;
     Description: string;
     Quantity: string;
     BillNo: string;
-    Value: string;
+    BillDate: string;
+    BillValue: string;
     Mode: string;
     ActualDimensions: string;
     ChargedDimensions: string;
@@ -48,16 +51,17 @@ interface ShipmentFormOptions {
     UnitWeight: OptionType[] | string[];
 }
 
-const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
+const useShipmentForm = () => {
     const [formData, setFormData] = useState<ShipmentFormData>({
         Consigner: '',
         Consignee: '',
         DeliveryLocation: '',
-        DateTime: '',
+        ExpectedDeliveryDateTime: '',
         Description: '',
         Quantity: '',
         BillNo: '',
-        Value: '',
+        BillDate: '',
+        BillValue: '',
         Mode: '',
         ActualDimensions: '',
         ChargedDimensions: '',
@@ -85,6 +89,12 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         UnitWeight: ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo']
     });
 
+    const consignerModal = useModal();
+    const consigneeModal = useModal();
+    const driverModal = useModal();
+    const vehicleModal = useModal();
+    
+    
     // Fetch dropdown options from backend on mount
     useEffect(() => {
         const fetchOptions = async () => {
@@ -119,13 +129,22 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
             value = e.target.value;
         } else {
             // fallback for direct value
-            name = e;
+             name = e;
             value = selectedValue;
         }
         if (value === '+Add new') {
-            onAddNewTrigger && onAddNewTrigger(name);
+            handleAddNewTrigger(name);
         } else {
             setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+    
+    const handleAddNewTrigger = (name: string) => {
+        switch (name) {
+            case 'Consigner': return consignerModal.openModal();
+            case 'Consignee': return consigneeModal.openModal();
+            case 'Driver': return driverModal.openModal();
+            case 'Vehicle': return vehicleModal.openModal();
         }
     };
 
@@ -134,18 +153,17 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         if (!formData.Consigner) newErrors.Consigner = 'Consigner is required';
         if (!formData.Consignee) newErrors.Consignee = 'Consignee is required';
         if (!formData.DeliveryLocation) newErrors.DeliveryLocation = 'Delivery Location is required';
-        if (!formData.DateTime) newErrors.DateTime = 'Date/Time is required';
-        if (!formData.Description) newErrors.Description = 'Description is required';
         if (!formData.Quantity) newErrors.Quantity = 'Quantity is required';
         if (!formData.BillNo) newErrors.BillNo = 'Bill No is required';
-        if (!formData.Value) newErrors.Value = 'Value is required';
-
+        if (!formData.BillValue) newErrors.BillValue = 'Bill Value is required';
+        console.log('Validating form:', newErrors);
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        console.log(validateForm());
         if (!validateForm()) return;
 
         // Transform formData to match Shipment type
@@ -155,12 +173,13 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
             driver: formData.Driver,
             vehicle: formData.Vehicle,
             delivery_location: formData.DeliveryLocation,
-            date_time: new Date(formData.DateTime).toISOString(),
+            expected_delivery_date_and_time: new Date(formData.ExpectedDeliveryDateTime).toISOString(),
             goods_details: {
                 description: formData.Description,
                 quantity: Number(formData.Quantity),
                 bill_no: formData.BillNo,
-                value: Number(formData.Value),
+                bill_date: Number(formData.BillDate),
+                bill_value: Number(formData.BillValue),
                 mode: formData.Mode,
                 actual_dimensions: Number(formData.ActualDimensions),
                 charged_dimensions: Number(formData.ChargedDimensions),
@@ -177,25 +196,20 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
 
         try {
             const response = await createShipment(shipment);
-            console.log('Shipment saved:', response);
-            alert('Shipment booked successfully!');
-            // Reset form
-            setFormData({
-                Consigner: '', Consignee: '', DeliveryLocation: '', DateTime: '',
-                Description: '', Quantity: '', BillNo: '', Value: '', Mode: '',
-                ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
-                ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
-                Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
-            });
+            if(response.status == 201) {
+                setFormData({
+                    Consigner: '', Consignee: '', DeliveryLocation: '', ExpectedDeliveryDateTime: '',
+                    Description: '', Quantity: '', BillNo: '', BillDate:'' ,BillValue: '', Mode: '',
+                    ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
+                    ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
+                    Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
+                });
+            }
         } catch (error) {
-            alert('Failed to book shipment. Please try again.');
-            console.error(error);
+            toast.error('Error booking shipment. Please try again.' + (error instanceof Error ? `: ${error.message}` : ''));
         }
     };
-
     const handleAddNew = async (type: keyof ShipmentFormOptions, newEntry: any) => {
-        console.log('handleAddNew called with:', { type, newEntry });
-        if (newEntry?.name?.trim()) {
             try {
                 // After adding, re-fetch the relevant list from backend
                 let updatedList: OptionType[] = [];
@@ -209,20 +223,15 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
                     updatedList = (await getVehicles()).map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name }));
                 }
                 setOptions((prev) => ({ ...prev, [type]: updatedList }));
-                setFormData((prev) => ({ ...prev, [type]: newEntry.value }));
-                console.log(`Successfully added new ${type}:`, newEntry.name.trim());
+                setFormData((prev) => ({ ...prev, [type]: newEntry._id }));
                 return true;
             } catch (error) {
                 console.error('Error adding new entry:', error);
                 alert('Error adding new entry. Please try again.');
                 return false;
             }
-        } else {
-            alert('Please fill all required fields');
-            return false;
-        }
-    };
-
+        };
+   
     const renderOptions = (items: OptionType[] | string[], fieldName: string) => {
         // If already in {value, label} format, return as is, else map to that format
         const baseOptions = typeof items[0] === 'object'
@@ -268,6 +277,10 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         handleAddNew,
         renderOptions,
         formatValue,
+        consignerModal,
+        consigneeModal,
+        driverModal,
+        vehicleModal
     };
 };
 

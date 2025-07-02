@@ -1,16 +1,11 @@
-export interface ContactInfo {
-  name: string;
-  contact_person?: string;
-  contact_number?: string;
-}
+import { Address, ContactInfo } from "./type";
 
 export interface Consigner {
+   name: string;
   _id?: string; // If fetched from DB
   contact: ContactInfo;
-  address?: string;
-  city?: string;
-  state?: string;
-  gst_in?: string;
+  address?: Address;
+  gstin?: string;
   created_by?: string; // User ID (ObjectId as string)
   updated_by?: string; // User ID (optional)
   organization_id?: string; // Account ID

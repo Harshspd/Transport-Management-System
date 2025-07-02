@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createDriver } from '@/utils/api/driverApi';
 import { Driver } from '@/types/driver';
 
-const useDriverForm = (type: string, onSave: any) => {
+const useDriverForm = (onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -33,26 +33,25 @@ const useDriverForm = (type: string, onSave: any) => {
         setError('');
         if (!newOptionValue) {
             setError('Driver Name is required');
-            return;
+         //   return;
         }
         setLoading(true);
         try {
             // Create FormData to match backend expectation
             const formDataToSend = new FormData();
-            formDataToSend.append('contact[name]', newOptionValue);
-            formDataToSend.append('contact[contact_number]', formData.contactNumber || '');
+            formDataToSend.append('name', newOptionValue);
+            formDataToSend.append('contact[phone]', formData.contactNumber || '');
             formDataToSend.append('license_number', formData.licenseNumber || '');
-            formDataToSend.append('address', formData.address || '');
-            formDataToSend.append('city', formData.city || '');
+            formDataToSend.append('address[adddress_line_1]', formData.address || '');
+            formDataToSend.append('address[city]', formData.city || '');
             if (formData.licenseFile) {
                 formDataToSend.append('licenseFile', formData.licenseFile);
             }
 
             console.log('Driver FormData payload:', formDataToSend);
             const response = await createDriver(formDataToSend);
-            if (response && response.contact && response.contact.name) {
-                alert('New Driver saved');
-                onSave('Driver', { name: response.contact.name });
+            if (response) {
+                onSave(response.data);
                 resetForm();
             } else {
                 setError('Error saving Driver');

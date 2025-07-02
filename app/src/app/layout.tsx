@@ -5,6 +5,9 @@ import { SidebarProvider } from '@/context/SidebarContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/middleware/AuthProvider';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const outfit = Outfit({
   subsets: ["latin"],
 });
@@ -17,15 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} dark:bg-gray-900`}>
-      <AuthProvider
+        <AuthProvider
           config={{
             backendType: 'node',
             apiUrl: process.env.NEXT_PUBLIC_API_URL || '/api/auth',
           }}
         >
-        <ThemeProvider>
-          <SidebarProvider>{children}</SidebarProvider>
-        </ThemeProvider>
+          <ThemeProvider>
+            <SidebarProvider>
+              {children}
+              <ToastContainer position="top-right" autoClose={3000} />
+            </SidebarProvider>
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

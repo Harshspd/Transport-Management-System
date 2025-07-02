@@ -1,11 +1,8 @@
 import React from 'react';
 import useVehicleForm from '@/hooks/useVehicleForm';
 
-interface EditVehicleProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditVehicle: React.FC<EditVehicleProps> = ({ onSave }) => {
+const EditVehicle: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
@@ -13,7 +10,7 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ onSave }) => {
         handleSave,
         formData,
         error,
-    } = useVehicleForm('Vehicle', onSave);
+    } = useVehicleForm(onSave);
 
     const fields = [
         { label: 'Vehicle Number', name: 'vehicleNumber', type: 'text' },

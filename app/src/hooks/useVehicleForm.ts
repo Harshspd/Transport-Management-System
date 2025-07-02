@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { createVehicle } from '@/utils/api/vehicle';
+import { createVehicle } from '@/utils/api/vehicleApi';
 import { Vehicle } from '@/types/vehicle';
 
-const useVehicleForm = (type: string, onSave: any) => {
+const useVehicleForm = (onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -45,13 +45,12 @@ const useVehicleForm = (type: string, onSave: any) => {
             if (formData.rcFile) {
                 formDataToSend.append('rc_file', formData.rcFile);
             }
-            formDataToSend.append('city', formData.city || '');
-            formDataToSend.append('state', formData.state || '');
+            formDataToSend.append('address[city]', formData.city || '');
+            formDataToSend.append('address[state]', formData.state || '');
 
             const response = await createVehicle(formDataToSend);
-            if (response && response.data && response.data.vehicle_number) {
-                alert('New Vehicle saved');
-                onSave(type, { name: response.data.vehicle_number });
+            if (response) {
+                onSave(response.data);
                 resetForm();
             } else {
                 setError('Error saving Vehicle');

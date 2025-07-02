@@ -13,20 +13,16 @@ import useShipmentForm from '@/hooks/useShipmentForm';
 import { SlideModal } from '@/components/ui/slide-modal';
 import EditDriver from '@/components/driver/EditDriver';
 import EditConsigner from '@/components/consigner/EditConsigner';
-import { useModal } from '@/hooks/useModal';
 import EditConsignee from '@/components/consignee/EditConsignee';
 import EditVehicle from '@/components/vehicle/EditVehicle';
+import { Consigner } from '@/types/consigner';
+import { Consignee } from '@/types/consignee';
+import { Driver } from '@/types/driver';
+import { Vehicle } from '@/types/vehicle';
 
 const ShipmentForm: React.FC = () => {
 
-    const handleAddNewTrigger = (name: string) => {
-        switch (name) {
-            case 'Consigner': return consignerModal.openModal();
-            case 'Consignee': return consigneeModal.openModal();
-            case 'Driver': return driverModal.openModal();
-            case 'Vehicle': return vehicleModal.openModal();
-        }
-    };
+
     const {
         formData,
         errors,
@@ -37,27 +33,20 @@ const ShipmentForm: React.FC = () => {
         handleAddNew,
         renderOptions,
         formatValue,
-    } = useShipmentForm(handleAddNewTrigger) as any;
+        consignerModal,
+        consigneeModal,
+        driverModal,
+        vehicleModal,
 
-    const consignerModal = useModal();
-    const consigneeModal = useModal();
-    const driverModal = useModal();
-    const vehicleModal = useModal();
+    } = useShipmentForm() as any;
 
     useEffect(() => {
         console.log("ShipmentForm loaded");
     }, []);
 
-    const handleAddNewAndClose = async (type: keyof typeof options, newEntry: any) => {
+
+    const handleAddNewAndClose = async (type:string, newEntry: any) => {
         const success = await handleAddNew(type, newEntry);
-        if (success) {
-            switch (type) {
-                case 'Consigner': consignerModal.closeModal(); break;
-                case 'Consignee': consigneeModal.closeModal(); break;
-                case 'Driver': driverModal.closeModal(); break;
-                case 'Vehicle': vehicleModal.closeModal(); break;
-            }
-        }
     };
 
     type OptionType = { value: string; label: string };
@@ -119,14 +108,14 @@ const ShipmentForm: React.FC = () => {
                                     {errors.DeliveryLocation && <p className="text-red-500 text-xs mt-1">{errors.DeliveryLocation}</p>}
                                 </div>
                                 <div>
-                                    <Label>Date/Time</Label>
+                                    <Label>Expected Date/Time</Label>
                                     <Input
-                                        name="DateTime"
+                                        name="ExpectedDeliveryDateTime"
                                         onChange={(e) => handleChange(e)}
-                                        value={formData.DateTime}
+                                        value={formData.ExpectedDeliveryDateTime}
                                         type="datetime-local"
                                     />
-                                    {errors.DateTime && <p className="text-red-500 text-xs mt-1">{errors.DateTime}</p>}
+                                    {errors.ExpectedDeliveryDateTime && <p className="text-red-500 text-xs mt-1">{errors.ExpectedDeliveryDateTime}</p>}
                                 </div>
                             </div>
 
@@ -142,16 +131,7 @@ const ShipmentForm: React.FC = () => {
                                     />
                                     {errors.Description && <p className="text-red-500 text-xs mt-1">{errors.Description}</p>}
                                 </div>
-                                <div>
-                                    <Label>Quantity</Label>
-                                    <Input
-                                        type="number"
-                                        name="Quantity"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.Quantity}
-                                    />
-                                    {errors.Quantity && <p className="text-red-500 text-xs mt-1">{errors.Quantity}</p>}
-                                </div>
+                                
                                 <div>
                                     <Label>Bill No</Label>
                                     <Input
@@ -162,14 +142,25 @@ const ShipmentForm: React.FC = () => {
                                     {errors.BillNo && <p className="text-red-500 text-xs mt-1">{errors.BillNo}</p>}
                                 </div>
                                 <div>
-                                    <Label>Value</Label>
+                                    <Label>BillDate</Label>
                                     <Input
-                                        type="number"
-                                        name="Value"
+                                        name="billDate"
                                         onChange={(e) => handleChange(e)}
-                                        value={formData.Value}
+                                        value={formData.BillDate}
+                                        type="datetime-local"
                                     />
-                                    {errors.Value && <p className="text-red-500 text-xs mt-1">{errors.Value}</p>}
+                                    {errors.BillDate && <p className="text-red-500 text-xs mt-1">{errors.BillDate}</p>}
+                                </div>
+                                
+
+                                <div>
+                                    <Label>Bill Value</Label>
+                                    <Input
+                                        name="BillValue"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.BillValue}
+                                    />
+                                    {errors.BillValue && <p className="text-red-500 text-xs mt-1">{errors.BillValue}</p>}
                                 </div>
                                 <div>
                                     <Label>Mode</Label>
@@ -185,6 +176,16 @@ const ShipmentForm: React.FC = () => {
                                         </span>
                                     </div>
                                     {errors.Mode && <p className="text-red-500 text-xs mt-1">{errors.Mode}</p>}
+                                </div>
+                                <div>
+                                    <Label>Quantity</Label>
+                                    <Input
+                                        type="number"
+                                        name="Quantity"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.Quantity}
+                                    />
+                                    {errors.Quantity && <p className="text-red-500 text-xs mt-1">{errors.Quantity}</p>}
                                 </div>
                                 <div>
                                     <Label>Actual Dimensions</Label>
@@ -361,16 +362,16 @@ const ShipmentForm: React.FC = () => {
                 {/* Modals */}
 
                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
-                    <EditConsigner onSave={handleAddNewAndClose} />
+                    <EditConsigner onSave={(data:Consigner)=>handleAddNewAndClose('Consigner',data)} />
                 </SlideModal>
                 <SlideModal title='Add Consignee' isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
-                    <EditConsignee onSave={handleAddNewAndClose} />
+                    <EditConsignee onSave={(data:Consignee)=>handleAddNewAndClose('Consignee',data)} />
                 </SlideModal>
                 <SlideModal title='Add Driver' isOpen={driverModal.isOpen} onClose={driverModal.closeModal}>
-                    <EditDriver onSave={handleAddNewAndClose} />
+                    <EditDriver onSave={(data:Driver)=>handleAddNewAndClose('Driver',data)} />
                 </SlideModal>
                 <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
-                    <EditVehicle onSave={handleAddNewAndClose} />
+                    <EditVehicle onSave={(data:Vehicle)=>handleAddNewAndClose('Vehicle',data)}/>
                 </SlideModal>
             </div>
         </ComponentCard>

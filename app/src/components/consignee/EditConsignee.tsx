@@ -1,19 +1,16 @@
 import React from 'react';
 import useConsigneeForm from '@/hooks/useConsigneeForm';
 
-interface EditConsigneeProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditConsignee: React.FC<EditConsigneeProps> = ({ onSave }) => {
+
+const EditConsignee: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useConsigneeForm('Consignee', (type: string, data: any) => {
-        onSave(type, data);
-    });
+    } = useConsigneeForm(onSave)
+    
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },

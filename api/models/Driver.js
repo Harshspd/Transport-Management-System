@@ -1,13 +1,21 @@
 import mongoose from 'mongoose';
 
 const driverSchema = new mongoose.Schema({
+  name: { type: String, index: true },
   contact: {
-    name: { type: String },
-    contact_number: { type: Number },
+    person: { type: String },
+    phone: { type: Number},
+    email: { type: String },
+  },
+  address: {
+    adddress_line_1: { type: String },
+    street: { type: String },
+    state: { type: String },
+    postal_code: { type: String },
+    city: { type: String },
+    country: { type: String },
   },
   license_number: { type: String },
-  address: { type: String },
-  city: { type: String },
   license_file: { type: String }, // File path or URL
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

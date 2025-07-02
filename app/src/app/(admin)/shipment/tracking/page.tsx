@@ -117,21 +117,21 @@ export default function ShipmentTracking() {
                                         </TableHeader>
                                         <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                                             {shipments.map((row) => (
-                                                <TableRow key={row._id}>
+                                                <TableRow key={row?._id}>
                                                     <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                        {row.goods_details?.bill_no || row._id}
+                                                        {row?.goods_details?.bill_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.date_time ? new Date(row.date_time).toLocaleDateString() : "-"}
+                                                        {row?.date_time ? new Date(row?.date_time).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.consignee_name || row.consignee || "-"}
+                                                        {row?.consignee?.contact?.name || row.consignee.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.delivery_location || "-"}
+                                                        {row?.delivery_location || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.goods_details?.actual_weight || "-"}
+                                                        {row?.goods_details?.actual_weight || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.goods_details?.quantity || "-"}
@@ -143,15 +143,15 @@ export default function ShipmentTracking() {
                                                         {row.delivery_date ? new Date(row.delivery_date).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.vehicle_number || row.vehicle || "-"}
+                                                        {row.vehicle?.vehicle_number || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                                {row.driver_name || row.driver || "-"}
+                                                                {row?.driver?.contact?.name || "-"}
                                                             </span>
                                                             <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                                {row.driver_phone || "-"}
+                                                                {row?.driver?.contact?.contact_number || "-"}
                                                             </span>
                                                         </div>
                                                     </TableCell>

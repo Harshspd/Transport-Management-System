@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsigner = async (req, res) => {
   try {
     // Step 1: Dynamic Required Field Validation
-    const requiredFields = ['contact.name', 'contact.contact_number'];
+    const requiredFields = ['name', 'contact.phone'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {
@@ -16,8 +16,8 @@ export const createConsigner = async (req, res) => {
       });
     }
 
-    // Step 2: Duplicate Check on contact.contact_number
-    const duplicate = await checkDuplicate(Consigner, { 'contact.contact_number': req.body.contact.contact_number });
+    // Step 2: Duplicate Check on contact.phone
+    const duplicate = await checkDuplicate(Consigner, { 'contact.phone': req.body.contact.phone });
     if (duplicate) {
       return res.status(409).json({
         message: 'Consigner with this contact number already exists',
