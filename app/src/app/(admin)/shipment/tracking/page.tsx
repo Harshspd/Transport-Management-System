@@ -12,7 +12,9 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-import { getShipments, updateShipmentStatus, deleteShipment } from '@/utils/api/shipmentApi';
+import { getShipments, updateShipmentStatus, deleteShipment, createShipment } from '@/utils/api/shipmentApi';
+import EditShipment from '@/components/shipment/EditShipment';
+import { SlideModal } from '@/components/ui/slide-modal';
 
 const statusOptions = [
     { value: "pending", label: "Pending" },
@@ -40,6 +42,8 @@ export default function ShipmentTracking() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [editingShipment, setEditingShipment] = useState<any | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -83,9 +87,30 @@ export default function ShipmentTracking() {
         }
     };
 
-    // Placeholder for edit
+    // Open modal for editing
     const handleEdit = (shipmentId: string) => {
-        alert(`Edit shipment ${shipmentId} (implement navigation or modal)`);
+        const shipment = shipments.find(s => s._id === shipmentId);
+        setEditingShipment(shipment);
+        setEditModalOpen(true);
+    };
+
+    // Save handler for modal
+    const handleEditSave = async (updated: any) => {
+        try {
+            // You may want to call a PATCH endpoint for full shipment update; for now, just update status, delivery_location, date_time
+            await createShipment(updated); // Replace with updateShipment if you have it
+            setShipments((prev) => prev.map(s => s._id === updated._id ? updated : s));
+            setEditModalOpen(false);
+            setEditingShipment(null);
+        } catch (err) {
+            alert('Failed to update shipment');
+        }
+    };
+
+    // Cancel handler for modal
+    const handleEditCancel = () => {
+        setEditModalOpen(false);
+        setEditingShipment(null);
     };
 
     return (
@@ -125,6 +150,7 @@ export default function ShipmentTracking() {
                                                         {row?.date_time ? new Date(row?.date_time).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.consignee?.contact?.name || row.consignee?.name || "-"}
                                                         {row?.consignee?.contact?.name || row.consignee.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
@@ -137,7 +163,7 @@ export default function ShipmentTracking() {
                                                         {row.goods_details?.quantity || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.agent || "-"}
+                                                        {row.consigner?.contact?.name || row.consigner?.name || row.agent || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.delivery_date ? new Date(row.delivery_date).toLocaleDateString() : "-"}
@@ -201,6 +227,15 @@ export default function ShipmentTracking() {
                     </div>
                 </ComponentCard>
             </div>
+            <SlideModal isOpen={editModalOpen} onClose={handleEditCancel} title="Edit Shipment">
+                {editingShipment && (
+                    <EditShipment
+                        shipment={editingShipment}
+                        onSave={handleEditSave}
+                        onCancel={handleEditCancel}
+                    />
+                )}
+            </SlideModal>
         </div>
     );
 } 
