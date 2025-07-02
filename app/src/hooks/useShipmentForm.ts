@@ -3,6 +3,12 @@ import { getConsigners } from '@/utils/api/consignerApi';
 import { getConsignees } from '@/utils/api/consigneeApi';
 import { getDrivers } from '@/utils/api/driverApi';
 import { getVehicles } from '@/utils/api/vehicle';
+import { createShipment } from '@/utils/api/shipmentApi';
+
+interface OptionType {
+    value: string;
+    label: string;
+}
 
 interface ShipmentFormData {
     Consigner: string;
@@ -32,14 +38,14 @@ interface ShipmentFormErrors {
 }
 
 interface ShipmentFormOptions {
-    Consigner: string[];
-    Consignee: string[];
-    Mode: string[];
-    ServiceType: string[];
-    Driver: string[];
-    Vehicle: string[];
-    Provider: string[];
-    UnitWeight: string[];
+    Consigner: OptionType[];
+    Consignee: OptionType[];
+    Mode: OptionType[] | string[];
+    ServiceType: OptionType[] | string[];
+    Driver: OptionType[];
+    Vehicle: OptionType[];
+    Provider: OptionType[] | string[];
+    UnitWeight: OptionType[] | string[];
 }
 
 const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
@@ -89,16 +95,12 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
                     getDrivers(),
                     getVehicles()
                 ]);
-                console.log('consigners:', consigners);
-                console.log('consignees:', consignees);
-                console.log('drivers:', drivers);
-                console.log('vehicles:', vehicles);
                 setOptions((prev) => ({
                     ...prev,
-                    Consigner: consigners.map((c: any) => c.contact?.name || c.name),
-                    Consignee: consignees.map((c: any) => c.contact?.name || c.name),
-                    Driver: drivers.map((d: any) => d.contact?.name || d.name),
-                    Vehicle: vehicles.map((v: any) => v.vehicle_number || v.name),
+                    Consigner: consigners.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
+                    Consignee: consignees.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
+                    Driver: drivers.map((d: any) => ({ value: d._id, label: d.contact?.name || d.name })),
+                    Vehicle: vehicles.map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name })),
                 }));
             } catch (error) {
                 console.error('Error fetching dropdown options:', error);
@@ -112,9 +114,13 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         if (typeof e === 'string' && selectedValue !== undefined) {
             name = e;
             value = selectedValue?.value || selectedValue;
-        } else {
+        } else if (e && e.target) {
             name = e.target.name;
             value = e.target.value;
+        } else {
+            // fallback for direct value
+            name = e;
+            value = selectedValue;
         }
         if (value === '+Add new') {
             onAddNewTrigger && onAddNewTrigger(name);
@@ -138,25 +144,53 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validateForm()) return;
 
-        const allShipments = JSON.parse(localStorage.getItem('shipments') ?? '[]');
-        allShipments.push(formData);
-        localStorage.setItem('shipments', JSON.stringify(allShipments));
+        // Transform formData to match Shipment type
+        const shipment = {
+            consigner: formData.Consigner,
+            consignee: formData.Consignee,
+            driver: formData.Driver,
+            vehicle: formData.Vehicle,
+            delivery_location: formData.DeliveryLocation,
+            date_time: new Date(formData.DateTime).toISOString(),
+            goods_details: {
+                description: formData.Description,
+                quantity: Number(formData.Quantity),
+                bill_no: formData.BillNo,
+                value: Number(formData.Value),
+                mode: formData.Mode,
+                actual_dimensions: Number(formData.ActualDimensions),
+                charged_dimensions: Number(formData.ChargedDimensions),
+                unit_of_weight: formData.UnitWeight,
+                actual_weight: Number(formData.ActualWeight),
+                charged_weight: Number(formData.ChargedWeight),
+                special_instructions: formData.Instructions,
+            },
+            service_type: formData.ServiceType,
+            provider: formData.Provider,
+            eway_bill_number: formData.EwayBill,
+            status: 'In-Transit',
+        };
 
-        console.log('Shipment saved:', formData);
-        alert("Shipment booked successfully!");
-
-        // Reset form
-        setFormData({
-            Consigner: '', Consignee: '', DeliveryLocation: '', DateTime: '',
-            Description: '', Quantity: '', BillNo: '', Value: '', Mode: '',
-            ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
-            ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
-            Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
-        });
+        try {
+            const response = await createShipment(shipment);
+            console.log('Shipment saved:', response);
+            alert('Shipment booked successfully!');
+            // Reset form
+            setFormData({
+                Consigner: '', Consignee: '', DeliveryLocation: '', DateTime: '',
+                Description: '', Quantity: '', BillNo: '', Value: '', Mode: '',
+                ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
+                ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
+                Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
+            });
+        } catch (error) {
+            alert('Failed to book shipment. Please try again.');
+            console.error(error);
+        }
     };
 
     const handleAddNew = async (type: keyof ShipmentFormOptions, newEntry: any) => {
@@ -164,18 +198,18 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         if (newEntry?.name?.trim()) {
             try {
                 // After adding, re-fetch the relevant list from backend
-                let updatedList: string[] = [];
+                let updatedList: OptionType[] = [];
                 if (type === 'Consigner') {
-                    updatedList = (await getConsigners()).map((c: any) => c.contact?.name || c.name);
+                    updatedList = (await getConsigners()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
                 } else if (type === 'Consignee') {
-                    updatedList = (await getConsignees()).map((c: any) => c.contact?.name || c.name);
+                    updatedList = (await getConsignees()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
                 } else if (type === 'Driver') {
-                    updatedList = (await getDrivers()).map((d: any) => d.contact?.name || d.name);
+                    updatedList = (await getDrivers()).map((d: any) => ({ value: d._id, label: d.contact?.name || d.name }));
                 } else if (type === 'Vehicle') {
-                    updatedList = (await getVehicles()).map((v: any) => v.vehicle_number || v.name);
+                    updatedList = (await getVehicles()).map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name }));
                 }
                 setOptions((prev) => ({ ...prev, [type]: updatedList }));
-                setFormData((prev) => ({ ...prev, [type]: newEntry.name.trim() }));
+                setFormData((prev) => ({ ...prev, [type]: newEntry.value }));
                 console.log(`Successfully added new ${type}:`, newEntry.name.trim());
                 return true;
             } catch (error) {
@@ -189,8 +223,11 @@ const useShipmentForm = (onAddNewTrigger?: (type: string) => void) => {
         }
     };
 
-    const renderOptions = (items: string[], fieldName: string) => {
-        const baseOptions = items.map((item) => ({ value: item, label: item }));
+    const renderOptions = (items: OptionType[] | string[], fieldName: string) => {
+        // If already in {value, label} format, return as is, else map to that format
+        const baseOptions = typeof items[0] === 'object'
+            ? (items as OptionType[])
+            : (items as string[]).map((item) => ({ value: item, label: item }));
         const noAddNewFields = ['Mode', 'UnitWeight', 'ServiceType', 'Provider'];
 
         return noAddNewFields.includes(fieldName)

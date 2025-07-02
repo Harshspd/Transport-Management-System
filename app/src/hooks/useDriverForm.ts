@@ -37,19 +37,19 @@ const useDriverForm = (type: string, onSave: any) => {
         }
         setLoading(true);
         try {
-            const data: Driver = {
-                contact: {
-                    name: newOptionValue,
-                    contact_person: formData.contactPerson || '',
-                    contact_number: formData.contactNumber || '',
-                },
-                address: formData.address || '',
-                city: formData.city || '',
-                license_number: formData.licenseNumber || '',
-                license_file: formData.licenseFile || '',
-            };
-            console.log('Driver payload:', data);
-            const response = await createDriver(data);
+            // Create FormData to match backend expectation
+            const formDataToSend = new FormData();
+            formDataToSend.append('contact[name]', newOptionValue);
+            formDataToSend.append('contact[contact_number]', formData.contactNumber || '');
+            formDataToSend.append('license_number', formData.licenseNumber || '');
+            formDataToSend.append('address', formData.address || '');
+            formDataToSend.append('city', formData.city || '');
+            if (formData.licenseFile) {
+                formDataToSend.append('licenseFile', formData.licenseFile);
+            }
+
+            console.log('Driver FormData payload:', formDataToSend);
+            const response = await createDriver(formDataToSend);
             if (response && response.contact && response.contact.name) {
                 alert('New Driver saved');
                 onSave('Driver', { name: response.contact.name });

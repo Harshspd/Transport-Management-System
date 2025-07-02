@@ -13,12 +13,12 @@ export const getDrivers = async () => {
     }
 };
 
-export const createDriver = async (data: Driver) => {
+export const createDriver = async (data: FormData) => {
     try {
         const response = await axiosInstance.post(API_ENDPOINT, data);
         return response.data;
     } catch (error) {
-        console.error('Error fetching contact lists:', error);
+        console.error('Error creating driver:', error);
         throw error;
     }
 };

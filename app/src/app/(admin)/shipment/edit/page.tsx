@@ -60,6 +60,14 @@ const ShipmentForm: React.FC = () => {
         }
     };
 
+    type OptionType = { value: string; label: string };
+    // Helper to get label from options by id
+    const getLabelById = (optionsArr: OptionType[], id: string) => {
+        if (!id) return '';
+        const found = optionsArr.find((opt) => opt.value === id);
+        return found ? found.label : id;
+    };
+
     return (
         <ComponentCard title="Shipment Booking">
             <div>
@@ -75,7 +83,7 @@ const ShipmentForm: React.FC = () => {
                                         options={renderOptions(options.Consigner, 'Consigner')}
                                         placeholder="Select an option"
                                         onChange={(value) => handleChange("Consigner", value)}
-                                        defaultValue={formData.Consigner}
+                                        value={formData.Consigner}
                                     />
                                     <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                         <ChevronDownIcon />
@@ -92,7 +100,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.Consignee, 'Consignee')}
                                             placeholder="Select an option"
                                             onChange={(value) => handleChange("Consignee", value)}
-                                            defaultValue={formData.Consignee}
+                                            value={formData.Consignee}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -105,7 +113,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="DeliveryLocation"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.DeliveryLocation}
+                                        value={formData.DeliveryLocation}
                                         type="text"
                                     />
                                     {errors.DeliveryLocation && <p className="text-red-500 text-xs mt-1">{errors.DeliveryLocation}</p>}
@@ -115,7 +123,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="DateTime"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.DateTime}
+                                        value={formData.DateTime}
                                         type="datetime-local"
                                     />
                                     {errors.DateTime && <p className="text-red-500 text-xs mt-1">{errors.DateTime}</p>}
@@ -140,7 +148,7 @@ const ShipmentForm: React.FC = () => {
                                         type="number"
                                         name="Quantity"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.Quantity}
+                                        value={formData.Quantity}
                                     />
                                     {errors.Quantity && <p className="text-red-500 text-xs mt-1">{errors.Quantity}</p>}
                                 </div>
@@ -149,7 +157,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="BillNo"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.BillNo}
+                                        value={formData.BillNo}
                                     />
                                     {errors.BillNo && <p className="text-red-500 text-xs mt-1">{errors.BillNo}</p>}
                                 </div>
@@ -159,7 +167,7 @@ const ShipmentForm: React.FC = () => {
                                         type="number"
                                         name="Value"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.Value}
+                                        value={formData.Value}
                                     />
                                     {errors.Value && <p className="text-red-500 text-xs mt-1">{errors.Value}</p>}
                                 </div>
@@ -170,7 +178,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.Mode, 'Mode')}
                                             placeholder="Select Mode"
                                             onChange={(value) => handleChange("Mode", value)}
-                                            defaultValue={formData.Mode}
+                                            value={formData.Mode}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -183,7 +191,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="ActualDimensions"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.ActualDimensions}
+                                        value={formData.ActualDimensions}
                                     />
                                     {errors.ActualDimensions && <p className="text-red-500 text-xs mt-1">{errors.ActualDimensions}</p>}
                                 </div>
@@ -192,7 +200,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="ChargedDimensions"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.ChargedDimensions}
+                                        value={formData.ChargedDimensions}
                                     />
                                     {errors.ChargedDimensions && <p className="text-red-500 text-xs mt-1">{errors.ChargedDimensions}</p>}
                                 </div>
@@ -203,7 +211,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.UnitWeight, 'UnitWeight')}
                                             placeholder="Select Unit"
                                             onChange={(value) => handleChange("UnitWeight", value)}
-                                            defaultValue={formData.UnitWeight}
+                                            value={formData.UnitWeight}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -216,7 +224,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="ActualWeight"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.ActualWeight}
+                                        value={formData.ActualWeight}
                                     />
                                     {errors.ActualWeight && <p className="text-red-500 text-xs mt-1">{errors.ActualWeight}</p>}
                                 </div>
@@ -225,7 +233,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="ChargedWeight"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.ChargedWeight}
+                                        value={formData.ChargedWeight}
                                     />
                                     {errors.ChargedWeight && <p className="text-red-500 text-xs mt-1">{errors.ChargedWeight}</p>}
                                 </div>
@@ -245,7 +253,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.Driver, 'Driver')}
                                             placeholder="Select Driver"
                                             onChange={(value) => handleChange("Driver", value)}
-                                            defaultValue={formData.Driver}
+                                            value={formData.Driver}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -260,7 +268,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.Vehicle, 'Vehicle')}
                                             placeholder="Select Vehicle"
                                             onChange={(value) => handleChange("Vehicle", value)}
-                                            defaultValue={formData.Vehicle}
+                                            value={formData.Vehicle}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -275,7 +283,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.ServiceType, 'ServiceType')}
                                             placeholder="Select Service Type"
                                             onChange={(value) => handleChange("ServiceType", value)}
-                                            defaultValue={formData.ServiceType}
+                                            value={formData.ServiceType}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -290,7 +298,7 @@ const ShipmentForm: React.FC = () => {
                                             options={renderOptions(options.Provider, 'Provider')}
                                             placeholder="Select Provider Type"
                                             onChange={(value) => handleChange("Provider", value)}
-                                            defaultValue={formData.Provider}
+                                            value={formData.Provider}
                                         />
                                         <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
                                             <ChevronDownIcon />
@@ -303,7 +311,7 @@ const ShipmentForm: React.FC = () => {
                                     <Input
                                         name="EwayBill"
                                         onChange={(e) => handleChange(e)}
-                                        defaultValue={formData.EwayBill}
+                                        value={formData.EwayBill}
                                     />
                                     {errors.EwayBill && <p className="text-red-500 text-xs mt-1">{errors.EwayBill}</p>}
                                 </div>
@@ -329,7 +337,9 @@ const ShipmentForm: React.FC = () => {
                                 const formattedKey = key.replace(/([A-Z])/g, ' $1').trim();
 
                                 let displayValue = value;
-
+                                if (["Consigner", "Consignee", "Driver", "Vehicle"].includes(key)) {
+                                    displayValue = getLabelById(options[key], String(value));
+                                }
                                 if (key === 'DateTime' && value) {
                                     displayValue = formatValue(value);
                                 }
