@@ -18,7 +18,7 @@ export const createConsignee = async (req, res) => {
 
     // 2. Duplicate check on gst
     if (req.body.gstin) {
-      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gst_in });
+      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gstin });
       if (duplicate) {
         return res.status(409).json({
           message: 'Consignee with this GST number already exists',
