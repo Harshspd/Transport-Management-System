@@ -1,10 +1,11 @@
 import express from 'express';
-import { createShipment, getAllShipments, updateShipment, deleteShipment,updateShipmentStatus, } from '../controllers/shipmentController.js';
+import { createShipment, getAllShipments, updateShipment, deleteShipment,updateShipmentStatus,getShipmentById } from '../controllers/shipmentController.js';
 import { authCheck } from '../middlewares/authCheck.js';
 
 const router = express.Router();
 router.post('/', authCheck, createShipment);
 router.get('/', authCheck, getAllShipments);
+router.get('/:id',authCheck, getShipmentById);
 router.put('/:id', authCheck, updateShipment);
 router.delete('/:id', authCheck, deleteShipment);
 router.patch('/:id/status',authCheck, updateShipmentStatus);

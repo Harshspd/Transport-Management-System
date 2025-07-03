@@ -57,6 +57,30 @@ export const getAllDrivers = async (req, res) => {
   }
 };
 
+
+// Get One Driver by ID
+export const getDriverById = async (req, res) => {
+  try {
+    const driver = await Driver.findOne({
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    });
+
+    if (!driver) {
+      return res.status(404).json({ message: 'Driver not found', error: true });
+    }
+
+    res.status(200).json({
+      message: 'Driver fetched successfully',
+      data: driver,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+
 //  Update Driver
 export const updateDriver = async (req, res) => {
   try {

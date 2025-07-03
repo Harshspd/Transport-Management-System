@@ -53,6 +53,30 @@ export const getAllVehicles = async (req, res) => {
   }
 };
 
+
+// Get One Vehicle by ID
+export const getVehicleById = async (req, res) => {
+  try {
+    const vehicle = await Vehicle.findOne({
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    });
+
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found', error: true });
+    }
+
+    res.status(200).json({
+      message: 'Vehicle fetched successfully',
+      data: vehicle,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+
 // UPDATE Vehicle
 export const updateVehicle = async (req, res) => {
   try {

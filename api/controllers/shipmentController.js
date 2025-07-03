@@ -90,6 +90,34 @@ export const getAllShipments = async (req, res) => {
   }
 };
 
+// Get One Shipment by ID
+export const getShipmentById = async (req, res) => {
+  try {
+    const shipment = await Shipment.findOne({
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    })
+      .populate('consigner')
+      .populate('consignee')
+      .populate('driver')
+      .populate('vehicle')
+      .populate('created_by', 'email');
+
+    if (!shipment) {
+      return res.status(404).json({ message: 'Shipment not found', error: true });
+    }
+
+    res.status(200).json({
+      message: 'Shipment fetched successfully',
+      data: shipment,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+
 // Update Shipment
 export const updateShipment = async (req, res) => {
   try {

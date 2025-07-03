@@ -59,6 +59,29 @@ export const getAllConsigners = async (req, res) => {
   }
 };
 
+// Get One Consigner by ID
+export const getConsignerById = async (req, res) => {
+  try {
+    const consigner = await Consigner.findOne({
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    });
+
+    if (!consigner) {
+      return res.status(404).json({ message: 'Consigner not found', error: true });
+    }
+
+    res.status(200).json({
+      message: 'Consigner fetched successfully',
+      data: consigner,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+
 // Update
 export const updateConsigner = async (req, res) => {
   try {
