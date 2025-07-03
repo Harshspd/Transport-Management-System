@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createDriver = async (req, res) => {
   try {
     // 1. Required fields validation
-    const requiredFields = ['name', 'license_number'];
+    const requiredFields = ['name', 'contact.phone'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {

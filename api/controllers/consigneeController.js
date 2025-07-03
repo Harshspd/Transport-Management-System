@@ -18,7 +18,7 @@ export const createConsignee = async (req, res) => {
 
     // 2. Duplicate check on gst
     if (req.body.gstin) {
-      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gst_in });
+      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gstin });
       if (duplicate) {
         return res.status(409).json({
           message: 'Consignee with this GST number already exists',
@@ -51,6 +51,28 @@ export const getAllConsignees = async (req, res) => {
     res.status(200).json({
       message: 'Consignees fetched successfully',
       data: consignees,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+// Get One by ID
+export const getConsigneeById = async (req, res) => {
+  try {
+    const consignee = await Consignee.findOne({
+      _id: req.params.id,
+      organization_id: req.user.account_id,
+    });
+
+    if (!consignee) {
+      return res.status(404).json({ message: 'Consignee not found', error: true });
+    }
+
+    res.status(200).json({
+      message: 'Consignee fetched successfully',
+      data: consignee,
       error: false,
     });
   } catch (error) {

@@ -3,18 +3,18 @@ import useConsigneeForm from '@/hooks/useConsigneeForm';
 
 
 
-const EditConsignee: React.FC<any> = ({ onSave }) => {
+const EditConsignee: React.FC<any> = ({ onSave ,selectedId}) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useConsigneeForm(onSave)
+    } = useConsigneeForm(onSave,selectedId)
     
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
-        { label: 'Address', name: 'address', type: 'textarea' },
+        { label: 'Address', name: 'adddress_line_1', type: 'textarea' },
         { label: 'City', name: 'city', type: 'text' },
         { label: 'State', name: 'state', type: 'text' },
         { label: 'Contact Number', name: 'contactNumber', type: 'text' },
@@ -55,12 +55,12 @@ const EditConsignee: React.FC<any> = ({ onSave }) => {
     const getLeftFields = () => {
         return [
             { label: 'Consignee Name', name: 'name', type: 'text' },
-            ...fields.filter(f => f.name === 'address')
+            ...fields.filter(f => f.name === 'adddress_line_1')
         ];
     };
 
     const getRightFields = () => {
-        return fields.filter(f => f.name !== 'address' && f.name !== 'city' && f.name !== 'state');
+        return fields.filter(f => f.name !== 'adddress_line_1' && f.name !== 'city' && f.name !== 'state');
     };
 
     return (
@@ -83,7 +83,7 @@ const EditConsignee: React.FC<any> = ({ onSave }) => {
                                 </div>
                             );
                         }
-                        if (field.name === 'address') {
+                        if (field.name === 'adddress_line_1') {
                             return (
                                 <div key={idx} className="md:col-span-2">
                                     <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>

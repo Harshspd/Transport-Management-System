@@ -22,3 +22,23 @@ export const createConsignee = async (data: Consignee) => {
         throw error;
     }
 };
+
+export const updateConsignee = async (data: Consignee) => {
+    try {
+        const response = await axiosInstance.put(API_ENDPOINT, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
+
+export const getConsigneeById = async (id: string) => {
+    try {
+        const response = await axiosInstance.get(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
