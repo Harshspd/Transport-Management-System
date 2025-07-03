@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/table";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateVehiclestatus, deleteShipment } from '@/utils/api/shipmentApi';
 import { getVehicles } from "@/utils/api/vehicleApi";
+import { Vehicle } from "@/types/vehicle";
+import { toast } from "react-toastify";
 
 const columns = [
     "ID",
@@ -25,7 +26,7 @@ const columns = [
 ];
 
 export default function VehicleList() {
-    const [Vehicles, setVehicles] = useState<any[]>([]);
+    const [Vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -36,13 +37,8 @@ export default function VehicleList() {
             try {
                 const data = await getVehicles();
                 setVehicles(data);
-                // Build status map for controlled Selects
-                const map: { [id: string]: string } = {};
-                data.forEach((vehicle: any) => {
-                    map[vehicle._id] = vehicle.status;
-                });
             } catch (err: any) {
-                setError("Failed to fetch Vehicles");
+                toast.error(err.message || "An error occurred while fetching vehicles");
             } finally {
                 setLoading(false);
             }
@@ -56,7 +52,7 @@ export default function VehicleList() {
             //await deleteShipment(VehiclesId);
             setVehicles((prev) => prev.filter(s => s._id !== VehiclesId));
         } catch (err) {
-            alert("Failed to delete vehicle");
+            toast.error("Failed to delete vehicle. Please try again." + (err instanceof Error ? err.message : ""));
         }
     };
 
