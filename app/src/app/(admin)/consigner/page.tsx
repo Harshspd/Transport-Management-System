@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/table";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateConsignerstatus, deleteShipment } from '@/utils/api/consignerApi';
 import { getConsigners } from "@/utils/api/consignerApi";
+import { Consigner } from "@/types/consigner";
+import { toast } from "react-toastify";
 
 const columns = [
     "Consigner ID",
@@ -23,7 +24,7 @@ const columns = [
 ];
 
 export default function ConsignerList() {
-    const [Consigners, setConsigners] = useState<any[]>([]);
+    const [Consigners, setConsigners] = useState<Consigner[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -34,13 +35,8 @@ export default function ConsignerList() {
             try {
                 const data = await getConsigners();
                 setConsigners(data);
-                // Build status map for controlled Selects
-                const map: { [id: string]: string } = {};
-                data.forEach((consigner: any) => {
-                    map[consigner._id] = consigner.status;
-                });
-            } catch (err: any) {
-                setError("Failed to fetch Consigners");
+            } catch (err) {
+                toast.error("Failed to fetch Consigners: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
@@ -54,7 +50,7 @@ export default function ConsignerList() {
             //await deleteShipment(consignersId);
             setConsigners((prev) => prev.filter(s => s._id !== consignersId));
         } catch (err) {
-            alert("Failed to delete consigner");
+            toast.error("Failed to delete consigner: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 

@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',  // This is the base URL for your API
-  
-  
+   
 });
 // Add auth token dynamically using interceptor
 axiosInstance.interceptors.request.use((config) => {

@@ -1,7 +1,7 @@
 import axiosInstance from '@/lib/axios'; // Adjust the import path if necessary
 import { Consignee } from '@/types/consignee';
 
-const API_ENDPOINT = 'http://localhost:5000/api/consignees'; // Define the endpoint
+const API_ENDPOINT = '/consignees'; // Define the endpoint
 
 export const getConsignees = async () => {
     try {

@@ -1,7 +1,7 @@
 import axiosInstance from '@/lib/axios';
 import { Shipment } from '@/types/shipment';
 
-const API_ENDPOINT = 'http://localhost:5000/api/shipments';
+const API_ENDPOINT = '/shipments';
 
 export const createShipment = async (data: Shipment) => {
     try {

@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/table";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateDrivertatus, deleteShipment } from '@/utils/api/shipmentApi';
 import { getDrivers } from "@/utils/api/driverApi";
+import { Driver } from "@/types/driver";
+import { toast } from "react-toastify";
 
 const columns = [
     "ID",
@@ -24,7 +25,7 @@ const columns = [
 ];
 
 export default function VehicleList() {
-    const [Driver, setDriver] = useState<any[]>([]);
+    const [Driver, setDriver] = useState<Driver[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -35,13 +36,8 @@ export default function VehicleList() {
             try {
                 const data = await getDrivers();
                 setDriver(data);
-                // Build status map for controlled Selects
-                const map: { [id: string]: string } = {};
-                data.forEach((driver: any) => {
-                    map[driver._id] = driver.status;
-                });
             } catch (err: any) {
-                setError("Failed to fetch Driver");
+                toast.error("Failed to fetch Driver: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
@@ -55,7 +51,7 @@ export default function VehicleList() {
             //await deleteShipment(DriverId);
             setDriver((prev) => prev.filter(s => s._id !== DriverId));
         } catch (err) {
-            alert("Failed to delete driver");
+            toast.error("Failed to delete driver: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 

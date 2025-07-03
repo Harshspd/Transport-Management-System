@@ -1,7 +1,7 @@
 import axiosInstance from '@/lib/axios'; // Adjust the import path if necessary
-import { Vehicle } from '@/types/vehicle';
 
-const API_ENDPOINT = 'http://localhost:5000/api/vehicles'; // Define the endpoint
+
+const API_ENDPOINT = '/vehicles'; // Define the endpoint
 
 export const getVehicles = async () => {
     try {

@@ -1,7 +1,6 @@
 import axiosInstance from '@/lib/axios'; // Adjust the import path if necessary
-import { Driver } from '@/types/driver';
 
-const API_ENDPOINT = 'http://localhost:5000/api/drivers'; // Define the endpoint
+const API_ENDPOINT = '/drivers'; // Define the endpoint
 
 export const getDrivers = async () => {
     try {

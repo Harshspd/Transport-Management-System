@@ -9,11 +9,11 @@ import {
 } from "@/components/ui/table";
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateConsigneestatus, deleteShipment } from '@/utils/api/shipmentApi';
-import { getConsignees } from "@/utils/api/ConsigneeApi";
+import { getConsignees } from "@/utils/api/consigneeApi";
+import { Consignee } from "@/types/consignee";
 
 const columns = [
     "Consignee ID",
@@ -23,7 +23,7 @@ const columns = [
 ];
 
 export default function ConsigneeList() {
-    const [Consignees, setConsignees] = useState<any[]>([]);
+    const [Consignees, setConsignees] = useState<Consignee[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -34,13 +34,12 @@ export default function ConsigneeList() {
             try {
                 const data = await getConsignees();
                 setConsignees(data);
-                // Build status map for controlled Selects
-                const map: { [id: string]: string } = {};
-                data.forEach((consignee: any) => {
-                    map[consignee._id] = consignee.status;
-                });
-            } catch (err: any) {
-                setError("Failed to fetch Consignees");
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError("Failed to fetch Consignees: " + err.message);
+                } else {
+                    setError("Failed to fetch Consignees: Unknown error");
+                }
             } finally {
                 setLoading(false);
             }
@@ -53,8 +52,14 @@ export default function ConsigneeList() {
         try {
             //await deleteShipment(ConsigneesId);
             setConsignees((prev) => prev.filter(s => s._id !== ConsigneesId));
-        } catch (err) {
-            alert("Failed to delete consignee");
+        } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError("Failed to fetch Consignees: " + err.message);
+                } else {
+                    setError("Failed to fetch Consignees: Unknown error");
+                }
+            } finally {
+                setLoading(false);
         }
     };
 

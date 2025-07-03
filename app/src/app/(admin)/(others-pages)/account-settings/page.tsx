@@ -1,12 +1,11 @@
 
 "use client";
-import React, { use, useState } from 'react';
+import React from 'react';
 
 import EditConsignee from '@/components/consignee/EditConsignee';
 import Tabs,{ Tab }  from '@/components/ui/tabs/Tabs';
 
 export default function AccountSettings() {
-    const [activeTab, setActiveTab] = useState('account');
     const tabData: Tab[] = [
         {
             title: "Tab 1",
