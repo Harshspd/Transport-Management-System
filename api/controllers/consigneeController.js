@@ -16,13 +16,15 @@ export const createConsignee = async (req, res) => {
       });
     }
 
-    // 2. Duplicate check on contact number
-    const duplicate = await checkDuplicate(Consignee, { 'contact.phone': req.body.contact.phone });
-    if (duplicate) {
-      return res.status(409).json({
-        message: 'Consignee with this contact number already exists',
-        error: true,
-      });
+    // 2. Duplicate check on gst
+    if (req.body.gstin) {
+      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gst_in });
+      if (duplicate) {
+        return res.status(409).json({
+          message: 'Consignee with this GST number already exists',
+          error: true,
+        });
+      }
     }
 
     // 3. Save new consignee

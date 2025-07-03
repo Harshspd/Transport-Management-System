@@ -16,13 +16,16 @@ export const createConsigner = async (req, res) => {
       });
     }
 
-    // Step 2: Duplicate Check on contact.phone
-    const duplicate = await checkDuplicate(Consigner, { 'contact.phone': req.body.contact.phone });
-    if (duplicate) {
-      return res.status(409).json({
-        message: 'Consigner with this contact number already exists',
-        error: true,
-      });
+    
+    // Step 2: Duplicate Check on gst
+     if (req.body.gstin) {
+      const duplicate = await checkDuplicate(Consigner, { gstin: req.body.gst_in });
+      if (duplicate) {
+        return res.status(409).json({
+          message: 'Consigner with this GST number already exists',
+          error: true,
+        });
+      }
     }
 
     // Step 3: Create
