@@ -1,0 +1,3841 @@
+{
+	"info": {
+		"_postman_id": "c3f87f54-b4cd-4262-b59f-c6ad84dca1b6",
+		"name": "Shipment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45603136",
+		"_collection_link": "https://harsh-159942.postman.co/workspace/Harsh's-Workspace~85e170a7-9581-4d35-8fbf-8b9616e32e3e/collection/45603136-c3f87f54-b4cd-4262-b59f-c6ad84dca1b6?action=share&source=collection_link&creator=45603136"
+	},
+	"item": [
+		{
+			"name": "Consignee",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consignees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "unauthorized login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-faKNiQdFclKuj0LtgNF5C5jTfw4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 06:15:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You need to login first\",\n    \"error\": \"Unauthorized\"\n}"
+						},
+						{
+							"name": "get consignee",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1860"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"744-CjqRYj9RmEcjQbSOVYm7erzC3GI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 06:17:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignees fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"Ritesh jiii\",\n                \"contact_person\": \"SPD harsh\",\n                \"contact_number\": \"1234567812\"\n            },\n            \"_id\": \"6852978e552b463543328707\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-18T10:40:14.569Z\",\n            \"updatedAt\": \"2025-06-20T05:30:58.907Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"contact\": {\n                \"name\": \"Ritesh\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"1234567812\"\n            },\n            \"_id\": \"68550807329b40fd407c274a\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n            \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"Ritesh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918255\"\n            },\n            \"_id\": \"685a465805d56b05a2d2fda4\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:31:52.193Z\",\n            \"updatedAt\": \"2025-06-24T06:31:52.193Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"harshhh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918256\"\n            },\n            \"_id\": \"685a468c05d56b05a2d2fda8\",\n            \"address\": \"gorahkpur ayodhya, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:32:44.104Z\",\n            \"updatedAt\": \"2025-06-24T06:32:44.104Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"harshhh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918256\"\n            },\n            \"_id\": \"685d1f8869d8705a139f1acd\",\n            \"address\": \"gorahkpur ayodhya, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-26T10:23:04.107Z\",\n            \"updatedAt\": \"2025-06-26T10:23:04.107Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Ritesh\",\r\n    \"contact_person\": \"SPD Mehta\",\r\n    \"contact_number\": \"1234567812\"\r\n  },\r\n  \"address\":\"gorahkpur, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consignees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "consignee created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"harshhh jiiiiii\",\r\n    \"contact_person\": \"SPD Mehta\",\r\n    \"contact_number\": \"9415918256\"\r\n  },\r\n  \"address\":\"gorahkpur ayodhya, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "423"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a7-LW9KYVbz1qkeiHz63g4sXYe1UgM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 06:18:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignee created successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"harshhh jiiiiii\",\n            \"contact_person\": \"SPD Mehta\",\n            \"contact_number\": \"9415918256\"\n        },\n        \"address\": \"gorahkpur ayodhya, Sector 62\",\n        \"city\": \"Noida\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e37c59221f85455cd89a2\",\n        \"createdAt\": \"2025-06-27T06:18:45.605Z\",\n        \"updatedAt\": \"2025-06-27T06:18:45.605Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "name field missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \r\n    \"contact_person\": \"SPD Mehta\",\r\n    \"contact_number\": \"9415918256\"\r\n  },\r\n  \"address\":\"gorahkpur ayodhya, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-ny409XDZ8CD0ewVER7D3Yp5s4L8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 06:58:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing required field: contact.name\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Ritesh jiii\",\r\n    \"contact_person\": \"SPD harsh\",\r\n    \"contact_number\": \"1234567812\"\r\n  },\r\n  \"address\":\"gorahkpur, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consignees/684fb8684e695a241718be95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees",
+								"684fb8684e695a241718be95"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update consignee by id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Bunny jiii\",\r\n    \"contact_person\": \"SPD harsh\",\r\n    \"contact_number\": \"1234567812\"\r\n  },\r\n  \"address\":\"gorahkpur, Sector 62\",\r\n  \"city\": \"Noida\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees/6852978e552b463543328707",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees",
+										"6852978e552b463543328707"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "436"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b4-DrPqj2SaiLy8jO4vY3kYXtWSAi4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:01:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignee updated successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"Bunny jiii\",\n            \"contact_person\": \"SPD harsh\",\n            \"contact_number\": \"1234567812\"\n        },\n        \"_id\": \"6852978e552b463543328707\",\n        \"address\": \"gorahkpur, Sector 62\",\n        \"city\": \"Noida\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-18T10:40:14.569Z\",\n        \"updatedAt\": \"2025-06-27T07:01:02.499Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consignees/6841566b35f38fcb6049f958",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consignees",
+								"6841566b35f38fcb6049f958"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "consignee not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consignees/6841566b35f38fcb6049f958",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees",
+										"6841566b35f38fcb6049f958"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-8dpIzfU8YK4iGZ+G7Z115rHAfLA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:02:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignee not found\"\n}"
+						},
+						{
+							"name": "deleted consignee",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consignees/685a465805d56b05a2d2fda4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees",
+										"685a465805d56b05a2d2fda4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-VM50ig1dfAAMyYXq6KTPqTT//bw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:04:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignee deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Consigner",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consigners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get consigner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consigners",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2699"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8b-DK/7GtJr8w4ZM5FAJTt62cBB5SM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 06:56:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigners fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"khushiii Tranporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 9811122233\n            },\n            \"_id\": \"685296041510036dc753e3df\",\n            \"address\": \"Plot 45, Transport Nagar\",\n            \"city\": \"Lucknow\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-18T10:33:40.699Z\",\n            \"updatedAt\": \"2025-06-18T10:33:40.699Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"bunny Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 9811122233\n            },\n            \"_id\": \"6854f2f251e9e04385079001\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T05:34:42.494Z\",\n            \"updatedAt\": \"2025-06-20T05:34:42.494Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"bunny SPD jii transporters\"\n            },\n            \"_id\": \"68550749329b40fd407c2748\",\n            \"address\": \"Plot 45, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n            \"updatedAt\": \"2025-06-23T12:24:54.333Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"contact\": {\n                \"name\": \"10x  Transporters\",\n                \"contact_person\": \"Harsh\"\n            },\n            \"_id\": \"685946149e320094e4f8a07a\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:18:28.540Z\",\n            \"updatedAt\": \"2025-06-23T12:18:28.540Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"10x  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1212121212\n            },\n            \"_id\": \"685a48b6bc73af5bf6ec72dd\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:41:58.927Z\",\n            \"updatedAt\": \"2025-06-24T06:41:58.927Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"spd harsh  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1212121211\n            },\n            \"_id\": \"685a4942bc73af5bf6ec72e1\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:44:18.235Z\",\n            \"updatedAt\": \"2025-06-24T06:44:18.235Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"spd harsh bunny  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1112121211\n            },\n            \"_id\": \"685a4997bc73af5bf6ec72e6\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:45:43.892Z\",\n            \"updatedAt\": \"2025-06-24T06:45:43.892Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Global Transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\": \"9811122233\"\r\n  },\r\n  \"address\": \"Plot 45, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H1Z2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consigners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "gst exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"spd harsh bunny  Transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\" :\"1112121211\"\r\n   \r\n  },\r\n  \"address\": \"Plot 47, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H1Z2\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consigners",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-n32Ee60cA23NFgAyrVYDa5ygQho\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Jun 2025 10:21:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner with this GST number already exists\",\n    \"error\": true\n}"
+						},
+						{
+							"name": "consigner created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"spd harsh bunny jii Transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\" :\"1112121211\"\r\n   \r\n  },\r\n  \"address\": \"Plot 47, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H2q3\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consigners",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c9-xxSXtObOkbrw4Pv33hVBLPDvTl8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:09:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner created successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"spd harsh bunny jii Transporters\",\n            \"contact_person\": \"Harsh\",\n            \"contact_number\": 1112121211\n        },\n        \"address\": \"Plot 47, Transport Nagar\",\n        \"city\": \"Delhi\",\n        \"gst_in\": \"07GLOBT4567H2q3\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e438eb74e6d0d5fc27792\",\n        \"createdAt\": \"2025-06-27T07:09:02.102Z\",\n        \"updatedAt\": \"2025-06-27T07:09:02.102Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "name field missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\" :\"1112121211\"\r\n   \r\n  },\r\n  \"address\": \"Plot 47, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H2q3\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consigners",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-ny409XDZ8CD0ewVER7D3Yp5s4L8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:10:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing required field: contact.name\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"Harsh SPD transporters\",\r\n    \"contact_person\": \"Harsh\",\r\n    \"contact_number\": \"1234567890\"\r\n  },\r\n  \"address\": \"Plot 45, Transport Nagar\",\r\n  \"city\": \"Delhi\",\r\n  \"gst_in\": \"07GLOBT4567H1Z2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/consigners/684fb4f44e695a241718be90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners",
+								"684fb4f44e695a241718be90"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "updated succesfully",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"bunny SPD jii hunny transporters\"\r\n   \r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consigners/68550749329b40fd407c2748",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners",
+										"68550749329b40fd407c2748"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "430"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ae-4AXB/sJuXbWpwRsEgYkL22axZUs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:11:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner updated successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"bunny SPD jii hunny transporters\"\n        },\n        \"_id\": \"68550749329b40fd407c2748\",\n        \"address\": \"Plot 45, Transport Nagar\",\n        \"city\": \"Delhi\",\n        \"gst_in\": \"07GLOBT4567H1Z2\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n        \"updatedAt\": \"2025-06-27T07:11:57.128Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\"\n    }\n}"
+						},
+						{
+							"name": "consigner not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"contact\": {\r\n    \"name\": \"bunny SPD jii hunny transporters\"\r\n   \r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consigners/68550749329b40fd407c2750",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners",
+										"68550749329b40fd407c2750"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-eF7zfM2PT4uSQW+E5pO4Il9ZPq4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:13:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/consigners/6841342357961ce281b82422",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"consigners",
+								"6841342357961ce281b82422"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "consigner not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consigners/6841342357961ce281b82422",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners",
+										"6841342357961ce281b82422"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-eF7zfM2PT4uSQW+E5pO4Il9ZPq4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:15:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner not found\"\n}"
+						},
+						{
+							"name": "deleted consigner",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consigners/685946149e320094e4f8a07a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners",
+										"685946149e320094e4f8a07a"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-6cEf4lJw316ZxlPBDh+h22mm3PI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:16:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get driver",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "417"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a1-HiQWBMhkl98s5RsWGwGIYhMuzJE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:17:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Drivers fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"Harsh10x\",\n                \"contact_number\": 9415917682\n            },\n            \"_id\": \"685a4df9a658f2a96127dd36\",\n            \"license_number\": \"DL042019123890\",\n            \"address\": \"Ayodhya\",\n            \"city\": \"kanpur\",\n            \"license_file\": \"\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:04:25.937Z\",\n            \"updatedAt\": \"2025-06-24T07:04:25.937Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contact[name]",
+									"value": "Harsh10x",
+									"type": "text"
+								},
+								{
+									"key": "license_number",
+									"value": "DL042019123456",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Ayodhya",
+									"type": "text"
+								},
+								{
+									"key": "contact[contact_number]",
+									"value": "9415917682",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "kanpur",
+									"type": "text"
+								},
+								{
+									"key": "licenseFile",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "licence duplicacy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "contact[name]",
+											"value": "Harsh10x",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL042019123890",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Ayodhya",
+											"type": "text"
+										},
+										{
+											"key": "contact[contact_number]",
+											"value": "9415917682",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-VYKMwlGjV8Fi3twntQc5oFz4s2Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:20:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver with this license number already exists\",\n    \"error\": true\n}"
+						},
+						{
+							"name": "driver created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "contact[name]",
+											"value": "Harsh10x",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL042019123870",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Ayodhya",
+											"type": "text"
+										},
+										{
+											"key": "contact[contact_number]",
+											"value": "9415917682",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "414"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19e-N7WsiXlPuzEO33zw29HBgJhrhRk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:23:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver created successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"Harsh10x\",\n            \"contact_number\": 9415917682\n        },\n        \"license_number\": \"DL042019123870\",\n        \"address\": \"Ayodhya\",\n        \"city\": \"kanpur\",\n        \"license_file\": \"\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e46ecb74e6d0d5fc2779c\",\n        \"createdAt\": \"2025-06-27T07:23:24.069Z\",\n        \"updatedAt\": \"2025-06-27T07:23:24.069Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contact[name]",
+									"value": "SPDHARSH",
+									"type": "text"
+								},
+								{
+									"key": "license_number",
+									"value": "DL042019123456",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Transport nagar",
+									"type": "text"
+								},
+								{
+									"key": "contact[contact_number]",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Kanpur",
+									"type": "text"
+								},
+								{
+									"key": "licenseFile",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/drivers/684fbc9e4e695a241718be9a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers",
+								"684fbc9e4e695a241718be9a"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "driver not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "contact[name]",
+											"value": "SPDHARSHji",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL042019123456",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Transport nagar",
+											"type": "text"
+										},
+										{
+											"key": "contact[contact_number]",
+											"value": "1234567890",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers/684fbc9e4e695a241718be9a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers",
+										"684fbc9e4e695a241718be9a"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-4Z7n9qcLW33wCpkrpjAXqq2W7v0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:29:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver not found\"\n}"
+						},
+						{
+							"name": "driver updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "contact[name]",
+											"value": "SPDHARSHji",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL042019123456",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Transport nagar",
+											"type": "text"
+										},
+										{
+											"key": "contact[contact_number]",
+											"value": "1234567890",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers/685a4df9a658f2a96127dd36",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers",
+										"685a4df9a658f2a96127dd36"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "450"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c2-aZFZXWQiXf6PJSnEGoeKS1/Q+LA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:30:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver updated successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"SPDHARSHji\",\n            \"contact_number\": 1234567890\n        },\n        \"_id\": \"685a4df9a658f2a96127dd36\",\n        \"license_number\": \"DL042019123456\",\n        \"address\": \"Transport nagar\",\n        \"city\": \"Kanpur\",\n        \"license_file\": \"\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-24T07:04:25.937Z\",\n        \"updatedAt\": \"2025-06-27T07:30:59.931Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/drivers/684156e6f399afadb850efe1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"drivers",
+								"684156e6f399afadb850efe1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "driver not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/drivers/684156e6f399afadb850efe1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers",
+										"684156e6f399afadb850efe1"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-4Z7n9qcLW33wCpkrpjAXqq2W7v0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:37:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver not found\"\n}"
+						},
+						{
+							"name": "driver deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/drivers/685e49d8b74e6d0d5fc277a8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers",
+										"685e49d8b74e6d0d5fc277a8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-QolouS0fTh13EfoTvzYAoxkPNE0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 07:43:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get vehicles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19a-Vq8dWbPt4z7aZi7EZpVbpYkGiFo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:26:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicles fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"685a50aa0db04b40bee10ae7\",\n            \"vehicle_number\": \"MH12AB8900\",\n            \"vehicle_type\": \"Truck\",\n            \"capacity_weight\": 12000,\n            \"capacity_volume\": 30,\n            \"rc_number\": \"RC1234561234\",\n            \"rc_file\": \"\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:15:54.223Z\",\n            \"updatedAt\": \"2025-06-24T07:15:54.223Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "post request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicle_number",
+									"value": "MH12AB1234",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_type",
+									"value": "Truck",
+									"type": "text"
+								},
+								{
+									"key": "capacity_weight",
+									"value": "12000",
+									"type": "text"
+								},
+								{
+									"key": "capacity_volume",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "rc_number",
+									"value": "RC123456789",
+									"type": "text"
+								},
+								{
+									"key": "rc_file",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "duplicate vehicle number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "MH12AB8900",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "12000",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "30",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "RC1234561234",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-FqMD7mTRAsXvxcH9H8uDFQHQ2mQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:31:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle with same vehicle number already exist\",\n    \"error\": true\n}"
+						},
+						{
+							"name": "vehicle created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "MH12AB8000",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "12000",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "30",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "RC1234561234",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "407"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"197-FQ+dq6iw1QmCzcDSQy1HM8Lp/so\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:33:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle created successfully\",\n    \"data\": {\n        \"vehicle_number\": \"MH12AB8000\",\n        \"vehicle_type\": \"Truck\",\n        \"capacity_weight\": 12000,\n        \"capacity_volume\": 30,\n        \"rc_number\": \"RC1234561234\",\n        \"rc_file\": \"\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e5775fb2bc81816bfe140\",\n        \"createdAt\": \"2025-06-27T08:33:57.584Z\",\n        \"updatedAt\": \"2025-06-27T08:33:57.584Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "vehicle number is missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "12000",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "30",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "RC1234561234",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-ODiQ4+wm14VtSOcOhXoMZszyrKA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:42:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing required field(s): vehicle_number\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "put request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicle_number",
+									"value": "MH12AB1234",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_type",
+									"value": "Truck",
+									"type": "text"
+								},
+								{
+									"key": "capacity_weight",
+									"value": "15000",
+									"type": "text"
+								},
+								{
+									"key": "capacity_volume",
+									"value": "40",
+									"type": "text"
+								},
+								{
+									"key": "rc_number",
+									"value": "RC123456789",
+									"type": "text"
+								},
+								{
+									"key": "rc_file",
+									"type": "file",
+									"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles/684fc700c8dcbf8d9e8051e2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles",
+								"684fc700c8dcbf8d9e8051e2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "vehicle not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "MH12AB0000",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "15000",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "40",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "RC123456789",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles/684fc700c8dcbf8d9e8051e2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles",
+										"684fc700c8dcbf8d9e8051e2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-H9IBKxSifN3bvmTAmmW2AoYaTjk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:43:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle not found\"\n}"
+						},
+						{
+							"name": "vehicle updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "MH12AB55555",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles/685e5775fb2bc81816bfe140",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles",
+										"685e5775fb2bc81816bfe140"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "423"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a7-Qz4IGP1OdXPCCurqoZa05SaydGI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:47:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle updated successfully\",\n    \"data\": {\n        \"_id\": \"685e5775fb2bc81816bfe140\",\n        \"vehicle_number\": \"MH12AB55555\",\n        \"vehicle_type\": \"Truck\",\n        \"capacity_weight\": null,\n        \"capacity_volume\": null,\n        \"rc_number\": \"\",\n        \"rc_file\": \"\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-27T08:33:57.584Z\",\n        \"updatedAt\": \"2025-06-27T08:47:39.455Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/vehicles/68415823a070a6a90dba881f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicles",
+								"68415823a070a6a90dba881f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "vehicle not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles/68415823a070a6a90dba881f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles",
+										"68415823a070a6a90dba881f"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-H9IBKxSifN3bvmTAmmW2AoYaTjk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:50:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle not found\"\n}"
+						},
+						{
+							"name": "deleted vehicle",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles/685e5a28ef3ed8cfcfa6abf8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles",
+										"685e5a28ef3ed8cfcfa6abf8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-EnYuQ8eDElQywKVDaBqGD0lmla0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:51:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "shipment booking",
+			"item": [
+				{
+					"name": "get request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get all shipments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "10416"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28b0-iYH871fDeFYyd36V9/UcUCgyuF0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:53:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"goods_details\": {\n                \"description\": \"SPD-HARSH\",\n                \"quantity\": 100,\n                \"bill_no\": \"SHP-009\",\n                \"value\": 111111,\n                \"mode\": \"Air\",\n                \"actual_dimensions\": 200,\n                \"charged_dimensions\": 220,\n                \"unit_of_weight\": \"kg\",\n                \"actual_weight\": 1200,\n                \"charged_weight\": 1250,\n                \"special_instructions\": \"Temperature sensitive cargo\"\n            },\n            \"_id\": \"685117d5c5e338696ed364ee\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"Global Transporters\",\n                    \"contact_person\": \"Harsh\",\n                    \"contact_number\": 9811122233\n                },\n                \"_id\": \"684928914309f49e25530a92\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"createdAt\": \"2025-06-11T06:56:17.613Z\",\n                \"updatedAt\": \"2025-06-11T06:56:17.613Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Reliable Distributors\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"9876543201\"\n                },\n                \"_id\": \"684928e94309f49e25530a94\",\n                \"address\": \"Warehouse 12, Sector 62\",\n                \"city\": \"Noida\",\n                \"createdAt\": \"2025-06-11T06:57:45.052Z\",\n                \"updatedAt\": \"2025-06-11T06:57:45.052Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"lucknow\",\n            \"date_time\": \"2025-06-10T12:00:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"name\": \"Suresh Yadav\",\n                    \"contact_number\": 9911223344\n                },\n                \"_id\": \"6849297b4309f49e25530a98\",\n                \"license_number\": \"UP16DL123456\",\n                \"address\": \"House No 45, Old Town\",\n                \"city\": \"Gurgaon\",\n                \"license_file\": \"uploads/licenses/suresh_license.pdf\",\n                \"createdAt\": \"2025-06-11T07:00:11.251Z\",\n                \"updatedAt\": \"2025-06-11T07:00:11.251Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"684929594309f49e25530a96\",\n                \"vehicle_number\": \"HR38AB9988\",\n                \"vehicle_type\": \"Container\",\n                \"capacity_weight\": 15000,\n                \"capacity_volume\": 800,\n                \"rc_number\": \"RC998877\",\n                \"rc_file\": \"uploads/rc/rc9988.pdf\",\n                \"createdAt\": \"2025-06-11T06:59:37.780Z\",\n                \"updatedAt\": \"2025-06-11T06:59:37.780Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Express Delivery\",\n            \"provider\": \"HealthGo\",\n            \"eway_bill_number\": \"EW654321098\",\n            \"status\": \"In-Transit\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-17T07:23:01.866Z\",\n            \"updatedAt\": \"2025-06-17T07:23:01.866Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"685509682702594923940462\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"driver\": null,\n            \"vehicle\": null,\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:10:32.455Z\",\n            \"updatedAt\": \"2025-06-20T07:10:32.455Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858e8a7e1d61183c7167f81\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"driver\": null,\n            \"vehicle\": null,\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T05:39:51.032Z\",\n            \"updatedAt\": \"2025-06-23T05:39:51.032Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858ed8e5fa002ca0bf50fd4\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:00:46.454Z\",\n            \"updatedAt\": \"2025-06-25T11:07:59.796Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"_id\": \"6858edc15fa002ca0bf50fd6\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:01:37.987Z\",\n            \"updatedAt\": \"2025-06-23T06:01:37.987Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858f18db3014e09b829dc58\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:17:49.871Z\",\n            \"updatedAt\": \"2025-06-23T06:17:49.871Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"685945469e320094e4f8a071\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"In-Transit\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:15:02.090Z\",\n            \"updatedAt\": \"2025-06-25T11:05:32.020Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"_id\": \"6859457f9e320094e4f8a073\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:15:59.221Z\",\n            \"updatedAt\": \"2025-06-23T12:15:59.221Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"685a51360db04b40bee10ae9\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:18:14.070Z\",\n            \"updatedAt\": \"2025-06-25T11:03:36.319Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "open shipment",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments?status=Open",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "Open"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5280"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14a0-Hi8r1U300JLXHajQjazJ5UG03bA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:55:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"685509682702594923940462\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"driver\": null,\n            \"vehicle\": null,\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:10:32.455Z\",\n            \"updatedAt\": \"2025-06-20T07:10:32.455Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858e8a7e1d61183c7167f81\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"driver\": null,\n            \"vehicle\": null,\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T05:39:51.032Z\",\n            \"updatedAt\": \"2025-06-23T05:39:51.032Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858edc15fa002ca0bf50fd6\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:01:37.987Z\",\n            \"updatedAt\": \"2025-06-23T06:01:37.987Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6858f18db3014e09b829dc58\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:17:49.871Z\",\n            \"updatedAt\": \"2025-06-23T06:17:49.871Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6859457f9e320094e4f8a073\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Open\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:15:59.221Z\",\n            \"updatedAt\": \"2025-06-23T12:15:59.221Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "In-Transit shipments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments?status=In-Transit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "In-Transit"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3051"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"beb-Hf3JU4fgLo2V70nv6ZI4M1vMsMM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:56:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"goods_details\": {\n                \"description\": \"SPD-HARSH\",\n                \"quantity\": 100,\n                \"bill_no\": \"SHP-009\",\n                \"value\": 111111,\n                \"mode\": \"Air\",\n                \"actual_dimensions\": 200,\n                \"charged_dimensions\": 220,\n                \"unit_of_weight\": \"kg\",\n                \"actual_weight\": 1200,\n                \"charged_weight\": 1250,\n                \"special_instructions\": \"Temperature sensitive cargo\"\n            },\n            \"_id\": \"685117d5c5e338696ed364ee\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"Global Transporters\",\n                    \"contact_person\": \"Harsh\",\n                    \"contact_number\": 9811122233\n                },\n                \"_id\": \"684928914309f49e25530a92\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"createdAt\": \"2025-06-11T06:56:17.613Z\",\n                \"updatedAt\": \"2025-06-11T06:56:17.613Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Reliable Distributors\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"9876543201\"\n                },\n                \"_id\": \"684928e94309f49e25530a94\",\n                \"address\": \"Warehouse 12, Sector 62\",\n                \"city\": \"Noida\",\n                \"createdAt\": \"2025-06-11T06:57:45.052Z\",\n                \"updatedAt\": \"2025-06-11T06:57:45.052Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"lucknow\",\n            \"date_time\": \"2025-06-10T12:00:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"name\": \"Suresh Yadav\",\n                    \"contact_number\": 9911223344\n                },\n                \"_id\": \"6849297b4309f49e25530a98\",\n                \"license_number\": \"UP16DL123456\",\n                \"address\": \"House No 45, Old Town\",\n                \"city\": \"Gurgaon\",\n                \"license_file\": \"uploads/licenses/suresh_license.pdf\",\n                \"createdAt\": \"2025-06-11T07:00:11.251Z\",\n                \"updatedAt\": \"2025-06-11T07:00:11.251Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"684929594309f49e25530a96\",\n                \"vehicle_number\": \"HR38AB9988\",\n                \"vehicle_type\": \"Container\",\n                \"capacity_weight\": 15000,\n                \"capacity_volume\": 800,\n                \"rc_number\": \"RC998877\",\n                \"rc_file\": \"uploads/rc/rc9988.pdf\",\n                \"createdAt\": \"2025-06-11T06:59:37.780Z\",\n                \"updatedAt\": \"2025-06-11T06:59:37.780Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Express Delivery\",\n            \"provider\": \"HealthGo\",\n            \"eway_bill_number\": \"EW654321098\",\n            \"status\": \"In-Transit\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-17T07:23:01.866Z\",\n            \"updatedAt\": \"2025-06-17T07:23:01.866Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"685945469e320094e4f8a071\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"In-Transit\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:15:02.090Z\",\n            \"updatedAt\": \"2025-06-25T11:05:32.020Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "Delivered shipments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments?status=Delivered",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "Delivered"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2219"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8ab-7MHqtCLuZ7K7qPxKjNgMsI7E8Nw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 08:58:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"6858ed8e5fa002ca0bf50fd4\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:00:46.454Z\",\n            \"updatedAt\": \"2025-06-25T11:07:59.796Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"_id\": \"685a51360db04b40bee10ae9\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:18:14.070Z\",\n            \"updatedAt\": \"2025-06-25T11:03:36.319Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        }\n    ],\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "post request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"consigner\": \"684928914309f49e25530a92\",  \r\n  \"consignee\": \"684928e94309f49e25530a94\",  \r\n  \"driver\": \"6849297b4309f49e25530a98\",    \r\n  \"vehicle\": \"684929594309f49e25530a96\",   \r\n  \"delivery_location\": \"NOIDA\",\r\n  \"date_time\": \"2025-06-10T12:00:00.000Z\",\r\n  \"goods_details\": {\r\n    \"description\": \"SPD-HARSH\",\r\n    \"quantity\": 100,\r\n    \"bill_no\": \"SHP-009\",\r\n    \"value\": 85000,\r\n    \"mode\": \"Air\",\r\n    \"actual_dimensions\": 200,\r\n    \"charged_dimensions\": 220,\r\n    \"unit_of_weight\": \"kg\",\r\n    \"actual_weight\": 1200,\r\n    \"charged_weight\": 1250,\r\n    \"special_instructions\": \"Temperature sensitive cargo\"\r\n  },\r\n  \"service_type\": \"Express Delivery\",\r\n  \"provider\": \"HealthGo\",\r\n  \"eway_bill_number\": \"EW654321098\",\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "shipment created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"consigner\": \"68550749329b40fd407c2748\",\r\n    \"consignee\": \"68550807329b40fd407c274a\",\r\n   \"delivery_location\" : \"kanpur\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "393"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"189-ajuDhb0I1/7uYAb6MvhmUTHwNZE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:00:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment created successfully\",\n    \"data\": {\n        \"consigner\": \"68550749329b40fd407c2748\",\n        \"consignee\": \"68550807329b40fd407c274a\",\n        \"delivery_location\": \"kanpur\",\n        \"status\": \"Open\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e5dc7ef3ed8cfcfa6ac17\",\n        \"createdAt\": \"2025-06-27T09:00:55.550Z\",\n        \"updatedAt\": \"2025-06-27T09:00:55.550Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "consigner is missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n    \"consignee\": \"68550807329b40fd407c274a\",\r\n   \"delivery_location\" : \"kanpur\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-+uWia18XkRpG9ITb9+Oj5hqP7KY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:02:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing required field: consigner\",\n    \"error\": true\n}"
+						},
+						{
+							"name": "consignee is missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"consigner\": \"68550749329b40fd407c2748\",\r\n    \r\n   \"delivery_location\" : \"kanpur\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-QnoNKOEjgIaeJXTXjhuIcy8lkr4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:03:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing required field: consignee\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "put request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"consigner\": \"684928914309f49e25530a92\",  \r\n  \"consignee\": \"684928e94309f49e25530a94\",  \r\n  \"driver\": \"6849297b4309f49e25530a98\",    \r\n  \"vehicle\": \"684929594309f49e25530a96\",   \r\n  \"delivery_location\": \"NOIDA\",\r\n  \"date_time\": \"2025-06-10T12:00:00.000Z\",\r\n  \"goods_details\": {\r\n    \"description\": \"SPD-HARSH\",\r\n    \"quantity\": 100,\r\n    \"bill_no\": \"SHP-009\",\r\n    \"value\": 100000,\r\n    \"mode\": \"Land\",\r\n    \"actual_dimensions\": 200,\r\n    \"charged_dimensions\": 220,\r\n    \"unit_of_weight\": \"kg\",\r\n    \"actual_weight\": 1000,\r\n    \"charged_weight\": 1250,\r\n    \"special_instructions\": \"Temperature sensitive cargo\"\r\n  },\r\n  \"service_type\": \"Express Delivery\",\r\n  \"provider\": \"HealthGo\",\r\n  \"eway_bill_number\": \"EW654321098\",\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/684fec7ac8dcbf8d9e8051f0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"684fec7ac8dcbf8d9e8051f0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "shipment not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"consigner\": \"684928914309f49e25530a92\",  \r\n  \"consignee\": \"684928e94309f49e25530a94\",  \r\n  \"driver\": \"6849297b4309f49e25530a98\",    \r\n  \"vehicle\": \"684929594309f49e25530a96\",   \r\n  \"delivery_location\": \"NOIDA\",\r\n  \"date_time\": \"2025-06-10T12:00:00.000Z\",\r\n  \"goods_details\": {\r\n    \"description\": \"SPD-HARSH\",\r\n    \"quantity\": 500,\r\n    \"bill_no\": \"SHP-000\",\r\n    \"value\": 100000,\r\n    \"mode\": \"Land\",\r\n    \"actual_dimensions\": 200,\r\n    \"charged_dimensions\": 220,\r\n    \"unit_of_weight\": \"kg\",\r\n    \"actual_weight\": 1000,\r\n    \"charged_weight\": 1250,\r\n    \"special_instructions\": \"Temperature sensitive cargo\"\r\n  },\r\n  \"service_type\": \"Express Delivery\",\r\n  \"provider\": \"spdgo\",\r\n  \"eway_bill_number\": \"EW654321098\",\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/684fec7ac8dcbf8d9e8051f0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"684fec7ac8dcbf8d9e8051f0"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-vDi0MhQhL+JLhS5KtNBwkLgyaIA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:08:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment not found\"\n}"
+						},
+						{
+							"name": "shipment updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n  \"eway_bill_number\": \"EW654321000\",\r\n  \"status\": \"Delivered\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/685a51360db04b40bee10ae9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"685a51360db04b40bee10ae9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "857"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"359-hbSS5G3t13ju0q1a5yTVaz1L0aQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:16:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment updated successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"SPD-HARSH\",\n            \"quantity\": 500,\n            \"bill_no\": \"SHP-000\",\n            \"value\": 100000,\n            \"mode\": \"Land\",\n            \"actual_dimensions\": 200,\n            \"charged_dimensions\": 220,\n            \"unit_of_weight\": \"kg\",\n            \"actual_weight\": 1000,\n            \"charged_weight\": 1250,\n            \"special_instructions\": \"Temperature sensitive cargo\"\n        },\n        \"_id\": \"685a51360db04b40bee10ae9\",\n        \"consigner\": \"684928914309f49e25530a92\",\n        \"consignee\": \"684928e94309f49e25530a94\",\n        \"delivery_location\": \"NOIDA\",\n        \"status\": \"Delivered\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-24T07:18:14.070Z\",\n        \"updatedAt\": \"2025-06-27T09:16:24.074Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\",\n        \"driver\": \"6849297b4309f49e25530a98\",\n        \"eway_bill_number\": \"EW654321000\",\n        \"provider\": \"spdgo\",\n        \"service_type\": \"Express Delivery\",\n        \"vehicle\": \"684929594309f49e25530a96\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDA2NzgyMH0.W6eANIGoS-VCupueuS-hJffN6KwbE0cUK6ZvtPYvook",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/68416cd982b3b1950e45002f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"68416cd982b3b1950e45002f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "shipment not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/68416cd982b3b1950e45002f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"68416cd982b3b1950e45002f"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-vDi0MhQhL+JLhS5KtNBwkLgyaIA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:17:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "get token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDc0NTczMywiZXhwIjoxNzUwODMyMTMzfQ.3eaLuYm2v9tpqvzZze7YK9qgxeIaA-JA2JCK6spmYCc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123456@hi\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123456@hi\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "799"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31f-vm3iiWAqDBZpb2jGJhl7Yh++VXM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Jun 2025 06:20:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"_id\": \"684959a8c83df52490b92c44\",\n        \"email\": \"spd1234@gmail.com\",\n        \"account_id\": \"684959a8c83df52490b92c42\",\n        \"__v\": 0,\n        \"no_of_attempts\": 0,\n        \"last_login_attempt_time\": \"2025-06-25T11:00:40.850Z\"\n    },\n    \"account\": {\n        \"_id\": \"684959a8c83df52490b92c42\",\n        \"account_email\": \"spd1234@gmail.com\",\n        \"address\": {\n            \"_id\": \"684959a8c83df52490b92c40\",\n            \"country_id\": null,\n            \"__v\": 0\n        },\n        \"fiscal_year\": {\n            \"start_month\": 1,\n            \"end_month\": 12,\n            \"start_day\": 1,\n            \"end_day\": 31\n        },\n        \"invoiceSettings\": {\n            \"prefix\": \"INV-\"\n        },\n        \"__v\": 0\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDkxODgzNSwiZXhwIjoxNzUxMDA1MjM1fQ.wLVaBjy0fbSBWSZOSrDxJ6J5up0DESXEJpEO9rM78gI\",\n    \"message\": \"Logged in successfully\",\n    \"error\": false,\n    \"success\": true\n}"
+						},
+						{
+							"name": "invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"spd1234@gmail.com\",\r\n  \"password\": \"Pac@123hi\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "99"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"63-kULnsPBw6M7TAEDCvhnNAFgJiBo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Jun 2025 06:21:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password not matched.Attempts left:4\",\n    \"error\": \"Invalid Credentials:Incorrect Password\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "shipment status",
+			"item": [
+				{
+					"name": "update status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"Delivered\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/shipments/68492a834309f49e25530a9a/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"shipments",
+								"68492a834309f49e25530a9a",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "status updated",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"In-Transit\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/6858ed8e5fa002ca0bf50fd4/status",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"6858ed8e5fa002ca0bf50fd4",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "423"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a7-YpR/6PO0eF2AEsW/bMR1IaSKLNk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Jun 2025 09:19:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment status updated\",\n    \"shipment\": {\n        \"_id\": \"6858ed8e5fa002ca0bf50fd4\",\n        \"consigner\": \"68550749329b40fd407c2748\",\n        \"consignee\": \"68550807329b40fd407c274a\",\n        \"delivery_location\": \"kanpur\",\n        \"status\": \"In-Transit\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-23T06:00:46.454Z\",\n        \"updatedAt\": \"2025-06-27T09:19:43.818Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "userunderorganisation",
+			"item": [
+				{
+					"name": "adding new user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQ5NTlhOGM4M2RmNTI0OTBiOTJjNDQiLCJlbWFpbCI6InNwZDEyMzRAZ21haWwuY29tIiwiYWNjb3VudF9pZCI6IjY4NDk1OWE4YzgzZGY1MjQ5MGI5MmM0MiIsImlhdCI6MTc1MDE1NTkxNX0.dktY3JB7MmyvBtuL6FaYveWoSRtqN1-cKQuVRrb1mFs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"spdharsh1234@gmail.com\",\r\n  \"password\": \"UserPass@123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register-under-org",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register-under-org"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

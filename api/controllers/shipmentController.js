@@ -58,7 +58,22 @@ export const createShipment = async (req, res) => {
 // Get all Shipments under user's organization
 export const getAllShipments = async (req, res) => {
   try {
-    const shipments = await Shipment.find({ organization_id: req.user.account_id })
+    const filter = { organization_id: req.user.account_id };
+
+    // Add status filter if query param is present
+    if (req.query.status) {
+      const allowedStatuses = ['Open', 'In-Transit', 'Delivered'];
+      if (!allowedStatuses.includes(req.query.status)) {
+        return res.status(400).json({
+          message: `Invalid status. Allowed: ${allowedStatuses.join(', ')}`,
+          error: true,
+        });
+      }
+      filter.status = req.query.status;
+    }
+
+    // Query with filter
+    const shipments = await Shipment.find(filter)
       .populate('consigner')
       .populate('consignee')
       .populate('driver')
@@ -75,7 +90,7 @@ export const getAllShipments = async (req, res) => {
   }
 };
 
-// Update Shipment (and track updated_by)
+// Update Shipment
 export const updateShipment = async (req, res) => {
   try {
     const shipment = await Shipment.findOneAndUpdate(
