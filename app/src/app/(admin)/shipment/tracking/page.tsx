@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Table,
     TableBody,
@@ -12,58 +12,12 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-
-const shipmentData = [
-    {
-        bilityNo: "SHP-001",
-        bilityDate: "2025-05-08",
-        party: "EternoCare",
-        town: "Chandigarh",
-        weight: "1550",
-        cases: 245,
-        agent: "Chaudhary",
-        deliveryDate: "2025-05-08",
-        vehicleNumber: "KA-01-AB-1234",
-        driver: {
-            name: "Ravi Kumar",
-            phone: "9876543210",
-        },
-    },
-    {
-        bilityNo: "SHP-002",
-        bilityDate: "2025-05-08",
-        party: "EternoCare",
-        town: "Chandigarh",
-        weight: "1550",
-        cases: 245,
-        agent: "Chaudhary",
-        deliveryDate: "2025-05-08",
-        vehicleNumber: "KA-01-AB-1234",
-        driver: {
-            name: "Ravi Kumar",
-            phone: "9876543210",
-        },
-    },
-    {
-        bilityNo: "SHP-003",
-        bilityDate: "2025-05-08",
-        party: "EternoCare",
-        town: "Chandigarh",
-        weight: "1550",
-        cases: 245,
-        agent: "Chaudhary",
-        deliveryDate: "2025-05-08",
-        vehicleNumber: "KA-01-AB-1234",
-        driver: {
-            name: "Ravi Kumar",
-            phone: "9876543210",
-        },
-    },
-
-];
+import { getShipments, updateShipmentStatus, deleteShipment, createShipment } from '@/utils/api/shipmentApi';
+import EditShipment from '@/components/shipment/EditShipment';
+import { SlideModal } from '@/components/ui/slide-modal';
 
 const statusOptions = [
-    { value: "open", label: "Open" },
+    { value: "pending", label: "Pending" },
     { value: "in-transit", label: "In-Transit" },
     { value: "delivered", label: "Delivered" },
 ];
@@ -84,17 +38,79 @@ const columns = [
 ];
 
 export default function ShipmentTracking() {
-    // Add status state for each row
-    const [statuses, setStatuses] = React.useState(
-        shipmentData.map(() => "open")
-    );
+    const [shipments, setShipments] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [editingShipment, setEditingShipment] = useState<any | null>(null);
 
-    const handleStatusChange = (idx: number, value: string) => {
-        setStatuses((prev) => {
-            const updated = [...prev];
-            updated[idx] = value;
-            return updated;
-        });
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const data = await getShipments();
+                setShipments(data);
+                // Build status map for controlled Selects
+                const map: { [id: string]: string } = {};
+                data.forEach((shipment: any) => {
+                    map[shipment._id] = shipment.status;
+                });
+                setStatusMap(map);
+            } catch (err: any) {
+                setError("Failed to fetch shipments");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const handleStatusChange = async (shipmentId: string, value: string) => {
+        try {
+            await updateShipmentStatus(shipmentId, value);
+            setStatusMap((prev) => ({ ...prev, [shipmentId]: value }));
+            setShipments((prev) => prev.map(s => s._id === shipmentId ? { ...s, status: value } : s));
+        } catch (err) {
+            alert("Failed to update status");
+        }
+    };
+
+    const handleDelete = async (shipmentId: string) => {
+        if (!window.confirm("Are you sure you want to delete this shipment?")) return;
+        try {
+            await deleteShipment(shipmentId);
+            setShipments((prev) => prev.filter(s => s._id !== shipmentId));
+        } catch (err) {
+            alert("Failed to delete shipment");
+        }
+    };
+
+    // Open modal for editing
+    const handleEdit = (shipmentId: string) => {
+        const shipment = shipments.find(s => s._id === shipmentId);
+        setEditingShipment(shipment);
+        setEditModalOpen(true);
+    };
+
+    // Save handler for modal
+    const handleEditSave = async (updated: any) => {
+        try {
+            // You may want to call a PATCH endpoint for full shipment update; for now, just update status, delivery_location, date_time
+            await createShipment(updated); // Replace with updateShipment if you have it
+            setShipments((prev) => prev.map(s => s._id === updated._id ? updated : s));
+            setEditModalOpen(false);
+            setEditingShipment(null);
+        } catch (err) {
+            alert('Failed to update shipment');
+        }
+    };
+
+    // Cancel handler for modal
+    const handleEditCancel = () => {
+        setEditModalOpen(false);
+        setEditingShipment(null);
     };
 
     return (
@@ -105,105 +121,121 @@ export default function ShipmentTracking() {
                     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                         <div className="max-w-full overflow-x-auto">
                             <div className="min-w-[1102px]">
-                                <Table>
-                                    <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
-                                        <TableRow>
-                                            {columns.map((col) => (
-                                                <TableCell
-                                                    key={col}
-                                                    isHeader
-                                                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                                                >
-                                                    {col}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-                                        {shipmentData.map((row, idx) => (
-                                            <TableRow key={row.bilityNo + idx}>
-                                                <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                    {row.bilityNo}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.bilityDate}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.party}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.town}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.weight}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.cases}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.agent}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.deliveryDate}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                    {row.vehicleNumber}
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-start">
-                                                    <div>
-                                                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                            {row.driver.name}
-                                                        </span>
-                                                        <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                            {row.driver.phone}
-                                                        </span>
-                                                    </div>
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-start">
-                                                    <Select
-                                                        options={statusOptions}
-                                                        defaultValue={statuses[idx]}
-                                                        onChange={(value) => handleStatusChange(idx, value)}
-                                                        className={
-                                                            statuses[idx] === "open"
-                                                                ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
-                                                                : statuses[idx] === "in-transit"
-                                                                    ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
-                                                                    : "bg-green-200 text-green-900 border-green-400 dark:bg-green-800 dark:text-green-100"
-                                                        }
-                                                    />
-                                                </TableCell>
-                                                <TableCell className="px-4 py-3 text-start">
-                                                    <div className="flex gap-2">
-                                                        <Button
-                                                            size="sm"
-                                                            variant="outline"
-                                                            startIcon={<PencilIcon width={18} height={18} />}
-                                                            className="!p-2 border border-gray-200 bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-900 dark:border-yellow-700"
-                                                            onClick={() => {/* handle edit */ }}
-                                                        >
-                                                            {""}
-                                                        </Button>
-                                                        <Button
-                                                            size="sm"
-                                                            variant="outline"
-                                                            startIcon={<TrashBinIcon width={18} height={18} />}
-                                                            className="!p-2 border border-gray-200 bg-red-50 hover:bg-red-100 dark:bg-red-900 dark:border-red-700"
-                                                            onClick={() => {/* handle delete */ }}
-                                                        >
-                                                            {""}
-                                                        </Button>
-                                                    </div>
-                                                </TableCell>
+                                {loading ? (
+                                    <div className="p-8 text-center text-gray-500">Loading shipments...</div>
+                                ) : error ? (
+                                    <div className="p-8 text-center text-red-500">{error}</div>
+                                ) : (
+                                    <Table>
+                                        <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
+                                            <TableRow>
+                                                {columns.map((col) => (
+                                                    <TableCell
+                                                        key={col}
+                                                        isHeader
+                                                        className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                                                    >
+                                                        {col}
+                                                    </TableCell>
+                                                ))}
                                             </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                        </TableHeader>
+                                        <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
+                                            {shipments.map((row) => (
+                                                <TableRow key={row?._id}>
+                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                        {row?.goods_details?.bill_no || row._id}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row?.date_time ? new Date(row?.date_time).toLocaleDateString() : "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.consignee?.contact?.name || row.consignee?.name || "-"}
+                                                        {row?.consignee?.contact?.name || row.consignee.name || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row?.delivery_location || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row?.goods_details?.actual_weight || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.goods_details?.quantity || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.consigner?.contact?.name || row.consigner?.name || row.agent || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.delivery_date ? new Date(row.delivery_date).toLocaleDateString() : "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                                        {row.vehicle?.vehicle_number || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-start">
+                                                        <div>
+                                                            <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                                                                {row?.driver?.contact?.name || "-"}
+                                                            </span>
+                                                            <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
+                                                                {row?.driver?.contact?.contact_number || "-"}
+                                                            </span>
+                                                        </div>
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-start">
+                                                        <Select
+                                                            options={statusOptions}
+                                                            value={statusMap[row._id]}
+                                                            onChange={(value) => handleStatusChange(row._id, value)}
+                                                            className={
+                                                                statusMap[row._id] === "pending"
+                                                                    ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
+                                                                    : statusMap[row._id] === "in-transit"
+                                                                        ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
+                                                                        : "bg-green-200 text-green-900 border-green-400 dark:bg-green-800 dark:text-green-100"
+                                                            }
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell className="px-4 py-3 text-start">
+                                                        <div className="flex gap-2">
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                startIcon={<PencilIcon width={18} height={18} />}
+                                                                className="!p-2 border border-gray-200 bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-900 dark:border-yellow-700"
+                                                                onClick={() => handleEdit(row._id)}
+                                                            >
+                                                                {""}
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                startIcon={<TrashBinIcon width={18} height={18} />}
+                                                                className="!p-2 border border-gray-200 bg-red-50 hover:bg-red-100 dark:bg-red-900 dark:border-red-700"
+                                                                onClick={() => handleDelete(row._id)}
+                                                            >
+                                                                {""}
+                                                            </Button>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                )}
                             </div>
                         </div>
                     </div>
                 </ComponentCard>
             </div>
+            <SlideModal isOpen={editModalOpen} onClose={handleEditCancel} title="Edit Shipment">
+                {editingShipment && (
+                    <EditShipment
+                        shipment={editingShipment}
+                        onSave={handleEditSave}
+                        onCancel={handleEditCancel}
+                    />
+                )}
+            </SlideModal>
         </div>
     );
 } 

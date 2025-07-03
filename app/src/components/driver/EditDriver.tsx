@@ -1,17 +1,14 @@
 import React from 'react';
 import useDriverForm from '@/hooks/useDriverForm';
 
-interface EditDriverProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditDriver: React.FC<EditDriverProps> = (onSave) => {
+const EditDriver: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useDriverForm('Driver', onSave);
+    } = useDriverForm(onSave);
 
     const fields = [
         { label: 'Contact Number', name: 'contactNumber', type: 'text' },
@@ -103,8 +100,6 @@ const EditDriver: React.FC<EditDriverProps> = (onSave) => {
                         </div>
                     ))}
                 </div>
-
-                {/* Save Button Only */}
                 <div className="col-span-1 md:col-span-2 mt-4">
                     <button
                         onClick={handleSave}

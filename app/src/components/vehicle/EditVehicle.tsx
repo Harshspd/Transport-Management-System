@@ -1,16 +1,16 @@
 import React from 'react';
 import useVehicleForm from '@/hooks/useVehicleForm';
 
-interface EditVehicleProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditVehicle: React.FC<EditVehicleProps> = (onSave) => {
+const EditVehicle: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
+        handleNameChange,
         handleSave,
-    } = useVehicleForm('Vehicle', onSave);
+        formData,
+        error,
+    } = useVehicleForm(onSave);
 
     const fields = [
         { label: 'Vehicle Number', name: 'vehicleNumber', type: 'text' },
@@ -24,6 +24,17 @@ const EditVehicle: React.FC<EditVehicleProps> = (onSave) => {
     ];
 
     const renderField = (field: any) => {
+        if (field.name === 'vehicleNumber') {
+            return (
+                <input
+                    type="text"
+                    name={field.name}
+                    value={newOptionValue}
+                    onChange={handleNameChange}
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
+                />
+            );
+        }
         if (field.type === 'file') {
             return (
                 <input
@@ -38,20 +49,19 @@ const EditVehicle: React.FC<EditVehicleProps> = (onSave) => {
             <input
                 type={field.type}
                 name={field.name}
+                value={formData[field.name] || ''}
                 onChange={handleChange}
                 className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
             />
         );
     };
 
-    // Left: Vehicle Number, Capacity (Weight), Capacity (Volume), City
     const getLeftFields = () => [
         { label: 'Vehicle Number', name: 'vehicleNumber', type: 'text' },
         { label: 'Capacity (Weight)', name: 'capacityWeight', type: 'text' },
         { label: 'Capacity (Volume)', name: 'capacityVolume', type: 'text' },
         { label: 'City', name: 'city', type: 'text' }
     ];
-    // Right: Vehicle Type, RC Number, Upload RC, State (State at bottom)
     const getRightFields = () => [
         { label: 'Vehicle Type', name: 'vehicleType', type: 'text' },
         { label: 'RC Number', name: 'rcNumber', type: 'text' },
@@ -80,20 +90,19 @@ const EditVehicle: React.FC<EditVehicleProps> = (onSave) => {
                             {renderField(field)}
                         </div>
                     ))}
-                    {/* State at the bottom of right column */}
                     <div>
                         <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">State :</label>
                         <input
                             type="text"
                             name="state"
+                            value={formData.state || ''}
                             onChange={handleChange}
                             className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
                         />
                     </div>
                 </div>
-
-                {/* Save Button Only */}
                 <div className="col-span-1 md:col-span-2 mt-4">
+                    {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
                     <button
                         onClick={handleSave}
                         className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"

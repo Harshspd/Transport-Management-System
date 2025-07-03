@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { saveModalEntry } from '@/utils/api.js';
 import { createDriver } from '@/utils/api/driverApi';
 import { Driver } from '@/types/driver';
 
-const useDriverForm = (onSave:any, onCancel:any) => {
+const useDriverForm = (onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState<any>({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const resetForm = () => {
         setNewOptionValue('');
         setFormData({});
-    };
-
-    const handleCancel = () => {
-        resetForm();
-        onCancel();
     };
 
     const handleChange = (e: any) => {
@@ -27,45 +23,55 @@ const useDriverForm = (onSave:any, onCancel:any) => {
         console.log('Form data updated:', { ...formData, [name]: value });
     };
 
-    const handleNameChange = (e: any ) => {
+    const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
         console.log('Name field updated:', value);
     };
 
     const handleSave = async () => {
-        // Create entry with name from newOptionValue and other data from formData
-        const entry = { name: newOptionValue, ...formData };
-        console.log('Saving entry:', entry);
-        const data:Driver ={
-                        contact: {
-                            name: "Kanika hard coding to be implemneted",
-                            contact_person: "Kanika hard coding to be implemneted",
-                            contact_number: "9987671378",
-                        },
-                        address: '',
-                        city: '',
-                        gst_in: '',
-                        };
+        setError('');
+        if (!newOptionValue) {
+            setError('Driver Name is required');
+         //   return;
+        }
+        setLoading(true);
+        try {
+            // Create FormData to match backend expectation
+            const formDataToSend = new FormData();
+            formDataToSend.append('name', newOptionValue);
+            formDataToSend.append('contact[phone]', formData.contactNumber || '');
+            formDataToSend.append('license_number', formData.licenseNumber || '');
+            formDataToSend.append('address[adddress_line_1]', formData.address || '');
+            formDataToSend.append('address[city]', formData.city || '');
+            if (formData.licenseFile) {
+                formDataToSend.append('licenseFile', formData.licenseFile);
+            }
 
-        const response = await createDriver(data);
-        if (response.success) {
-            onSave("Driver", response);
-        } else {
-            alert('Error saving entry');
+            console.log('Driver FormData payload:', formDataToSend);
+            const response = await createDriver(formDataToSend);
+            if (response) {
+                onSave(response.data);
+                resetForm();
+            } else {
+                setError('Error saving Driver');
+            }
+        } catch (err) {
+            setError('Error saving driver');
+        } finally {
+            setLoading(false);
         }
     };
 
     return {
-        // State
         newOptionValue,
         formData,
-
-        // Actions
+        loading,
+        error,
         handleChange,
         handleNameChange,
         handleSave,
-        handleCancel
+        resetForm,
     };
 };
 

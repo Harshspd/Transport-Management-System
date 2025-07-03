@@ -1,17 +1,15 @@
 import React from 'react';
 import useConsignerForm from '@/hooks/useConsignerForm';
 
-interface EditConsignerProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditConsigner: React.FC<EditConsignerProps> = (onSave) => {
+
+const EditConsigner: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useConsignerForm('Consigner', onSave);
+    } = useConsignerForm(onSave);
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
@@ -123,8 +121,6 @@ const EditConsigner: React.FC<EditConsignerProps> = (onSave) => {
                         />
                     </div>
                 </div>
-
-                {/* Save Button Only */}
                 <div className="col-span-1 md:col-span-2 mt-4">
                     <button
                         onClick={handleSave}

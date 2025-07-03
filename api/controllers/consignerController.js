@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsigner = async (req, res) => {
   try {
     // Step 1: Dynamic Required Field Validation
-    const requiredFields = ['contact.name'];
+    const requiredFields = ['name', 'contact.phone'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {
@@ -16,15 +16,13 @@ export const createConsigner = async (req, res) => {
       });
     }
 
-    // Step 2: Duplicate Check on gst
-     if (req.body.gst_in) {
-      const duplicate = await checkDuplicate(Consigner, { gst_in: req.body.gst_in });
-      if (duplicate) {
-        return res.status(409).json({
-          message: 'Consigner with this GST number already exists',
-          error: true,
-        });
-      }
+    // Step 2: Duplicate Check on contact.phone
+    const duplicate = await checkDuplicate(Consigner, { 'contact.phone': req.body.contact.phone });
+    if (duplicate) {
+      return res.status(409).json({
+        message: 'Consigner with this contact number already exists',
+        error: true,
+      });
     }
 
     // Step 3: Create

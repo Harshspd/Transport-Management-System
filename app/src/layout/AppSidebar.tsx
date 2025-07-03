@@ -36,22 +36,32 @@ const navItems: NavItem[] = [
     icon: <BoxCubeIcon />,
     name: "Shipment",
     subItems: [
-      { name: "Shipment Booking", path: "/shipment/edit", pro: false },
+      { name: "Book a Shipment", path: "/shipment/edit", pro: false },
+      { name: "Shipment", path: "/shipment", pro: false },
       { name: "Shipment Tracking", path: "/shipment/tracking", pro: false },
     ],
   },
   {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/calendar",
+    icon: <ListIcon />,
+    name: "Consigner",
+    path: "/consigner",
   },
   {
     icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
+    name: "Consignee",
+    path: "/consignee",
   },
-
   {
+    icon: <ListIcon />,
+    name: "Vehicle",
+    path: "/vehicle",
+  },
+  {
+    icon: <UserCircleIcon />,
+    name: "Driver",
+    path: "/driver",
+  },
+  /* {
     name: "Forms",
     icon: <ListIcon />,
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
@@ -68,10 +78,11 @@ const navItems: NavItem[] = [
       { name: "Blank Page", path: "/blank", pro: false },
       { name: "404 Error", path: "/error-404", pro: false },
     ],
-  },
+  },*/
 ];
 
-const othersItems: NavItem[] = [
+
+const othersItems: NavItem[] =[];/* [
   {
     icon: <PieChartIcon />,
     name: "Charts",
@@ -91,9 +102,9 @@ const othersItems: NavItem[] = [
       { name: "Images", path: "/images", pro: false },
       { name: "Videos", path: "/videos", pro: false },
     ],
-  },
+  }, 
 
-];
+];*/
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();

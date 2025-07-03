@@ -6,25 +6,16 @@ const API_ENDPOINT = 'http://localhost:5000/api/consigners'; // Define the endpo
 export const getConsigners = async () => {
     try {
         const response = await axiosInstance.get(API_ENDPOINT);
-        return response.data;
+        return response.data.data;
     } catch (error) {
         console.error('Error fetching contact lists:', error);
         throw error;
     }
 };
 
-export const createConsigner = async (data:Consigner) => {
-    const token = localStorage.getItem('token'); // Get JWT token from localStorage
+export const createConsigner = async (data: Consigner) => {
     try {
-        const response = await axiosInstance.post(
-            API_ENDPOINT,
-            data,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+        const response = await axiosInstance.post(API_ENDPOINT, data);
         return response.data;
     } catch (error) {
         console.error('Error fetching contact lists:', error);

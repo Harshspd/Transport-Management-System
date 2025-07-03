@@ -1,17 +1,16 @@
 import React from 'react';
 import useConsigneeForm from '@/hooks/useConsigneeForm';
 
-interface EditConsigneeProps {
-    onSave: (type: string, data: any) => void;
-}
 
-const EditConsignee: React.FC<EditConsigneeProps> = (onSave) => {
+
+const EditConsignee: React.FC<any> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
         handleSave,
-    } = useConsigneeForm('Consignee', onSave);
+    } = useConsigneeForm(onSave)
+    
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
@@ -66,7 +65,7 @@ const EditConsignee: React.FC<EditConsigneeProps> = (onSave) => {
 
     return (
         <div className='p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'>
-            <h2 className="text-lg font-medium pb-4 text-gray-800 dark:text-white">Consigner Details</h2>
+            <h2 className="text-lg font-medium pb-4 text-gray-800 dark:text-white">Consignee Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Left Column */}
                 <div className="flex flex-col gap-4">
@@ -94,7 +93,6 @@ const EditConsignee: React.FC<EditConsigneeProps> = (onSave) => {
                         }
                         return null;
                     })}
-                    {/* City field after Address */}
                     <div>
                         <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">City :</label>
                         <input
@@ -125,10 +123,9 @@ const EditConsignee: React.FC<EditConsigneeProps> = (onSave) => {
                     </div>
                 </div>
 
-                {/* Save Button Only */}
                 <div className="col-span-1 md:col-span-2 mt-4">
                     <button
-                        onClick={handleSave}
+                        onClick={async () => { await handleSave(); }}
                         className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
                     >
                         Save

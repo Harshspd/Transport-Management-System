@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { saveModalEntry } from '@/utils/api.js';
-import { createVehicle } from '@/utils/api/vehicle';
+import { createVehicle } from '@/utils/api/vehicleApi';
 import { Vehicle } from '@/types/vehicle';
 
-const useVehicleForm = (onSave:any, onCancel:any) => {
+const useVehicleForm = (onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState<any>({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const resetForm = () => {
         setNewOptionValue('');
         setFormData({});
-    };
-
-    const handleCancel = () => {
-        resetForm();
-        onCancel();
     };
 
     const handleChange = (e: any) => {
@@ -24,48 +20,57 @@ const useVehicleForm = (onSave:any, onCancel:any) => {
         } else {
             setFormData({ ...formData, [name]: value });
         }
-        console.log('Form data updated:', { ...formData, [name]: value });
     };
 
-    const handleNameChange = (e: any ) => {
+    const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
-        console.log('Name field updated:', value);
     };
 
     const handleSave = async () => {
-        // Create entry with name from newOptionValue and other data from formData
-        const entry = { name: newOptionValue, ...formData };
-        console.log('Saving entry:', entry);
-        const data:Vehicle ={
-                        contact: {
-                            name: "Kanika hard coding to be implemneted",
-                            contact_person: "Kanika hard coding to be implemneted",
-                            contact_number: "9987671378",
-                        },
-                        address: '',
-                        city: '',
-                        gst_in: '',
-                        };
+        setError('');
+        if (!newOptionValue) {
+            setError('Vehicle Number is required');
+            return;
+        }
+        setLoading(true);
+        try {
+            // Create FormData to match backend expectation
+            const formDataToSend = new FormData();
+            formDataToSend.append('vehicle_number', newOptionValue);
+            formDataToSend.append('vehicle_type', formData.vehicleType || '');
+            formDataToSend.append('capacity_weight', formData.capacityWeight || '');
+            formDataToSend.append('capacity_volume', formData.capacityVolume || '');
+            formDataToSend.append('rc_number', formData.rcNumber || '');
+            if (formData.rcFile) {
+                formDataToSend.append('rc_file', formData.rcFile);
+            }
+            formDataToSend.append('address[city]', formData.city || '');
+            formDataToSend.append('address[state]', formData.state || '');
 
-        const response = await createVehicle(data);
-        if (response.success) {
-            onSave("Vehicle", response);
-        } else {
-            alert('Error saving entry');
+            const response = await createVehicle(formDataToSend);
+            if (response) {
+                onSave(response.data);
+                resetForm();
+            } else {
+                setError('Error saving Vehicle');
+            }
+        } catch (err) {
+            setError('Error saving Vehicle');
+        } finally {
+            setLoading(false);
         }
     };
 
     return {
-        // State
         newOptionValue,
         formData,
-
-        // Actions
+        loading,
+        error,
         handleChange,
         handleNameChange,
         handleSave,
-        handleCancel
+        resetForm,
     };
 };
 
