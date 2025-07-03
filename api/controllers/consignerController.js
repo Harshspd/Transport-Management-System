@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsigner = async (req, res) => {
   try {
     // Step 1: Dynamic Required Field Validation
-    const requiredFields = ['name', 'contact.phone'];
+    const requiredFields = ['name'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {

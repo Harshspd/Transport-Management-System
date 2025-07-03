@@ -6,7 +6,7 @@ import { validateRequiredFields, checkDuplicate } from '../helpers/validationUti
 export const createConsignee = async (req, res) => {
   try {
     // 1. Required fields check
-    const requiredFields = ['name', 'contact.phone'];
+    const requiredFields = ['name'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
     if (missingFields.length > 0) {
