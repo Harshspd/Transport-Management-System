@@ -1,10 +1,22 @@
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 
 // Configure Multer storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    let folder = 'uploads/others'; 
+
+    // Check fieldname to determine folder
+    if (file.fieldname === 'licenseFile') {
+      folder = 'uploads/licenses';
+    } else if (file.fieldname === 'rc_file') {
+      folder = 'uploads/rcs';
+    }
+
+    // Ensure the folder exists
+    fs.mkdirSync(folder, { recursive: true });
+    cb(null, folder);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
