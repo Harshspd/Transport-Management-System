@@ -12,14 +12,17 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-import { getShipments, updateShipmentStatus, deleteShipment, createShipment } from '@/utils/api/shipmentApi';
+import { getShipments, updateShipmentStatus, deleteShipment, createShipment, updateShipment } from '@/utils/api/shipmentApi';
 import EditShipment from '@/components/shipment/EditShipment';
 import { SlideModal } from '@/components/ui/slide-modal';
 
+
+
+
 const statusOptions = [
-    { value: "pending", label: "Pending" },
-    { value: "in-transit", label: "In-Transit" },
-    { value: "delivered", label: "Delivered" },
+    { value: "Open", label: "Open" },
+    { value: "In-Transit", label: "In-Transit" },
+    { value: "Delivered", label: "Delivered" },
 ];
 
 const columns = [
@@ -94,12 +97,13 @@ export default function ShipmentTracking() {
         setEditModalOpen(true);
     };
 
-    // Save handler for modal
-    const handleEditSave = async (updated: any) => {
+    // Save handler for slider
+    const handleEditSave = async (updatedShipment: any) => {
         try {
-            // You may want to call a PATCH endpoint for full shipment update; for now, just update status, delivery_location, date_time
-            await createShipment(updated); // Replace with updateShipment if you have it
-            setShipments((prev) => prev.map(s => s._id === updated._id ? updated : s));
+            await updateShipment(updatedShipment._id, updatedShipment);
+            // Refetch all shipments to get fully populated objects
+            const data = await getShipments();
+            setShipments(data);
             setEditModalOpen(false);
             setEditingShipment(null);
         } catch (err) {
@@ -151,7 +155,6 @@ export default function ShipmentTracking() {
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.consignee?.contact?.name || row.consignee?.name || "-"}
-                                                        {row?.consignee?.contact?.name || row.consignee.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.delivery_location || "-"}
@@ -187,7 +190,7 @@ export default function ShipmentTracking() {
                                                             value={statusMap[row._id]}
                                                             onChange={(value) => handleStatusChange(row._id, value)}
                                                             className={
-                                                                statusMap[row._id] === "pending"
+                                                                statusMap[row._id] === "open"
                                                                     ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
                                                                     : statusMap[row._id] === "in-transit"
                                                                         ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
@@ -200,11 +203,10 @@ export default function ShipmentTracking() {
                                                             <Button
                                                                 size="sm"
                                                                 variant="outline"
-                                                                startIcon={<PencilIcon width={18} height={18} />}
-                                                                className="!p-2 border border-gray-200 bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-900 dark:border-yellow-700"
                                                                 onClick={() => handleEdit(row._id)}
+                                                                className="text-blue-500 hover:text-blue-700"
                                                             >
-                                                                {""}
+                                                                <PencilIcon className="w-5 h-5" />
                                                             </Button>
                                                             <Button
                                                                 size="sm"
@@ -228,13 +230,15 @@ export default function ShipmentTracking() {
                 </ComponentCard>
             </div>
             <SlideModal isOpen={editModalOpen} onClose={handleEditCancel} title="Edit Shipment">
-                {editingShipment && (
-                    <EditShipment
-                        shipment={editingShipment}
-                        onSave={handleEditSave}
-                        onCancel={handleEditCancel}
-                    />
-                )}
+                <div className="max-h-[80vh] overflow-y-auto">
+                    {editingShipment && (
+                        <EditShipment
+                            shipment={editingShipment}
+                            onSave={handleEditSave}
+                            onCancel={handleEditCancel}
+                        />
+                    )}
+                </div>
             </SlideModal>
         </div>
     );

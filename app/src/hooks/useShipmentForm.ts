@@ -93,8 +93,8 @@ const useShipmentForm = () => {
     const consigneeModal = useModal();
     const driverModal = useModal();
     const vehicleModal = useModal();
-    
-    
+
+
     // Fetch dropdown options from backend on mount
     useEffect(() => {
         const fetchOptions = async () => {
@@ -129,7 +129,7 @@ const useShipmentForm = () => {
             value = e.target.value;
         } else {
             // fallback for direct value
-             name = e;
+            name = e;
             value = selectedValue;
         }
         if (value === '+Add new') {
@@ -138,7 +138,7 @@ const useShipmentForm = () => {
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
     };
-    
+
     const handleAddNewTrigger = (name: string) => {
         switch (name) {
             case 'Consigner': return consignerModal.openModal();
@@ -147,7 +147,7 @@ const useShipmentForm = () => {
             case 'Vehicle': return vehicleModal.openModal();
         }
     };
-    
+
     const validateForm = () => {
         const newErrors: ShipmentFormErrors = {};
         if (!formData.Consigner) newErrors.Consigner = 'Consigner is required';
@@ -173,12 +173,12 @@ const useShipmentForm = () => {
             driver: formData.Driver,
             vehicle: formData.Vehicle,
             delivery_location: formData.DeliveryLocation,
-            expected_delivery_date_and_time: new Date(formData.ExpectedDeliveryDateTime).toISOString(),
+            expected_delivery_date_and_time: new Date(formData.ExpectedDeliveryDateTime),
             goods_details: {
                 description: formData.Description,
                 quantity: Number(formData.Quantity),
                 bill_no: formData.BillNo,
-                bill_date: Number(formData.BillDate),
+                bill_date: new Date(formData.BillDate),
                 bill_value: Number(formData.BillValue),
                 mode: formData.Mode,
                 actual_dimensions: Number(formData.ActualDimensions),
@@ -191,15 +191,15 @@ const useShipmentForm = () => {
             service_type: formData.ServiceType,
             provider: formData.Provider,
             eway_bill_number: formData.EwayBill,
-            status: 'In-Transit',
+            status: 'Open',
         };
 
         try {
             const response = await createShipment(shipment);
-            if(response.status == 201) {
+            if (response.status == 201) {
                 setFormData({
                     Consigner: '', Consignee: '', DeliveryLocation: '', ExpectedDeliveryDateTime: '',
-                    Description: '', Quantity: '', BillNo: '', BillDate:'' ,BillValue: '', Mode: '',
+                    Description: '', Quantity: '', BillNo: '', BillDate: '', BillValue: '', Mode: '',
                     ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
                     ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
                     Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
@@ -210,34 +210,34 @@ const useShipmentForm = () => {
         }
     };
     const handleAddNew = async (type: keyof ShipmentFormOptions, newEntry: any) => {
-            try {
-                // After adding, re-fetch the relevant list from backend
-                let updatedList: OptionType[] = [];
-                if (type === 'Consigner') {
-                    updatedList = (await getConsigners()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
-                } else if (type === 'Consignee') {
-                    updatedList = (await getConsignees()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
-                } else if (type === 'Driver') {
-                    updatedList = (await getDrivers()).map((d: any) => ({ value: d._id, label: d.contact?.name || d.name }));
-                } else if (type === 'Vehicle') {
-                    updatedList = (await getVehicles()).map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name }));
-                }
-                setOptions((prev) => ({ ...prev, [type]: updatedList }));
-                setFormData((prev) => ({ ...prev, [type]: newEntry._id }));
-                switch (type) {
-                    case 'Consigner': return consignerModal.closeModal();
-                    case 'Consignee': return consigneeModal.closeModal();
-                    case 'Driver': return driverModal.closeModal();
-                    case 'Vehicle': return vehicleModal.closeModal();
-                }
-                return true;
-            } catch (error) {
-                console.error('Error adding new entry:', error);
-                alert('Error adding new entry. Please try again.');
-                return false;
+        try {
+            // After adding, re-fetch the relevant list from backend
+            let updatedList: OptionType[] = [];
+            if (type === 'Consigner') {
+                updatedList = (await getConsigners()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
+            } else if (type === 'Consignee') {
+                updatedList = (await getConsignees()).map((c: any) => ({ value: c._id, label: c.contact?.name || c.name }));
+            } else if (type === 'Driver') {
+                updatedList = (await getDrivers()).map((d: any) => ({ value: d._id, label: d.contact?.name || d.name }));
+            } else if (type === 'Vehicle') {
+                updatedList = (await getVehicles()).map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name }));
             }
-        };
-   
+            setOptions((prev) => ({ ...prev, [type]: updatedList }));
+            setFormData((prev) => ({ ...prev, [type]: newEntry._id }));
+            switch (type) {
+                case 'Consigner': return consignerModal.closeModal();
+                case 'Consignee': return consigneeModal.closeModal();
+                case 'Driver': return driverModal.closeModal();
+                case 'Vehicle': return vehicleModal.closeModal();
+            }
+            return true;
+        } catch (error) {
+            console.error('Error adding new entry:', error);
+            alert('Error adding new entry. Please try again.');
+            return false;
+        }
+    };
+
     const renderOptions = (items: OptionType[] | string[], fieldName: string) => {
         // If already in {value, label} format, return as is, else map to that format
         const baseOptions = typeof items[0] === 'object'
