@@ -162,6 +162,74 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Consignees fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"Ritesh jiii\",\n                \"contact_person\": \"SPD harsh\",\n                \"contact_number\": \"1234567812\"\n            },\n            \"_id\": \"6852978e552b463543328707\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-18T10:40:14.569Z\",\n            \"updatedAt\": \"2025-06-20T05:30:58.907Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"contact\": {\n                \"name\": \"Ritesh\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"1234567812\"\n            },\n            \"_id\": \"68550807329b40fd407c274a\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n            \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"Ritesh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918255\"\n            },\n            \"_id\": \"685a465805d56b05a2d2fda4\",\n            \"address\": \"gorahkpur, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:31:52.193Z\",\n            \"updatedAt\": \"2025-06-24T06:31:52.193Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"harshhh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918256\"\n            },\n            \"_id\": \"685a468c05d56b05a2d2fda8\",\n            \"address\": \"gorahkpur ayodhya, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:32:44.104Z\",\n            \"updatedAt\": \"2025-06-24T06:32:44.104Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"harshhh jiiiiii\",\n                \"contact_person\": \"SPD Mehta\",\n                \"contact_number\": \"9415918256\"\n            },\n            \"_id\": \"685d1f8869d8705a139f1acd\",\n            \"address\": \"gorahkpur ayodhya, Sector 62\",\n            \"city\": \"Noida\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-26T10:23:04.107Z\",\n            \"updatedAt\": \"2025-06-26T10:23:04.107Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "getconsigneebyid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/consignees/68665dbc17b406bfb04a1edf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consignees",
+										"68665dbc17b406bfb04a1edf"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "405"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"195-wRiMkUl0aHhqCgqiNpLIzUhqTuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jul 2025 10:57:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consignee fetched successfully\",\n    \"data\": {\n        \"contact\": {\n            \"person\": \"harsh\",\n            \"phone\": \"9415910000\"\n        },\n        \"address\": {\n            \"adddress_line_1\": \"ayodhya\",\n            \"state\": \"up\",\n            \"city\": \"kanpur\"\n        },\n        \"_id\": \"68665dbc17b406bfb04a1edf\",\n        \"name\": \"bunny\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n        \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -649,6 +717,65 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Consigners fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"khushiii Tranporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 9811122233\n            },\n            \"_id\": \"685296041510036dc753e3df\",\n            \"address\": \"Plot 45, Transport Nagar\",\n            \"city\": \"Lucknow\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-18T10:33:40.699Z\",\n            \"updatedAt\": \"2025-06-18T10:33:40.699Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"bunny Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 9811122233\n            },\n            \"_id\": \"6854f2f251e9e04385079001\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T05:34:42.494Z\",\n            \"updatedAt\": \"2025-06-20T05:34:42.494Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"bunny SPD jii transporters\"\n            },\n            \"_id\": \"68550749329b40fd407c2748\",\n            \"address\": \"Plot 45, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n            \"updatedAt\": \"2025-06-23T12:24:54.333Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"contact\": {\n                \"name\": \"10x  Transporters\",\n                \"contact_person\": \"Harsh\"\n            },\n            \"_id\": \"685946149e320094e4f8a07a\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T12:18:28.540Z\",\n            \"updatedAt\": \"2025-06-23T12:18:28.540Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"10x  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1212121212\n            },\n            \"_id\": \"685a48b6bc73af5bf6ec72dd\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:41:58.927Z\",\n            \"updatedAt\": \"2025-06-24T06:41:58.927Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"spd harsh  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1212121211\n            },\n            \"_id\": \"685a4942bc73af5bf6ec72e1\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:44:18.235Z\",\n            \"updatedAt\": \"2025-06-24T06:44:18.235Z\",\n            \"__v\": 0\n        },\n        {\n            \"contact\": {\n                \"name\": \"spd harsh bunny  Transporters\",\n                \"contact_person\": \"Harsh\",\n                \"contact_number\": 1112121211\n            },\n            \"_id\": \"685a4997bc73af5bf6ec72e6\",\n            \"address\": \"Plot 47, Transport Nagar\",\n            \"city\": \"Delhi\",\n            \"gst_in\": \"07GLOBT4567H1Z2\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T06:45:43.892Z\",\n            \"updatedAt\": \"2025-06-24T06:45:43.892Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "getconsignerbyid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/consigners/685e93d73f62b6cc9adac5df",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"consigners",
+										"685e93d73f62b6cc9adac5df"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "411"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19b-HY+BsZ3chCZat9D2bDsinr1cQH4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jul 2025 11:25:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Consigner fetched successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"television\",\n            \"contact_person\": \"12asdf\",\n            \"contact_number\": 1234567889\n        },\n        \"address\": \"ayodhya\",\n        \"_id\": \"685e93d73f62b6cc9adac5df\",\n        \"city\": \"delhi\",\n        \"gst_in\": \"123qwwr\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-06-27T12:51:35.537Z\",\n        \"updatedAt\": \"2025-06-27T12:51:35.537Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -1271,6 +1398,65 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Drivers fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"name\": \"Harsh10x\",\n                \"contact_number\": 9415917682\n            },\n            \"_id\": \"685a4df9a658f2a96127dd36\",\n            \"license_number\": \"DL042019123890\",\n            \"address\": \"Ayodhya\",\n            \"city\": \"kanpur\",\n            \"license_file\": \"\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:04:25.937Z\",\n            \"updatedAt\": \"2025-06-24T07:04:25.937Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "getdriverbyid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/drivers/68663c32d713f625f68758b3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers",
+										"68663c32d713f625f68758b3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "442"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ba-ZoEfC4yD3e+R+lhaKzBO6QakOM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jul 2025 11:31:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver fetched successfully\",\n    \"data\": {\n        \"contact\": {\n            \"phone\": 9415918111\n        },\n        \"address\": {\n            \"adddress_line_1\": \"forest\",\n            \"city\": \"\"\n        },\n        \"_id\": \"68663c32d713f625f68758b3\",\n        \"name\": \"lion\",\n        \"license_number\": \"555555\",\n        \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n        \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -1970,6 +2156,65 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Vehicles fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"685a50aa0db04b40bee10ae7\",\n            \"vehicle_number\": \"MH12AB8900\",\n            \"vehicle_type\": \"Truck\",\n            \"capacity_weight\": 12000,\n            \"capacity_volume\": 30,\n            \"rc_number\": \"RC1234561234\",\n            \"rc_file\": \"\",\n            \"created_by\": \"684959a8c83df52490b92c44\",\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:15:54.223Z\",\n            \"updatedAt\": \"2025-06-24T07:15:54.223Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "getvehiclebyid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/vehicles/68666ac9d832caa4ff0378a4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"vehicles",
+										"68666ac9d832caa4ff0378a4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "425"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a9-XIKw7rWAJNbnUWTgQLCIizCG9oU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jul 2025 11:35:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vehicle fetched successfully\",\n    \"data\": {\n        \"_id\": \"68666ac9d832caa4ff0378a4\",\n        \"vehicle_number\": \"1212\",\n        \"vehicle_type\": \"truck\",\n        \"capacity_weight\": 1200,\n        \"capacity_volume\": 60,\n        \"rc_number\": \"10000\",\n        \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n        \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
