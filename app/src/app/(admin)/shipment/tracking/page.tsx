@@ -20,9 +20,9 @@ import { SlideModal } from '@/components/ui/slide-modal';
 
 
 const statusOptions = [
-    { value: "open", label: "Open" },
-    { value: "in-transit", label: "In-Transit" },
-    { value: "delivered", label: "Delivered" },
+    { value: "Open", label: "Open" },
+    { value: "In-Transit", label: "In-Transit" },
+    { value: "Delivered", label: "Delivered" },
 ];
 
 const columns = [
@@ -100,12 +100,10 @@ export default function ShipmentTracking() {
     // Save handler for slider
     const handleEditSave = async (updatedShipment: any) => {
         try {
-            const response = await updateShipment(updatedShipment._id, updatedShipment);
-            console.log('updateShipment response:', response);
-            const updated = response.data?.data || response.data || response;
-            setShipments((prev) =>
-                prev.map((s) => s._id === updated._id ? updated : s)
-            );
+            await updateShipment(updatedShipment._id, updatedShipment);
+            // Refetch all shipments to get fully populated objects
+            const data = await getShipments();
+            setShipments(data);
             setEditModalOpen(false);
             setEditingShipment(null);
         } catch (err) {
@@ -157,7 +155,6 @@ export default function ShipmentTracking() {
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.consignee?.contact?.name || row.consignee?.name || "-"}
-                                                        {row?.consignee?.contact?.name || row.consignee.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.delivery_location || "-"}
