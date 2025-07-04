@@ -42,3 +42,13 @@ export const deleteShipment = async (id: string) => {
         throw error;
     }
 };
+
+export const updateShipment = async (id: string, data: Partial<Shipment>) => {
+    try {
+        const response = await axiosInstance.put(`${API_ENDPOINT}/${id}`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating shipment:', error);
+        throw error;
+    }
+};

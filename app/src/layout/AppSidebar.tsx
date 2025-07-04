@@ -37,7 +37,7 @@ const navItems: NavItem[] = [
     name: "Shipment",
     subItems: [
       { name: "Book a Shipment", path: "/shipment/edit", pro: false },
-      { name: "Shipment", path: "/shipment", pro: false },
+      // { name: "Shipment", path: "/shipment", pro: false },
       { name: "Shipment Tracking", path: "/shipment/tracking", pro: false },
     ],
   },

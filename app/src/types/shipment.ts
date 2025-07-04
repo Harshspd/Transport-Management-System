@@ -2,7 +2,8 @@ export interface GoodsDetails {
     description: string;
     quantity: number;
     bill_no: string;
-    value: number;
+    bill_date: Date;
+    bill_value: number;
     mode: string;
     actual_dimensions: number;
     charged_dimensions: number;
@@ -18,7 +19,7 @@ export interface Shipment {
     driver: string;
     vehicle: string;
     delivery_location: string;
-    date_time: string; // ISO string
+    expected_delivery_date_and_time: Date;
     goods_details: GoodsDetails;
     service_type: string;
     provider: string;
