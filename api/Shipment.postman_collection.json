@@ -3235,6 +3235,73 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"6858ed8e5fa002ca0bf50fd4\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-23T06:00:46.454Z\",\n            \"updatedAt\": \"2025-06-25T11:07:59.796Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        },\n        {\n            \"_id\": \"685a51360db04b40bee10ae9\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"bunny SPD jii hunny transporters\"\n                },\n                \"_id\": \"68550749329b40fd407c2748\",\n                \"address\": \"Plot 45, Transport Nagar\",\n                \"city\": \"Delhi\",\n                \"gst_in\": \"07GLOBT4567H1Z2\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:01:29.205Z\",\n                \"updatedAt\": \"2025-06-27T07:12:49.327Z\",\n                \"__v\": 0,\n                \"updated_by\": \"684959a8c83df52490b92c44\"\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"name\": \"Ritesh\",\n                    \"contact_person\": \"SPD Mehta\",\n                    \"contact_number\": \"1234567812\"\n                },\n                \"_id\": \"68550807329b40fd407c274a\",\n                \"address\": \"gorahkpur, Sector 62\",\n                \"city\": \"Noida\",\n                \"created_by\": \"684959a8c83df52490b92c44\",\n                \"organization_id\": \"684959a8c83df52490b92c42\",\n                \"createdAt\": \"2025-06-20T07:04:39.737Z\",\n                \"updatedAt\": \"2025-06-20T07:04:39.737Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"kanpur\",\n            \"status\": \"Delivered\",\n            \"created_by\": {\n                \"_id\": \"684959a8c83df52490b92c44\",\n                \"email\": \"spd1234@gmail.com\"\n            },\n            \"organization_id\": \"684959a8c83df52490b92c42\",\n            \"createdAt\": \"2025-06-24T07:18:14.070Z\",\n            \"updatedAt\": \"2025-06-25T11:03:36.319Z\",\n            \"__v\": 0,\n            \"updated_by\": \"684959a8c83df52490b92c44\"\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "bilityno",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4472"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1178-MepQcZ8UzxudzoEtBjbD3wRYb3k\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 07:10:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"goods_details\": {\n                \"description\": \"\",\n                \"quantity\": 1000,\n                \"bill_no\": \"SH1111\",\n                \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n                \"bill_value\": 10000,\n                \"mode\": \"Transport\",\n                \"actual_dimensions\": 60,\n                \"charged_dimensions\": 50,\n                \"unit_of_weight\": \"Per Kg\",\n                \"actual_weight\": 30,\n                \"charged_weight\": 25,\n                \"special_instructions\": \"\"\n            },\n            \"_id\": \"68677a9338d4a3e577f54001\",\n            \"consigner\": {\n                \"contact\": {\n                    \"person\": \"Harsh vardhan singh\",\n                    \"phone\": 9653064472\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"\",\n                    \"state\": \"KANPUR\",\n                    \"city\": \"delhi\"\n                },\n                \"_id\": \"68665d4f17b406bfb04a1edb\",\n                \"name\": \"harsh\",\n                \"gstin\": \"000000000\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:37:03.726Z\",\n                \"updatedAt\": \"2025-07-03T10:37:03.726Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"person\": \"harsh\",\n                    \"phone\": \"9415910000\"\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"ayodhya\",\n                    \"state\": \"up\",\n                    \"city\": \"kanpur\"\n                },\n                \"_id\": \"68665dbc17b406bfb04a1edf\",\n                \"name\": \"bunny\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n                \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"mumbai\",\n            \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"phone\": 9415918111\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"forest\",\n                    \"city\": \"\"\n                },\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\",\n                \"license_number\": \"555555\",\n                \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n                \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ac9d832caa4ff0378a4\",\n                \"vehicle_number\": \"1212\",\n                \"vehicle_type\": \"truck\",\n                \"capacity_weight\": 1200,\n                \"capacity_volume\": 60,\n                \"rc_number\": \"10000\",\n                \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n                \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Standard\",\n            \"provider\": \"Owner\",\n            \"eway_bill_number\": \"ER0000\",\n            \"status\": \"In-Transit\",\n            \"bility_no\": 4003,\n            \"created_by\": {\n                \"_id\": \"685e93273f62b6cc9adac5da\",\n                \"email\": \"10xtech@demo.com\"\n            },\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n            \"updatedAt\": \"2025-07-04T06:54:11.156Z\",\n            \"__v\": 0\n        },\n        {\n            \"goods_details\": {\n                \"description\": \"\",\n                \"quantity\": 60,\n                \"bill_no\": \"qw1212\",\n                \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n                \"bill_value\": 10000,\n                \"mode\": \"Door Delivery\",\n                \"actual_dimensions\": 60,\n                \"charged_dimensions\": 50,\n                \"unit_of_weight\": \"Per Kg\",\n                \"actual_weight\": 30,\n                \"charged_weight\": 25,\n                \"special_instructions\": \"\"\n            },\n            \"_id\": \"68677e1d38d4a3e577f54023\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"television\",\n                    \"contact_person\": \"12asdf\",\n                    \"contact_number\": \"1234567889\"\n                },\n                \"address\": \"ayodhya\",\n                \"_id\": \"685e944d532d16d35d1099bc\",\n                \"city\": \"delhi\",\n                \"gst_in\": \"565656\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-06-27T12:53:33.281Z\",\n                \"updatedAt\": \"2025-06-27T12:53:33.281Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"person\": \"harsh\",\n                    \"phone\": \"9415910000\"\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"\",\n                    \"state\": \"up\",\n                    \"city\": \"kanpur\"\n                },\n                \"_id\": \"68665f5e110bd39d219984c7\",\n                \"name\": \"mango\",\n                \"gstin\": \"11111\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:45:50.379Z\",\n                \"updatedAt\": \"2025-07-03T10:45:50.379Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"mumbai\",\n            \"expected_delivery_date_and_time\": \"2025-07-05T07:07:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"phone\": 9415918111\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"forest\",\n                    \"city\": \"\"\n                },\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\",\n                \"license_number\": \"555555\",\n                \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n                \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ae7d832caa4ff0378a8\",\n                \"vehicle_number\": \"MH10000\",\n                \"vehicle_type\": \"truck\",\n                \"capacity_weight\": 1200,\n                \"capacity_volume\": 60,\n                \"rc_number\": \"10000\",\n                \"rc_file\": \"\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T11:35:03.120Z\",\n                \"updatedAt\": \"2025-07-03T11:35:03.120Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Standard\",\n            \"provider\": \"Agency\",\n            \"eway_bill_number\": \"ER00111\",\n            \"status\": \"In-Transit\",\n            \"bility_no\": 4004,\n            \"created_by\": {\n                \"_id\": \"685e93273f62b6cc9adac5da\",\n                \"email\": \"10xtech@demo.com\"\n            },\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T07:09:17.022Z\",\n            \"updatedAt\": \"2025-07-04T07:09:17.022Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -4079,6 +4146,456 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agent",
+			"item": [
+				{
+					"name": "get agent",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get all agents",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/agents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "528"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"210-prx3tmuEEX4Ite+/CJEsmtIXFDw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:16:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agents fetched successfully\",\n    \"data\": [\n        {\n            \"contact\": {\n                \"person\": \"John Doe\",\n                \"phone\": 9876543210,\n                \"email\": \"john@agent.com\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"Block B\",\n                \"street\": \"Park Street\",\n                \"state\": \"Delhi\",\n                \"postal_code\": \"110001\",\n                \"city\": \"New Delhi\",\n                \"country\": \"India\"\n            },\n            \"_id\": \"68678d85bc1e56bd55d9de05\",\n            \"name\": \"Agent A\",\n            \"gstin\": \"29ABCDE1234F2Z5\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T08:15:01.408Z\",\n            \"updatedAt\": \"2025-07-04T08:15:01.408Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/agents/68678d85bc1e56bd55d9de05",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents",
+										"68678d85bc1e56bd55d9de05"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "525"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20d-apGdnF5yBpu0w9LW2XRfc8+s5DA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:19:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agent fetched successfully\",\n    \"data\": {\n        \"contact\": {\n            \"person\": \"John Doe\",\n            \"phone\": 9876543210,\n            \"email\": \"john@agent.com\"\n        },\n        \"address\": {\n            \"adddress_line_1\": \"Block B\",\n            \"street\": \"Park Street\",\n            \"state\": \"Delhi\",\n            \"postal_code\": \"110001\",\n            \"city\": \"New Delhi\",\n            \"country\": \"India\"\n        },\n        \"_id\": \"68678d85bc1e56bd55d9de05\",\n        \"name\": \"Agent A\",\n        \"gstin\": \"29ABCDE1234F2Z5\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T08:15:01.408Z\",\n        \"updatedAt\": \"2025-07-04T08:15:01.408Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "create Agent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVlOTMyNzNmNjJiNmNjOWFkYWM1ZGEiLCJlbWFpbCI6IjEweHRlY2hAZGVtby5jb20iLCJhY2NvdW50X2lkIjoiNjg1ZTkzMjYzZjYyYjZjYzlhZGFjNWQ4IiwiaWF0IjoxNzUxNjEyMTgwLCJleHAiOjE3NTE2OTg1ODB9.tQY-3HhJmI6IYzsq-74v1E6srugRW-VYlOUsJOPGnyI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Agent A\",\r\n  \"contact\": {\r\n    \"person\": \"John Doe\",\r\n    \"phone\": 9876543210,\r\n    \"email\": \"john@agent.com\"\r\n  },\r\n  \"address\": {\r\n    \"adddress_line_1\": \"Block B\",\r\n    \"street\": \"Park Street\",\r\n    \"state\": \"Delhi\",\r\n    \"postal_code\": \"110001\",\r\n    \"city\": \"New Delhi\",\r\n    \"country\": \"India\"\r\n  },\r\n  \"gstin\": \"29ABCDE1234F2Z5\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/agents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"agents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "agent created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Agent A\",\r\n  \"contact\": {\r\n    \"person\": \"John Doe\",\r\n    \"phone\": 9876543210,\r\n    \"email\": \"john@agent.com\"\r\n  },\r\n  \"address\": {\r\n    \"adddress_line_1\": \"Block B\",\r\n    \"street\": \"Park Street\",\r\n    \"state\": \"Delhi\",\r\n    \"postal_code\": \"110001\",\r\n    \"city\": \"New Delhi\",\r\n    \"country\": \"India\"\r\n  },\r\n  \"gstin\": \"29ABCDE1234F2Z5\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/agents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "525"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20d-37Up0xSLu1W+8EQPpeV50LO/7qM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:15:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agent created successfully\",\n    \"data\": {\n        \"name\": \"Agent A\",\n        \"contact\": {\n            \"person\": \"John Doe\",\n            \"phone\": 9876543210,\n            \"email\": \"john@agent.com\"\n        },\n        \"address\": {\n            \"adddress_line_1\": \"Block B\",\n            \"street\": \"Park Street\",\n            \"state\": \"Delhi\",\n            \"postal_code\": \"110001\",\n            \"city\": \"New Delhi\",\n            \"country\": \"India\"\n        },\n        \"gstin\": \"29ABCDE1234F2Z5\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"_id\": \"68678d85bc1e56bd55d9de05\",\n        \"createdAt\": \"2025-07-04T08:15:01.408Z\",\n        \"updatedAt\": \"2025-07-04T08:15:01.408Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "GST duplication",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Agent B\",\r\n  \"contact\": {\r\n    \"person\": \"John Doe\",\r\n    \"phone\": 9876543210,\r\n    \"email\": \"john@agent.com\"\r\n  },\r\n  \"address\": {\r\n    \"adddress_line_1\": \"Block B\",\r\n    \"street\": \"Park Street\",\r\n    \"state\": \"Delhi\",\r\n    \"postal_code\": \"110001\",\r\n    \"city\": \"New Delhi\",\r\n    \"country\": \"India\"\r\n  },\r\n  \"gstin\": \"29ABCDE1234F2Z5\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/agents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-U159V9UnqYpgQThg4KQAXiwjf3M\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:18:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agent with this GST number already exists\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "update Agent",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "update agent by id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Agent A Updated\",\r\n  \"contact\": {\r\n    \"person\": \"Jane Doe\",\r\n    \"phone\": 9999999999,\r\n    \"email\": \"jane@agent.com\"\r\n  },\r\n  \"gstin\": \"29ABCDE1234F2Z5\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/agents/68678d85bc1e56bd55d9de05",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents",
+										"68678d85bc1e56bd55d9de05"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "559"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22f-WutzFOgqvMWYvHLf6+Z25fKaXZc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:24:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agent updated successfully\",\n    \"data\": {\n        \"contact\": {\n            \"person\": \"Jane Doe\",\n            \"phone\": 9999999999,\n            \"email\": \"jane@agent.com\"\n        },\n        \"address\": {\n            \"adddress_line_1\": \"Block B\",\n            \"street\": \"Park Street\",\n            \"state\": \"Delhi\",\n            \"postal_code\": \"110001\",\n            \"city\": \"New Delhi\",\n            \"country\": \"India\"\n        },\n        \"_id\": \"68678d85bc1e56bd55d9de05\",\n        \"name\": \"Agent A Updated\",\n        \"gstin\": \"29ABCDE1234F2Z5\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T08:15:01.408Z\",\n        \"updatedAt\": \"2025-07-04T08:24:42.257Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete agent",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "agent deleted by id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/agents/68679062bc1e56bd55d9de0f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"agents",
+										"68679062bc1e56bd55d9de0f"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-L/gmTp/46A1BiFwk5i68i/3Fa2M\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Jul 2025 08:28:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Agent deleted successfully\"\n}"
+						}
+					]
 				}
 			]
 		}

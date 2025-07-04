@@ -40,6 +40,11 @@ const shipmentSchema = new mongoose.Schema({
   enum: ['Open', 'In-Transit', 'Delivered'],
   default: 'Open',
   },
+  bility_no: {
+  type: Number,
+  required: true,
+  unique: true,
+},
    created_by: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

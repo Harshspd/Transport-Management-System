@@ -4,6 +4,10 @@ import { serverError } from '../helpers/responseUtility.mjs';
  import {
   validateRequiredFields,
   validateObjectIdFields,checkDuplicate} from '../helpers/validationUtility.mjs';
+  
+   import dotenv from 'dotenv';
+   dotenv.config();
+
 
 
 
@@ -12,7 +16,7 @@ export const createShipment = async (req, res) => {
   try {
     const { consigner, consignee, driver, vehicle, ...rest } = req.body;
 
-    // ✅ Step 1: Required Fields Check
+    //  Step 1: Required Fields Check
     const requiredFields = ['consigner', 'consignee', 'delivery_location'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
@@ -23,7 +27,7 @@ export const createShipment = async (req, res) => {
       });
     }
 
-    // ✅ Step 2: ObjectId Validations
+    //  Step 2: ObjectId Validations
     const idFields = ['consigner', 'consignee', 'driver', 'vehicle'];
     const invalidFields = validateObjectIdFields(idFields, req.body);
 
@@ -33,13 +37,21 @@ export const createShipment = async (req, res) => {
         error: true,
       });
     }
+      
+     const latestShipment = await Shipment.findOne().sort({ bility_no: -1 }).limit(1);
+    const bility_no = latestShipment?.bility_no
+      ? latestShipment.bility_no + 1
+      : parseInt(process.env.ShipmentBaseId) || 4000;
 
-    // ✅ Step 3: Create Shipment
+
+
+    //  Step 3: Create Shipment
     const shipment = await Shipment.create({
       consigner: new mongoose.Types.ObjectId(consigner),
       consignee: new mongoose.Types.ObjectId(consignee),
       driver: driver ? new mongoose.Types.ObjectId(driver) : undefined,
       vehicle: vehicle ? new mongoose.Types.ObjectId(vehicle) : undefined,
+      bility_no,
       ...rest,
       created_by: req.user._id,
       organization_id: req.user.account_id,
