@@ -3302,6 +3302,74 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Shipments fetched successfully\",\n    \"data\": [\n        {\n            \"goods_details\": {\n                \"description\": \"\",\n                \"quantity\": 1000,\n                \"bill_no\": \"SH1111\",\n                \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n                \"bill_value\": 10000,\n                \"mode\": \"Transport\",\n                \"actual_dimensions\": 60,\n                \"charged_dimensions\": 50,\n                \"unit_of_weight\": \"Per Kg\",\n                \"actual_weight\": 30,\n                \"charged_weight\": 25,\n                \"special_instructions\": \"\"\n            },\n            \"_id\": \"68677a9338d4a3e577f54001\",\n            \"consigner\": {\n                \"contact\": {\n                    \"person\": \"Harsh vardhan singh\",\n                    \"phone\": 9653064472\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"\",\n                    \"state\": \"KANPUR\",\n                    \"city\": \"delhi\"\n                },\n                \"_id\": \"68665d4f17b406bfb04a1edb\",\n                \"name\": \"harsh\",\n                \"gstin\": \"000000000\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:37:03.726Z\",\n                \"updatedAt\": \"2025-07-03T10:37:03.726Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"person\": \"harsh\",\n                    \"phone\": \"9415910000\"\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"ayodhya\",\n                    \"state\": \"up\",\n                    \"city\": \"kanpur\"\n                },\n                \"_id\": \"68665dbc17b406bfb04a1edf\",\n                \"name\": \"bunny\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n                \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"mumbai\",\n            \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"phone\": 9415918111\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"forest\",\n                    \"city\": \"\"\n                },\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\",\n                \"license_number\": \"555555\",\n                \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n                \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ac9d832caa4ff0378a4\",\n                \"vehicle_number\": \"1212\",\n                \"vehicle_type\": \"truck\",\n                \"capacity_weight\": 1200,\n                \"capacity_volume\": 60,\n                \"rc_number\": \"10000\",\n                \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n                \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Standard\",\n            \"provider\": \"Owner\",\n            \"eway_bill_number\": \"ER0000\",\n            \"status\": \"In-Transit\",\n            \"bility_no\": 4003,\n            \"created_by\": {\n                \"_id\": \"685e93273f62b6cc9adac5da\",\n                \"email\": \"10xtech@demo.com\"\n            },\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n            \"updatedAt\": \"2025-07-04T06:54:11.156Z\",\n            \"__v\": 0\n        },\n        {\n            \"goods_details\": {\n                \"description\": \"\",\n                \"quantity\": 60,\n                \"bill_no\": \"qw1212\",\n                \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n                \"bill_value\": 10000,\n                \"mode\": \"Door Delivery\",\n                \"actual_dimensions\": 60,\n                \"charged_dimensions\": 50,\n                \"unit_of_weight\": \"Per Kg\",\n                \"actual_weight\": 30,\n                \"charged_weight\": 25,\n                \"special_instructions\": \"\"\n            },\n            \"_id\": \"68677e1d38d4a3e577f54023\",\n            \"consigner\": {\n                \"contact\": {\n                    \"name\": \"television\",\n                    \"contact_person\": \"12asdf\",\n                    \"contact_number\": \"1234567889\"\n                },\n                \"address\": \"ayodhya\",\n                \"_id\": \"685e944d532d16d35d1099bc\",\n                \"city\": \"delhi\",\n                \"gst_in\": \"565656\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-06-27T12:53:33.281Z\",\n                \"updatedAt\": \"2025-06-27T12:53:33.281Z\",\n                \"__v\": 0\n            },\n            \"consignee\": {\n                \"contact\": {\n                    \"person\": \"harsh\",\n                    \"phone\": \"9415910000\"\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"\",\n                    \"state\": \"up\",\n                    \"city\": \"kanpur\"\n                },\n                \"_id\": \"68665f5e110bd39d219984c7\",\n                \"name\": \"mango\",\n                \"gstin\": \"11111\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T10:45:50.379Z\",\n                \"updatedAt\": \"2025-07-03T10:45:50.379Z\",\n                \"__v\": 0\n            },\n            \"delivery_location\": \"mumbai\",\n            \"expected_delivery_date_and_time\": \"2025-07-05T07:07:00.000Z\",\n            \"driver\": {\n                \"contact\": {\n                    \"phone\": 9415918111\n                },\n                \"address\": {\n                    \"adddress_line_1\": \"forest\",\n                    \"city\": \"\"\n                },\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\",\n                \"license_number\": \"555555\",\n                \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n                \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n                \"__v\": 0\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ae7d832caa4ff0378a8\",\n                \"vehicle_number\": \"MH10000\",\n                \"vehicle_type\": \"truck\",\n                \"capacity_weight\": 1200,\n                \"capacity_volume\": 60,\n                \"rc_number\": \"10000\",\n                \"rc_file\": \"\",\n                \"created_by\": \"685e93273f62b6cc9adac5da\",\n                \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n                \"createdAt\": \"2025-07-03T11:35:03.120Z\",\n                \"updatedAt\": \"2025-07-03T11:35:03.120Z\",\n                \"__v\": 0\n            },\n            \"service_type\": \"Standard\",\n            \"provider\": \"Agency\",\n            \"eway_bill_number\": \"ER00111\",\n            \"status\": \"In-Transit\",\n            \"bility_no\": 4004,\n            \"created_by\": {\n                \"_id\": \"685e93273f62b6cc9adac5da\",\n                \"email\": \"10xtech@demo.com\"\n            },\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T07:09:17.022Z\",\n            \"updatedAt\": \"2025-07-04T07:09:17.022Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "get shipment by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/68677a9338d4a3e577f54001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"68677a9338d4a3e577f54001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2285"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8ed-59UFe+GEfPUi7aP8GwVMeZ5WgBg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 05 Jul 2025 11:13:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment fetched successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": {\n            \"contact\": {\n                \"person\": \"Harsh vardhan singh\",\n                \"phone\": 9653064472\n            },\n            \"address\": {\n                \"adddress_line_1\": \"\",\n                \"state\": \"KANPUR\",\n                \"city\": \"delhi\"\n            },\n            \"_id\": \"68665d4f17b406bfb04a1edb\",\n            \"name\": \"harsh\",\n            \"gstin\": \"000000000\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:37:03.726Z\",\n            \"updatedAt\": \"2025-07-03T10:37:03.726Z\",\n            \"__v\": 0\n        },\n        \"consignee\": {\n            \"contact\": {\n                \"person\": \"harsh\",\n                \"phone\": \"9415910000\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"ayodhya\",\n                \"state\": \"up\",\n                \"city\": \"kanpur\"\n            },\n            \"_id\": \"68665dbc17b406bfb04a1edf\",\n            \"name\": \"bunny\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n            \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n            \"__v\": 0\n        },\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": {\n            \"contact\": {\n                \"phone\": 9415918111\n            },\n            \"address\": {\n                \"adddress_line_1\": \"forest\",\n                \"city\": \"\"\n            },\n            \"_id\": \"68663c32d713f625f68758b3\",\n            \"name\": \"lion\",\n            \"license_number\": \"555555\",\n            \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n            \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n            \"__v\": 0\n        },\n        \"vehicle\": {\n            \"_id\": \"68666ac9d832caa4ff0378a4\",\n            \"vehicle_number\": \"1212\",\n            \"vehicle_type\": \"truck\",\n            \"capacity_weight\": 1200,\n            \"capacity_volume\": 60,\n            \"rc_number\": \"10000\",\n            \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n            \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n            \"__v\": 0\n        },\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"ER0000\",\n        \"status\": \"In-Transit\",\n        \"bility_no\": 4003,\n        \"created_by\": {\n            \"_id\": \"685e93273f62b6cc9adac5da\",\n            \"email\": \"10xtech@demo.com\"\n        },\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-04T06:54:11.156Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
