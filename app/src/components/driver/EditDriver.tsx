@@ -1,114 +1,176 @@
-import React from 'react';
-import useDriverForm from '@/hooks/useDriverForm';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { createDriver, getDriverById, updateDriver } from '@/utils/api/driverApi';
+import { Driver } from '@/types/driver';
+import { driverSchema } from '@/validations/validationSchema';
+import Input from '../form/input/InputField';
+import TextArea from '../form/input/TextArea';
+import Button from '../ui/button/Button';
+import BtnSubmit from '../ui/button/BtnSubmit';
+import { toast } from 'react-toastify';
 
 
-const EditDriver: React.FC<any> = ({ onSave }) => {
-    const {
-        newOptionValue,
-        handleChange,
-        handleNameChange,
-        handleSave,
-    } = useDriverForm(onSave);
 
-    const fields = [
-        { label: 'Contact Number', name: 'contactNumber', type: 'text' },
-        { label: 'License Number', name: 'licenseNumber', type: 'text' },
-        { label: 'License Upload', name: 'licenseFile', type: 'file' },
-        { label: 'Address', name: 'address', type: 'textarea' }
-    ];
+interface EditDriverProps {
+    onSave: (data: Driver) => void;
+    selectedId?: string | null;
+    onCancel: () => void;
+}
 
-    const renderField = (field: any) => {
-        if (field.type === 'textarea') {
-            return (
-                <textarea
-                    name={field.name}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
-                    rows={5}
-                ></textarea>
-            );
+const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId }) => {
+    const [initialValues, setInitialValues] = useState({
+        name: '',
+        contactPerson: '',
+        contactNumber: '',
+        adddress_line_1: '',
+        license_number: '',
+        state: '',
+        gstin: '',
+    });
+    const resetForm = () => {
+        // Reset to initial values if no selectedId
+        setInitialValues({
+            name: '',
+            contactPerson: '',
+            contactNumber: '',
+            adddress_line_1: '',
+            license_number: '',
+            state: '',
+            gstin: '',
+        });
+    }
+    useEffect(() => {
+        const fetchDriver = async () => {
+            if (selectedId) {
+                try {
+                    const res = await getDriverById(selectedId);
+                    const data = res.data;
+                    setInitialValues({
+                        name: data.name || '',
+                        contactPerson: data.contact?.person || '',
+                        contactNumber: data.contact?.phone || '',
+                        adddress_line_1: data.address?.adddress_line_1 || '',
+                        license_number: data.address?.license_number || '',
+                        state: data.address?.state || '',
+                        gstin: data.gstin || '',
+                    });
+                } catch (err) {
+                    console.error('Error fetching driver:', err);
+                }
+            } else {
+                resetForm();
+            }
+        };
+        fetchDriver();
+    }, [selectedId]);
+
+    const handleSubmit = async (values: typeof initialValues, { setSubmitting, resetForm }: any) => {
+        try {
+            const payload: Driver = {
+                name: values.name,
+                contact: {
+                    person: values.contactPerson,
+                    phone: values.contactNumber,
+                },
+                address: {
+                    adddress_line_1: values.adddress_line_1,
+                },
+                license_number: values.license_number
+            };
+
+            const res = selectedId ? await updateDriver(selectedId, payload) : await createDriver(payload);
+            toast.success(`Driver ${selectedId ? 'updated' : 'created'} successfully!`);
+            onSave(res.data);
+            resetForm();
+        } catch (error) {
+            console.error('Failed to save driver:', error);
+        } finally {
+            setSubmitting(false);
         }
-        if (field.type === 'file') {
-            return (
-                <input
-                    type="file"
-                    name={field.name}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-700 dark:file:bg-brand-900/20 dark:file:text-brand-400 hover:file:bg-brand-100 dark:hover:file:bg-brand-900/30"
-                />
-            );
-        }
-        return (
-            <input
-                type={field.type}
-                name={field.name}
-                onChange={handleChange}
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
-            />
-        );
+    };
+    const handleCancel = () => {
+        resetForm();
+        onCancel();
     };
 
-    const getLeftFields = () => {
-        return [
-            { label: 'Driver Name', name: 'name', type: 'text' },
-            ...fields.filter(f => f.name === 'address')
-        ];
-    };
-
-    const getRightFields = () => {
-        return fields.filter(f => f.name !== 'address');
-    };
 
     return (
-        <div className='p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'>
-            <h2 className="text-lg font-medium pb-4 text-gray-800 dark:text-white">Driver Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Left Column */}
-                <div className="flex flex-col gap-4">
-                    {getLeftFields().map((field, idx) => {
-                        if (field.name === 'name') {
-                            return (
-                                <div key={idx}>
-                                    <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
-                                    <input
-                                        type="text"
-                                        value={newOptionValue}
-                                        onChange={handleNameChange}
-                                        className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 h-10.5 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand-300 dark:focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:focus:ring-brand-500/20"
-                                    />
-                                </div>
-                            );
-                        }
-                        if (field.name === 'address') {
-                            return (
-                                <div key={idx} className="md:col-span-2">
-                                    <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
-                                    {renderField(field)}
-                                </div>
-                            );
-                        }
-                        return null;
-                    })}
-                </div>
+        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
 
-                {/* Right Column */}
-                <div className="flex flex-col gap-4">
-                    {getRightFields().map((field, idx) => (
-                        <div key={idx}>
-                            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">{field.label} :</label>
-                            {renderField(field)}
+            <Formik
+                enableReinitialize
+                initialValues={initialValues}
+                validationSchema={driverSchema}
+                onSubmit={handleSubmit}
+            >
+                {({ isSubmitting }) => (
+                    <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Left Column */}
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <label>Driver Name</label>
+                                <Field name="name" as={Input} />
+                                <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+                            <div>
+                                <label>Address</label>
+                                <Field name="adddress_line_1" id="adddress_line_1" rows={5} className="w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs focus:outline-hidden" />
+                                <ErrorMessage name="adddress_line_1" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+                            <div>
+                                <label>License Number</label>
+                                <Field name="license_number" as={Input} />
+                                <ErrorMessage name="license_number" component="div" className="text-red-500 text-sm" />
+                            </div>
                         </div>
-                    ))}
-                </div>
-                <div className="col-span-1 md:col-span-2 mt-4">
-                    <button
-                        onClick={handleSave}
-                        className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
+
+                        {/* Right Column */}
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <label>Contact Person</label>
+                                <Field name="contactPerson" as={Input} />
+                                <ErrorMessage name="contactPerson" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+                            <div>
+                                <label>Contact Number</label>
+                                <Field name="contactNumber" as={Input} />
+                                <ErrorMessage name="contactNumber" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+                            <div>
+                                <label>GSTIN</label>
+                                <Field name="gstin" as={Input} />
+                                <ErrorMessage name="gstin" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+                            <div>
+                                <label>State</label>
+                                <Field name="state" as={Input} />
+                                <ErrorMessage name="state" component="div" className="text-red-500 text-sm" />
+                            </div>
+
+
+                        </div>
+
+                        <div className="col-span-1 md:col-span-2 mt-4 gap-4 flex justify-end">
+                            <BtnSubmit
+                                disabled={isSubmitting}
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+                            >
+                                {isSubmitting ? 'Saving...' : 'Save'}
+                            </BtnSubmit>
+
+                            <Button variant='outline' onClick={handleCancel}>Cancel</Button>
+
+                        </div>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };

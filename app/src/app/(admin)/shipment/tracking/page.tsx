@@ -169,7 +169,7 @@ export default function ShipmentTracking() {
                                                         {row?.goods_details?.bill_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.createdAt?.toLocaleDateString()}
+                                                        {row?.createdAt ? new Date(row.createdAt).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.consignee?.name || "-"}
