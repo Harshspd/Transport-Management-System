@@ -45,7 +45,7 @@ const ShipmentForm: React.FC = () => {
     }, []);
 
 
-    const handleAddNewAndClose = async (type:string, newEntry: any) => {
+    const handleAddNewAndClose = async (type: string, newEntry: any) => {
         const success = await handleAddNew(type, newEntry);
     };
 
@@ -131,7 +131,7 @@ const ShipmentForm: React.FC = () => {
                                     />
                                     {errors.Description && <p className="text-red-500 text-xs mt-1">{errors.Description}</p>}
                                 </div>
-                                
+
                                 <div>
                                     <Label>Bill No</Label>
                                     <Input
@@ -142,16 +142,16 @@ const ShipmentForm: React.FC = () => {
                                     {errors.BillNo && <p className="text-red-500 text-xs mt-1">{errors.BillNo}</p>}
                                 </div>
                                 <div>
-                                    <Label>BillDate</Label>
+                                    <Label>Bill Date/Time</Label>
                                     <Input
-                                        name="billDate"
+                                        name="BillDate"
                                         onChange={(e) => handleChange(e)}
                                         value={formData.BillDate}
                                         type="datetime-local"
                                     />
                                     {errors.BillDate && <p className="text-red-500 text-xs mt-1">{errors.BillDate}</p>}
                                 </div>
-                                
+
 
                                 <div>
                                     <Label>Bill Value</Label>
@@ -186,6 +186,21 @@ const ShipmentForm: React.FC = () => {
                                         value={formData.Quantity}
                                     />
                                     {errors.Quantity && <p className="text-red-500 text-xs mt-1">{errors.Quantity}</p>}
+                                </div>
+                                <div>
+                                    <Label>Provider</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.Provider, 'Provider')}
+                                            placeholder="Select Provider Type"
+                                            onChange={(value) => handleChange("Provider", value)}
+                                            value={formData.Provider}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                    {errors.Provider && <p className="text-red-500 text-xs mt-1">{errors.Provider}</p>}
                                 </div>
                                 <div>
                                     <Label>Actual Dimensions</Label>
@@ -292,21 +307,7 @@ const ShipmentForm: React.FC = () => {
                                     </div>
                                     {errors.ServiceType && <p className="text-red-500 text-xs mt-1">{errors.ServiceType}</p>}
                                 </div>
-                                <div>
-                                    <Label>Provider</Label>
-                                    <div className="relative">
-                                        <Select
-                                            options={renderOptions(options.Provider, 'Provider')}
-                                            placeholder="Select Provider Type"
-                                            onChange={(value) => handleChange("Provider", value)}
-                                            value={formData.Provider}
-                                        />
-                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
-                                            <ChevronDownIcon />
-                                        </span>
-                                    </div>
-                                    {errors.Provider && <p className="text-red-500 text-xs mt-1">{errors.Provider}</p>}
-                                </div>
+                                
                                 <div>
                                     <Label>Eway Bill Number</Label>
                                     <Input
@@ -362,16 +363,16 @@ const ShipmentForm: React.FC = () => {
                 {/* Modals */}
 
                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
-                    <EditConsigner onSave={(data:Consigner)=>handleAddNewAndClose('Consigner',data)} />
+                    <EditConsigner onSave={(data: Consigner) => handleAddNewAndClose('Consigner', data)} />
                 </SlideModal>
                 <SlideModal title='Add Consignee' isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
-                    <EditConsignee onSave={(data:Consignee)=>handleAddNewAndClose('Consignee',data)} />
+                    <EditConsignee onSave={(data: Consignee) => handleAddNewAndClose('Consignee', data)} />
                 </SlideModal>
                 <SlideModal title='Add Driver' isOpen={driverModal.isOpen} onClose={driverModal.closeModal}>
-                    <EditDriver onSave={(data:Driver)=>handleAddNewAndClose('Driver',data)} />
+                    <EditDriver onSave={(data: Driver) => handleAddNewAndClose('Driver', data)} />
                 </SlideModal>
                 <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
-                    <EditVehicle onSave={(data:Vehicle)=>handleAddNewAndClose('Vehicle',data)}/>
+                    <EditVehicle onSave={(data: Vehicle) => handleAddNewAndClose('Vehicle', data)} />
                 </SlideModal>
             </div>
         </ComponentCard>

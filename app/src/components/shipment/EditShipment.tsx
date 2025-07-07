@@ -4,6 +4,13 @@ import { getConsigners } from '@/utils/api/consignerApi';
 import { getConsignees } from '@/utils/api/consigneeApi';
 import { getDrivers } from '@/utils/api/driverApi';
 import { getVehicles } from '@/utils/api/vehicleApi';
+import ComponentCard from '@/components/common/ComponentCard';
+import Label from '@/components/form/Label';
+import Select from '@/components/form/Select';
+import Input from '@/components/form/input/InputField';
+import TextArea from '@/components/form/input/TextArea';
+import Form from '@/components/form/Form';
+import { ChevronDownIcon } from '@/icons/index';
 
 interface EditShipmentProps {
     shipment: any;
@@ -24,39 +31,55 @@ const EditShipment: React.FC<EditShipmentProps> = ({ shipment, onSave, onCancel 
         return entity._id || '';
     };
 
-    const [form, setForm] = useState({
-        consignerName: getDisplayValue(shipment.consigner),
-        consignerId: getIdValue(shipment.consigner),
-        consigneeName: getDisplayValue(shipment.consignee),
-        consigneeId: getIdValue(shipment.consignee),
-        delivery_location: shipment.delivery_location || '',
-        date_time: shipment.date_time ? new Date(shipment.date_time).toISOString().slice(0, 16) : '',
-        description: shipment.goods_details?.description || '',
-        quantity: shipment.goods_details?.quantity || '',
-        bill_no: shipment.goods_details?.bill_no || '',
-        bill_date: shipment.goods_details?.bill_date ? new Date(shipment.goods_details.bill_date).toISOString().slice(0, 10) : '',
-        bill_value: shipment.goods_details?.bill_value || '',
-        mode: shipment.goods_details?.mode || '',
-        actual_dimensions: shipment.goods_details?.actual_dimensions || '',
-        charged_dimensions: shipment.goods_details?.charged_dimensions || '',
-        unit_of_weight: shipment.goods_details?.unit_of_weight || '',
-        actual_weight: shipment.goods_details?.actual_weight || '',
-        charged_weight: shipment.goods_details?.charged_weight || '',
-        special_instructions: shipment.goods_details?.special_instructions || '',
-        driverName: getDisplayValue(shipment.driver),
-        driverId: getIdValue(shipment.driver),
-        vehicleName: getDisplayValue(shipment.vehicle),
-        vehicleId: getIdValue(shipment.vehicle),
-        service_type: shipment.service_type || '',
-        provider: shipment.provider || '',
-        eway_bill_number: shipment.eway_bill_number || '',
-        status: shipment.status || '',
+    const [formData, setFormData] = useState({
+        Consigner: getIdValue(shipment.consigner),
+        Consignee: getIdValue(shipment.consignee),
+        DeliveryLocation: shipment.delivery_location || '',
+        ExpectedDeliveryDateTime: shipment.date_time ? new Date(shipment.date_time).toISOString().slice(0, 16) : '',
+        Description: shipment.goods_details?.description || '',
+        Quantity: shipment.goods_details?.quantity || '',
+        BillNo: shipment.goods_details?.bill_no || '',
+        BillDate: shipment.goods_details?.bill_date ? new Date(shipment.goods_details.bill_date).toISOString().slice(0, 16) : '',
+        BillValue: shipment.goods_details?.bill_value || '',
+        Mode: shipment.goods_details?.mode || '',
+        ActualDimensions: shipment.goods_details?.actual_dimensions || '',
+        ChargedDimensions: shipment.goods_details?.charged_dimensions || '',
+        UnitWeight: shipment.goods_details?.unit_of_weight || '',
+        ActualWeight: shipment.goods_details?.actual_weight || '',
+        ChargedWeight: shipment.goods_details?.charged_weight || '',
+        Instructions: shipment.goods_details?.special_instructions || '',
+        Driver: getIdValue(shipment.driver),
+        Vehicle: getIdValue(shipment.vehicle),
+        ServiceType: shipment.service_type || '',
+        Provider: shipment.provider || '',
+        EwayBill: shipment.eway_bill_number || '',
+        Status: shipment.status || '',
     });
 
-    const [consignerOptions, setConsignerOptions] = useState<any[]>([]);
-    const [consigneeOptions, setConsigneeOptions] = useState<any[]>([]);
-    const [driverOptions, setDriverOptions] = useState<any[]>([]);
-    const [vehicleOptions, setVehicleOptions] = useState<any[]>([]);
+    const [options, setOptions] = useState({
+        Consigner: [],
+        Consignee: [],
+        Driver: [],
+        Vehicle: [],
+        Mode: [
+            { value: 'Transport', label: 'Transport' },
+            { value: 'Door Delivery', label: 'Door Delivery' },
+        ],
+        UnitWeight: [
+            { value: 'Per Kg', label: 'Per Kg' },
+            { value: 'LPT (Less than Truckload)', label: 'LPT (Less than Truckload)' },
+            { value: 'FTL (Turbo)', label: 'FTL (Turbo)' },
+            { value: 'Turbo', label: 'Turbo' },
+        ],
+        ServiceType: [
+            { value: 'Standard', label: 'Standard' },
+            { value: 'Express', label: 'Express' },
+        ],
+        Provider: [
+            { value: 'Owner', label: 'Owner' },
+            { value: 'Agency', label: 'Agency' },
+        ],
+    });
 
     useEffect(() => {
         Promise.all([
@@ -65,224 +88,326 @@ const EditShipment: React.FC<EditShipmentProps> = ({ shipment, onSave, onCancel 
             getDrivers(),
             getVehicles()
         ]).then(([consigners, consignees, drivers, vehicles]) => {
-            setConsignerOptions(consigners.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })));
-            setConsigneeOptions(consignees.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })));
-            setDriverOptions(drivers.map((d: any) => ({ value: d._id, label: d.contact?.name || d.name })));
-            setVehicleOptions(vehicles.map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name })));
+            setOptions(prev => ({
+                ...prev,
+                Consigner: consigners.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
+                Consignee: consignees.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
+                Driver: drivers.map((d: any) => ({ value: d._id, label: d.contact?.name || d.name })),
+                Vehicle: vehicles.map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name })),
+            }));
         });
     }, []);
 
-    const getIdByName = (options: any[], name: string) => {
-        const found = options.find(opt => opt.label === name);
-        return found ? found.value : undefined;
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name]: value }));
+    const handleSelectChange = (name: string, value: string) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Map names to IDs for reference fields if possible
-        const consignerId = getIdByName(consignerOptions, form.consignerName);
-        const consigneeId = getIdByName(consigneeOptions, form.consigneeName);
-        const driverId = getIdByName(driverOptions, form.driverName);
-        const vehicleId = getIdByName(vehicleOptions, form.vehicleName);
         const updated = {
             _id: shipment._id,
-            ...form,
-            consigner: consignerId,
-            consignee: consigneeId,
-            driver: driverId,
-            vehicle: vehicleId,
+            consigner: formData.Consigner,
+            consignee: formData.Consignee,
+            delivery_location: formData.DeliveryLocation,
+            date_time: formData.ExpectedDeliveryDateTime,
+            driver: formData.Driver,
+            vehicle: formData.Vehicle,
+            service_type: formData.ServiceType,
+            provider: formData.Provider,
+            eway_bill_number: formData.EwayBill,
+            status: formData.Status,
             goods_details: {
-                description: form.description,
-                quantity: form.quantity,
-                bill_no: form.bill_no,
-                bill_date: form.bill_date,
-                bill_value: form.bill_value,
-                mode: form.mode,
-                actual_dimensions: form.actual_dimensions,
-                charged_dimensions: form.charged_dimensions,
-                unit_of_weight: form.unit_of_weight,
-                actual_weight: form.actual_weight,
-                charged_weight: form.charged_weight,
-                special_instructions: form.special_instructions,
+                description: formData.Description,
+                quantity: formData.Quantity,
+                bill_no: formData.BillNo,
+                bill_date: formData.BillDate,
+                bill_value: formData.BillValue,
+                mode: formData.Mode,
+                actual_dimensions: formData.ActualDimensions,
+                charged_dimensions: formData.ChargedDimensions,
+                unit_of_weight: formData.UnitWeight,
+                actual_weight: formData.ActualWeight,
+                charged_weight: formData.ChargedWeight,
+                special_instructions: formData.Instructions,
             },
         };
         onSave(updated);
     };
 
+    const renderOptions = (optionsArr: any[], type: string) => {
+        return optionsArr.map((option: any) => ({
+            value: option.value,
+            label: option.label
+        }));
+    };
+
+    const getLabelById = (optionsArr: any[], id: string) => {
+        if (!id) return '';
+        const found = optionsArr.find((opt) => opt.value === id);
+        return found ? found.label : id;
+    };
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 p-2">
+        <ComponentCard title="Edit Shipment">
             <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Consigner</label>
-                <input
-                    type="text"
-                    name="consignerName"
-                    value={form.consignerName}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Consignee</label>
-                <input
-                    type="text"
-                    name="consigneeName"
-                    value={form.consigneeName}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Delivery Location</label>
-                <input
-                    type="text"
-                    name="delivery_location"
-                    value={form.delivery_location}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Expected Delivery Date/Time</label>
-                <input
-                    type="datetime-local"
-                    name="date_time"
-                    value={form.date_time}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Description</label>
-                <input type="text" name="description" value={form.description} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Quantity</label>
-                <input type="number" name="quantity" value={form.quantity} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Bill No</label>
-                <input type="text" name="bill_no" value={form.bill_no} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Bill Date</label>
-                <input type="date" name="bill_date" value={form.bill_date} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Bill Value</label>
-                <input type="number" name="bill_value" value={form.bill_value} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Mode</label>
-                <input type="text" name="mode" value={form.mode} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Actual Dimensions</label>
-                <input type="number" name="actual_dimensions" value={form.actual_dimensions} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Charged Dimensions</label>
-                <input type="number" name="charged_dimensions" value={form.charged_dimensions} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Unit Weight</label>
-                <input type="text" name="unit_of_weight" value={form.unit_of_weight} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Actual Weight</label>
-                <input type="number" name="actual_weight" value={form.actual_weight} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Charged Weight</label>
-                <input type="number" name="charged_weight" value={form.charged_weight} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Instructions</label>
-                <input type="text" name="special_instructions" value={form.special_instructions} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white" />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Driver</label>
-                <input
-                    type="text"
-                    name="driverName"
-                    value={form.driverName}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Vehicle</label>
-                <input
-                    type="text"
-                    name="vehicleName"
-                    value={form.vehicleName}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Service Type</label>
-                <input
-                    type="text"
-                    name="service_type"
-                    value={form.service_type}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Provider</label>
-                <input
-                    type="text"
-                    name="provider"
-                    value={form.provider}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Eway Bill Number</label>
-                <input
-                    type="text"
-                    name="eway_bill_number"
-                    value={form.eway_bill_number}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                />
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Status</label>
-                <select
-                    name="status"
-                    value={form.status}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
-                >
-                    <option value="open">Open</option>
-                    <option value="in-transit">In-Transit</option>
-                    <option value="delivered">Delivered</option>
-                </select>
-            </div>
-            <div className="flex gap-2 justify-end">
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"
-                >
-                    Cancel
-                </button>
-                <button
-                    type="submit"
-                    className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-                >
-                    Save
-                </button>
-            </div>
-        </form>
+                    <div className="w-full max-w-3xl bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6 flex gap-6">
+                        <Form className="flex-[3] space-y-4" onSubmit={handleSubmit}>
+                            <div>
+                                <Label>Consigner</Label>
+                                <div className="relative">
+                                    <Select
+                                        options={renderOptions(options.Consigner, 'Consigner')}
+                                        placeholder="Select Consigner"
+                                        onChange={(value) => handleSelectChange("Consigner", value)}
+                                        value={formData.Consigner}
+                                    />
+                                    <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                        <ChevronDownIcon />
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-4">
+                                <div>
+                                    <Label>Consignee</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.Consignee, 'Consignee')}
+                                            placeholder="Select Consignee"
+                                            onChange={(value) => handleSelectChange("Consignee", value)}
+                                            value={formData.Consignee}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Delivery Location</Label>
+                                    <Input
+                                        name="DeliveryLocation"
+                                        onChange={handleChange}
+                                        value={formData.DeliveryLocation}
+                                        type="text"
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Expected Date/Time</Label>
+                                    <Input
+                                        name="ExpectedDeliveryDateTime"
+                                        onChange={handleChange}
+                                        value={formData.ExpectedDeliveryDateTime}
+                                        type="datetime-local"
+                                    />
+                                </div>
+                            </div>
+
+                            <h2 className="text-lg font-medium text-gray-800 dark:text-white">Goods Details</h2>
+
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="row-span-3">
+                                    <Label>Description</Label>
+                                    <TextArea
+                                        value={formData.Description}
+                                        onChange={(value) => handleChange({ target: { name: 'Description', value } })}
+                                        rows={10}
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label>Bill No</Label>
+                                    <Input
+                                        name="BillNo"
+                                        onChange={handleChange}
+                                        value={formData.BillNo}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Bill Date</Label>
+                                    <Input
+                                        name="BillDate"
+                                        onChange={handleChange}
+                                        value={formData.BillDate}
+                                        type="datetime-local"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label>Bill Value</Label>
+                                    <Input
+                                        name="BillValue"
+                                        onChange={handleChange}
+                                        value={formData.BillValue}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Mode</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.Mode, 'Mode')}
+                                            placeholder="Select Mode"
+                                            onChange={(value) => handleSelectChange("Mode", value)}
+                                            value={formData.Mode}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Quantity</Label>
+                                    <Input
+                                        type="number"
+                                        name="Quantity"
+                                        onChange={handleChange}
+                                        value={formData.Quantity}
+                                    />
+                                </div>
+                            <div>
+                                <Label>Provider</Label>
+                                <div className="relative">
+                                    <Select
+                                        options={renderOptions(options.Provider, 'Provider')}
+                                        placeholder="Select Provider Type"
+                                        onChange={(value) => handleSelectChange("Provider", value)}
+                                        value={formData.Provider}
+                                    />
+                                    <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                        <ChevronDownIcon />
+                                    </span>
+                                </div>
+                            </div>
+                                <div>
+                                    <Label>Actual Dimensions</Label>
+                                    <Input
+                                        name="ActualDimensions"
+                                        onChange={handleChange}
+                                        value={formData.ActualDimensions}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Charged Dimensions</Label>
+                                    <Input
+                                        name="ChargedDimensions"
+                                        onChange={handleChange}
+                                        value={formData.ChargedDimensions}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Unit of Weight</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.UnitWeight, 'UnitWeight')}
+                                            placeholder="Select Unit"
+                                            onChange={(value) => handleSelectChange("UnitWeight", value)}
+                                            value={formData.UnitWeight}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Actual Weight</Label>
+                                    <Input
+                                        name="ActualWeight"
+                                        onChange={handleChange}
+                                        value={formData.ActualWeight}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Charged Weight</Label>
+                                    <Input
+                                        name="ChargedWeight"
+                                        onChange={handleChange}
+                                        value={formData.ChargedWeight}
+                                    />
+                                </div>
+                                <div className="row-span-3">
+                                    <Label>Special Instructions</Label>
+                                    <TextArea
+                                        value={formData.Instructions}
+                                        onChange={(value) => handleChange({ target: { name: 'Instructions', value } })}
+                                        rows={10}
+                                    />
+                                </div>
+                                <div>
+                                    <Label>Driver</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.Driver, 'Driver')}
+                                            placeholder="Select Driver"
+                                            onChange={(value) => handleSelectChange("Driver", value)}
+                                            value={formData.Driver}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Vehicle</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.Vehicle, 'Vehicle')}
+                                            placeholder="Select Vehicle"
+                                            onChange={(value) => handleSelectChange("Vehicle", value)}
+                                            value={formData.Vehicle}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Service Type</Label>
+                                    <div className="relative">
+                                        <Select
+                                            options={renderOptions(options.ServiceType, 'ServiceType')}
+                                            placeholder="Select Service Type"
+                                            onChange={(value) => handleSelectChange("ServiceType", value)}
+                                            value={formData.ServiceType}
+                                        />
+                                        <span className="absolute text-gray-500 dark:text-gray-400 -translate-y-1/2 pointer-events-none right-3 top-1/2">
+                                            <ChevronDownIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <Label>Eway Bill Number</Label>
+                                    <Input
+                                        name="EwayBill"
+                                        onChange={handleChange}
+                                        value={formData.EwayBill}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2">
+                                <button
+                                    type="button"
+                                    onClick={onCancel}
+                                    className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </Form>
+                    </div>
+                </div>
+        </ComponentCard>
     );
 };
 
