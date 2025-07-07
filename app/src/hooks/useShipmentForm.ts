@@ -63,6 +63,7 @@ const useShipmentForm = () => {
         BillDate: '',
         BillValue: '',
         Mode: '',
+        Provider: '',
         ActualDimensions: '',
         ChargedDimensions: '',
         UnitWeight: '',
@@ -72,7 +73,6 @@ const useShipmentForm = () => {
         Driver: '',
         Vehicle: '',
         ServiceType: '',
-        Provider: '',
         EwayBill: '',
     });
 
