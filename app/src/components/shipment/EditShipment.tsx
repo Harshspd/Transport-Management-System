@@ -360,13 +360,13 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                 {/* Modals */}
 
                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
-                    <EditConsigner onSave={(data:Consigner)=>handleAddNewAndClose('Consigner',data)} />
+                    <EditConsigner onSave={(data:Consigner)=>handleAddNewAndClose('Consigner',data)} onCancel={()=> consignerModal.closeModal} />
                 </SlideModal>
                 <SlideModal title='Add Consignee' isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
                     <EditConsignee onSave={(data:Consignee)=>handleAddNewAndClose('Consignee',data)} onCancel={()=>consignerModal.closeModal} />
                 </SlideModal>
                 <SlideModal title='Add Driver' isOpen={driverModal.isOpen} onClose={driverModal.closeModal}>
-                    <EditDriver onSave={(data:Driver)=>handleAddNewAndClose('Driver',data)} />
+                    <EditDriver onSave={(data:Driver)=>handleAddNewAndClose('Driver',data)} onCancel={()=>driverModal.closeModal} />
                 </SlideModal>
                 <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
                     <EditVehicle onSave={(data:Vehicle)=>handleAddNewAndClose('Vehicle',data)}/>

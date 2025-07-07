@@ -13,7 +13,7 @@ export const getDrivers = async () => {
     }
 };
 
-export const createDriver = async (data: FormData) => {
+export const createDriver = async (data: any) => {
     try {
         const response = await axiosInstance.post(API_ENDPOINT, data);
         return response.data;
