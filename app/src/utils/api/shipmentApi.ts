@@ -3,7 +3,7 @@ import { Shipment } from '@/types/shipment';
 
 const API_ENDPOINT = '/shipments';
 
-export const createShipment = async (data: Shipment) => {
+export const createShipment = async (data: any) => {
     try {
         const response = await axiosInstance.post(API_ENDPOINT, data);
         return response.data;
@@ -22,7 +22,15 @@ export const getShipments = async () => {
         throw error;
     }
 };
-
+export const getShipmentById = async (id:string) => {
+    try {
+        const response = await axiosInstance.get(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching shipments:', error);
+        throw error;
+    }
+};
 export const updateShipmentStatus = async (id: string, status: string) => {
     try {
         const response = await axiosInstance.patch(`${API_ENDPOINT}/${id}/status`, { status });

@@ -1,3 +1,9 @@
+import { Agent } from "./agent";
+import { Consignee } from "./consignee";
+import { Consigner } from "./consigner";
+import { Driver } from "./driver";
+import { Vehicle } from "./vehicle";
+
 export interface GoodsDetails {
     description: string;
     quantity: number;
@@ -14,10 +20,12 @@ export interface GoodsDetails {
 }
 
 export interface Shipment {
-    consigner: string;
-    consignee: string;
-    driver: string;
-    vehicle: string;
+    _id?: string;
+    consigner: Consigner;
+    consignee: Consignee;
+    driver: Driver;
+    vehicle: Vehicle;
+    bility_no: number;
     delivery_location: string;
     expected_delivery_date_and_time: Date;
     goods_details: GoodsDetails;
@@ -25,4 +33,7 @@ export interface Shipment {
     provider: string;
     eway_bill_number: string;
     status: string;
+    agent?:Agent
+    createdAt?: Date;
+    updatedAt?: Date;
 }

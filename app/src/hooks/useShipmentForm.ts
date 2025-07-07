@@ -3,14 +3,12 @@ import { getConsigners } from '@/utils/api/consignerApi';
 import { getConsignees } from '@/utils/api/consigneeApi';
 import { getDrivers } from '@/utils/api/driverApi';
 import { getVehicles } from '@/utils/api/vehicleApi';
-import { createShipment } from '@/utils/api/shipmentApi';
+import { createShipment, getShipmentById } from '@/utils/api/shipmentApi';
 import { toast } from 'react-toastify';
 import { useModal } from '@/hooks/useModal';
+import { OptionType } from '@/types/type';
 
-interface OptionType {
-    value: string;
-    label: string;
-}
+
 
 interface ShipmentFormData {
     Consigner: string;
@@ -51,7 +49,10 @@ interface ShipmentFormOptions {
     UnitWeight: OptionType[] | string[];
 }
 
-const useShipmentForm = () => {
+type MappedKeys = keyof Pick<ShipmentFormOptions, "Consigner" | "Consignee" | "Driver" | "Vehicle">;
+
+
+const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
     const [formData, setFormData] = useState<ShipmentFormData>({
         Consigner: '',
         Consignee: '',
@@ -118,6 +119,21 @@ const useShipmentForm = () => {
         };
         fetchOptions();
     }, []);
+    useEffect(() => {
+        // If shipmentId is provided, fetch the existing shipment data
+        const fetchShipmentData= async (shipmentId:string) =>{
+        if (shipmentId) {
+            try {
+                const response = await getShipmentById(shipmentId);
+                setFormData(response.data);  
+            }
+            catch (error) {
+                console.error('Error fetching shipment data:', error);
+                toast.error('Error fetching shipment data. Please try again.');
+            }   
+        }}
+        fetchShipmentData(shipmentId);
+    },[shipmentId]);
 
     const handleChange = (e: any, selectedValue?: any) => {
         let name: string, value: string;
@@ -209,7 +225,7 @@ const useShipmentForm = () => {
             toast.error('Error booking shipment. Please try again.' + (error instanceof Error ? `: ${error.message}` : ''));
         }
     };
-    const handleAddNew = async (type: keyof ShipmentFormOptions, newEntry: any) => {
+    const handleAddNew = async (type: string, newEntry: any) => {
         try {
             // After adding, re-fetch the relevant list from backend
             let updatedList: OptionType[] = [];
@@ -250,6 +266,13 @@ const useShipmentForm = () => {
             : [...baseOptions, { value: '+Add new', label: '+Add new' }];
     };
 
+    const getSelectedOptionLabel = (value: string, fieldName: string) => {
+        const mappedKey = fieldName as MappedKeys;
+        const optionsList = options[mappedKey];
+        const selectedOption = optionsList.find((option: OptionType) => option.value === value);
+        return selectedOption ? selectedOption.label : '';
+    };
+
     const formatValue = (value: string) => {
         if (!value) return "";
 
@@ -286,7 +309,8 @@ const useShipmentForm = () => {
         consignerModal,
         consigneeModal,
         driverModal,
-        vehicleModal
+        vehicleModal,
+        getSelectedOptionLabel,
     };
 };
 

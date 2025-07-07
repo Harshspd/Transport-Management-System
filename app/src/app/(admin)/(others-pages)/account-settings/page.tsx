@@ -7,10 +7,7 @@ import Tabs,{ Tab }  from '@/components/ui/tabs/Tabs';
 
 export default function AccountSettings() {
     const tabData: Tab[] = [
-        {
-            title: "Tab 1",
-            content: <EditConsignee onSave={() => alert('Profile saved!')}></EditConsignee>,
-        },
+      
         
     ];
   return (

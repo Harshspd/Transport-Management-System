@@ -36,7 +36,7 @@ export default function VehicleList() {
             try {
                 const data = await getDrivers();
                 setDriver(data);
-            } catch (err: any) {
+            } catch (err) {
                 toast.error("Failed to fetch Driver: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
@@ -45,7 +45,7 @@ export default function VehicleList() {
         fetchData();
     }, []);
 
-    const handleDelete = async (DriverId: string) => {
+    const handleDelete = async (DriverId?: string) => {
         if (!window.confirm("Are you sure you want to delete this driver?")) return;
         try {
             //await deleteShipment(DriverId);
@@ -56,8 +56,14 @@ export default function VehicleList() {
     };
 
     // Placeholder for edit
-    const handleEdit = (DriverId: string) => {
-        alert(`Edit driver ${DriverId} (implement navigation or modal)`);
+    const handleEdit = (DriverId?: string) => {
+        if (!DriverId) {
+            toast.error("Driver ID is required for editing");
+            return;
+        }
+        // Logic to handle edit action, e.g., open a modal with the driver's details
+        console.log("Edit Driver with ID:", DriverId);
+        
     };
 
     return (

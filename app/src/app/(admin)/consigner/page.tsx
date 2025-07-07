@@ -15,6 +15,10 @@ import Button from "@/components/ui/button/Button";
 import { getConsigners } from "@/utils/api/consignerApi";
 import { Consigner } from "@/types/consigner";
 import { toast } from "react-toastify";
+import { SlideModal } from "@/components/ui/slide-modal";
+import { useModal } from '@/hooks/useModal';
+
+import EditConsigner from "@/components/consigner/EditConsigner";
 
 const columns = [
     "Consigner ID",
@@ -27,7 +31,8 @@ export default function ConsignerList() {
     const [Consigners, setConsigners] = useState<Consigner[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const consignerModal = useModal();
+    const [slectedConsignerId, setSlectedConsignerId] = useState<string | null>(null);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -44,7 +49,12 @@ export default function ConsignerList() {
         fetchData();
     }, []);
 
-    const handleDelete = async (consignersId: string) => {
+    const handleDelete = async (consignersId?: string) => {
+        if (!consignersId) {
+            toast.error("Consigner ID is required for deletion");
+            return;
+        }
+         // Uncomment the next line when deleteShipment function is implemented
         if (!window.confirm("Are you sure you want to delete this consigner?")) return;
         try {
             //await deleteShipment(consignersId);
@@ -55,10 +65,24 @@ export default function ConsignerList() {
     };
 
     // Placeholder for edit
-    const handleEdit = (consignersId: string) => {
-        alert(`Edit consigner ${consignersId} (implement navigation or modal)`);
+    const handleEdit = (consignersId?: string) => {
+        if (!consignersId) {
+            toast.error("Consigner ID is required for editing");
+            return;
+        }
+        // Logic to open edit modal or navigate to edit page
+        console.log("Edit consigner with ID:", consignersId);
     };
-
+    const handleOnSave = async (type: string, data: Consigner) => {
+        if (slectedConsignerId) {
+            setConsigners((prev) => prev.map(c => c._id === slectedConsignerId ? data : c));
+        } else {
+            setConsigners((prev) => [...prev, data]);
+        }
+        const updatedList = await getConsigners();
+        setConsigners(updatedList);
+        consignerModal.closeModal();
+    };
     return (
         <div>
             <PageBreadcrumb pageTitle="Consigner" />
@@ -140,6 +164,9 @@ export default function ConsignerList() {
                         </div>
                     </div>
                 </ComponentCard>
+                 <SlideModal title='Add Consigner' isOpen={consignerModal.isOpen} onClose={consignerModal.closeModal}>
+                    <EditConsigner onSave={(data:Consigner)=>handleOnSave('Consigner',data)} selectedId={slectedConsignerId}/>
+                </SlideModal>
             </div>
         </div>
     );

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createConsignee, getConsigneeById, updateConsignee } from '@/utils/api/consigneeApi';
 import { Consignee } from '@/types/consignee';
+import { toast } from 'react-toastify';
 
-const useConsigneeForm = (onSave,selectedId) => {
+const useConsigneeForm = (onSave:any,selectedId?:string) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -52,7 +53,7 @@ const useConsigneeForm = (onSave,selectedId) => {
             };
             let response ;
             if(formData._id) {
-                response = await updateConsignee(data);
+                response = await updateConsignee(formData._id,data);
             }else{
                 response = await createConsignee(data);
             }
@@ -65,8 +66,7 @@ const useConsigneeForm = (onSave,selectedId) => {
                 return false;
             }
         } catch (err) {
-            setError('Error saving consignee');
-            return false;
+            toast.error('Error saving consignee: ' + (err instanceof Error ? err.message : 'Unknown error'));
         } finally {
             setLoading(false);
         }
@@ -91,11 +91,13 @@ const useConsigneeForm = (onSave,selectedId) => {
 
     };
     useEffect(() => {
-        if (selectedId) {
+        if (selectedId && selectedId !== '') {
+            console.log('Fetching consignee with ID:', selectedId);
             // Fetch existing consignee data and populate formData
             // This is a placeholder, replace with actual fetch logic
             const fetchConsignee = async (selectedId: string) => {
                 try {
+                    
                     const response = await getConsigneeById(selectedId); // Implement this API call
                     await populateFormData(response.data);    
                     

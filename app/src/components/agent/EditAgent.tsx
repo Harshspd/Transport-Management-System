@@ -1,22 +1,21 @@
 import React from 'react';
-import useConsignerForm from '@/hooks/useConsignerForm';
-import { Consigner } from '@/types/consigner';
-import { FieldConfig } from '@/types/type';
+import useAgentForm from '@/hooks/useAgentForm';
+import { Agent } from '@/types/agent';
 
 
 
-interface EditConsignerProps {
-    onSave: (data: Consigner) => void; // Replace 'any' with the actual data type if known
-    selectedId?: string | null; // Adjust type as needed
+interface EditAgentProps {
+    onSave: (data: Agent) => void; // Replace 'any' with the actual data type if known
+    selectedId?: string ; // Adjust type as needed
 }
 
-const EditConsigner: React.FC<EditConsignerProps> = ({ onSave ,selectedId }) => {
+const EditAgent: React.FC<EditAgentProps> = ({ onSave ,selectedId }) => {
     const {
         newOptionValue,
         handleChange,
         handleNameChange,
-        handleSave,
-    } = useConsignerForm(onSave);
+        handleSave
+    } = useAgentForm(onSave,selectedId);
 
     const fields = [
         { label: 'Contact Person', name: 'contactPerson', type: 'text' },
@@ -27,7 +26,7 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave ,selectedId }) => 
         { label: 'GST IN', name: 'gstin', type: 'text' }
     ];
 
-    const renderField = (field: FieldConfig) => {
+    const renderField = (field: any) => {
         if (field.type === 'textarea') {
             return (
                 <textarea
@@ -141,4 +140,4 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave ,selectedId }) => 
     );
 };
 
-export default EditConsigner; 
+export default EditAgent; 

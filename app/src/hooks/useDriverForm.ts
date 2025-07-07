@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createDriver } from '@/utils/api/driverApi';
-import { Driver } from '@/types/driver';
+import { toast } from 'react-toastify';
 
 const useDriverForm = (onSave: any) => {
     const [newOptionValue, setNewOptionValue] = useState('');
@@ -57,7 +57,7 @@ const useDriverForm = (onSave: any) => {
                 setError('Error saving Driver');
             }
         } catch (err) {
-            setError('Error saving driver');
+            toast.error('Error saving driver: ' + (err instanceof Error ? err.message : 'Unknown error'));
         } finally {
             setLoading(false);
         }

@@ -6,7 +6,7 @@ import ThemeTogglerTwo from "@/components/common/ThemeTogglerTwo";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/middleware/auth/AuthContext";
 
@@ -17,14 +17,11 @@ export default function AuthLayout({
 }) {
 const { user, loading } = useAuth(); // Use your authentication hook
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
-  useEffect(() => {
+      useEffect(() => {
       const checkAuth = async () => {
         if (!loading && user) {
           router.push(`/dashboard`);
         }
-        setIsLoadingAuth(loading);
       };
   
       checkAuth();

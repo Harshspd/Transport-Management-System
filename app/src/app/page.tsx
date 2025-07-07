@@ -1,17 +1,34 @@
+import GridShape from "@/components/common/GridShape";
 import Image from "next/image";
 import Link from "next/link";
+import SignInForm from "@/components/auth/SignInForm";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-        <Link href="/signup" className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]">Signup</Link>
-        <Link href="/signin" className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]">Signin</Link>
+    <div className="relative p-6 bg-white z-1 dark:bg-gray-900 sm:p-0">
+        <div className="relative flex lg:flex-row w-full h-screen justify-center flex-col  dark:bg-gray-900 sm:p-0">
+          <SignInForm />
+          <div className="lg:w-1/2 w-full h-full bg-brand-950 dark:bg-white/5 lg:grid items-center hidden">
+            <div className="relative items-center justify-center  flex z-1">
+              {/* <!-- ===== Common Grid Shape Start ===== --> */}
+              <GridShape />
+              <div className="flex flex-col items-center max-w-xs">
+                <Link href="/" className="block mb-4">
+                  <Image
+                    width={231}
+                    height={48}
+                    src="./images/logo/auth-logo.svg"
+                    alt="Logo"
+                  />
+                </Link>
+                <p className="text-center text-gray-400 dark:text-white/60">
+                  Free and Open-Source Tailwind CSS Admin Dashboard Template
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-      </footer>
     </div>
+
   );
 }

@@ -12,9 +12,9 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-import { getShipments, updateShipmentStatus, deleteShipment, createShipment, updateShipment } from '@/utils/api/shipmentApi';
-import EditShipment from '@/components/shipment/EditShipment';
-import { SlideModal } from '@/components/ui/slide-modal';
+import { getShipments, updateShipmentStatus, deleteShipment, updateShipment } from '@/utils/api/shipmentApi';
+import { Shipment } from "@/types/shipment";
+import { toast } from "react-toastify";
 
 
 
@@ -41,12 +41,12 @@ const columns = [
 ];
 
 export default function ShipmentTracking() {
-    const [shipments, setShipments] = useState<any[]>([]);
+    const [shipments, setShipments] = useState<Shipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
     const [editModalOpen, setEditModalOpen] = useState(false);
-    const [editingShipment, setEditingShipment] = useState<any | null>(null);
+    const [editingShipment, setEditingShipment] = useState<Shipment | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -57,12 +57,14 @@ export default function ShipmentTracking() {
                 setShipments(data);
                 // Build status map for controlled Selects
                 const map: { [id: string]: string } = {};
-                data.forEach((shipment: any) => {
-                    map[shipment._id] = shipment.status;
+                data.forEach((shipment: Shipment) => {
+                    if(shipment._id) {
+                        map[shipment._id] = shipment.status;
+                    }
                 });
                 setStatusMap(map);
-            } catch (err: any) {
-                setError("Failed to fetch shipments");
+            } catch (err) {
+                toast.error("Failed to fetch shipments: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
@@ -70,36 +72,50 @@ export default function ShipmentTracking() {
         fetchData();
     }, []);
 
-    const handleStatusChange = async (shipmentId: string, value: string) => {
+    const handleStatusChange = async (shipmentId?: string, value?: string) => {
+        if(!shipmentId || !value) {
+            toast.error("Invalid shipment ID or status value");
+            return;
+        }
         try {
             await updateShipmentStatus(shipmentId, value);
             setStatusMap((prev) => ({ ...prev, [shipmentId]: value }));
             setShipments((prev) => prev.map(s => s._id === shipmentId ? { ...s, status: value } : s));
         } catch (err) {
-            alert("Failed to update status");
+            toast.error("Failed to update shipment status: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 
-    const handleDelete = async (shipmentId: string) => {
+    const handleDelete = async (shipmentId?: string) => {
+        if (!shipmentId) {
+            toast.error("Invalid shipment ID");
+            return;
+        }
+         // Confirm before deletion
         if (!window.confirm("Are you sure you want to delete this shipment?")) return;
         try {
             await deleteShipment(shipmentId);
             setShipments((prev) => prev.filter(s => s._id !== shipmentId));
         } catch (err) {
-            alert("Failed to delete shipment");
+            toast.error("Failed to delete shipment: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 
     // Open modal for editing
-    const handleEdit = (shipmentId: string) => {
+    const handleEdit = (shipmentId?: string) => {
+        if(!shipmentId) toast.error("Invalid shipment ID for editing");
         const shipment = shipments.find(s => s._id === shipmentId);
-        setEditingShipment(shipment);
+        setEditingShipment(shipment ?? null);
         setEditModalOpen(true);
     };
 
     // Save handler for slider
-    const handleEditSave = async (updatedShipment: any) => {
+    const handleEditSave = async (updatedShipment: Shipment) => {
         try {
+            if(!updatedShipment._id) {
+                toast.error("Invalid shipment ID for update");
+                return;
+            }
             await updateShipment(updatedShipment._id, updatedShipment);
             // Refetch all shipments to get fully populated objects
             const data = await getShipments();
@@ -107,7 +123,9 @@ export default function ShipmentTracking() {
             setEditModalOpen(false);
             setEditingShipment(null);
         } catch (err) {
-            alert('Failed to update shipment');
+            toast.error("Failed to update shipment: " + (err instanceof Error ? err.message : "Unknown error"));
+            setEditModalOpen(false);
+            setEditingShipment(null);
         }
     };
 
@@ -151,10 +169,10 @@ export default function ShipmentTracking() {
                                                         {row?.goods_details?.bill_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.date_time ? new Date(row?.date_time).toLocaleDateString() : "-"}
+                                                        {row?.createdAt?.toLocaleDateString()}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.consignee?.contact?.name || row.consignee?.name || "-"}
+                                                        {row.consignee?.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.delivery_location || "-"}
@@ -166,10 +184,10 @@ export default function ShipmentTracking() {
                                                         {row.goods_details?.quantity || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.consigner?.contact?.name || row.consigner?.name || row.agent || "-"}
+                                                        {row.consigner?.name|| "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.delivery_date ? new Date(row.delivery_date).toLocaleDateString() : "-"}
+                                                        {row.expected_delivery_date_and_time ? new Date(row.expected_delivery_date_and_time).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.vehicle?.vehicle_number || "-"}
@@ -177,22 +195,22 @@ export default function ShipmentTracking() {
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                                {row?.driver?.contact?.name || "-"}
+                                                                {row?.driver.name || "-"}
                                                             </span>
                                                             <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                                {row?.driver?.contact?.contact_number || "-"}
+                                                                {row?.driver?.contact?.person || "-"}
                                                             </span>
                                                         </div>
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <Select
                                                             options={statusOptions}
-                                                            value={statusMap[row._id]}
+                                                            value={row.status}
                                                             onChange={(value) => handleStatusChange(row._id, value)}
                                                             className={
-                                                                statusMap[row._id] === "open"
+                                                                row.status === "open"
                                                                     ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
-                                                                    : statusMap[row._id] === "in-transit"
+                                                                    : row.status === "in-transit"
                                                                         ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
                                                                         : "bg-green-200 text-green-900 border-green-400 dark:bg-green-800 dark:text-green-100"
                                                             }
@@ -229,17 +247,6 @@ export default function ShipmentTracking() {
                     </div>
                 </ComponentCard>
             </div>
-            <SlideModal isOpen={editModalOpen} onClose={handleEditCancel} title="Edit Shipment">
-                <div className="max-h-[80vh] overflow-y-auto">
-                    {editingShipment && (
-                        <EditShipment
-                            shipment={editingShipment}
-                            onSave={handleEditSave}
-                            onCancel={handleEditCancel}
-                        />
-                    )}
-                </div>
-            </SlideModal>
         </div>
     );
 } 

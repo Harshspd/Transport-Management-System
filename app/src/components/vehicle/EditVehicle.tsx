@@ -1,8 +1,14 @@
 import React from 'react';
 import useVehicleForm from '@/hooks/useVehicleForm';
+import { Vehicle } from '@/types/vehicle';
+import { FieldConfig } from '@/types/type';
 
 
-const EditVehicle: React.FC<any> = ({ onSave }) => {
+interface EditVehicleProps {
+    onSave: (data: Vehicle) => void; // Replace 'any' with the actual data type if known
+}
+
+const EditVehicle: React.FC<EditVehicleProps> = ({ onSave }) => {
     const {
         newOptionValue,
         handleChange,
@@ -12,18 +18,7 @@ const EditVehicle: React.FC<any> = ({ onSave }) => {
         error,
     } = useVehicleForm(onSave);
 
-    const fields = [
-        { label: 'Vehicle Number', name: 'vehicleNumber', type: 'text' },
-        { label: 'Capacity (Weight)', name: 'capacityWeight', type: 'text' },
-        { label: 'Capacity (Volume)', name: 'capacityVolume', type: 'text' },
-        { label: 'City', name: 'city', type: 'text' },
-        { label: 'Vehicle Type', name: 'vehicleType', type: 'text' },
-        { label: 'RC Number', name: 'rcNumber', type: 'text' },
-        { label: 'Upload RC', name: 'rcFile', type: 'file' },
-        { label: 'State', name: 'state', type: 'text' }
-    ];
-
-    const renderField = (field: any) => {
+       const renderField = (field: FieldConfig) => {
         if (field.name === 'vehicleNumber') {
             return (
                 <input

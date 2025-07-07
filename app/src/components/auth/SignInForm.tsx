@@ -3,9 +3,9 @@ import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
+import { EyeCloseIcon, EyeIcon } from "@/icons";
 import React, { useState } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import Router from "next/router";
 import { useAuth } from '@/middleware/auth/AuthContext';
 import Link from 'next/link';
 
@@ -18,9 +18,9 @@ export default function SignInForm() {
   const [loading, setLoading] = useState(false);
   
   const { login } = useAuth();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/dashboard';
+  //const router = useRouter();
+ // const searchParams = useSearchParams();
+  //const redirect = searchParams.get('redirect') || '/dashboard';
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ export default function SignInForm() {
     try {
       const result = await login(email, password);
       if (result.success) {
-        router.push(redirect);
+        Router.push('/dashboard'); // Redirect to dashboard or specified route
       } else {
         setError(result.error || 'Login failed. Please try again.');
       }
@@ -163,8 +163,8 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
-                    Sign in
+                  <Button className="w-full" size="sm" disabled={loading}>
+                    {loading ? "Signing in..." : "Sign in"}
                   </Button>
                 </div>
               </div>

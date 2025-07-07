@@ -12,11 +12,12 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateAgentstatus, deleteShipment } from '@/utils/api/shipmentApi';
-import { getAgents } from "@/utils/api/agentApi";
 import { Agent } from "@/types/agent";
 import { SlideModal } from "@/components/ui/slide-modal";
 import EditAgent from "@/components/agent/EditAgent";
 import { useModal } from '@/hooks/useModal';
+import { getAgents } from "@/utils/api/agentApi";
+import { toast } from "react-toastify";
 
 const columns = [
     "Agent ID",
@@ -56,7 +57,11 @@ export default function AgentList() {
         }
         agentModal.closeModal();
     };
-    const handleDelete = async (AgentsId: string) => {
+    const handleDelete = async (AgentsId?: string) => {
+        if (!AgentsId) {
+            toast.error("Agent ID is required for deletion");
+            return;
+        }
         if (!window.confirm("Are you sure you want to delete this agent?")) return;
         try {
             //await deleteShipment(AgentsId);
@@ -73,7 +78,11 @@ export default function AgentList() {
     };
 
     // Placeholder for edit
-    const handleEdit = (AgentsId: string) => {
+    const handleEdit = (AgentsId?: string) => {
+        if (!AgentsId) {
+            toast.error("Agent ID is required for editing");
+            return;
+        }
         setSlectedAgentId(AgentsId);
         agentModal.openModal();
         alert(`Edit agent ${AgentsId} (implement navigation or modal)`);
@@ -161,7 +170,7 @@ export default function AgentList() {
                     </div>
                 </ComponentCard>
                 <SlideModal title='Add Agent' isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
-                    <EditAgent onSave={(data:Agent)=>handleOnSave('Agent',data)} selectedId={slectedAgentId}/>
+                    <EditAgent onSave={(data:Agent)=>handleOnSave('Agent',data)} selectedId={slectedAgentId??undefined}/>
                 </SlideModal>
             </div>
         </div>
