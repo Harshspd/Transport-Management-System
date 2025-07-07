@@ -17,16 +17,21 @@ export const createConsigner = async (req, res) => {
     }
 
     
-    // Step 2: Duplicate Check on gst
-     if (req.body.gstin) {
-      const duplicate = await checkDuplicate(Consigner, { gstin: req.body.gstin });
+    // Step 2: Duplicate Check on gst (within organization)
+    if (req.body.gstin) {
+      const duplicate = await checkDuplicate(Consigner, {
+        gstin: req.body.gstin,
+        organization_id: req.user.account_id,
+      });
+
       if (duplicate) {
         return res.status(409).json({
-          message: 'Consigner with this GST number already exists',
+          message: 'Consigner with this GST number already exists in your organization',
           error: true,
         });
       }
     }
+
 
     // Step 3: Create
     const consigner = await Consigner.create({

@@ -16,16 +16,21 @@ export const createConsignee = async (req, res) => {
       });
     }
 
-    // 2. Duplicate check on gst
-    if (req.body.gstin) {
-      const duplicate = await checkDuplicate(Consignee, { gstin: req.body.gstin });
-      if (duplicate) {
-        return res.status(409).json({
-          message: 'Consignee with this GST number already exists',
-          error: true,
-        });
-      }
-    }
+    // 2. Duplicate check on gst (within organization)
+if (req.body.gstin) {
+  const duplicate = await checkDuplicate(Consignee, {
+    gstin: req.body.gstin,
+    organization_id: req.user.account_id,
+  });
+
+  if (duplicate) {
+    return res.status(409).json({
+      message: 'Consignee with this GST number already exists in your organization',
+      error: true,
+    });
+  }
+}
+
 
     // 3. Save new consignee
     const consignee = await Consignee.create({

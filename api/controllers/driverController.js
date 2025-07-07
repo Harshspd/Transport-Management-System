@@ -16,13 +16,19 @@ export const createDriver = async (req, res) => {
       });
     }
 
-    // 2. Duplicate license_number check (across all orgs)
-    const duplicate = await checkDuplicate(Driver, { license_number: req.body.license_number });
-    if (duplicate) {
-      return res.status(409).json({
-        message: 'Driver with this license number already exists',
-        error: true,
+    // 2. Optional duplicate check on license_number scoped to organization
+    if (req.body.license_number) {
+      const duplicate = await checkDuplicate(Driver, {
+        license_number: req.body.license_number,
+        organization_id: req.user.account_id,
       });
+
+      if (duplicate) {
+        return res.status(409).json({
+          message: 'Driver with this license number already exists in your organization',
+          error: true,
+        });
+      }
     }
 
     // 3. Create driver

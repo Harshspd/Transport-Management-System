@@ -14,7 +14,7 @@ import { serverError } from '../helpers/responseUtility.mjs';
 // Create Shipment
 export const createShipment = async (req, res) => {
   try {
-    const { consigner, consignee, driver, vehicle, ...rest } = req.body;
+    const { consigner, consignee, driver, vehicle,agent, ...rest } = req.body;
 
     //  Step 1: Required Fields Check
     const requiredFields = ['consigner', 'consignee', 'delivery_location'];
@@ -29,6 +29,7 @@ export const createShipment = async (req, res) => {
 
     //  Step 2: ObjectId Validations
     const idFields = ['consigner', 'consignee', 'driver', 'vehicle'];
+    if (agent) idFields.push('agent'); 
     const invalidFields = validateObjectIdFields(idFields, req.body);
 
     if (invalidFields.length > 0) {
@@ -37,13 +38,16 @@ export const createShipment = async (req, res) => {
         error: true,
       });
     }
-      
-     const latestShipment = await Shipment.findOne().sort({ bility_no: -1 }).limit(1);
-    const bility_no = latestShipment?.bility_no
-      ? latestShipment.bility_no + 1
-      : parseInt(process.env.ShipmentBaseId) || 4000;
+      // organisation level bilityno
+     const latestShipment = await Shipment.findOne({
+    organization_id: req.user.account_id
+})
+  .sort({ bility_no: -1 })
+  .limit(1);
 
-
+const bility_no = latestShipment?.bility_no
+  ? latestShipment.bility_no + 1
+  : parseInt(process.env.ShipmentBaseId) || 4000;
 
     //  Step 3: Create Shipment
     const shipment = await Shipment.create({
@@ -51,6 +55,7 @@ export const createShipment = async (req, res) => {
       consignee: new mongoose.Types.ObjectId(consignee),
       driver: driver ? new mongoose.Types.ObjectId(driver) : undefined,
       vehicle: vehicle ? new mongoose.Types.ObjectId(vehicle) : undefined,
+      agent: agent ? new mongoose.Types.ObjectId(agent) : undefined, 
       bility_no,
       ...rest,
       created_by: req.user._id,
@@ -90,6 +95,7 @@ export const getAllShipments = async (req, res) => {
       .populate('consignee')
       .populate('driver')
       .populate('vehicle')
+      .populate('agent') 
       .populate('created_by', 'email');
 
     res.status(200).json({
