@@ -96,7 +96,7 @@ export default function VehicleList() {
                                         <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                                             {Driver.map((row) => (
                                                 <TableRow key={row?._id}>
-                                                     <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
                                                         {row?._id || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
