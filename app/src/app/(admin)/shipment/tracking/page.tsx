@@ -15,9 +15,7 @@ import Button from "@/components/ui/button/Button";
 import { getShipments, updateShipmentStatus, deleteShipment, updateShipment } from '@/utils/api/shipmentApi';
 import { Shipment } from "@/types/shipment";
 import { toast } from "react-toastify";
-
-
-
+import { useRouter } from "next/navigation";
 
 const statusOptions = [
     { value: "Open", label: "Open" },
@@ -47,6 +45,7 @@ export default function ShipmentTracking() {
     const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editingShipment, setEditingShipment] = useState<Shipment | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -104,9 +103,8 @@ export default function ShipmentTracking() {
     // Open modal for editing
     const handleEdit = (shipmentId?: string) => {
         if(!shipmentId) toast.error("Invalid shipment ID for editing");
-        const shipment = shipments.find(s => s._id === shipmentId);
-        setEditingShipment(shipment ?? null);
-        setEditModalOpen(true);
+         router.push(`/shipment/edit/${shipmentId}`);
+        
     };
 
     // Save handler for slider
@@ -169,7 +167,7 @@ export default function ShipmentTracking() {
                                                         {row?.goods_details?.bill_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.createdAt?.toLocaleDateString()}
+                                                        {row?.createdAt ? new Date(row.createdAt).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.consignee?.name || "-"}
@@ -195,7 +193,7 @@ export default function ShipmentTracking() {
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                                {row?.driver.name || "-"}
+                                                                {row?.driver?.name || "-"}
                                                             </span>
                                                             <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
                                                                 {row?.driver?.contact?.person || "-"}

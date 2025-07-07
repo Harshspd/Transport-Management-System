@@ -4,10 +4,11 @@ import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
-import React, { useState } from "react";
-import Router from "next/router";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useAuth } from '@/middleware/auth/AuthContext';
 import Link from 'next/link';
+import BtnSubmit from "../ui/button/BtnSubmit";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,10 +19,15 @@ export default function SignInForm() {
   const [loading, setLoading] = useState(false);
   
   const { login } = useAuth();
-  //const router = useRouter();
- // const searchParams = useSearchParams();
-  //const redirect = searchParams.get('redirect') || '/dashboard';
+  const params = useParams();
+  const router = useRouter(); 
+  const redirect = typeof params?.redirect === 'string' ? params.redirect : undefined;
   
+  useEffect(() => {
+      if (redirect) 
+        router.push(redirect);
+    }, [redirect,router]);
+    
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -30,7 +36,7 @@ export default function SignInForm() {
     try {
       const result = await login(email, password);
       if (result.success) {
-        Router.push('/dashboard'); // Redirect to dashboard or specified route
+        router.push('/dashboard'); // Redirect to dashboard or specified route
       } else {
         setError(result.error || 'Login failed. Please try again.');
       }
@@ -163,9 +169,9 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm" disabled={loading}>
+                  <BtnSubmit className="w-full" size="sm" disabled={loading}>
                     {loading ? "Signing in..." : "Sign in"}
-                  </Button>
+                  </BtnSubmit>
                 </div>
               </div>
             </form>

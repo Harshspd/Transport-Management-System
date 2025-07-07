@@ -15,7 +15,8 @@ import Button from "@/components/ui/button/Button";
 import { getShipments, updateShipmentStatus, deleteShipment } from '@/utils/api/shipmentApi';
 import { Shipment } from "@/types/shipment";
 import { toast } from "react-toastify";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
+
 
 const statusOptions = [
     { value: "pending", label: "Pending" },
@@ -42,7 +43,7 @@ export default function ShipmentList() {
     const [shipments, setShipments] = useState<Shipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const router = useRouter();
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -99,7 +100,7 @@ export default function ShipmentList() {
             toast.error("Invalid shipment ID");
             return;
         }
-         Router.push(`/admin/shipment/edit/${shipmentId}`);
+         router.push(`/shipment/edit/${shipmentId}`);
 
     };
 

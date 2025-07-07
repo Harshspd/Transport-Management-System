@@ -6,7 +6,7 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import React, { useEffect, useState } from "react";
 import { useAuth } from '@/middleware/auth/AuthContext';
 import Link from 'next/link';
-import Router from "next/router";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 
 export default function SignUpForm() {
@@ -20,16 +20,14 @@ export default function SignUpForm() {
     const [loading, setLoading] = useState(false);
     
     const { register } = useAuth();
-//    const router = useRouter();
-      //const { redirect } = router.query;
-    //const searchParams = useSearchParams();
-    //const searchParams = typeof redirect === 'string' ? redirect : undefined;
-    //const searchParams = searchParams.get('redirect') || '/dashboard';
-  //const [redirect, setRedirect] = useState('/dashboard');
-    /*useEffect(() => {
-    
-    if (searchParams) router.push('dashboard');
-  }, [searchParams]);*/
+    const params = useParams();
+    const router = useRouter(); 
+    const redirect = typeof params?.redirect === 'string' ? params.redirect : undefined;
+      
+    useEffect(() => {
+    if (redirect) 
+      router.push(redirect);
+  }, [redirect,router]);
     
   const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
@@ -45,7 +43,7 @@ export default function SignUpForm() {
         const result = await register({email,password,lname,fname});
         console.log(result);
         if (result.success) {
-          Router.push('/dashboard'); // Redirect to dashboard or specified route
+          router.push('/dashboard'); // Redirect to dashboard or specified route
         } else {
           setError(result.error || 'Login failed. Please try again.');
         }
