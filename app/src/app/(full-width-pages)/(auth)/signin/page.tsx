@@ -1,11 +1,7 @@
-import SignInForm from "@/components/auth/SignInForm";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: " SignIn Page | TenXAdmin ",
-  description: "This is Signin Page TenxAdmin Dashboard Template",
-};
+import SignInForm from "@/components/auth/SignInForm";
 
 export default function SignIn() {
-  return <SignInForm />;
+    return <SignInForm />;
+  
 }

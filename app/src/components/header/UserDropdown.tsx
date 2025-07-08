@@ -4,16 +4,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { log } from "console";
 import { useAuth } from "@/middleware/auth/AuthContext";
 import { useRouter } from 'next/navigation';
+import { toast } from "react-toastify";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 const { logout } = useAuth();
 const router = useRouter();
-const [error, setError] = useState('');
-const [loading, setLoading] = useState(false);
 
 const { user } = useAuth();
 
@@ -31,10 +29,8 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
           await logout();
           router.push("signin");
         } catch (err) {
-          setError('An unexpected error occurred. Please try again.');
-          console.error(err);
+          toast.error("Failed to logout. Please try again.");
         } finally {
-          setLoading(false);
         }
       };
   return (

@@ -23,9 +23,9 @@ export const createConsignee = async (data: Consignee) => {
     }
 };
 
-export const updateConsignee = async (data: Consignee) => {
+export const updateConsignee = async (id:string,data: Consignee) => {
     try {
-        const response = await axiosInstance.put(API_ENDPOINT, data);
+        const response = await axiosInstance.put(API_ENDPOINT + `/${id}`, data);
         return response.data;
     } catch (error) {
         console.error('Error fetching contact lists:', error);

@@ -13,6 +13,10 @@ import Select from "@/components/form/Select";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 import { getShipments, updateShipmentStatus, deleteShipment } from '@/utils/api/shipmentApi';
+import { Shipment } from "@/types/shipment";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
 
 const statusOptions = [
     { value: "pending", label: "Pending" },
@@ -36,11 +40,10 @@ const columns = [
 ];
 
 export default function ShipmentList() {
-    const [shipments, setShipments] = useState<any[]>([]);
+    const [shipments, setShipments] = useState<Shipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
-
+    const router = useRouter();
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -50,12 +53,13 @@ export default function ShipmentList() {
                 setShipments(data);
                 // Build status map for controlled Selects
                 const map: { [id: string]: string } = {};
-                data.forEach((shipment: any) => {
-                    map[shipment._id] = shipment.status;
+                data.forEach((shipment: Shipment) => {
+                    if(shipment._id){
+                        map[shipment._id] = shipment.status;
+                    }
                 });
-                setStatusMap(map);
-            } catch (err: any) {
-                setError("Failed to fetch shipments");
+            } catch (err) {
+                setError("Failed to fetch shipments: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
@@ -63,29 +67,41 @@ export default function ShipmentList() {
         fetchData();
     }, []);
 
-    const handleStatusChange = async (shipmentId: string, value: string) => {
+    const handleStatusChange = async (shipmentId?: string, value?: string) => {
         try {
+            if (!shipmentId || !value) {
+                toast.error("Invalid shipment ID");
+                return;
+            }
             await updateShipmentStatus(shipmentId, value);
-            setStatusMap((prev) => ({ ...prev, [shipmentId]: value }));
             setShipments((prev) => prev.map(s => s._id === shipmentId ? { ...s, status: value } : s));
         } catch (err) {
-            alert("Failed to update status");
+            toast.error("Failed to update shipment status: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 
-    const handleDelete = async (shipmentId: string) => {
+    const handleDelete = async (shipmentId?: string) => {
+        if (!shipmentId) {
+            toast.error("Invalid shipment ID");
+            return;
+        }
         if (!window.confirm("Are you sure you want to delete this shipment?")) return;
         try {
             await deleteShipment(shipmentId);
             setShipments((prev) => prev.filter(s => s._id !== shipmentId));
         } catch (err) {
-            alert("Failed to delete shipment");
+            toast.error("Failed to delete shipment: " + (err instanceof Error ? err.message : "Unknown error"));
         }
     };
 
     // Placeholder for edit
-    const handleEdit = (shipmentId: string) => {
-        alert(`Edit shipment ${shipmentId} (implement navigation or modal)`);
+    const handleEdit = (shipmentId?: string) => {
+        if (!shipmentId) {
+            toast.error("Invalid shipment ID");
+            return;
+        }
+         router.push(`/shipment/edit/${shipmentId}`);
+
     };
 
     return (
@@ -119,13 +135,13 @@ export default function ShipmentList() {
                                             {shipments.map((row) => (
                                                 <TableRow key={row?._id}>
                                                     <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                        {row?.goods_details?.bill_no || row._id}
+                                                        {row?.bility_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.date_time ? new Date(row?.date_time).toLocaleDateString() : "-"}
+                                                        {row?.createdAt?.toLocaleDateString()}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.consignee?.contact?.name || row.consignee.name || "-"}
+                                                        {row?.consignee.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.delivery_location || "-"}
@@ -137,10 +153,10 @@ export default function ShipmentList() {
                                                         {row.goods_details?.quantity || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.agent || "-"}
+                                                        {row?.agent?.contact.person}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.delivery_date ? new Date(row.delivery_date).toLocaleDateString() : "-"}
+                                                        {row.expected_delivery_date_and_time ? new Date(row.expected_delivery_date_and_time).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row.vehicle?.vehicle_number || "-"}
@@ -148,22 +164,22 @@ export default function ShipmentList() {
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                                {row?.driver?.contact?.name || "-"}
+                                                                {row?.driver?.name || "-"}
                                                             </span>
                                                             <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                                {row?.driver?.contact?.contact_number || "-"}
+                                                                {row?.driver?.contact?.phone || "-"}
                                                             </span>
                                                         </div>
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <Select
                                                             options={statusOptions}
-                                                            value={statusMap[row._id]}
+                                                            value={row.status}
                                                             onChange={(value) => handleStatusChange(row._id, value)}
                                                             className={
-                                                                statusMap[row._id] === "pending"
+                                                                row.status === "pending"
                                                                     ? "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200"
-                                                                    : statusMap[row._id] === "in-transit"
+                                                                    : row.status === "in-transit"
                                                                         ? "bg-yellow-200 text-yellow-900 border-yellow-400 dark:bg-yellow-800 dark:text-yellow-100"
                                                                         : "bg-green-200 text-green-900 border-green-400 dark:bg-green-800 dark:text-green-100"
                                                             }

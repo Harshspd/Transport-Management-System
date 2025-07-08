@@ -17,11 +17,12 @@ import { Consignee } from "@/types/consignee";
 import { SlideModal } from "@/components/ui/slide-modal";
 import EditConsignee from "@/components/consignee/EditConsignee";
 import { useModal } from '@/hooks/useModal';
-import { getConsigners } from "@/utils/api/consignerApi";
+import { toast } from "react-toastify";
+
 
 const columns = [
-    "Consignee ID",
     "Consignee Name",
+    "City",
     "Contact",
     "Last Shipment Book Date"
 ];
@@ -51,14 +52,23 @@ export default function ConsigneeList() {
         };
         fetchData();
     }, []);
-    const handleOnSave = (type: string, data: Consignee) => {
+    const handleOnSave = async (type: string, data: Consignee) => {
         if (type === 'Consignee') {
+            if (slectedConsigneeId) {
+                setConsignees((prev) => prev.map(c => c._id === slectedConsigneeId ? data : c));
+            } else {
+                setConsignees((prev) => [...prev, data]);
+            }
             const updatedList = await getConsignees();
             setConsignees(updatedList);
         }
         consigneeModal.closeModal();
     };
-    const handleDelete = async (ConsigneesId: string) => {
+    const handleDelete = async (ConsigneesId?: string) => {
+        if (!ConsigneesId) {
+            toast.error("Consignee ID is required for editing");
+            return;
+        }
         if (!window.confirm("Are you sure you want to delete this consignee?")) return;
         try {
             //await deleteShipment(ConsigneesId);
@@ -75,17 +85,23 @@ export default function ConsigneeList() {
     };
 
     // Placeholder for edit
-    const handleEdit = (ConsigneesId: string) => {
-        setSlectedConsigneeId(ConsigneesId);
+    const handleEdit = (ConsigneesId?: string) => {
+        if (ConsigneesId) {
+            setSlectedConsigneeId(ConsigneesId);
+        }else{
+            setSlectedConsigneeId(null);
+        }
         consigneeModal.openModal();
-        alert(`Edit consignee ${ConsigneesId} (implement navigation or modal)`);
     };
 
     return (
         <div>
             <PageBreadcrumb pageTitle="Consignee" />
             <div className="space-y-6">
-                <ComponentCard title="Consignee Table">
+                <ComponentCard title="">
+                    <Button size="sm" variant="primary" onClick={()=>handleEdit(undefined)}>
+                        + Add Consignee
+                    </Button>
                     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                         <div className="max-w-full overflow-x-auto">
                             <div className="min-w-[1102px]">
@@ -101,7 +117,7 @@ export default function ConsigneeList() {
                                                     <TableCell
                                                         key={col}
                                                         isHeader
-                                                        className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                                                        className="px-3 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                                                     >
                                                         {col}
                                                     </TableCell>
@@ -111,13 +127,13 @@ export default function ConsigneeList() {
                                         <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                                             {Consignees.map((row) => (
                                                 <TableRow key={row?._id}>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                        {row?._id || "-"}
-                                                    </TableCell>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
                                                         {row?.name || "-"}
                                                     </TableCell>
-                                                    <TableCell className="px-4 py-3 text-start">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
+                                                        {row?.address?.city || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-2 py-1 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
                                                                 {row?.contact?.person || "-"}
@@ -127,11 +143,11 @@ export default function ConsigneeList() {
                                                             </span>
                                                         </div>
                                                     </TableCell>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
                                                         {"-"}
                                                     </TableCell>
 
-                                                    <TableCell className="px-4 py-3 text-start">
+                                                    <TableCell className="px-2 py-1 text-start">
                                                         <div className="flex gap-2">
                                                             <Button
                                                                 size="sm"
@@ -162,8 +178,8 @@ export default function ConsigneeList() {
                         </div>
                     </div>
                 </ComponentCard>
-                <SlideModal title='Add Consignee' isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
-                    <EditConsignee onSave={(data:Consignee)=>handleOnSave('Consignee',data)} selectedId={slectedConsigneeId}/>
+                <SlideModal title={slectedConsigneeId ? 'Edit Consignee' : 'Add Consignee'}  isOpen={consigneeModal.isOpen} onClose={consigneeModal.closeModal}>
+                    <EditConsignee onSave={(data:Consignee)=>handleOnSave('Consignee',data)} onCancel={()=>consigneeModal.closeModal()} selectedId={slectedConsigneeId??undefined}/>
                 </SlideModal>
             </div>
         </div>

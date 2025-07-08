@@ -37,8 +37,8 @@ export default function VehicleList() {
             try {
                 const data = await getVehicles();
                 setVehicles(data);
-            } catch (err: any) {
-                toast.error(err.message || "An error occurred while fetching vehicles");
+            } catch (err) {
+                toast.error("Failed to fetch vehicles: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
@@ -46,7 +46,11 @@ export default function VehicleList() {
         fetchData();
     }, []);
 
-    const handleDelete = async (VehiclesId: string) => {
+    const handleDelete = async (VehiclesId?: string) => {
+        if (!VehiclesId) {
+            toast.error("Invalid vehicle ID for deletion");
+            return;
+        }
         if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
         try {
             //await deleteShipment(VehiclesId);
@@ -57,7 +61,11 @@ export default function VehicleList() {
     };
 
     // Placeholder for edit
-    const handleEdit = (VehiclesId: string) => {
+    const handleEdit = (VehiclesId?: string) => {
+        if(!VehiclesId) {
+            toast.error("Invalid vehicle ID for editing");      
+            return;
+        }
         alert(`Edit vehicle ${VehiclesId} (implement navigation or modal)`);
     };
 

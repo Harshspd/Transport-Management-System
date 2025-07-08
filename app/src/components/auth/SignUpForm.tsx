@@ -2,11 +2,11 @@
 import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
-import React, { useState } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { EyeCloseIcon, EyeIcon } from "@/icons";
+import React, { useEffect, useState } from "react";
 import { useAuth } from '@/middleware/auth/AuthContext';
 import Link from 'next/link';
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 
 export default function SignUpForm() {
@@ -20,11 +20,16 @@ export default function SignUpForm() {
     const [loading, setLoading] = useState(false);
     
     const { register } = useAuth();
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const redirect = searchParams.get('redirect') || '/dashboard';
+    const params = useParams();
+    const router = useRouter(); 
+    const redirect = typeof params?.redirect === 'string' ? params.redirect : undefined;
+      
+    useEffect(() => {
+    if (redirect) 
+      router.push(redirect);
+  }, [redirect,router]);
     
-    const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setError('');
       setLoading(true);
@@ -38,7 +43,7 @@ export default function SignUpForm() {
         const result = await register({email,password,lname,fname});
         console.log(result);
         if (result.success) {
-          router.push(redirect);
+          router.push('/dashboard'); // Redirect to dashboard or specified route
         } else {
           setError(result.error || 'Login failed. Please try again.');
         }
@@ -205,8 +210,8 @@ export default function SignUpForm() {
                 </div>
                 {/* <!-- Button --> */}
                 <div>
-                  <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                    Sign Up
+                  <button disabled={loading} className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+                    {loading ? "Signing up..." : "Sign up"}
                   </button>
                 </div>
               </div>

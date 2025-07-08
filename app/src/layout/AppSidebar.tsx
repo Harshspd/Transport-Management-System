@@ -6,15 +6,15 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
-  CalenderIcon,
+//  CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
   ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
+//  PageIcon,
+//  PieChartIcon,
+//  PlugInIcon,
+//  TableIcon,
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
@@ -37,7 +37,7 @@ const navItems: NavItem[] = [
     name: "Shipment",
     subItems: [
       { name: "Book a Shipment", path: "/shipment/edit", pro: false },
-      { name: "Shipment", path: "/shipment", pro: false },
+      // { name: "Shipment", path: "/shipment", pro: false },
       { name: "Shipment Tracking", path: "/shipment/tracking", pro: false },
     ],
   },

@@ -5,6 +5,8 @@ export interface AuthUser {
     role?: string;
     fname?:string;
     lname?:string;
+    phone?: string;
+    organizationId?: string; // Account ID
     
     // Add any other user fields you need
   }

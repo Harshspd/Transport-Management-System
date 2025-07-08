@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { createVehicle } from '@/utils/api/vehicleApi';
-import { toast } from 'react-toastify';
+import { createAgent } from '@/utils/api/agentApi';
+import { Agent } from '@/types/agent';
 
-const useVehicleForm = (onSave: any) => {
+const useAgentForm = (onSave: any,selectedId?:string) => {
     const [newOptionValue, setNewOptionValue] = useState('');
     const [formData, setFormData] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -25,38 +25,39 @@ const useVehicleForm = (onSave: any) => {
     const handleNameChange = (e: any) => {
         const value = e.target.value;
         setNewOptionValue(value);
+
     };
 
     const handleSave = async () => {
+        console.log('handleSave called with:', { newOptionValue, formData });
         setError('');
         if (!newOptionValue) {
-            setError('Vehicle Number is required');
-            return;
+            setError('Agent Name is required');
+            return false;
         }
         setLoading(true);
         try {
-            // Create FormData to match backend expectation
-            const formDataToSend = new FormData();
-            formDataToSend.append('vehicle_number', newOptionValue);
-            formDataToSend.append('vehicle_type', formData.vehicleType || '');
-            formDataToSend.append('capacity_weight', formData.capacityWeight || '');
-            formDataToSend.append('capacity_volume', formData.capacityVolume || '');
-            formDataToSend.append('rc_number', formData.rcNumber || '');
-            if (formData.rcFile) {
-                formDataToSend.append('rc_file', formData.rcFile);
-            }
-            formDataToSend.append('address[city]', formData.city || '');
-            formDataToSend.append('address[state]', formData.state || '');
-
-            const response = await createVehicle(formDataToSend);
+            const data: Agent = {
+                name: newOptionValue,
+                contact: {
+                    person: formData.contactPerson || '',
+                    phone: formData.contactNumber || '',
+                },
+                address:{
+                    adddress_line_1: formData.address || '',
+                    city: formData.city || '',
+                    state: formData.state || '',
+                },
+                gstin: formData.gstin || '',
+            };
+            const response = await createAgent(data);
             if (response) {
                 onSave(response.data);
                 resetForm();
-            } else {
-                setError('Error saving Vehicle');
             }
         } catch (err) {
-            toast.error('Error saving vehicle: ' + (err instanceof Error ? err.message : 'Unknown error'));
+            console.error('Error saving agent:', err);
+            return false;
         } finally {
             setLoading(false);
         }
@@ -74,4 +75,4 @@ const useVehicleForm = (onSave: any) => {
     };
 };
 
-export default useVehicleForm; 
+export default useAgentForm; 

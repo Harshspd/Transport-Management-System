@@ -10,3 +10,15 @@ export interface Address {
   city?: string;
   country?: string;
 }
+
+
+export interface FieldConfig {
+    label: string;
+    name: string;
+    type: string;
+}
+
+export interface OptionType {
+    value: string;
+    label: string;
+}

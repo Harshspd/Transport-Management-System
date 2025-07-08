@@ -6,18 +6,16 @@ interface ButtonProps {
   variant?: "primary" | "outline"; // Button variant
   startIcon?: ReactNode; // Icon before the text
   endIcon?: ReactNode; // Icon after the text
-  onClick?: () => void; // Click handler
   disabled?: boolean; // Disabled state
   className?: string; // Disabled state
 }
 
-const Button: React.FC<ButtonProps> = ({
+const BtnSubmit: React.FC<ButtonProps> = ({
   children,
   size = "md",
   variant = "primary",
   startIcon,
   endIcon,
-  onClick,
   className = "",
   disabled = false,
 }) => {
@@ -42,9 +40,8 @@ const Button: React.FC<ButtonProps> = ({
       } ${variantClasses[variant]} ${
         disabled ? "cursor-not-allowed opacity-50" : ""
       }`}
-      onClick={onClick}
+      type="submit"
       disabled={disabled}
-      type="button" // Changed to "button" to prevent form submission
     >
       {startIcon && <span className="flex items-center">{startIcon}</span>}
       {children}
@@ -53,4 +50,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export default Button;
+export default BtnSubmit;
