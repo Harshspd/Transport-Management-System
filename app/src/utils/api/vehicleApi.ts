@@ -24,7 +24,7 @@ export const createVehicle = async (data: FormData) => {
     }
 };
 
-export const updateVehicle = async (id: string, data: Vehicle) => {
+export const updateVehicle = async (id: string, data: any) => {
     try {
         const response = await axiosInstance.put(API_ENDPOINT + `/${id}`, data);
         return response.data;
@@ -43,3 +43,13 @@ export const getVehicleById = async (id: string) => {
         throw error;
     }
 };
+export const deleteById = async (id: string) => {
+    try {
+        const response = await axiosInstance.delete(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
+

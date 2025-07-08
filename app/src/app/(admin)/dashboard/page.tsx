@@ -17,9 +17,6 @@ export default function Ecommerce() {
   
   return (
     <div>
-      <div className = "col-span-12 space-y-6 xl:col-span-7">
-        {/* <ShipmentForm /> */}
-        </div>
       <div className="col-span-12 xl:col-span-5">
         <EcommerceMetrics />        
 

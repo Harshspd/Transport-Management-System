@@ -11,10 +11,12 @@ import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-//import { updateVehiclestatus, deleteShipment } from '@/utils/api/shipmentApi';
-import { getVehicles } from "@/utils/api/vehicleApi";
+import { deleteById, getVehicles } from "@/utils/api/vehicleApi";
 import { Vehicle } from "@/types/vehicle";
 import { toast } from "react-toastify";
+import { SlideModal } from "@/components/ui/slide-modal";
+import { useModal } from "@/hooks/useModal";
+import EditVehicle from "@/components/vehicle/EditVehicle";
 
 const columns = [
     "ID",
@@ -29,7 +31,9 @@ export default function VehicleList() {
     const [Vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const vehicleModal = useModal();
+    const [slectedVehicleId, setSlectedVehicleId] = useState<string | null>(null);
+    
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -53,7 +57,7 @@ export default function VehicleList() {
         }
         if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
         try {
-            //await deleteShipment(VehiclesId);
+            await deleteById(VehiclesId);
             setVehicles((prev) => prev.filter(s => s._id !== VehiclesId));
         } catch (err) {
             toast.error("Failed to delete vehicle. Please try again." + (err instanceof Error ? err.message : ""));
@@ -62,18 +66,33 @@ export default function VehicleList() {
 
     // Placeholder for edit
     const handleEdit = (VehiclesId?: string) => {
-        if(!VehiclesId) {
-            toast.error("Invalid vehicle ID for editing");      
-            return;
+        if (VehiclesId) {
+            setSlectedVehicleId(VehiclesId);
+        } else {
+            setSlectedVehicleId(null);
         }
-        alert(`Edit vehicle ${VehiclesId} (implement navigation or modal)`);
+        vehicleModal.openModal();
     };
-
+        const handleOnSave = async (type: string, data: Vehicle) => {
+            if (slectedVehicleId) {
+                setVehicles((prev) => prev.map(c => c._id === slectedVehicleId ? data : c));
+            } else {
+                setVehicles((prev) => [...prev, data]);
+            }
+            const updatedList = await getVehicles();
+            setVehicles(updatedList);
+            vehicleModal.closeModal();
+        };
+    
     return (
         <div>
             <PageBreadcrumb pageTitle="Vehicle" />
             <div className="space-y-6">
                 <ComponentCard title="Vehicle Table">
+                    <Button size="sm" variant="primary" onClick={() => handleEdit(undefined)}>
+                        + Add Vehicle
+                    </Button>
+                
                     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                         <div className="max-w-full overflow-x-auto">
                             <div className="min-w-[1102px]">
@@ -148,6 +167,9 @@ export default function VehicleList() {
                         </div>
                     </div>
                 </ComponentCard>
+                <SlideModal title={slectedVehicleId ? 'Edit Vehicle' : 'Add Vehicle'} isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
+                    <EditVehicle onSave={(data: Vehicle) => handleOnSave('Vehicle', data)} onCancel={() => vehicleModal.closeModal()} selectedId={slectedVehicleId}/>
+                </SlideModal>
             </div>
         </div>
     );
