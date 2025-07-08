@@ -593,7 +593,7 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                 <EditDriver onSave={(data: Driver) => handleAddNewAndClose('Driver', data, setFieldValue)} onCancel={() => driverModal.closeModal()} />
                             </SlideModal>
                             <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
-                                <EditVehicle onSave={(data: Vehicle) => handleAddNewAndClose('Vehicle', data, setFieldValue)} />
+                                <EditVehicle onSave={(data: Vehicle) => handleAddNewAndClose('Vehicle', data, setFieldValue)} onCancel={() => vehicleModal.closeModal()} />
                             </SlideModal>
                              <SlideModal title='Add Agent' isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
                                 <EditAgent onSave={(data: Agent) => handleAddNewAndClose('Agent', data, setFieldValue)} onCancel={() => agentModal.closeModal()}/>
