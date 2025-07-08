@@ -138,8 +138,27 @@ export const getShipmentById = async (req, res) => {
 
 
 // Update Shipment
+// Update Shipment
 export const updateShipment = async (req, res) => {
   try {
+    const objectIdFields = ['consigner', 'consignee', 'driver', 'vehicle', 'agent'];
+
+    for (const field of objectIdFields) {
+      const value = req.body[field];
+
+      if (value === "" || value === null || value === undefined) {
+        delete req.body[field]; 
+      } else if (mongoose.Types.ObjectId.isValid(value)) {
+        req.body[field] = new mongoose.Types.ObjectId(value);
+      } else {
+        return res.status(400).json({
+          message: `Invalid ObjectId for field: ${field}`,
+          error: true,
+        });
+      }
+    }
+
+    // Perform the update
     const shipment = await Shipment.findOneAndUpdate(
       {
         _id: req.params.id,
