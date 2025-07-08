@@ -16,6 +16,7 @@ import { getShipments, updateShipmentStatus, deleteShipment, updateShipment } fr
 import { Shipment } from "@/types/shipment";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { Modal } from "@/components/ui/modal";
 
 const statusOptions = [
     { value: "Open", label: "Open" },
@@ -32,7 +33,7 @@ const columns = [
     "Cases",
     "Agent",
     "Delivery Date",
-    "Vehicle Number",
+    "Vehicle Number1",
     "Driver",
     "Status",
     "Actions",
@@ -45,29 +46,32 @@ export default function ShipmentTracking() {
     const [statusMap, setStatusMap] = useState<{ [id: string]: string }>({});
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editingShipment, setEditingShipment] = useState<Shipment | null>(null);
+    const [shipmentRowId, setShipmentRowId] = useState<string | null>(null);
+    const [isConfirmationVisible, setIsConfirmationVisible] = useState(false)
     const router = useRouter();
 
+    const fetchData = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await getShipments();
+            setShipments(data);
+            // Build status map for controlled Selects
+            const map: { [id: string]: string } = {};
+            data.forEach((shipment: Shipment) => {
+                if(shipment._id) {
+                    map[shipment._id] = shipment.status;
+                }
+            });
+            setStatusMap(map);
+        } catch (err) {
+            toast.error("Failed to fetch shipments: " + (err instanceof Error ? err.message : "Unknown error"));
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const data = await getShipments();
-                setShipments(data);
-                // Build status map for controlled Selects
-                const map: { [id: string]: string } = {};
-                data.forEach((shipment: Shipment) => {
-                    if(shipment._id) {
-                        map[shipment._id] = shipment.status;
-                    }
-                });
-                setStatusMap(map);
-            } catch (err) {
-                toast.error("Failed to fetch shipments: " + (err instanceof Error ? err.message : "Unknown error"));
-            } finally {
-                setLoading(false);
-            }
-        };
         fetchData();
     }, []);
 
@@ -85,16 +89,16 @@ export default function ShipmentTracking() {
         }
     };
 
-    const handleDelete = async (shipmentId?: string) => {
-        if (!shipmentId) {
+    const handleDelete = async () => {
+        if (!shipmentRowId) {
             toast.error("Invalid shipment ID");
             return;
         }
-         // Confirm before deletion
-        if (!window.confirm("Are you sure you want to delete this shipment?")) return;
         try {
-            await deleteShipment(shipmentId);
-            setShipments((prev) => prev.filter(s => s._id !== shipmentId));
+            await deleteShipment(shipmentRowId);
+            await fetchData()
+            setIsConfirmationVisible(false);
+            setShipmentRowId(null);
         } catch (err) {
             toast.error("Failed to delete shipment: " + (err instanceof Error ? err.message : "Unknown error"));
         }
@@ -164,7 +168,7 @@ export default function ShipmentTracking() {
                                             {shipments.map((row) => (
                                                 <TableRow key={row?._id}>
                                                     <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                        {row?.goods_details?.bill_no || row._id}
+                                                        {row?.bility_no}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.createdAt ? new Date(row.createdAt).toLocaleDateString() : "-"}
@@ -229,7 +233,10 @@ export default function ShipmentTracking() {
                                                                 variant="outline"
                                                                 startIcon={<TrashBinIcon width={18} height={18} />}
                                                                 className="!p-2 border border-gray-200 bg-red-50 hover:bg-red-100 dark:bg-red-900 dark:border-red-700"
-                                                                onClick={() => handleDelete(row._id)}
+                                                                onClick={() => {
+                                                                    setShipmentRowId(row._id ?? null);
+                                                                    setIsConfirmationVisible(true);
+                                                                }}
                                                             >
                                                                 {""}
                                                             </Button>
@@ -245,6 +252,34 @@ export default function ShipmentTracking() {
                     </div>
                 </ComponentCard>
             </div>
+            {isConfirmationVisible && (
+                <Modal
+                isOpen={isConfirmationVisible}
+                onClose={() => {
+                    setIsConfirmationVisible(false);
+                    setShipmentRowId(null);
+                }}
+                className="max-w-[400px] p-5"
+              >
+                <h4 className="font-semibold text-gray-800 mb-4 text-title-sm dark:text-white/90">
+                  Confirm Deletion
+                </h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    Are you sure you want to delete this shipment?
+                </p>
+                <div className="flex items-center justify-end w-full gap-3">
+                  <Button size="sm" variant="outline" onClick={() => {
+                    setIsConfirmationVisible(false);
+                    setShipmentRowId(null);
+                  }}>
+                    Cancel
+                  </Button>
+                  <Button size="sm" onClick={handleDelete} variant="primary" className="bg-red-600 hover:bg-red-700 text-white">
+                    Delete
+                  </Button>
+                </div>
+              </Modal>
+            )}
         </div>
     );
 } 

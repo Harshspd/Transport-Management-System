@@ -22,3 +22,23 @@ export const createAgent = async (data: Agent) => {
         throw error;
     }
 };
+
+export const updateAgent = async (id:string,data: Agent) => {
+    try {
+        const response = await axiosInstance.put(API_ENDPOINT + `/${id}`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
+
+export const getAgentById = async (id: string) => {
+    try {
+        const response = await axiosInstance.get(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};

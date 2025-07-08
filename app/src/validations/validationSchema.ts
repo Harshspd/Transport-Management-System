@@ -8,6 +8,10 @@ export const consignerSchema = Yup.object().shape({
   name: Yup.string().required('Consignee name is required'),
 });
 
+export const agentSchema = Yup.object().shape({
+  name: Yup.string().required('Agent name is required'),
+});
+
 export const driverSchema = Yup.object().shape({
   name: Yup.string().required('Consignee name is required'),
 });
