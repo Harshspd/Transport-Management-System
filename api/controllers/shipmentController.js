@@ -119,6 +119,7 @@ export const getShipmentById = async (req, res) => {
       .populate('consignee')
       .populate('driver')
       .populate('vehicle')
+      .populate('agent')
       .populate('created_by', 'email');
 
     if (!shipment) {

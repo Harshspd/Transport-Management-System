@@ -31,7 +31,7 @@ const shipmentSchema = new mongoose.Schema({
 
   driver: { type: mongoose.Schema.Types.ObjectId, ref: 'Driver' },
   vehicle: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' },
-
+  agent: { type: mongoose.Schema.Types.ObjectId, ref: 'Agent', required: false },
   service_type: { type: String },
   provider: { type: String },
   eway_bill_number: { type: String },
