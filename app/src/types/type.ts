@@ -21,4 +21,5 @@ export interface FieldConfig {
 export interface OptionType {
     value: string;
     label: string;
+    city: string
 }

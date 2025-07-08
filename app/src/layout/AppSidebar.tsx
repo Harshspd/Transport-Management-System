@@ -61,6 +61,11 @@ const navItems: NavItem[] = [
     name: "Driver",
     path: "/driver",
   },
+  {
+    icon: <UserCircleIcon />,
+    name: "Agency",
+    path: "/agent",
+  },
   /* {
     name: "Forms",
     icon: <ListIcon />,

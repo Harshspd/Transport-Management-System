@@ -11,17 +11,17 @@ import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
-//import { updateAgentstatus, deleteShipment } from '@/utils/api/shipmentApi';
+//import { updateAgentstatus, deleteShipment } from '@/utils/api/agentApi';
+import { getAgents } from "@/utils/api/agentApi";
 import { Agent } from "@/types/agent";
 import { SlideModal } from "@/components/ui/slide-modal";
 import EditAgent from "@/components/agent/EditAgent";
 import { useModal } from '@/hooks/useModal';
-import { getAgents } from "@/utils/api/agentApi";
 import { toast } from "react-toastify";
 
 const columns = [
-    "Agent ID",
     "Agent Name",
+    "City",
     "Contact",
     "Last Shipment Book Date"
 ];
@@ -39,60 +39,70 @@ export default function AgentList() {
             try {
                 const data = await getAgents();
                 setAgents(data);
-            } catch (err: unknown) {
-                if (err instanceof Error) {
-                    setError("Failed to fetch Agents: " + err.message);
-                } else {
-                    setError("Failed to fetch Agents: Unknown error");
-                }
+            } catch (err) {
+                toast.error("Failed to fetch Agents: " + (err instanceof Error ? err.message : "Unknown error"));
             } finally {
                 setLoading(false);
             }
         };
         fetchData();
     }, []);
-    const handleOnSave = (type: string, data: Agent) => {
-        if (type === 'Agent') {
-            setAgents((prev) => [...prev, data]);
-        }
-        agentModal.closeModal();
-    };
-    const handleDelete = async (AgentsId?: string) => {
-        if (!AgentsId) {
+
+    const handleDelete = async (agentsId?: string) => {
+        if (!agentsId) {
             toast.error("Agent ID is required for deletion");
             return;
         }
+         // Uncomment the next line when deleteShipment function is implemented
         if (!window.confirm("Are you sure you want to delete this agent?")) return;
         try {
-            //await deleteShipment(AgentsId);
-            setAgents((prev) => prev.filter(s => s._id !== AgentsId));
-        } catch (err: unknown) {
-                if (err instanceof Error) {
-                    setError("Failed to fetch Agents: " + err.message);
-                } else {
-                    setError("Failed to fetch Agents: Unknown error");
-                }
-            } finally {
-                setLoading(false);
+            //await deleteShipment(agentsId);
+            setAgents((prev) => prev.filter(s => s._id !== agentsId));
+        } catch (err) {
+            toast.error("Failed to delete agent: " + (err instanceof Error ? err.message : "Unknown error"));
+        } finally {
+            setLoading(false);
         }
     };
 
     // Placeholder for edit
-    const handleEdit = (AgentsId?: string) => {
-        if (!AgentsId) {
-            toast.error("Agent ID is required for editing");
-            return;
-        }
-        setSlectedAgentId(AgentsId);
-        agentModal.openModal();
-        alert(`Edit agent ${AgentsId} (implement navigation or modal)`);
-    };
+    // const handleEdit = (agentsId?: string) => {
+    //     if (!agentsId) {
+    //         toast.error("Agent ID is required for editing");
+    //         return;
+    //     }
+    //     // Logic to open edit modal or navigate to edit page
+    //     console.log("Edit agent with ID:", agentsId);
+    // };
 
+    const handleEdit = (AgentsId?: string) => {
+        if (AgentsId) {
+            setSlectedAgentId(AgentsId);
+        } else {
+            setSlectedAgentId(null);
+        }
+        agentModal.openModal();
+    };
+    const handleOnSave = async (type: string, data: Agent) => {
+        if (type === 'Agent') {
+        if (slectedAgentId) {
+            setAgents((prev) => prev.map(c => c._id === slectedAgentId ? data : c));
+        } else {
+            setAgents((prev) => [...prev, data]);
+        }
+        const updatedList = await getAgents();
+        setAgents(updatedList);
+        }
+        agentModal.closeModal();
+    };
     return (
         <div>
             <PageBreadcrumb pageTitle="Agent" />
             <div className="space-y-6">
-                <ComponentCard title="Agent Table">
+                <ComponentCard title="">
+                    <Button size="sm" variant="primary" onClick={() => handleEdit(undefined)}>
+                        + Add Agent
+                    </Button>
                     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                         <div className="max-w-full overflow-x-auto">
                             <div className="min-w-[1102px]">
@@ -108,7 +118,7 @@ export default function AgentList() {
                                                     <TableCell
                                                         key={col}
                                                         isHeader
-                                                        className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                                                        className="px-3 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                                                     >
                                                         {col}
                                                     </TableCell>
@@ -118,13 +128,13 @@ export default function AgentList() {
                                         <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                                             {Agents.map((row) => (
                                                 <TableRow key={row?._id}>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
-                                                        {row?._id || "-"}
-                                                    </TableCell>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
                                                         {row?.name || "-"}
                                                     </TableCell>
-                                                    <TableCell className="px-4 py-3 text-start">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
+                                                        {row?.address?.city || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="px-2 py-1 text-start">
                                                         <div>
                                                             <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
                                                                 {row?.contact?.person || "-"}
@@ -134,11 +144,11 @@ export default function AgentList() {
                                                             </span>
                                                         </div>
                                                     </TableCell>
-                                                    <TableCell className="px-5 py-4 sm:px-6 text-start text-blue-500">
+                                                    <TableCell className="px-2 py-1 sm:px-6 text-start text-blue-500">
                                                         {"-"}
                                                     </TableCell>
 
-                                                    <TableCell className="px-4 py-3 text-start">
+                                                    <TableCell className="px-2 py-1 text-start">
                                                         <div className="flex gap-2">
                                                             <Button
                                                                 size="sm"
@@ -169,8 +179,8 @@ export default function AgentList() {
                         </div>
                     </div>
                 </ComponentCard>
-                <SlideModal title='Add Agent' isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
-                    <EditAgent onSave={(data:Agent)=>handleOnSave('Agent',data)} selectedId={slectedAgentId??undefined}/>
+                <SlideModal title={slectedAgentId ? 'Edit Agent' : 'Add Agent'} isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
+                    <EditAgent onSave={(data:Agent) => handleOnSave('Agent', data)} onCancel={() => agentModal.closeModal()} selectedId={slectedAgentId}/>
                 </SlideModal>
             </div>
         </div>

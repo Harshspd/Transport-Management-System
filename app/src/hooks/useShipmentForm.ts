@@ -7,6 +7,7 @@ import { createShipment, getShipmentById } from '@/utils/api/shipmentApi';
 import { toast } from 'react-toastify';
 import { useModal } from '@/hooks/useModal';
 import { OptionType } from '@/types/type';
+import { getAgents } from '@/utils/api/agentApi';
 
 
 
@@ -32,6 +33,7 @@ interface ShipmentFormData {
     ServiceType: string;
     Provider: string;
     EwayBill: string;
+    Agency: string;
 }
 
 interface ShipmentFormErrors {
@@ -47,9 +49,10 @@ interface ShipmentFormOptions {
     Vehicle: OptionType[];
     Provider: OptionType[] | string[];
     UnitWeight: OptionType[] | string[];
+    Agent: OptionType[];
 }
 
-type MappedKeys = keyof Pick<ShipmentFormOptions, "Consigner" | "Consignee" | "Driver" | "Vehicle">;
+type MappedKeys = keyof Pick<ShipmentFormOptions, "Consigner" | "Consignee" | "Driver" | "Vehicle" | "Agent" >;
 
 
 const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
@@ -75,6 +78,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         ServiceType: '',
         Provider: '',
         EwayBill: '',
+        Agency: '',
     });
 
     const [errors, setErrors] = useState<ShipmentFormErrors>({});
@@ -87,31 +91,35 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         Driver: [],
         Vehicle: [],
         Provider: ['Owner', 'Agency'],
-        UnitWeight: ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo']
+        UnitWeight: ['Per Kg', 'LPT (Less than Truckload)', 'FTL (Turbo)', 'Turbo'],
+        Agent: [],
     });
 
     const consignerModal = useModal();
     const consigneeModal = useModal();
     const driverModal = useModal();
     const vehicleModal = useModal();
+    const agentModal = useModal();
 
 
     // Fetch dropdown options from backend on mount
     useEffect(() => {
         const fetchOptions = async () => {
             try {
-                const [consigners, consignees, drivers, vehicles] = await Promise.all([
+                const [consigners, consignees, drivers, vehicles, agents] = await Promise.all([
                     getConsigners(),
                     getConsignees(),
                     getDrivers(),
-                    getVehicles()
+                    getVehicles(),
+                    getAgents()
                 ]);
                 setOptions((prev) => ({
                     ...prev,
                     Consigner: consigners.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
-                    Consignee: consignees.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name })),
+                    Consignee: consignees.map((c: any) => ({ value: c._id, label: c.contact?.name || c.name, city: c.address?.city })),
                     Driver: drivers.map((d: any) => ({ value: d._id, label: d.contact?.name || d.name })),
                     Vehicle: vehicles.map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name })),
+                    Agent: agents.map((v: any) => ({ value: v._id, label: v.name || v.name })),
                 }));
             } catch (error) {
                 console.error('Error fetching dropdown options:', error);
@@ -119,21 +127,6 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         };
         fetchOptions();
     }, []);
-    useEffect(() => {
-        // If shipmentId is provided, fetch the existing shipment data
-        const fetchShipmentData= async (shipmentId:string) =>{
-        if (shipmentId) {
-            try {
-                const response = await getShipmentById(shipmentId);
-                setFormData(response.data);  
-            }
-            catch (error) {
-                console.error('Error fetching shipment data:', error);
-                toast.error('Error fetching shipment data. Please try again.');
-            }   
-        }}
-        fetchShipmentData(shipmentId);
-    },[shipmentId]);
 
     const handleChange = (e: any, selectedValue?: any) => {
         let name: string, value: string;
@@ -161,6 +154,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
             case 'Consignee': return consigneeModal.openModal();
             case 'Driver': return driverModal.openModal();
             case 'Vehicle': return vehicleModal.openModal();
+            case 'Agent' : return agentModal.openModal();
         }
     };
 
@@ -219,6 +213,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
                     ActualDimensions: '', ChargedDimensions: '', UnitWeight: '',
                     ActualWeight: '', ChargedWeight: '', Instructions: '', Driver: '',
                     Vehicle: '', ServiceType: '', Provider: '', EwayBill: '',
+                    Agency: '',
                 });
             }
         } catch (error) {
@@ -237,6 +232,8 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
                 updatedList = (await getDrivers()).map((d: any) => ({ value: d._id, label: d.contact?.name || d.name }));
             } else if (type === 'Vehicle') {
                 updatedList = (await getVehicles()).map((v: any) => ({ value: v._id, label: v.vehicle_number || v.name }));
+            } else if (type === 'Agent') {
+                updatedList = (await getAgents()).map((v: any) => ({ value: v._id, label: v.name || v.name }));
             }
             setOptions((prev) => ({ ...prev, [type]: updatedList }));
             setFormData((prev) => ({ ...prev, [type]: newEntry._id }));
@@ -245,6 +242,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
                 case 'Consignee': return consigneeModal.closeModal();
                 case 'Driver': return driverModal.closeModal();
                 case 'Vehicle': return vehicleModal.closeModal();
+                case 'Agent' : return agentModal.closeModal();
             }
             return true;
         } catch (error) {
@@ -302,7 +300,6 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         options,
         isFormValid,
         handleChange,
-        handleSubmit,
         handleAddNew,
         renderOptions,
         formatValue,
@@ -310,6 +307,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         consigneeModal,
         driverModal,
         vehicleModal,
+        agentModal,
         getSelectedOptionLabel,
     };
 };

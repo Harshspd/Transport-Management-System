@@ -138,10 +138,10 @@ export default function ShipmentList() {
                                                         {row?.bility_no || row._id}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.createdAt?.toLocaleDateString()}
+                                                        {row?.createdAt ? new Date(row.createdAt).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.consignee.name || "-"}
+                                                        {row?.consignee?.name || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                                                         {row?.delivery_location || "-"}
@@ -153,13 +153,13 @@ export default function ShipmentList() {
                                                         {row.goods_details?.quantity || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row?.agent?.contact.person}
+                                                        {row?.agent?.contact?.person}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.expected_delivery_date_and_time ? new Date(row.expected_delivery_date_and_time).toLocaleDateString() : "-"}
+                                                        {row?.expected_delivery_date_and_time ? new Date(row.expected_delivery_date_and_time).toLocaleDateString() : "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                                        {row.vehicle?.vehicle_number || "-"}
+                                                        {row?.vehicle?.vehicle_number || "-"}
                                                     </TableCell>
                                                     <TableCell className="px-4 py-3 text-start">
                                                         <div>

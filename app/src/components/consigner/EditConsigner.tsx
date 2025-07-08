@@ -19,7 +19,7 @@ interface EditConsignerProps {
     onCancel: () => void;
 }
 
-const EditConsigner: React.FC<EditConsignerProps> = ({ onSave,onCancel, selectedId }) => {
+const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel, selectedId }) => {
     const [initialValues, setInitialValues] = useState({
         name: '',
         contactPerson: '',
@@ -107,8 +107,8 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave,onCancel, selected
                     validationSchema={consignerSchema}
                     onSubmit={handleSubmit}
                 >
-                    {({ isSubmitting }) => (
-                        <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {({ isSubmitting, handleSubmit }) => (
+                        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {/* Left Column */}
                             <div className="flex flex-col gap-4">
                                 <div>
@@ -170,7 +170,7 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave,onCancel, selected
                                 <Button variant='outline' onClick={handleCancel}>Cancel</Button>
 
                             </div>
-                        </Form>
+                        </form>
                     )}
                 </Formik>
             </div>
