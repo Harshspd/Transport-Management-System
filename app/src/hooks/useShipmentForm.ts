@@ -67,6 +67,7 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         BillDate: '',
         BillValue: '',
         Mode: '',
+        Provider: '',
         ActualDimensions: '',
         ChargedDimensions: '',
         UnitWeight: '',
@@ -76,7 +77,6 @@ const useShipmentForm = (onSave:any,onCancel:any,shipmentId:any) => {
         Driver: '',
         Vehicle: '',
         ServiceType: '',
-        Provider: '',
         EwayBill: '',
         Agency: '',
     });
