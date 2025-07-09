@@ -12,7 +12,7 @@ const shipmentSchema = new mongoose.Schema({
     required: true,
   },
   delivery_location: { type: String, required: true },
-  expected_delivery_date_and_time: { type: Date, },
+  expected_delivery_date_and_time: { type: Date },
 
   goods_details: {
     description: { type: String },
@@ -36,27 +36,31 @@ const shipmentSchema = new mongoose.Schema({
   provider: { type: String },
   eway_bill_number: { type: String },
   status: {
-  type: String,
-  enum: ['Open', 'In-Transit', 'Delivered'],
-  default: 'Open',
+    type: String,
+    enum: ['Open', 'In-Transit', 'Delivered'],
+    default: 'Open',
   },
+
   bility_no: {
-  type: Number,
-  required: true,
-  unique: true,
-},
-   created_by: {
+    type: Number,
+    required: true
+  },
+
+  created_by: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-   },
-   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-   organization_id: {
+  },
+  updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  organization_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true,
   },
 }, { timestamps: true });
+
+// Compound unique index: bility_no unique per organization
+shipmentSchema.index({ organization_id: 1, bility_no: 1 }, { unique: true });
 
 const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', shipmentSchema);
 export default Shipment;

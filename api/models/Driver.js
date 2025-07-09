@@ -4,7 +4,7 @@ const driverSchema = new mongoose.Schema({
   name: { type: String, index: true },
   contact: {
     person: { type: String },
-    phone: { type: Number},
+    phone: { type: String},
     email: { type: String },
   },
   address: {
