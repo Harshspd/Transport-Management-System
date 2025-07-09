@@ -65,18 +65,18 @@ const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId })
                     setInitialValues({
                         name: data.name,
                         contact: {
-                            person: data.contact.person || '',
-                            phone: data.contact.phone || '',
+                            person: data.contact?.person || '',
+                            phone: data.contact?.phone || '',
                         },
                         address: {
-                            street: data.address.street || '',
-                            city: data.address.city || '',
-                            state: data.address.state || '',
+                            street: data.address?.street || '',
+                            city: data.address?.city || '',
+                            state: data.address?.state || '',
                             zip_code: '',
                             country: '',
                         },
                         license_number: data?.license_number || '',
-                        license_file: data.license_file,
+                        license_file: data?.license_file,
                     });
                 } catch (err) {
                     console.error('Error fetching driver:', err);
@@ -92,11 +92,11 @@ const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId })
         try {
             const formData = new FormData();
             formData.append('name', values.name);
-            formData.append('address.street', values?.address?.street)
-            formData.append('address.city', values?.address?.city)
-            formData.append('address.state', values?.address?.state)
+            formData.append('address', values?.address?.street)
+            formData.append('city', values?.address?.city)
+            formData.append('state', values?.address?.state)
             formData.append('contact.person', values.contact.person);
-            formData.append('contact.phone', values.contact.phone);
+            formData.append('contact[phone]', values.contact.phone);
             formData.append('license_number', values.license_number);
             if (values.license_file && values.license_file as any instanceof File) {
                 formData.append('licenseFile', values.license_file);
