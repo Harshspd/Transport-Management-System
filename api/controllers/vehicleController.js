@@ -1,29 +1,38 @@
 import Vehicle from '../models/Vehicle.js';
 import { serverError } from '../helpers/responseUtility.mjs';
-import {validateRequiredFields , checkDuplicate } from '../helpers/validationUtility.mjs';
+import { validateRequiredFields, checkDuplicate } from '../helpers/validationUtility.mjs';
 
 // CREATE Vehicle
 export const createVehicle = async (req, res) => {
   try {
-    const requiredFields = ['vehicle_number',  'rc_number'];
+    const requiredFields = ['vehicle_number', 'rc_number'];
     const missing = validateRequiredFields(requiredFields, req.body);
     if (missing.length > 0) {
-      return res.status(400).json({ message: `Missing required field(s): ${missing.join(', ')}`, error: true });
+      return res.status(400).json({
+        message: `Missing required field(s): ${missing.join(', ')}`,
+        error: true
+      });
     }
 
-    // Duplicate check 
+    // Duplicate check
     const duplicate = await checkDuplicate(Vehicle, {
       $or: [
         { vehicle_number: req.body.vehicle_number },
       ]
     });
     if (duplicate) {
-      return res.status(409).json({ message: 'Vehicle with same vehicle number already exist', error: true });
+      return res.status(409).json({
+        message: 'Vehicle with same vehicle number already exist',
+        error: true
+      });
     }
+
+    const filePath = req.file?.path || '';
+    const fullRcFileUrl = filePath ? `${req.protocol}://${req.get('host')}/api/${filePath.replace(/\\/g, '/')}` : '';
 
     const vehicle = new Vehicle({
       ...req.body,
-      rc_file: req.file?.path || '',
+      rc_file: fullRcFileUrl,
       created_by: req.user._id,
       organization_id: req.user.account_id,
     });
@@ -53,7 +62,6 @@ export const getAllVehicles = async (req, res) => {
   }
 };
 
-
 // Get One Vehicle by ID
 export const getVehicleById = async (req, res) => {
   try {
@@ -76,16 +84,22 @@ export const getVehicleById = async (req, res) => {
   }
 };
 
-
 // UPDATE Vehicle
 export const updateVehicle = async (req, res) => {
   try {
+    if (req.file?.path) {
+      const fullRcFileUrl = `${req.protocol}://${req.get('host')}/api/${req.file.path.replace(/\\/g, '/')}`;
+      req.body.rc_file = fullRcFileUrl;
+    }
+
     const vehicle = await Vehicle.findOneAndUpdate(
       { _id: req.params.id, organization_id: req.user.account_id },
       { ...req.body, updated_by: req.user._id },
       { new: true }
     );
+
     if (!vehicle) return res.status(404).json({ message: 'Vehicle not found' });
+
     res.json({ message: 'Vehicle updated successfully', data: vehicle });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -99,7 +113,9 @@ export const deleteVehicle = async (req, res) => {
       _id: req.params.id,
       organization_id: req.user.account_id
     });
+
     if (!result) return res.status(404).json({ message: 'Vehicle not found' });
+
     res.json({ message: 'Vehicle deleted successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
