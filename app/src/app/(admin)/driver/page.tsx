@@ -12,9 +12,12 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateDrivertatus, deleteShipment } from '@/utils/api/shipmentApi';
-import { getDrivers } from "@/utils/api/driverApi";
+import { deleteById, getDrivers } from "@/utils/api/driverApi";
 import { Driver } from "@/types/driver";
 import { toast } from "react-toastify";
+import { useModal } from "@/hooks/useModal";
+import { SlideModal } from "@/components/ui/slide-modal";
+import EditDriver from "@/components/driver/EditDriver";
 
 const columns = [
     "ID",
@@ -24,11 +27,13 @@ const columns = [
     "Last Shipment Book Date"
 ];
 
-export default function VehicleList() {
+export default function DriverList() {
     const [Driver, setDriver] = useState<Driver[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const driverModal = useModal();
+    const [slectedDriverId, setSlectedDriverId] = useState<string | null>(null);
+    
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -46,9 +51,13 @@ export default function VehicleList() {
     }, []);
 
     const handleDelete = async (DriverId?: string) => {
+        if(!DriverId){
+            toast.error("DriverId ID is required for editing");
+            return;
+        }
         if (!window.confirm("Are you sure you want to delete this driver?")) return;
         try {
-            //await deleteShipment(DriverId);
+            await deleteById(DriverId);
             setDriver((prev) => prev.filter(s => s._id !== DriverId));
         } catch (err) {
             toast.error("Failed to delete driver: " + (err instanceof Error ? err.message : "Unknown error"));
@@ -57,20 +66,33 @@ export default function VehicleList() {
 
     // Placeholder for edit
     const handleEdit = (DriverId?: string) => {
-        if (!DriverId) {
-            toast.error("Driver ID is required for editing");
-            return;
+        if (DriverId) {
+            setSlectedDriverId(DriverId);
+        } else {
+            setSlectedDriverId(null);
         }
-        // Logic to handle edit action, e.g., open a modal with the driver's details
-        console.log("Edit Driver with ID:", DriverId);
+        driverModal.openModal();
         
     };
-
+    const handleOnSave = async (type: string, data: Driver) => {
+            if (slectedDriverId) {
+                setDriver((prev) => prev.map(c => c._id === slectedDriverId ? data : c));
+            } else {
+                setDriver((prev) => [...prev, data]);
+            }
+            const updatedList = await getDrivers();
+            setDriver(updatedList);
+            driverModal.closeModal();
+        };
     return (
         <div>
             <PageBreadcrumb pageTitle="Driver " />
             <div className="space-y-6">
                 <ComponentCard title="Driver  Table">
+                    <Button size="sm" variant="primary" onClick={() => handleEdit(undefined)}>
+                        + Add Driver
+                    </Button>
+                
                     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
                         <div className="max-w-full overflow-x-auto">
                             <div className="min-w-[1102px]">
@@ -143,6 +165,9 @@ export default function VehicleList() {
                         </div>
                     </div>
                 </ComponentCard>
+                 <SlideModal title={slectedDriverId ? 'Edit Driver' : 'Add Driver'} isOpen={driverModal.isOpen} onClose={driverModal.closeModal}>
+                    <EditDriver onSave={(data: Driver) => handleOnSave('Driver', data)} onCancel={() => driverModal.closeModal()} selectedId={slectedDriverId}/>
+                </SlideModal>
             </div>
         </div>
     );

@@ -12,7 +12,7 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateConsigneestatus, deleteShipment } from '@/utils/api/shipmentApi';
-import { getConsignees } from "@/utils/api/consigneeApi";
+import { deleteById, getConsignees } from "@/utils/api/consigneeApi";
 import { Consignee } from "@/types/consignee";
 import { SlideModal } from "@/components/ui/slide-modal";
 import EditConsignee from "@/components/consignee/EditConsignee";
@@ -71,7 +71,7 @@ export default function ConsigneeList() {
         }
         if (!window.confirm("Are you sure you want to delete this consignee?")) return;
         try {
-            //await deleteShipment(ConsigneesId);
+            await deleteById(ConsigneesId);
             setConsignees((prev) => prev.filter(s => s._id !== ConsigneesId));
         } catch (err: unknown) {
                 if (err instanceof Error) {

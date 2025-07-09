@@ -23,7 +23,7 @@ export const createDriver = async (data: any) => {
     }
 };
 
-export const updateDriver = async (id: string, data: Driver) => {
+export const updateDriver = async (id: string, data: any) => {
     try {
         const response = await axiosInstance.put(API_ENDPOINT + `/${id}`, data);
         return response.data;
@@ -42,3 +42,13 @@ export const getDriverById = async (id: string) => {
         throw error;
     }
 };
+export const deleteById = async (id: string) => {
+    try {
+        const response = await axiosInstance.delete(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
+

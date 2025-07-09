@@ -12,7 +12,7 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { PencilIcon, TrashBinIcon } from "@/icons";
 import Button from "@/components/ui/button/Button";
 //import { updateConsignerstatus, deleteShipment } from '@/utils/api/consignerApi';
-import { getConsigners } from "@/utils/api/consignerApi";
+import { deleteById, getConsigners } from "@/utils/api/consignerApi";
 import { Consigner } from "@/types/consigner";
 import { SlideModal } from "@/components/ui/slide-modal";
 import EditConsigner from "@/components/consigner/EditConsigner";
@@ -56,7 +56,7 @@ export default function ConsignerList() {
          // Uncomment the next line when deleteShipment function is implemented
         if (!window.confirm("Are you sure you want to delete this consigner?")) return;
         try {
-            //await deleteShipment(consignersId);
+            await deleteById(consignersId);
             setConsigners((prev) => prev.filter(s => s._id !== consignersId));
         } catch (err) {
             toast.error("Failed to delete consigner: " + (err instanceof Error ? err.message : "Unknown error"));
@@ -65,15 +65,6 @@ export default function ConsignerList() {
         }
     };
 
-    // Placeholder for edit
-    // const handleEdit = (consignersId?: string) => {
-    //     if (!consignersId) {
-    //         toast.error("Consigner ID is required for editing");
-    //         return;
-    //     }
-    //     // Logic to open edit modal or navigate to edit page
-    //     console.log("Edit consigner with ID:", consignersId);
-    // };
 
     const handleEdit = (ConsignersId?: string) => {
         if (ConsignersId) {

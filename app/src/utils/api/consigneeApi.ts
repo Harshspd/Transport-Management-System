@@ -42,3 +42,13 @@ export const getConsigneeById = async (id: string) => {
         throw error;
     }
 };
+
+export const deleteById = async (id: string) => {
+    try {
+        const response = await axiosInstance.delete(API_ENDPOINT + `/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching contact lists:', error);
+        throw error;
+    }
+};
