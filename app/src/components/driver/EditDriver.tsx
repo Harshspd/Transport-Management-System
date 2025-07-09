@@ -10,6 +10,7 @@ import TextArea from '../form/input/TextArea';
 import Button from '../ui/button/Button';
 import BtnSubmit from '../ui/button/BtnSubmit';
 import { toast } from 'react-toastify';
+import Label from '../form/Label';
 
 
 
@@ -131,42 +132,48 @@ const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId })
                     <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                         <div className="flex flex-col gap-4">
-                            <label htmlFor="name">Driver Name</label>
+                            <Label htmlFor="name">Driver Name</Label>
                             <Field id="name" name="name" as={Input} />
                             <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="contact.person">Contact Person (Optional)</label>
+                            <Label htmlFor="contact.person">Contact Person (Optional)</Label>
                             <Field id="contact.person" name="contact.person" as={Input} />
                             <ErrorMessage name="contact.person" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="contact.phone">Contact Phone</label>
+                            <Label htmlFor="contact.phone">Contact Phone</Label>
                             <Field id="contact.phone" name="contact.phone" as={Input} />
                             <ErrorMessage name="contact.phone" component="div" className="text-red-500 text-sm" />
                         </div>
                         <div>
-                            <label>Address</label>
+                            <Label>Address</Label>
                             <Field name="address.street" id="address.street" rows={5} className="w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs focus:outline-hidden" />
                             <ErrorMessage name="address.street" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label>City</label>
+                            <Label>State</Label>
+                            <Field name="address.state" as={Input} />
+                            <ErrorMessage name="address.state" component="div" className="text-red-500 text-sm" />
+                        </div>
+
+                        <div>
+                            <Label>City</Label>
                             <Field name="address.city" as={Input} />
                             <ErrorMessage name="address.city" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="license_number">License Number (Optional)</label>
+                            <Label htmlFor="license_number">License Number (Optional)</Label>
                             <Field id="license_number" name="license_number" as={Input} />
                             <ErrorMessage name="license_number" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="license_file">License File Upload (Optional)</label>
+                            <Label htmlFor="license_file">License File Upload (Optional)</Label>
                             <Input
                                 id="license_file"
                                 name="license_file"
@@ -195,7 +202,7 @@ const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId })
                         {/* For example: */}
                         {/*
           <div>
-            <label htmlFor="address.street">Street</label>
+            <Label htmlFor="address.street">Street</Label>
             <Field id="address.street" name="address.street" as={Input} />
             <ErrorMessage name="address.street" component="div" className="text-red-500 text-sm" />
           </div>

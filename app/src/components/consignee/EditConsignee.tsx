@@ -10,6 +10,7 @@ import TextArea from '../form/input/TextArea';
 import Button from '../ui/button/Button';
 import BtnSubmit from '../ui/button/BtnSubmit';
 import { toast } from 'react-toastify';
+import Label from '../form/Label';
 
 interface EditConsigneeProps {
   onSave: (data: Consignee) => void;
@@ -109,19 +110,19 @@ const EditConsignee: React.FC<EditConsigneeProps> = ({ onSave, onCancel ,selecte
             {/* Left Column */}
             <div className="flex flex-col gap-4">
               <div>
-                <label>Consignee Name</label>
+                <Label>Consignee Name</Label>
                 <Field name="name" as={Input} />
                 <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label>Address</label>
+                <Label>Address</Label>
                 <Field name="adddress_line_1" id="adddress_line_1"  rows={3} className="w-full rounded-lg border px-4 py-2.5 text-sm shadow-theme-xs focus:outline-hidden"/>
                 <ErrorMessage name="adddress_line_1" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label>City</label>
+                <Label>City</Label>
                 <Field name="city" as={Input} />
                 <ErrorMessage name="city" component="div" className="text-red-500 text-sm" />
               </div>
@@ -130,25 +131,25 @@ const EditConsignee: React.FC<EditConsigneeProps> = ({ onSave, onCancel ,selecte
             {/* Right Column */}
             <div className="flex flex-col gap-4">
               <div>
-                <label>Contact Person</label>
+                <Label>Contact Person</Label>
                 <Field name="contactPerson" as={Input} />
                 <ErrorMessage name="contactPerson" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label>Contact Number</label>
+                <Label>Contact Number</Label>
                 <Field name="contactNumber" as={Input} />
                 <ErrorMessage name="contactNumber" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label>State</label>
+                <Label>State</Label>
                 <Field name="state" as={Input} />
                 <ErrorMessage name="state" component="div" className="text-red-500 text-sm" />
               </div>
 
               <div>
-                <label>GSTIN</label>
+                <Label>GSTIN</Label>
                 <Field name="gstin" as={Input} />
                 <ErrorMessage name="gstin" component="div" className="text-red-500 text-sm" />
               </div>

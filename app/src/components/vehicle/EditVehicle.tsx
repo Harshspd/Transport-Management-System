@@ -9,6 +9,7 @@ import Input from '../form/input/InputField';
 import Button from '../ui/button/Button';
 import BtnSubmit from '../ui/button/BtnSubmit';
 import { toast } from 'react-toastify';
+import Label from '../form/Label';
 
 
 
@@ -105,37 +106,37 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ onSave, onCancel, selectedId 
                         {/* VEHICLE FIELDS START */}
 
                         <div>
-                            <label htmlFor="vehicle_number">Vehicle Number</label>
+                            <Label htmlFor="vehicle_number">Vehicle Number</Label>
                             <Field id="vehicle_number" name="vehicle_number" as={Input} />
                             <ErrorMessage name="vehicle_number" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="vehicle_type">Vehicle Type</label>
+                            <Label htmlFor="vehicle_type">Vehicle Type</Label>
                             <Field id="vehicle_type" name="vehicle_type" as={Input} />
                             <ErrorMessage name="vehicle_type" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="capacity_weight">Capacity (Weight in Kg)</label>
+                            <Label htmlFor="capacity_weight">Capacity (Weight in Kg)</Label>
                             <Field id="capacity_weight" name="capacity_weight" as={Input} />
                             <ErrorMessage name="capacity_weight" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="capacity_volume">Capacity (Volume in m³)</label>
+                            <Label htmlFor="capacity_volume">Capacity (Volume in m³)</Label>
                             <Field id="capacity_volume" name="capacity_volume" as={Input} />
                             <ErrorMessage name="capacity_volume" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="rc_number">RC Number</label>
+                            <Label htmlFor="rc_number">RC Number</Label>
                             <Field id="rc_number" name="rc_number" as={Input} />
                             <ErrorMessage name="rc_number" component="div" className="text-red-500 text-sm" />
                         </div>
 
                         <div>
-                            <label htmlFor="rc_file">RC File Upload</label>
+                            <Label htmlFor="rc_file">RC File Upload</Label>
                             <Input
                                 id="rc_file"
                                 name="rc_file"
@@ -168,7 +169,7 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ onSave, onCancel, selectedId 
                         {/* For example: */}
                         {/*
           <div>
-            <label htmlFor="address.street">Street</label>
+            <Label htmlFor="address.street">Street</Label>
             <Field id="address.street" name="address.street" as={Input} />
             <ErrorMessage name="address.street" component="div" className="text-red-500 text-sm" />
           </div>

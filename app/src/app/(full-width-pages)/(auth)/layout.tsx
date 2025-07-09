@@ -37,12 +37,12 @@ const { user, loading } = useAuth(); // Use your authentication hook
             <div className="relative items-center justify-center  flex z-1">
               {/* <!-- ===== Common Grid Shape Start ===== --> */}
               <GridShape />
-              <div className="flex flex-col items-center max-w-xs">
+              <div className="flex flex-col items-center max-w-lg">
                 <Link href="/" className="block mb-4">
                   <Image
-                    width={231}
+                    width={700}
                     height={48}
-                    src="./images/logo/auth-logo.svg"
+                    src="/images/logo/signup.png"
                     alt="Logo"
                   />
                 </Link>
