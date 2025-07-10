@@ -105,7 +105,7 @@ function transformShipmentToFormValues(shipment: any) {
         ServiceType: shipment.service_type || '',
         Provider: shipment.provider || '',
         EwayBill: shipment.eway_bill_number || '',
-        Agency: ''
+        Agency: shipment.agent?._id || ''
     };
 }
 
@@ -185,7 +185,7 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                             provider: values.Provider,
                             eway_bill_number: values.EwayBill,
                             status: 'Open',
-                            agency: values.Agency
+                            agent: values.Agency
                         };
                         try {
                             let response;
