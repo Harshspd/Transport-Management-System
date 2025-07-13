@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Table,
     TableBody,
@@ -17,6 +17,8 @@ import { Shipment } from "@/types/shipment";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { Modal } from "@/components/ui/modal";
+import PrintableShipment from "@/components/shipment/PrintableShipment";
+import html2pdf from "html2pdf.js";
 
 const statusOptions = [
     { value: "Open", label: "Open" },
@@ -49,6 +51,26 @@ export default function ShipmentTracking() {
     const [shipmentRowId, setShipmentRowId] = useState<string | null>(null);
     const [isConfirmationVisible, setIsConfirmationVisible] = useState(false)
     const router = useRouter();
+
+    const pdfRef = useRef<HTMLDivElement>(null);
+    const [printShipment, setPrintShipment] = useState<Shipment | null>(null);
+    
+    const handlePdf = () => {
+        if (pdfRef.current) {
+          html2pdf()
+            .from(pdfRef.current)
+            .set({
+              margin: 0.5,
+              filename: "shipment.pdf",
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+            })
+            .outputPdf("bloburl")
+            .then((pdfUrl: string) => {
+              window.open(pdfUrl, "_blank");
+            });
+        }
+    };
 
     const fetchData = async () => {
         setLoading(true);
@@ -240,6 +262,14 @@ export default function ShipmentTracking() {
                                                             >
                                                                 {""}
                                                             </Button>
+                                                            <Button size="sm" variant="primary" className="bg-red-600 hover:bg-red-700 text-white"
+                                                             onClick={() => {
+                                                                setPrintShipment(row);
+                                                                setTimeout(() => handlePdf(), 100);
+                                                             }}
+                                                            >
+                                                                Print
+                                                            </Button>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>
@@ -279,6 +309,13 @@ export default function ShipmentTracking() {
                   </Button>
                 </div>
               </Modal>
+            )}
+            {printShipment && (
+            <div style={{ display: "none" }}>
+                <div ref={pdfRef}>
+                <PrintableShipment shipment={printShipment} />
+                </div>
+            </div>
             )}
         </div>
     );
