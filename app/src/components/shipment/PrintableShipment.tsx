@@ -64,7 +64,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
             </div>
             <div style={{ display: 'flex', gap: 5, marginBottom: '4px' }}>
               <div style={{ fontWeight: 600, width: '50px' }}>G.R. No.</div>
-              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px',  height: '30px' }}></div>
+              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px',  height: '30px' }}>{shipment?.bility_no}</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 2 }}>
@@ -76,14 +76,14 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
             </div>
             <div style={{ display: 'flex', gap: 5, marginBottom: '4px' }}>
               <div style={{ fontWeight: 600, width: '50px' }}>From</div>
-              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px',  height: '30px' }}></div>
+              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px',  height: '30px' }}>Ambala</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 2 }}>
             <div style={{ display: 'flex', gap: 5, marginBottom: '4px' }}>
               <div style={{ fontWeight: 600, width: '50px' }}>Value</div>
               <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px', height: '30px' }}>
-                
+                  {shipment?.goods_details?.bill_value}
               </div>
             </div>
             <div style={{ display: 'flex', gap: 5, marginBottom: '4px' }}>
@@ -105,17 +105,17 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
 
       <div style={{ display: "flex", gap: 8}}>
         <div style={{ display: 'flex', flexDirection: "column", gap: 5}}>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "130px", textAlign: "center", fontWeight: 600 }} >PACKAGES</div>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', height:'430px'}} ></div>
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "130px", textAlign: "center", fontWeight: 600, height: '50px' }} >PACKAGES</div>
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', height:'410px', textAlign: 'center'}} >{shipment?.goods_details?.quantity}</div>
         </div>
         
         <div style={{ display: 'flex', flexDirection: "column", gap: 5}}>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "200px",textAlign: "center", fontWeight: 600 }} >DESCRIPTION <br/> <span>(Said to Contain)</span></div>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', height:'410px'}} ></div>
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "200px",textAlign: "center", fontWeight: 600, height: '50px' }} >DESCRIPTION <br/> <span>(Said to Contain)</span></div>
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', height:'410px', textAlign: 'center'}}>{shipment?.goods_details?.description}</div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: "column", gap: 5}}>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "160px",textAlign: "center", fontWeight: 600 }} >
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "160px",textAlign: "center", fontWeight: 600, height: '50px' }} >
               WEIGHT (K.G)
               <div style={{ display: "flex", justifyContent: "space-around"}}>
                 <span style={{ fontSize: '10px'}}>Actual</span>
@@ -123,13 +123,13 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
               </div>
           </div>
           <div style={{ display: "flex", gap: 5}}>
-            <div style={{ border: "1px solid #888", borderRadius:'3px', width:"80px", height:'410px'}} ></div>
-            <div style={{ border: "1px solid #888", borderRadius:'3px', width:"80px", height:'410px'}} ></div>
+            <div style={{ border: "1px solid #888", borderRadius:'3px', width:"80px", height:'410px', textAlign: 'center'}} >{shipment?.goods_details?.actual_weight}</div>
+            <div style={{ border: "1px solid #888", borderRadius:'3px', width:"80px", height:'410px', textAlign: 'center'}} >{shipment?.goods_details?.actual_dimensions}</div>
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: "column", gap: 5}}>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "170px",textAlign: "center", fontWeight: 600 }} >
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', width: "170px",textAlign: "center", fontWeight: 600, height: '50px' }} >
             FREIGHT DETAILS
             <div style={{ display: "flex", gap: 5}}>
               <div style={{ display: 'flex', fontSize: '10px', gap: 3}}>To Pay <div style={{border: "1px solid #888", borderRadius:'3px', width: '20px', height: '15px', marginTop:'8px' }}></div></div>
@@ -178,7 +178,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
 
       <div style={{ display: "flex", justifyContent:'space-between'}}>
         <div>
-          <div style={{ border: "1px solid #888", borderRadius:'3px',padding: '4px 2px', position: "relative", width: '450px', height: '60px' }}>
+          <div style={{ border: "1px solid #888", borderRadius:'3px',padding: '4px 2px', position: "relative", width: '450px', height: '60px', marginTop:'10px' }}>
               <div style={{ height: '25px'}}>Delivery at:</div>
               <div style={{ background: "#464646", height: '25px', color: '#fff', position: 'absolute', bottom: '0', left: 0, paddingLeft: '10px',}}>Please Inform booking office if the consignee does not take delivery within 7 days.</div>
           </div>
@@ -206,11 +206,82 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
             </div>
           </div>
          </div>
-         <div>
+         <div style={{ fontWeight: 600}}>
           For SRD LOGISTICS
           <div style={{ height: '130px', display: "flex", justifyContent: 'flex-end', flexDirection:'column'}}>
             BOOKING CLERK
           </div>
+        </div>
+      </div>
+      {/* --- BLANK FORM SECTION FOR PRINTED PDF --- */}
+      <div style={{
+        marginTop: 60,
+        padding: 24,
+        background: '#fff',
+        width: '100%',
+        maxWidth: 900,
+        minHeight: 600,
+        fontSize: 12,
+        color: '#222',
+        fontFamily: 'Arial, sans-serif',
+        boxSizing: 'border-box',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+          <div>TC No: ________________________________________________</div>
+          <div>Date: <span style={{ borderBottom: '1px solid #888', minWidth: 120, display: 'inline-block' }}>&nbsp;</span></div>
+        </div>
+        <div style={{ display: 'flex', marginBottom: 8, gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1 }}>
+            <span>Date truck report:</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 60, display: 'inline-block' }}>&nbsp;</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1, justifyContent: 'flex-end' }}>
+            <span>Truck No:</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 60, display: 'inline-block' }}>&nbsp;</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', marginBottom: 8, gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1 }}>
+            <span>Date truck Unloaded:</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 60, display: 'inline-block' }}>&nbsp;</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', minWidth: 0, flex: 1, justifyContent: 'flex-end' }}>
+            <span>Out Time:</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 60, display: 'inline-block' }}>&nbsp;</span>
+          </div>
+        </div>
+        <div style={{ marginBottom: 8 }}>Unloaded charges paid by driver Rs.: <span style={{ borderBottom: '1px solid #888', minWidth: 80, display: 'inline-block' }}>&nbsp;</span></div>
+        <div style={{ display: 'flex', marginBottom: 8, gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+            <span>Cases As per LR</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 8, minWidth: 0, display: 'block' }}>&nbsp;</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+            <span>Cases Physically received</span>
+            <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 8, minWidth: 0, display: 'block' }}>&nbsp;</span>
+          </div>
+        </div>
+        <div style={{ marginBottom: 8 }}>
+          Remarks (Shortage / Breakage / Packing condition Cold chain Product)
+          <div style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, width: 230, display: 'inline-block' }}>&nbsp;</div>
+          <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 650, display: 'inline-block' }}>&nbsp;</span>
+          <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 650, display: 'inline-block' }}>&nbsp;</span>
+          <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 650, display: 'inline-block' }}>&nbsp;</span>
+          <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 650, display: 'inline-block' }}>&nbsp;</span>
+          <span style={{ flex: 1, borderBottom: '1px solid #888', marginLeft: 4, minWidth: 650, display: 'inline-block' }}>&nbsp;</span>
+        </div>
+        <div style={{ marginBottom: 8 }}>
+          Goods Received Subject to Verification of Quantity / Qty.: <span style={{ borderBottom: '1px solid #888', width: 200, display: 'inline-block' }}>&nbsp;</span>
+        </div>
+        <div style={{ display: 'flex', marginBottom: 8 }}>
+          <div style={{ flex: 1 }}>Signature Transporter / Driver <span style={{ borderBottom: '1px solid #888', minWidth: 140, display: 'inline-block' }}>&nbsp;</span></div>
+          <div style={{ flex: 1 }}>Signature of Party with Stamp <span style={{ borderBottom: '1px solid #888', minWidth: 120, display: 'inline-block' }}>&nbsp;</span></div>
+        </div>
+        <div style={{ marginBottom: 8 }}>Value : Shortage / damage : <span style={{ borderBottom: '1px solid #888', minWidth: 120, display: 'inline-block' }}>&nbsp;</span></div>
+        <div style={{ border: '1px solid #888', borderRadius: 3, padding: 8, marginTop: 24, width: 350 }}>
+          <div style={{ marginBottom: 8, fontWeight: 600, fontSize: 11 }}>GRN Details (Party to fill once GRN is prepared)</div>
+          <div style={{ marginBottom: 20 }}>GRN No. &amp; Date : <span style={{ borderBottom: '1px solid #888', minWidth: 120, display: 'inline-block' }}>&nbsp;</span></div>
+          <div>Breakage/Damage Report to HO on  ___/___/___</div>
         </div>
       </div>
     </div>
