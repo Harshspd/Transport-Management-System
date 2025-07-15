@@ -55,7 +55,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
           </div>
           <div style={{ display: "flex", gap: 5, marginBottom: '4px' }}>
             <div style={{ border: "1px solid #888", padding: '4px 2px', fontWeight: 600, borderRadius:'3px', minWidth: '70px' }}>GST No.</div>
-            <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px' }}>
+            <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius:'3px', minWidth: '150px' }}>{shipment?.consignee?.gstin}
             </div>
           </div>
         </div>
