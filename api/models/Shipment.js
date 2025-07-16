@@ -45,6 +45,7 @@ const shipmentSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  negotiated_rate: { type: Number },
 
   created_by: {
     type: mongoose.Schema.Types.ObjectId,
