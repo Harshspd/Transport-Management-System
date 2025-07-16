@@ -1699,6 +1699,207 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Driver created successfully\",\n    \"data\": {\n        \"contact\": {\n            \"name\": \"Harsh10x\",\n            \"contact_number\": 9415917682\n        },\n        \"license_number\": \"DL042019123870\",\n        \"address\": \"Ayodhya\",\n        \"city\": \"kanpur\",\n        \"license_file\": \"\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"_id\": \"685e46ecb74e6d0d5fc2779c\",\n        \"createdAt\": \"2025-06-27T07:23:24.069Z\",\n        \"updatedAt\": \"2025-06-27T07:23:24.069Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "url api apending",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "tiger",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL0420191211111",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Ayodhya",
+											"type": "text"
+										},
+										{
+											"key": "contact[phone]",
+											"value": "1212121211",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										},
+										{
+											"key": "contact[person]",
+											"value": "god",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "438"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b6-tQNjB6okDuCK8ofTIhqUjCjGaBw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Jul 2025 16:58:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver created successfully\",\n    \"data\": {\n        \"name\": \"tiger\",\n        \"contact\": {\n            \"person\": \"god\",\n            \"phone\": 1212121211\n        },\n        \"license_number\": \"DL0420191211111\",\n        \"license_file\": \"http://localhost:5000/uploads/licenses/1751993918659.jpg\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"_id\": \"686d4e3e80b81d0327aab7a4\",\n        \"createdAt\": \"2025-07-08T16:58:38.680Z\",\n        \"updatedAt\": \"2025-07-08T16:58:38.680Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "Updated model driver",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "spider man",
+											"type": "text"
+										},
+										{
+											"key": "license_number",
+											"value": "DL042019k102030",
+											"type": "text"
+										},
+										{
+											"key": "address[state]",
+											"value": "UTTAR PRADESH",
+											"type": "text"
+										},
+										{
+											"key": "contact[phone]",
+											"value": "9415918200",
+											"type": "text"
+										},
+										{
+											"key": "address[city]",
+											"value": "kanpur",
+											"type": "text"
+										},
+										{
+											"key": "licenseFile",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/driver licence.jpg"
+										},
+										{
+											"key": "contact[person]",
+											"value": "god",
+											"type": "text"
+										},
+										{
+											"key": "address[adddress_line_1]",
+											"value": "Street 21",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"drivers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "527"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20f-4CVW/JOSrsIDiBbWxCyjpJI63Tk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jul 2025 05:34:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Driver created successfully\",\n    \"data\": {\n        \"name\": \"spider man\",\n        \"contact\": {\n            \"person\": \"god\",\n            \"phone\": \"9415918200\"\n        },\n        \"address\": {\n            \"adddress_line_1\": \"Street 21\",\n            \"state\": \"UTTAR PRADESH\",\n            \"city\": \"kanpur\"\n        },\n        \"license_number\": \"DL042019k102030\",\n        \"license_file\": \"http://localhost:5000/uploads/licenses/1752125666353.jpg\",\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"_id\": \"686f50e2ea7945fdc25e51f7\",\n        \"createdAt\": \"2025-07-10T05:34:26.361Z\",\n        \"updatedAt\": \"2025-07-10T05:34:26.361Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -3370,6 +3571,74 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Shipment fetched successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": {\n            \"contact\": {\n                \"person\": \"Harsh vardhan singh\",\n                \"phone\": 9653064472\n            },\n            \"address\": {\n                \"adddress_line_1\": \"\",\n                \"state\": \"KANPUR\",\n                \"city\": \"delhi\"\n            },\n            \"_id\": \"68665d4f17b406bfb04a1edb\",\n            \"name\": \"harsh\",\n            \"gstin\": \"000000000\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:37:03.726Z\",\n            \"updatedAt\": \"2025-07-03T10:37:03.726Z\",\n            \"__v\": 0\n        },\n        \"consignee\": {\n            \"contact\": {\n                \"person\": \"harsh\",\n                \"phone\": \"9415910000\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"ayodhya\",\n                \"state\": \"up\",\n                \"city\": \"kanpur\"\n            },\n            \"_id\": \"68665dbc17b406bfb04a1edf\",\n            \"name\": \"bunny\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n            \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n            \"__v\": 0\n        },\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": {\n            \"contact\": {\n                \"phone\": 9415918111\n            },\n            \"address\": {\n                \"adddress_line_1\": \"forest\",\n                \"city\": \"\"\n            },\n            \"_id\": \"68663c32d713f625f68758b3\",\n            \"name\": \"lion\",\n            \"license_number\": \"555555\",\n            \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n            \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n            \"__v\": 0\n        },\n        \"vehicle\": {\n            \"_id\": \"68666ac9d832caa4ff0378a4\",\n            \"vehicle_number\": \"1212\",\n            \"vehicle_type\": \"truck\",\n            \"capacity_weight\": 1200,\n            \"capacity_volume\": 60,\n            \"rc_number\": \"10000\",\n            \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n            \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n            \"__v\": 0\n        },\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"ER0000\",\n        \"status\": \"In-Transit\",\n        \"bility_no\": 4003,\n        \"created_by\": {\n            \"_id\": \"685e93273f62b6cc9adac5da\",\n            \"email\": \"10xtech@demo.com\"\n        },\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-04T06:54:11.156Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+						},
+						{
+							"name": "get agent",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/68677a9338d4a3e577f54001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"68677a9338d4a3e577f54001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2851"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b23-MhcDx+49LrD3+gUcPq2Mo08Vm64\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jul 2025 08:09:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment fetched successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": {\n            \"contact\": {\n                \"person\": \"Harsh vardhan singh\",\n                \"phone\": 9653064472\n            },\n            \"address\": {\n                \"adddress_line_1\": \"\",\n                \"state\": \"KANPUR\",\n                \"city\": \"delhi\"\n            },\n            \"_id\": \"68665d4f17b406bfb04a1edb\",\n            \"name\": \"harsh\",\n            \"gstin\": \"000000000\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:37:03.726Z\",\n            \"updatedAt\": \"2025-07-03T10:37:03.726Z\",\n            \"__v\": 0\n        },\n        \"consignee\": {\n            \"contact\": {\n                \"person\": \"harsh\",\n                \"phone\": \"9415910000\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"ayodhya\",\n                \"state\": \"up\",\n                \"city\": \"kanpur\"\n            },\n            \"_id\": \"68665dbc17b406bfb04a1edf\",\n            \"name\": \"bunny\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T10:38:52.283Z\",\n            \"updatedAt\": \"2025-07-03T10:38:52.283Z\",\n            \"__v\": 0\n        },\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": {\n            \"contact\": {\n                \"phone\": \"9415918111\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"forest\",\n                \"city\": \"\"\n            },\n            \"_id\": \"68663c32d713f625f68758b3\",\n            \"name\": \"lion\",\n            \"license_number\": \"555555\",\n            \"license_file\": \"uploads\\\\licenses\\\\1751530546710.jpg\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T08:15:46.733Z\",\n            \"updatedAt\": \"2025-07-03T08:15:46.733Z\",\n            \"__v\": 0\n        },\n        \"vehicle\": {\n            \"_id\": \"68666ac9d832caa4ff0378a4\",\n            \"vehicle_number\": \"1212\",\n            \"vehicle_type\": \"truck\",\n            \"capacity_weight\": 1200,\n            \"capacity_volume\": 60,\n            \"rc_number\": \"10000\",\n            \"rc_file\": \"uploads\\\\rcs\\\\1751542473961.webp\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-03T11:34:33.985Z\",\n            \"updatedAt\": \"2025-07-03T11:34:33.985Z\",\n            \"__v\": 0\n        },\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"EW654321666\",\n        \"status\": \"Delivered\",\n        \"bility_no\": 4003,\n        \"created_by\": {\n            \"_id\": \"685e93273f62b6cc9adac5da\",\n            \"email\": \"10xtech@demo.com\"\n        },\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-10T08:07:57.443Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\",\n        \"agent\": {\n            \"contact\": {\n                \"person\": \"Jane Doe\",\n                \"phone\": 9999999999,\n                \"email\": \"jane@agent.com\"\n            },\n            \"address\": {\n                \"adddress_line_1\": \"Block B\",\n                \"street\": \"Park Street\",\n                \"state\": \"Delhi\",\n                \"postal_code\": \"110001\",\n                \"city\": \"New Delhi\",\n                \"country\": \"India\"\n            },\n            \"_id\": \"68678d85bc1e56bd55d9de05\",\n            \"name\": \"Agent A Updated\",\n            \"gstin\": \"29ABCDE1234F2Z5\",\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T08:15:01.408Z\",\n            \"updatedAt\": \"2025-07-04T08:24:42.257Z\",\n            \"__v\": 0,\n            \"updated_by\": \"685e93273f62b6cc9adac5da\"\n        }\n    },\n    \"error\": false\n}"
 						}
 					]
 				},
@@ -3788,6 +4057,74 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Shipment updated successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"SPD-HARSH\",\n            \"quantity\": 500,\n            \"bill_no\": \"SHP-000\",\n            \"value\": 100000,\n            \"mode\": \"Land\",\n            \"actual_dimensions\": 200,\n            \"charged_dimensions\": 220,\n            \"unit_of_weight\": \"kg\",\n            \"actual_weight\": 1000,\n            \"charged_weight\": 1250,\n            \"special_instructions\": \"Temperature sensitive cargo\"\n        },\n        \"_id\": \"685a51360db04b40bee10ae9\",\n        \"consigner\": \"684928914309f49e25530a92\",\n        \"consignee\": \"684928e94309f49e25530a94\",\n        \"delivery_location\": \"NOIDA\",\n        \"status\": \"Delivered\",\n        \"created_by\": \"684959a8c83df52490b92c44\",\n        \"organization_id\": \"684959a8c83df52490b92c42\",\n        \"createdAt\": \"2025-06-24T07:18:14.070Z\",\n        \"updatedAt\": \"2025-06-27T09:16:24.074Z\",\n        \"__v\": 0,\n        \"updated_by\": \"684959a8c83df52490b92c44\",\n        \"driver\": \"6849297b4309f49e25530a98\",\n        \"eway_bill_number\": \"EW654321000\",\n        \"provider\": \"spdgo\",\n        \"service_type\": \"Express Delivery\",\n        \"vehicle\": \"684929594309f49e25530a96\"\n    }\n}"
+						},
+						{
+							"name": "agent updation",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"agent\" :\"68678d85bc1e56bd55d9de05\",\r\n  \"eway_bill_number\": \"EW654321666\",\r\n  \"status\": \"Delivered\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/shipments/68677a9338d4a3e577f54001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"shipments",
+										"68677a9338d4a3e577f54001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "973"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3cd-LC+urOskBIWPgRnZ8RiAn4nYuK8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Jul 2025 08:07:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Shipment updated successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": \"68665d4f17b406bfb04a1edb\",\n        \"consignee\": \"68665dbc17b406bfb04a1edf\",\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": \"68663c32d713f625f68758b3\",\n        \"vehicle\": \"68666ac9d832caa4ff0378a4\",\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"EW654321666\",\n        \"status\": \"Delivered\",\n        \"bility_no\": 4003,\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-10T08:07:57.443Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\",\n        \"agent\": \"68678d85bc1e56bd55d9de05\"\n    }\n}"
 						}
 					]
 				},
@@ -4523,8 +4860,40 @@
 				{
 					"name": "update Agent",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVlOTMyNzNmNjJiNmNjOWFkYWM1ZGEiLCJlbWFpbCI6IjEweHRlY2hAZGVtby5jb20iLCJhY2NvdW50X2lkIjoiNjg1ZTkzMjYzZjYyYjZjYzlhZGFjNWQ4IiwiaWF0IjoxNzUxNjEyMTgwLCJleHAiOjE3NTE2OTg1ODB9.tQY-3HhJmI6IYzsq-74v1E6srugRW-VYlOUsJOPGnyI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Agent A Updated\",\r\n  \"contact\": {\r\n    \"person\": \"Jane Doe\",\r\n    \"phone\": 9999999999,\r\n    \"email\": \"jane@agent.com\"\r\n  },\r\n  \"gstin\": \"29ABCDE1234F2Z5\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/agents/68678d85bc1e56bd55d9de05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"agents",
+								"68678d85bc1e56bd55d9de05"
+							]
+						}
 					},
 					"response": [
 						{
@@ -4662,6 +5031,321 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Agent deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "rate negotiation",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "all negotiated rates",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/rates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1402"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57a-8RGcAEXM5SyBFUMowMhSCeIkO8A\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 09:16:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Negotiated rates fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"68677a9338d4a3e577f54001\",\n            \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n            \"driver\": {\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\"\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ac9d832caa4ff0378a4\",\n                \"vehicle_number\": \"1212\"\n            },\n            \"bility_no\": 4003,\n            \"negotiated_rate\": 12500\n        },\n        {\n            \"_id\": \"68677e1d38d4a3e577f54023\",\n            \"expected_delivery_date_and_time\": \"2025-07-05T07:07:00.000Z\",\n            \"driver\": {\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\"\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ae7d832caa4ff0378a8\",\n                \"vehicle_number\": \"MH10000\"\n            },\n            \"bility_no\": 4004\n        },\n        {\n            \"_id\": \"686908427839f71d2217b504\",\n            \"expected_delivery_date_and_time\": \"2025-07-05T11:10:00.000Z\",\n            \"driver\": {\n                \"_id\": \"68663c32d713f625f68758b3\",\n                \"name\": \"lion\"\n            },\n            \"vehicle\": {\n                \"_id\": \"68666ac9d832caa4ff0378a4\",\n                \"vehicle_number\": \"1212\"\n            },\n            \"bility_no\": 4005\n        },\n        {\n            \"_id\": \"686cb729e2f25a413a948c3b\",\n            \"expected_delivery_date_and_time\": \"2025-07-12T06:13:00.000Z\",\n            \"bility_no\": 4006\n        },\n        {\n            \"_id\": \"686d00cf7d6964bae354f0ad\",\n            \"expected_delivery_date_and_time\": null,\n            \"bility_no\": 4007\n        },\n        {\n            \"_id\": \"686d01037d6964bae354f0b0\",\n            \"expected_delivery_date_and_time\": null,\n            \"bility_no\": 4008\n        },\n        {\n            \"_id\": \"686d01f47d6964bae354f0b3\",\n            \"expected_delivery_date_and_time\": null,\n            \"bility_no\": 4009\n        },\n        {\n            \"_id\": \"686d02897d6964bae354f0d2\",\n            \"expected_delivery_date_and_time\": null,\n            \"bility_no\": 4010\n        },\n        {\n            \"_id\": \"686e2de6ada0b0b01fdd2b58\",\n            \"bility_no\": 4011\n        },\n        {\n            \"_id\": \"686f42238f800c2aee9b844c\",\n            \"bility_no\": 4012\n        }\n    ],\n    \"error\": false\n}"
+						},
+						{
+							"name": "negotiated rate by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/rates/68677a9338d4a3e577f54001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates",
+										"68677a9338d4a3e577f54001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "335"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14f-VkcOGY5R5uRO4Msib2wbJeQHM6c\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 09:45:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Negotiated rate fetched successfully\",\n    \"data\": {\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": {\n            \"_id\": \"68663c32d713f625f68758b3\",\n            \"name\": \"lion\"\n        },\n        \"vehicle\": {\n            \"_id\": \"68666ac9d832caa4ff0378a4\",\n            \"vehicle_number\": \"1212\"\n        },\n        \"bility_no\": 4003,\n        \"negotiated_rate\": 13500\n    },\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "add rate negotiation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVlOTMyNzNmNjJiNmNjOWFkYWM1ZGEiLCJlbWFpbCI6IjEweHRlY2hAZGVtby5jb20iLCJhY2NvdW50X2lkIjoiNjg1ZTkzMjYzZjYyYjZjYzlhZGFjNWQ4IiwiaWF0IjoxNzUyNjU2MTkyLCJleHAiOjE3NTI3NDI1OTJ9.TrszIcKYaQpsG-EtO6UvZM6_9lDMWSNWKk1fqnU0AMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"shipmentId\": \"68677a9338d4a3e577f54001\",\r\n  \"negotiated_rate\": 12500\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/rates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"rates"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "negotiation added",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"shipmentId\": \"68677a9338d4a3e577f54001\",\r\n  \"negotiated_rate\": 12500\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/rates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1016"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f8-QlCoL+wFim7CMYLsL6tqsEUTZ6A\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 09:13:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Negotiated rate added successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": \"68665d4f17b406bfb04a1edb\",\n        \"consignee\": \"68665dbc17b406bfb04a1edf\",\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": \"68663c32d713f625f68758b3\",\n        \"vehicle\": \"68666ac9d832caa4ff0378a4\",\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"EW654321666\",\n        \"status\": \"Delivered\",\n        \"bility_no\": 4003,\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-16T09:13:34.367Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\",\n        \"agent\": \"68678d85bc1e56bd55d9de05\",\n        \"negotiated_rate\": 12500\n    },\n    \"error\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "updated rate",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"negotiated_rate\": 13500\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/rates/68677a9338d4a3e577f54001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates",
+										"68677a9338d4a3e577f54001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1018"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3fa-WKxFrDBIiDrrhHicwHc73scECSE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 16 Jul 2025 09:21:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Negotiated rate updated successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": \"68665d4f17b406bfb04a1edb\",\n        \"consignee\": \"68665dbc17b406bfb04a1edf\",\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": \"68663c32d713f625f68758b3\",\n        \"vehicle\": \"68666ac9d832caa4ff0378a4\",\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"EW654321666\",\n        \"status\": \"Delivered\",\n        \"bility_no\": 4003,\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-16T09:21:55.426Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\",\n        \"agent\": \"68678d85bc1e56bd55d9de05\",\n        \"negotiated_rate\": 13500\n    },\n    \"error\": false\n}"
 						}
 					]
 				}
