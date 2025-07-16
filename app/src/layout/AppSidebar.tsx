@@ -66,6 +66,11 @@ const navItems: NavItem[] = [
     name: "Agency",
     path: "/agent",
   },
+  {
+    icon: <UserCircleIcon />,
+    name: "Rate Management",
+    path: "/rate-management",
+  },
   /* {
     name: "Forms",
     icon: <ListIcon />,
