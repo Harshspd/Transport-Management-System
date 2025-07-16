@@ -60,7 +60,7 @@ export default function ShipmentTracking() {
           html2pdf()
             .from(pdfRef.current)
             .set({
-              margin: 0.5,
+              margin:[0.2, 0.5, 0.2, 0.5],
               filename: "shipment.pdf",
               html2canvas: { scale: 2 },
               jsPDF: { unit: "in", format: "a4", orientation: "portrait" }

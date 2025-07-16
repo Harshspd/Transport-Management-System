@@ -165,25 +165,28 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
             <div style={{ height: '25px' }}>Delivery at:</div>
             <div style={{ background: "#464646", height: '25px', color: '#fff', position: 'absolute', bottom: '0', left: 0, paddingLeft: '10px', }}>Please Inform booking office if the consignee does not take delivery within 7 days.</div>
           </div>
-          <div style={{ display: "flex", width: '450px', height: '60px', marginTop: '30px' }}>
-
+          <div style={{ display: "flex", width: '450px', height: '30px', marginTop: '10px' }}>
             <div style={{ fontSize: 10, color: "#444" }}>
               Goods booked at owner’s packing and insured. Octroi tax is to be produced as per city/consignee.
             </div>
-
-            <div style={{ flex: 2, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+          </div>
+          <div>
+             <div style={{ flex: 2, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
               <div style={{ border: "1px solid #222", background: "#222", color: "#fff", textAlign: "center", fontWeight: 700, padding: 4, fontSize: 12 }}>
                 GST TAX WILL BE PAID BY
               </div>
-              <div style={{ display: "flex", border: "1px solid #888", borderTop: "none" }}>
-                <div style={{ flex: 1, textAlign: "center", padding: 4, borderRight: "1px solid #888" }}>
-                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Consigner
+              <div style={{  display: "flex", border: "1px solid #888", borderTop: "none", alignItems: 'center' }}>
+                 <div style={{ flex: 1, padding: 4, borderRight: "1px solid #888", display: 'flex', alignItems: 'center', gap: 5, justifyContent: 'center'}}>
+                    <div style={{ height: '12px', width: '12px', border: '1px solid gray', borderRadius: '2px'}}></div>
+                    <div style={{ marginBottom: '10px'}}>Consigner</div>
                 </div>
-                <div style={{ flex: 1, textAlign: "center", padding: 4, borderRight: "1px solid #888" }}>
-                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Consignee
+                <div style={{ flex: 1,padding: 4, borderRight: "1px solid #888", display: 'flex', alignItems: 'center', gap: 5, justifyContent: 'center'}}>
+                    <div style={{ height: '12px', width: '12px', border: '1px solid gray', borderRadius: '2px'}}></div>
+                    <div style={{ marginBottom: '10px'}}>Consignee</div>
                 </div>
-                <div style={{ flex: 1, textAlign: "center", padding: 4 }}>
-                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Transporter
+                <div style={{ flex: 1,padding: 4, borderRight: "1px solid #888", display: 'flex', alignItems: 'center', gap: 5, justifyContent: 'center'}}>
+                    <div style={{ height: '12px', width: '12px', border: '1px solid gray', borderRadius: '2px'}}></div>
+                    <div style={{ marginBottom: '10px'}}>Transporter</div>
                 </div>
               </div>
             </div>
@@ -191,7 +194,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
         </div>
         <div style={{ fontWeight: 600 }}>
           For SRD LOGISTICS
-          <div style={{ height: '130px', display: "flex", justifyContent: 'flex-end', flexDirection: 'column' }}>
+          <div style={{ height: '150px', display: "flex", justifyContent: 'flex-end', flexDirection: 'column' }}>
             BOOKING CLERK
           </div>
         </div>
