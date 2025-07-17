@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "@/components/ui/button/Button";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
+import { Success } from "@/icons";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -13,13 +14,11 @@ export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [showOtpSection, setShowOtpSection] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (!showOtpSection) {
       if (!email) return alert("Please enter an email.");
       console.log("OTP sent to:", email);
-      setShowOtpSection(true); // Show OTP & new password fields
+      setShowOtpSection(true);
     } else {
       if (!otp || !newPassword) return alert("Fill both OTP and new password.");
       console.log("OTP entered:", otp);
@@ -53,9 +52,17 @@ export default function ResetPassword() {
             </p>
           </div>
 
-          {/* ✅ FORM */}
           <form className="space-y-6">
-            {/* Email Field */}
+
+            {showOtpSection && (
+              <div className="p-3 bg-green-50 border border-green-300 rounded-2xl text-black text-sm flex items-start gap-2">
+                <Success className="w-5 mt-0.5" />
+                <span>
+                  OTP has been sent to {email}
+                </span>
+              </div>
+            )}
+
             <div>
               <Label>
                 Email <span className="text-error-500">*</span>
@@ -68,13 +75,8 @@ export default function ResetPassword() {
               />
             </div>
 
-            {/* OTP Section */}
             {showOtpSection && (
               <>
-                <div className="p-3 bg-green-50 border border-green-300 rounded text-green-700 text-sm">
-                  ✅ OTP has been sent to <strong>{email}</strong>
-                </div>
-
                 <div>
                   <Label>OTP</Label>
                   <Input
@@ -97,15 +99,13 @@ export default function ResetPassword() {
               </>
             )}
 
-            {/* Submit Button */}
             <div>
-              <Button className="w-full" onClick={handleSubmit}>
+              <Button className="w-full" onClick={() => handleSubmit()}>
                 {showOtpSection ? "Reset Password" : "Send OTP"}
               </Button>
             </div>
           </form>
 
-          {/* Sign In link */}
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-sm text-center text-gray-700 dark:text-gray-400">
               If you remember the password,{" "}
