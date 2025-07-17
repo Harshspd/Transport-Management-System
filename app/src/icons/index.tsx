@@ -51,6 +51,19 @@ import HorizontaLDots from "./horizontal-dots.svg";
 import ChatIcon from "./chat.svg";
 import MoreDotIcon from "./more-dot.svg";
 import BellIcon from "./bell.svg";
+import PhoneIcon from "./phone.svg";
+import MapPinIcon from "./map-pin.svg";
+import Email from "./email.svg"
+import Location from "./location.svg"
+import Document from "./document.svg"
+import Reg2 from "./registration.svg"
+import FiscY from "./fiscalyear.svg"
+import User2 from "./user2.svg"
+import User3 from "./user3.svg"
+import Notification from "./notifications.svg"
+import Estimate from "./estimate.svg"
+import Shield from "./shield.svg"
+import Invoice from "./invoice.svg"
 
 export {
   DownloadIcon,
@@ -106,4 +119,17 @@ export {
   HorizontaLDots,
   ChevronUpIcon,
   ChatIcon,
+  PhoneIcon,
+  MapPinIcon,
+  Email,
+  Location,
+  Document,
+  Reg2,
+  FiscY,
+  User2,
+  User3,
+  Notification,
+  Estimate,
+  Shield,
+  Invoice
 };
