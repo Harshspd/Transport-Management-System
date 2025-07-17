@@ -9,6 +9,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useAuth } from '@/middleware/auth/AuthContext';
 import Link from 'next/link';
 import BtnSubmit from "../ui/button/BtnSubmit";
+import Image from "next/image";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +52,25 @@ export default function SignInForm() {
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
+          <div className="flex justify-left mb-10">
+          <Link href="/">
+            <Image
+              src="/images/logo/auth-logo.svg"
+              alt="TMS Logo"
+              width={185}
+              height={40}
+              priority
+            />
+          </Link>
+        </div>
         <div>
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
               Sign In
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email and password to sign in!
-            </p>
+            {/* <p className="text-sm text-gray-500 dark:text-gray-400">
+              Enter your email and password to sign in! 
+            </p> */}
             {error && (
               <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
                 {error}
@@ -124,7 +136,7 @@ export default function SignInForm() {
               </div>
             </form>
 
-            <div className="mt-5">
+            <div className="flex flex-col items-center gap-2 mt-3">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
                 Don&apos;t have an account? {""}
                 <Link
