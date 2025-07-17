@@ -262,14 +262,12 @@ export default function ShipmentTracking() {
                                                             >
                                                                 {""}
                                                             </Button>
-                                                            <Button size="sm" variant="primary" className="bg-red-600 hover:bg-red-700 text-white"
+                                                            <button className="hidden md:flex bg-red-600 hover:bg-red-700 text-white m-1 p-2 rounded-md"
                                                              onClick={() => {
                                                                 setPrintShipment(row);
                                                                 setTimeout(() => handlePdf(), 100);
                                                              }}
-                                                            >
-                                                                Print
-                                                            </Button>
+                                                            >Print</button>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>
