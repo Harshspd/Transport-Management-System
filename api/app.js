@@ -31,6 +31,7 @@ import shipmentRoutes from './routes/shipmentRoutes.js';
 import agentRoutes from './routes/agentRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import rateRouter from './routes/rateRouter.js';
+import dashboardRouter from './routes/dashboardRouter.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -83,6 +84,8 @@ app.use('/api/shipments', shipmentRoutes);
 app.use('/api/agents', agentRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/rates', rateRouter);
+app.use('/api/dashboard', dashboardRouter);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
