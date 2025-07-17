@@ -21,7 +21,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
     >
       <div style={{ display: "flex", justifyContent: 'space-between', marginBottom: '8px' }}>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 24, marginBottom: 2 }}>SRD LOGISTICS</div>
+          <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 2 }}>SRD LOGISTICS</div>
           <div style={{ fontWeight: 500, fontSize: 13, marginBottom: 2 }}>
             3 OM CHAMBER, KHASRA NO. 15/3/3/3, SRD LOGISTICS<br />
             VILLAGE NANHERA, AMBALA CANTT-133 004<br />
@@ -110,7 +110,10 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
 
         <div style={{ display: 'flex', flexDirection: "column", gap: 5 }}>
           <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius: '3px', width: "200px", textAlign: "center", fontWeight: 600, height: '50px' }} >DESCRIPTION <br /> <span>(Said to Contain)</span></div>
-          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius: '3px', height: '190px', textAlign: 'center' }}>{shipment?.goods_details?.description}</div>
+          <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius: '3px', height: '190px', textAlign: 'center', position: 'relative' }}>
+                {shipment?.goods_details?.description}
+                <span style={{ position: 'absolute', bottom: '10px', left: '20px'}}> Vehicle No. {shipment?.vehicle?.vehicle_number}</span>
+          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: "column", gap: 5 }}>
@@ -161,16 +164,39 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
 
       <div style={{ display: "flex", justifyContent: 'space-between' }}>
         <div>
-          <div style={{ border: "1px solid #888", borderRadius: '3px', padding: '4px 2px', position: "relative", width: '450px', height: '60px', marginTop: '10px' }}>
-            <div style={{ height: '25px' }}>Delivery at:</div>
-            <div style={{ background: "#464646", height: '25px', color: '#fff', position: 'absolute', bottom: '0', left: 0, paddingLeft: '10px', }}>Please Inform booking office if the consignee does not take delivery within 7 days.</div>
+          <div style={{ border: "1px solid #888", borderRadius: '3px', padding: '4px 2px', position: "relative", width: '450px', height: '55px', marginTop: '10px' }}>
+            <div style={{ height: '22px' }}>Delivery at:</div>
+            <div style={{ background: "#464646", height: '22px', color: '#fff', position: 'absolute', bottom: '0', left: 0, paddingLeft: '10px' }}>Please Inform booking office if the consignee does not take delivery within 7 days.</div>
           </div>
-          <div style={{ display: "flex", width: '450px', height: '30px', marginTop: '10px' }}>
+
+          {/* <div style={{ display: "flex", width: '550px', height: '60px', marginTop: '10px' }}>
+            <div style={{ fontSize: 10, color: "#444", width: '180px' }}>
+              Goods booked at owner’s packing and insured. Octroi tax is to be produced as per city/consignee.
+            </div>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+              <div style={{ border: "1px solid #222", background: "#222", color: "#fff", textAlign: "center", fontWeight: 700, padding: 4, fontSize: 12 }}>
+                GST TAX WILL BE PAID BY
+              </div>
+              <div style={{ display: "flex", border: "1px solid #888", borderTop: "none" }}>
+                <div style={{ flex: 1, textAlign: "center", padding: 4, borderRight: "1px solid #888" }}>
+                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Consigner
+                </div>
+                <div style={{ flex: 1, textAlign: "center", padding: 4, borderRight: "1px solid #888" }}>
+                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Consigner
+                </div>
+                <div style={{ flex: 1, textAlign: "center", padding: 4, borderRight: "1px solid #888" }}>
+                  <input type="checkbox" style={{ marginRight: 4 }} readOnly /> Consigner
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+          {/* <div style={{ display: "flex", width: '450px', height: '30px', marginTop: '10px' }}>
             <div style={{ fontSize: 10, color: "#444" }}>
               Goods booked at owner’s packing and insured. Octroi tax is to be produced as per city/consignee.
             </div>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
              <div style={{ flex: 2, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
               <div style={{ border: "1px solid #222", background: "#222", color: "#fff", textAlign: "center", fontWeight: 700, padding: 4, fontSize: 12 }}>
                 GST TAX WILL BE PAID BY
@@ -190,11 +216,11 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div style={{ fontWeight: 600 }}>
           For SRD LOGISTICS
-          <div style={{ height: '150px', display: "flex", justifyContent: 'flex-end', flexDirection: 'column' }}>
+          <div style={{ height: '40px', display: "flex", justifyContent: 'flex-end', flexDirection: 'column' }}>
             BOOKING CLERK
           </div>
         </div>
