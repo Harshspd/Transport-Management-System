@@ -16,9 +16,10 @@ export default function SettingsTabs() {
   const searchParams = useSearchParams(); 
   const activeTab = searchParams.get("tab") || "Account";
 
-  const handleTabClick = (tabLabel: string) => {
-    router.push(`?tab=${tabLabel}`);
-  };
+const handleTabClick = (tabLabel: string) => {
+  const currentPath = window.location.pathname;
+  router.push(`${currentPath}?tab=${encodeURIComponent(tabLabel)}`);
+};
 
   return (
     <div className="w-full">

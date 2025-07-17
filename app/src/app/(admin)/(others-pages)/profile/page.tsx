@@ -13,8 +13,9 @@ export const metadata: Metadata = {
   description:"This is Profile page for TenXAdmin",
 };
 
-export default function Profile({ searchParams }: { searchParams: { tab?: string } }) {
-    const tab = searchParams.tab || "Account";
+
+export default function ProfilePage() {
+  const tab:string =  "Account";
   return (
     <div>
       

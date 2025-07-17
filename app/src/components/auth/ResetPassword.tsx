@@ -13,9 +13,7 @@ export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [showOtpSection, setShowOtpSection] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (!showOtpSection) {
       if (!email) return alert("Please enter an email.");
       console.log("OTP sent to:", email);
