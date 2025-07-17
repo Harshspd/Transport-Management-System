@@ -205,11 +205,14 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                 >
                     {({ values, setFieldValue, isSubmitting, handleSubmit  }) => (
                         <div>
-                            <div className="grid grid-cols-[66%_34%] w-full gap-4">
-                                <div className="w-full max-w-3xl bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6 flex gap-6">
+                            <div className="grid  w-full gap-4">
+                                <div className="w-full  bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6 flex gap-6">
                                     {/* Left Form Section */}
                                     <div className="flex-[3] space-y-4">
-                                        <div>
+                                        
+
+                                        <div className="grid grid-cols-4 gap-4">
+                                            <div>
                                             <Label>Consigner</Label>
                                             <div className="relative">
                                                 <Select
@@ -229,8 +232,6 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                             </div>
                                             <ErrorMessage name="Consigner" component="p" className="text-red-500 text-xs mt-1" />
                                         </div>
-
-                                        <div className="grid grid-cols-3 gap-4">
                                             <div>
                                                 <Label>Consignee</Label>
                                                 <div className="relative">
@@ -281,18 +282,8 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
 
                                         <h2 className="text-lg font-medium text-gray-800 dark:text-white">Goods Details</h2>
 
-                                        <div className="grid grid-cols-3 gap-4">
-                                            <div className="row-span-3">
-                                                <Label>Description</Label>
-                                                <Field
-                                                    as={TextArea}
-                                                    name="Description"
-                                                    value={values.Description}
-                                                    onChange={(val: string) => setFieldValue('Description', val)}
-                                                    rows={10}
-                                                />
-                                                <ErrorMessage name="Description" component="p" className="text-red-500 text-xs mt-1" />
-                                            </div>
+                                        <div className="grid grid-cols-4 gap-4">
+                                           
                                             <div>
                                                 <Label>Bill No</Label>
                                                 <Field
@@ -506,16 +497,32 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                 <ErrorMessage name="EwayBill" component="p" className="text-red-500 text-xs mt-1" />
                                             </div>
                                         </div>
-                                        <div>
+                                         
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
                                             <Label>Special Instructions</Label>
                                             <Field
                                                 as={TextArea}
                                                 name="Instructions"
                                                 value={values.Instructions}
                                                 onChange={(val: string) => setFieldValue('Instructions', val)}
-                                                rows={10}
+                                                rows={5}
                                             />
                                             <ErrorMessage name="Instructions" component="p" className="text-red-500 text-xs mt-1" />
+                                            
+                                        </div>
+                                        <div>
+                                            <Label>Description</Label>
+                                            <Field
+                                                as={TextArea}
+                                                name="Description"
+                                                value={values.Description}
+                                                onChange={(val: string) => setFieldValue('Description', val)}
+                                                rows={5}
+                                            />
+                                            <ErrorMessage name="Description" component="p" className="text-red-500 text-xs mt-1" />
+                                        </div>
+                                        
                                         </div>
                                         <div className="flex justify-end">
                                             <button
@@ -531,7 +538,7 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                 </div>
 
                                 {/* Right Preview Section */}
-                                <div className="w-full bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                                <div className="w-full bg-white dark:bg-gray-900 hidden rounded-lg border border-gray-200 dark:border-gray-700 p-6">
                                     <h2 className="flex justify-center font-semibold text-lg mb-4 text-gray-800 dark:text-white">Preview</h2>
                                     <div className="grid grid-cols-2 gap-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
                                         {Object.entries(values).map(([key, value]) => {
