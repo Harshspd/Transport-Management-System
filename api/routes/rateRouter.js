@@ -1,16 +1,11 @@
 import express from 'express';
-import {
-  getAllNegotiatedRates,
-  addNegotiatedRate,
-  updateNegotiatedRate,getNegotiatedRateById
-} from '../controllers/rateController.js';
+import { upsertRate, getAllRates } from '../controllers/rateController.js';
 import { authCheck } from '../middlewares/authCheck.js';
 
 const router = express.Router();
 
-router.get('/', authCheck, getAllNegotiatedRates);
-router.get('/:id', authCheck, getNegotiatedRateById);
-router.post('/', authCheck, addNegotiatedRate);
-router.put('/:id', authCheck, updateNegotiatedRate);
+router.post('/', authCheck, upsertRate); 
+router.put('/', authCheck, upsertRate);  
+router.get('/', authCheck, getAllRates);
 
 export default router;
