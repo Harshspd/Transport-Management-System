@@ -33,25 +33,25 @@ const { user, loading } = useAuth(); // Use your authentication hook
       <ThemeProvider>
         <div className="relative flex lg:flex-row w-full h-screen justify-center flex-col  dark:bg-gray-900 sm:p-0">
           {children}
-          <div className="lg:w-1/2 w-full h-full bg-brand-950 dark:bg-white/5 lg:grid items-center hidden">
-            <div className="relative items-center justify-center  flex z-1">
-              {/* <!-- ===== Common Grid Shape Start ===== --> */}
-              <GridShape />
-              <div className="flex flex-col items-center max-w-lg">
-                <Link href="/" className="block mb-4">
-                  <Image
-                    width={700}
-                    height={48}
-                    src="/images/logo/signup.png"
-                    alt="Logo"
-                  />
-                </Link>
-                <p className="text-center text-gray-400 dark:text-white/60">
-                  Free and Open-Source Tailwind CSS Admin Dashboard Template
-                </p>
-              </div>
-            </div>
-          </div>
+          <div className="lg:w-1/2 w-full h-full bg-brand-950 dark:bg-white/5 lg:flex items-center justify-center hidden px-10">
+                    <div className="relative z-10 max-w-2xl text-center text-white">
+                      <GridShape/>
+                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 leading-snug">
+                        Modern Transport Management System <br /> for Logistics Teams
+                      </h2>
+                      <p className="mb-6 text-sm sm:text-base">
+                        Plan, Track & Optimize Every Shipment — All in One Place
+                      </p>
+          
+                      <Image
+                        width={800}
+                        height={400}
+                        src="/images/logo/signup.png"
+                        alt="Dashboard Preview"
+                        className="rounded-md shadow-lg w-full max-w-[700px] mx-auto"
+                      />
+                    </div>
+                  </div>
           <div className="fixed bottom-6 right-6 z-50 hidden sm:block">
             <ThemeTogglerTwo />
           </div>

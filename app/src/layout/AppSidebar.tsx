@@ -66,6 +66,11 @@ const navItems: NavItem[] = [
     name: "Agency",
     path: "/agent",
   },
+  {
+    icon: <UserCircleIcon />,
+    name: "Rate Management",
+    path: "/rate-management",
+  },
   /* {
     name: "Forms",
     icon: <ListIcon />,
@@ -321,7 +326,7 @@ const AppSidebar: React.FC = () => {
                 className="dark:hidden"
                 src="/images/logo/main-logo.svg"
                 alt="Logo"
-                width={200}
+                width={150}
                 height={40}
               />
               <Image

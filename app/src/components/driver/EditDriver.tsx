@@ -96,7 +96,7 @@ const EditDriver: React.FC<EditDriverProps> = ({ onSave, onCancel, selectedId })
             formData.append('address[street]', values?.address?.street)
             formData.append('address[city]', values?.address?.city)
             formData.append('address[state]', values?.address?.state)
-            formData.append('contact.person', values.contact.person);
+            formData.append('contact[person]', values.contact.person);
             formData.append('contact[phone]', values.contact.phone);
             formData.append('license_number', values.license_number);
             if (values.license_file && values.license_file as any instanceof File) {
