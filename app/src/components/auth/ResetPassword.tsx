@@ -1,28 +1,102 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import Button from "@/components/ui/button/Button";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
+import { Success } from "@/icons";
+import { Error } from "@/icons";
+import { useRouter } from "next/navigation";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showOtpSection, setShowOtpSection] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+  const router = useRouter();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (message) window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [message]);
+
+  const handleSubmit = async () => {
     if (!showOtpSection) {
-      if (!email) return alert("Please enter an email.");
-      console.log("OTP sent to:", email);
-      setShowOtpSection(true); // Show OTP & new password fields
+      if (!email) return alert("Please enter your email.");
+      setLoading(true);
+      setMessage("");
+      setMessageType("");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/generate-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          setMessage(`OTP sent to ${email}`);
+          setMessageType("success");
+          setShowOtpSection(true);
+        } else {
+          setMessage(data.message || "Failed to send OTP.");
+          setMessageType("error");
+        }
+      } catch (err) {
+        setMessage("Something went wrong while sending OTP.");
+        setMessageType("error");
+      } finally {
+        setLoading(false);
+      }
     } else {
-      if (!otp || !newPassword) return alert("Fill both OTP and new password.");
-      console.log("OTP entered:", otp);
-      console.log("New Password:", newPassword);
-      alert("Password reset simulated!");
+      if (!otp || !newPassword || !confirmPassword) {
+        return alert("Please fill in all fields.");
+      }
+
+      if (newPassword !== confirmPassword) {
+        return alert("Passwords do not match.");
+      }
+
+      setLoading(true);
+      setMessage("");
+      setMessageType("");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            otp,
+            newPassword,
+          }),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          setMessage("Password changed successfully.");
+          setMessageType("success");
+
+          // Delay before redirecting to login
+          setTimeout(() => {
+            router.push("/"); // or "/signin"
+          }, 2000);
+        } else {
+          setMessage(data.message || "Failed to reset password.");
+          setMessageType("error");
+        }
+      } catch (err) {
+        setMessage("Something went wrong.");
+        setMessageType("error");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -47,13 +121,25 @@ export default function ResetPassword() {
               Forgot Your Password
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email linked to your account, and we’ll email you a link to reset your password securely.
+              Enter your email linked to your account, and we’ll send you an OTP to reset your password securely.
             </p>
           </div>
 
-          {/* ✅ FORM */}
-          <form className="space-y-6">
-            {/* Email Field */}
+          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            {message && (
+              <div
+                className={`p-3 rounded-2xl border text-sm mb-4 flex ${
+                  messageType === "success"
+                    ? "bg-green-50 border-green-300 text-green-800"
+                    : "bg-red-50 border-red-300 text-red-800"
+                }`}
+              >
+                {messageType === "success" && <Success className="w-6 mr-2" />}
+    {messageType === "error" && <Error className="w-6 mr-2" />}
+                {message}
+              </div>
+            )}
+
             <div>
               <Label>
                 Email <span className="text-error-500">*</span>
@@ -66,13 +152,8 @@ export default function ResetPassword() {
               />
             </div>
 
-            {/* OTP Section */}
             {showOtpSection && (
               <>
-                <div className="p-3 bg-green-50 border border-green-300 rounded text-green-700 text-sm">
-                  ✅ OTP has been sent to <strong>{email}</strong>
-                </div>
-
                 <div>
                   <Label>OTP</Label>
                   <Input
@@ -92,21 +173,37 @@ export default function ResetPassword() {
                     placeholder="Enter new password"
                   />
                 </div>
+
+                <div>
+                  <Label>Confirm New Password</Label>
+                  <Input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm new password"
+                  />
+                </div>
               </>
             )}
 
-            {/* Submit Button */}
             <div>
-              <Button className="w-full" onClick={handleSubmit}>
-                {showOtpSection ? "Reset Password" : "Send OTP"}
+              <Button
+                className="w-full"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {loading
+                  ? "Please wait..."
+                  : showOtpSection
+                  ? "Reset Password"
+                  : "Send OTP"}
               </Button>
             </div>
           </form>
 
-          {/* Sign In link */}
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-sm text-center text-gray-700 dark:text-gray-400">
-              If you remember the password,{" "}
+              If you remember your password,{" "}
               <Link
                 href="/signin"
                 className="text-brand-500 hover:text-brand-600 dark:text-brand-400"

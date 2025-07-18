@@ -64,6 +64,8 @@ import Notification from "./notifications.svg"
 import Estimate from "./estimate.svg"
 import Shield from "./shield.svg"
 import Invoice from "./invoice.svg"
+import Success from "./success.svg"
+import Error from './redcross.svg'
 
 export {
   DownloadIcon,
@@ -131,5 +133,7 @@ export {
   Notification,
   Estimate,
   Shield,
-  Invoice
+  Invoice,
+  Success,
+  Error
 };
