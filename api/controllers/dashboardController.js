@@ -25,14 +25,19 @@ export const getDashboardStats = async (req, res) => {
       Agent.countDocuments({ organization_id: organizationId }),
     ]);
 
-    res.status(200).json({
-      shipmentCount,
-      consigneeCount,
-      consignerCount,
-      driverCount,
-      vehicleCount,
-      agentCount,
-    });
+   res.status(200).json({
+  message: 'Dashboard data fetched successfully',
+  data: {
+    shipmentCount,
+    consigneeCount,
+    consignerCount,
+    driverCount,
+    vehicleCount,
+    agentCount
+  },
+  error: false
+});
+
   } catch (error) {
     console.error('Error fetching dashboard stats:', error);
     res.status(500).json({ message: 'Internal Server Error' });
