@@ -29,6 +29,7 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel, selecte
         city: '',
         state: '',
         gstin: '',
+        description: '',
     });
     const resetForm = () => {
         // Reset to initial values if no selectedId
@@ -40,6 +41,7 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel, selecte
             city: '',
             state: '',
             gstin: '',
+            description: ''
         });
     }
     useEffect(() => {
@@ -56,6 +58,7 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel, selecte
                         city: data.address?.city || '',
                         state: data.address?.state || '',
                         gstin: data.gstin || '',
+                        description: data.description || '',
                     });
                 } catch (err) {
                     console.error('Error fetching consigner:', err);
@@ -128,6 +131,16 @@ const EditConsigner: React.FC<EditConsignerProps> = ({ onSave, onCancel, selecte
                                     <Label>City</Label>
                                     <Field name="city" as={Input} />
                                     <ErrorMessage name="city" component="div" className="text-red-500 text-sm" />
+                                </div>
+
+                                 <div>
+                                    <Label>Description</Label>
+                                    <Field
+                                        as={TextArea}
+                                        name="description"
+                                        rows={5}
+                                    />
+                                    <ErrorMessage name="description" component="p" className="text-red-500 text-xs mt-1" />
                                 </div>
                             </div>
 
