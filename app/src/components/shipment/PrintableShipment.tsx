@@ -71,7 +71,7 @@ const PrintableShipment = forwardRef<HTMLDivElement, { shipment: Shipment }>(
             </div>
             <div style={{ display: 'flex', gap: 5, marginBottom: '4px' }}>
               <div style={{ fontWeight: 600, width: '60px', border: "1px solid #888", padding: '4px 2px', borderRadius: '3px' }}>G.R. No.</div>
-              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius: '3px', minWidth: '150px', height: '30px' }}></div>
+              <div style={{ border: "1px solid #888", padding: '4px 2px', borderRadius: '3px', minWidth: '150px', height: '30px' }}>{shipment?.bility_no}</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 10 }}>
