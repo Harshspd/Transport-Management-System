@@ -5275,8 +5275,40 @@
 				{
 					"name": "New Request",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVlOTMyNzNmNjJiNmNjOWFkYWM1ZGEiLCJlbWFpbCI6IjEweHRlY2hAZGVtby5jb20iLCJhY2NvdW50X2lkIjoiNjg1ZTkzMjYzZjYyYjZjYzlhZGFjNWQ4IiwiaWF0IjoxNzUyNjU2MTkyLCJleHAiOjE3NTI3NDI1OTJ9.TrszIcKYaQpsG-EtO6UvZM6_9lDMWSNWKk1fqnU0AMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"negotiated_rate\": 13500\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/rates/68677a9338d4a3e577f54001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"rates",
+								"68677a9338d4a3e577f54001"
+							]
+						}
 					},
 					"response": [
 						{
@@ -5346,6 +5378,359 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Negotiated rate updated successfully\",\n    \"data\": {\n        \"goods_details\": {\n            \"description\": \"\",\n            \"quantity\": 1000,\n            \"bill_no\": \"SH1111\",\n            \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n            \"bill_value\": 10000,\n            \"mode\": \"Transport\",\n            \"actual_dimensions\": 60,\n            \"charged_dimensions\": 50,\n            \"unit_of_weight\": \"Per Kg\",\n            \"actual_weight\": 30,\n            \"charged_weight\": 25,\n            \"special_instructions\": \"\"\n        },\n        \"_id\": \"68677a9338d4a3e577f54001\",\n        \"consigner\": \"68665d4f17b406bfb04a1edb\",\n        \"consignee\": \"68665dbc17b406bfb04a1edf\",\n        \"delivery_location\": \"mumbai\",\n        \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n        \"driver\": \"68663c32d713f625f68758b3\",\n        \"vehicle\": \"68666ac9d832caa4ff0378a4\",\n        \"service_type\": \"Standard\",\n        \"provider\": \"Owner\",\n        \"eway_bill_number\": \"EW654321666\",\n        \"status\": \"Delivered\",\n        \"bility_no\": 4003,\n        \"created_by\": \"685e93273f62b6cc9adac5da\",\n        \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n        \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n        \"updatedAt\": \"2025-07-16T09:21:55.426Z\",\n        \"__v\": 0,\n        \"updated_by\": \"685e93273f62b6cc9adac5da\",\n        \"agent\": \"68678d85bc1e56bd55d9de05\",\n        \"negotiated_rate\": 13500\n    },\n    \"error\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "dashboard",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "dashboard data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "vehicle_number",
+											"value": "MH12AB1234",
+											"type": "text"
+										},
+										{
+											"key": "vehicle_type",
+											"value": "Truck",
+											"type": "text"
+										},
+										{
+											"key": "capacity_weight",
+											"value": "12000",
+											"type": "text"
+										},
+										{
+											"key": "capacity_volume",
+											"value": "30",
+											"type": "text"
+										},
+										{
+											"key": "rc_number",
+											"value": "RC123456789",
+											"type": "text"
+										},
+										{
+											"key": "rc_file",
+											"type": "file",
+											"src": "/C:/Users/harsh/OneDrive/Desktop/rcfile.webp"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/dashboard",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"dashboard"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-MZBIxrbogXKBNQsnB0mPLPwm7G8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 11:26:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Dashboard data fetched successfully\",\n    \"data\": {\n        \"shipmentCount\": 10,\n        \"consigneeCount\": 7,\n        \"consignerCount\": 6,\n        \"driverCount\": 12,\n        \"vehicleCount\": 4,\n        \"agentCount\": 3\n    },\n    \"error\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Rate",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get rate",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/rates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1032"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"408-3oM+jU9Li7IRVECKtMuXRmhgZKw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Jul 2025 08:44:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"68792ca791791b248ede9b33\",\n        \"shipment_id\": {\n            \"goods_details\": {\n                \"description\": \"\",\n                \"quantity\": 1000,\n                \"bill_no\": \"SH1111\",\n                \"bill_date\": \"1970-01-01T00:00:00.000Z\",\n                \"bill_value\": 10000,\n                \"mode\": \"Transport\",\n                \"actual_dimensions\": 60,\n                \"charged_dimensions\": 50,\n                \"unit_of_weight\": \"Per Kg\",\n                \"actual_weight\": 30,\n                \"charged_weight\": 25,\n                \"special_instructions\": \"\"\n            },\n            \"_id\": \"68677a9338d4a3e577f54001\",\n            \"consigner\": \"68665d4f17b406bfb04a1edb\",\n            \"consignee\": \"68665dbc17b406bfb04a1edf\",\n            \"delivery_location\": \"mumbai\",\n            \"expected_delivery_date_and_time\": \"2025-07-15T06:49:00.000Z\",\n            \"driver\": \"68663c32d713f625f68758b3\",\n            \"vehicle\": \"68666ac9d832caa4ff0378a4\",\n            \"service_type\": \"Standard\",\n            \"provider\": \"Owner\",\n            \"eway_bill_number\": \"EW654321666\",\n            \"status\": \"Delivered\",\n            \"bility_no\": 4003,\n            \"created_by\": \"685e93273f62b6cc9adac5da\",\n            \"organization_id\": \"685e93263f62b6cc9adac5d8\",\n            \"createdAt\": \"2025-07-04T06:54:11.156Z\",\n            \"updatedAt\": \"2025-07-16T09:21:55.426Z\",\n            \"updated_by\": \"685e93273f62b6cc9adac5da\",\n            \"agent\": \"68678d85bc1e56bd55d9de05\",\n            \"negotiated_rate\": 13500\n        },\n        \"consigner_rate\": 4100,\n        \"provider_rate\": 5500\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVlOTMyNzNmNjJiNmNjOWFkYWM1ZGEiLCJlbWFpbCI6IjEweHRlY2hAZGVtby5jb20iLCJhY2NvdW50X2lkIjoiNjg1ZTkzMjYzZjYyYjZjYzlhZGFjNWQ4IiwiaWF0IjoxNzUyNzUwNjEzLCJleHAiOjE3NTI4MzcwMTN9.Dm4m1C0QMCJ05fyob85Idm1kCasDENprzSxd0fFH5ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"shipment_id\": \"68677a9338d4a3e577f54001\",\r\n  \"provider_rate\": 4500,\r\n  \"consigner_rate\": 4100\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/rates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"rates"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "rate created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"shipment_id\": \"68677a9338d4a3e577f54001\",\r\n  \"provider_rate\": 4500,\r\n  \"consigner_rate\": 4100\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/rates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cc-YCKtSU25zjSjQEnTqAkSuJu/6Ng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Jul 2025 17:02:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"68792ca791791b248ede9b33\",\n    \"shipment_id\": \"68677a9338d4a3e577f54001\",\n    \"__v\": 0,\n    \"consigner_rate\": 4100,\n    \"createdAt\": \"2025-07-17T17:02:31.154Z\",\n    \"provider_rate\": 4500,\n    \"updatedAt\": \"2025-07-17T17:02:31.154Z\"\n}"
+						},
+						{
+							"name": "another rate testing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"shipment_id\": \"68677e1d38d4a3e577f54023\",\r\n  \"provider_rate\": 5500,\r\n  \"consigner_rate\": 4100\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/rates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"rates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cc-wSg34Aly/XNgVs9Yf5xogBxQuDI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jul 2025 11:58:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"687e2b5b0e376b3344ed98ca\",\n    \"shipment_id\": \"68677e1d38d4a3e577f54023\",\n    \"__v\": 0,\n    \"consigner_rate\": 4100,\n    \"createdAt\": \"2025-07-21T11:58:19.499Z\",\n    \"provider_rate\": 5500,\n    \"updatedAt\": \"2025-07-21T11:58:19.499Z\"\n}"
 						}
 					]
 				}
