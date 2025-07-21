@@ -1,9 +1,40 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Badge from "../ui/badge/Badge";
 import { ArrowDownIcon, ArrowUpIcon, BoxCubeIcon, BoxIconLine, GroupIcon, ListIcon, UserCircleIcon } from "@/icons";
+import { getTransportationReport } from '@/utils/api/modelAPI';
+import { toast } from "react-toastify";
 
 export const TransportationMetrics = () => {
+    const [metrics, setMetrics] = useState({
+        shipmentCount: 0,
+        consigneeCount: 0,
+        consignerCount: 0,
+        driverCount: 0,
+        vehicleCount: 0,
+        agentCount: 0
+    });
+
+    useEffect(() => {
+        getTransportationReport()
+            .then((data) => {
+                setMetrics({
+                    shipmentCount: data.shipmentCount || 0,
+                    consigneeCount: data.consigneeCount || 0,
+                    consignerCount: data.consignerCount || 0,
+                    driverCount: data.driverCount || 0,
+                    vehicleCount: data.vehicleCount || 0,
+                    agentCount: data.agentCount || 0
+                });
+            })
+            .catch(() => {
+                toast.error("Somethind went wrong!!")
+            });
+    },[]);
+
+     
+
+
     return (
         <div className="grid grid-cols-6 gap-4 md:gap-6">
             {/* <!-- Metric Item Start --> */}
@@ -17,7 +48,7 @@ export const TransportationMetrics = () => {
                             Shipment
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            3,782
+                            {metrics.shipmentCount}
                         </h4>
                     </div>
                     <Badge color="success">
@@ -39,7 +70,7 @@ export const TransportationMetrics = () => {
                             Consignee
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            5,359
+                            {metrics.consigneeCount}
                         </h4>
                     </div>
                     <Badge color="error">
@@ -61,7 +92,7 @@ export const TransportationMetrics = () => {
                             Consigner
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            1,245
+                            {metrics.consignerCount}
                         </h4>
                     </div>
                     <Badge color="success">
@@ -83,7 +114,7 @@ export const TransportationMetrics = () => {
                             Vehicles
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            678
+                            {metrics.vehicleCount}
                         </h4>
                     </div>
                     <Badge color="success">
@@ -105,7 +136,7 @@ export const TransportationMetrics = () => {
                             Drivers
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            2,345
+                            {metrics.driverCount}
                         </h4>
                     </div>
                     <Badge color="error">
@@ -127,7 +158,7 @@ export const TransportationMetrics = () => {
                             Agents
                         </span>
                         <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
-                            512
+                            {metrics.agentCount}
                         </h4>
                     </div>
                     <Badge color="success">

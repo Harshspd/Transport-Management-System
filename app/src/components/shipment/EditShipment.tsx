@@ -130,7 +130,7 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
         if (shipmentId) {
             getShipmentById(shipmentId)
                 .then((data) => {
-                    setShipmentData(data.data); 
+                    setShipmentData(data.data);
                     setInitialValues(transformShipmentToFormValues(data.data));
                 })
                 .catch((err) => {
@@ -139,15 +139,15 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
         } else {
             setInitialValues(defaultInitialValues);
             setShipmentData(null);
-            
+
         }
     }, [shipmentId]);
 
-   
+
     // Helper for modal save
     const handleAddNewAndClose = async (type: string, newEntry: any, setFieldValue?: any) => {
         await handleAddNew(type, newEntry);
-        if(newEntry) setFieldValue(type, newEntry?._id)
+        if (newEntry) setFieldValue(type, newEntry?._id)
     };
 
     return (
@@ -203,55 +203,55 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                         }
                     }}
                 >
-                    {({ values, setFieldValue, isSubmitting, handleSubmit  }) => (
+                    {({ values, setFieldValue, isSubmitting, handleSubmit }) => (
                         <div>
                             <div className="grid  w-full gap-4">
                                 <div className="w-full  bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6 flex gap-6">
                                     {/* Left Form Section */}
                                     <div className="flex-[3] space-y-4">
-                                        
+
 
                                         <div className="grid grid-cols-4 gap-4">
                                             <div>
-                                            <Label>Consigner</Label>
-                                            <div className="relative">
-                                                <Select
-                                                    name='Consigner'
-                                                    options={renderOptions(options.Consigner, 'Consigner')}
-                                                    placeholder="Select an option"
-                                                    value={options.Consigner.find(option => option.value === values.Consigner) || null}
-                                                    onChange={(selected: any) => {
-                                                        if (selected && selected.value === '+Add new') {
-                                                            consignerModal.openModal();
-                                                        } else {
-                                                            setFieldValue('Consigner', selected ? selected.value : '');
-                                                        }
-                                                    }}
-                                                    isClearable
-                                                />
+                                                <Label>Consigner</Label>
+                                                <div className="relative">
+                                                    <Select
+                                                        name='Consigner'
+                                                        options={renderOptions(options.Consigner, 'Consigner')}
+                                                        placeholder="Select an option"
+                                                        value={options.Consigner.find(option => option.value === values.Consigner) || null}
+                                                        onChange={(selected: any) => {
+                                                            if (selected && selected.value === '+Add new') {
+                                                                consignerModal.openModal();
+                                                            } else {
+                                                                setFieldValue('Consigner', selected ? selected.value : '');
+                                                            }
+                                                        }}
+                                                        isClearable
+                                                    />
+                                                </div>
+                                                <ErrorMessage name="Consigner" component="p" className="text-red-500 text-xs mt-1" />
                                             </div>
-                                            <ErrorMessage name="Consigner" component="p" className="text-red-500 text-xs mt-1" />
-                                        </div>
                                             <div>
                                                 <Label>Consignee</Label>
                                                 <div className="relative">
-                                                <Select
-                                                    name="Consignee"
-                                                    options={renderOptions(options.Consignee, 'Consignee')}
-                                                    placeholder="Select an option"
-                                                    value={renderOptions(options.Consignee, 'Consignee').find(option => option.value === values.Consignee) || null}
-                                                    onChange={selected => {
-                                                        if (selected && selected.value === '+Add new') {
-                                                        consigneeModal.openModal();
-                                                        } else {
-                                                        setFieldValue('Consignee', selected ? selected.value : '');
-                                                        const selectedConsignee = options.Consignee.find(
-                                                            (c: any) => c.value === (selected ? selected.value : '')
-                                                        );
-                                                        setFieldValue('DeliveryLocation', selectedConsignee?.city ?? '');
-                                                        }
-                                                    }}
-                                                    isClearable
+                                                    <Select
+                                                        name="Consignee"
+                                                        options={renderOptions(options.Consignee, 'Consignee')}
+                                                        placeholder="Select an option"
+                                                        value={renderOptions(options.Consignee, 'Consignee').find(option => option.value === values.Consignee) || null}
+                                                        onChange={selected => {
+                                                            if (selected && selected.value === '+Add new') {
+                                                                consigneeModal.openModal();
+                                                            } else {
+                                                                setFieldValue('Consignee', selected ? selected.value : '');
+                                                                const selectedConsignee = options.Consignee.find(
+                                                                    (c: any) => c.value === (selected ? selected.value : '')
+                                                                );
+                                                                setFieldValue('DeliveryLocation', selectedConsignee?.city ?? '');
+                                                            }
+                                                        }}
+                                                        isClearable
                                                     />
                                                 </div>
                                                 <ErrorMessage name="Consignee" component="p" className="text-red-500 text-xs mt-1" />
@@ -283,7 +283,7 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                         <h2 className="text-lg font-medium text-gray-800 dark:text-white">Goods Details</h2>
 
                                         <div className="grid grid-cols-4 gap-4">
-                                           
+
                                             <div>
                                                 <Label>Bill No</Label>
                                                 <Field
@@ -323,8 +323,11 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                         name="Mode"
                                                         options={renderOptions(options.Mode, 'Mode')}
                                                         placeholder="Select Mode"
-                                                        value={values.Mode}
-                                                        onChange={(val: string) => setFieldValue('Mode', val)}
+                                                        value={renderOptions(options.Mode, 'Mode').find(option => option.value === values.Mode) || ''}
+                                                        onChange={(selected: any) => {
+                                                            setFieldValue('Mode', selected ? selected.value : '');
+                                                        }}
+
                                                     />
                                                 </div>
                                                 <ErrorMessage name="Mode" component="p" className="text-red-500 text-xs mt-1" />
@@ -368,8 +371,10 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                         name="UnitWeight"
                                                         options={renderOptions(options.UnitWeight, 'UnitWeight')}
                                                         placeholder="Select Unit"
-                                                        value={values.UnitWeight}
-                                                        onChange={(val: string) => setFieldValue('UnitWeight', val)}
+                                                        value={renderOptions(options.UnitWeight, 'UnitWeight').find(option => option.value === values.UnitWeight) || ''}
+                                                        onChange={(selected: any) => {
+                                                            setFieldValue('UnitWeight', selected ? selected.value : '');
+                                                        }}
                                                     />
                                                 </div>
                                                 <ErrorMessage name="UnitWeight" component="p" className="text-red-500 text-xs mt-1" />
@@ -394,11 +399,11 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                 />
                                                 <ErrorMessage name="ChargedWeight" component="p" className="text-red-500 text-xs mt-1" />
                                             </div>
-                                           
+
                                             <div>
                                                 <Label>Driver</Label>
                                                 <div className="relative">
-                                                <Select
+                                                    <Select
                                                         name="Driver"
                                                         options={renderOptions(options.Driver, 'Driver')}
                                                         placeholder="Select Driver"
@@ -443,8 +448,10 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                         name="ServiceType"
                                                         options={renderOptions(options.ServiceType, 'ServiceType')}
                                                         placeholder="Select Service Type"
-                                                        value={values.ServiceType}
-                                                        onChange={(val: string) => setFieldValue('ServiceType', val)}
+                                                        value={renderOptions(options.ServiceType, 'ServiceType').find(option => option.value === values.ServiceType) || ''}
+                                                        onChange={(selected: any) => {
+                                                            setFieldValue('ServiceType', selected ? selected.value : '');
+                                                        }}
                                                     />
                                                 </div>
                                                 <ErrorMessage name="ServiceType" component="p" className="text-red-500 text-xs mt-1" />
@@ -452,40 +459,40 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                             <div>
                                                 <Label>Provider</Label>
                                                 <div className="relative">
-                                                <Select
-                                                    name="Provider"
-                                                    options={renderOptions(options.Provider, 'Provider')}
-                                                    placeholder="Select Provider Type"
-                                                    value={renderOptions(options.Provider, 'Provider').find(option => option.value === values.Provider) || null}
-                                                    onChange={selected => setFieldValue('Provider', selected ? selected.value : '')}
-                                                    isClearable
+                                                    <Select
+                                                        name="Provider"
+                                                        options={renderOptions(options.Provider, 'Provider')}
+                                                        placeholder="Select Provider Type"
+                                                        value={renderOptions(options.Provider, 'Provider').find(option => option.value === values.Provider) || null}
+                                                        onChange={selected => setFieldValue('Provider', selected ? selected.value : '')}
+                                                        isClearable
                                                     />
                                                 </div>
                                                 <ErrorMessage name="Provider" component="p" className="text-red-500 text-xs mt-1" />
                                             </div>
                                             {/* Agency Dropdown */}
                                             {values.Provider === 'Agency' && (
-                                                 <div>
-                                                 <Label>Agency</Label>
-                                                 <div className="relative">
-                                                     <Select
-                                                         name="Agency"
-                                                         options={renderOptions(options.Agent, 'Agent')}
-                                                         placeholder="Select Agency"
-                                                         value={renderOptions(options.Agent, 'Agent').find(option => option.value === values.Agency) || null}
-                                                         onChange={selected => {
-                                                            if (selected && selected.value === '+Add new') {
-                                                                agentModal.openModal();
-                                                            } else {
-                                                              setFieldValue('Agency', selected ? selected.value : '');
-                                                            }
-                                                          }}
-                                                          isClearable
-                                                     />
-                                                 </div>
-                                                 <ErrorMessage name="Agency" component="p" className="text-red-500 text-xs mt-1" />
-                                             </div>
-                                            ) }
+                                                <div>
+                                                    <Label>Agency</Label>
+                                                    <div className="relative">
+                                                        <Select
+                                                            name="Agency"
+                                                            options={renderOptions(options.Agent, 'Agent')}
+                                                            placeholder="Select Agency"
+                                                            value={renderOptions(options.Agent, 'Agent').find(option => option.value === values.Agency) || null}
+                                                            onChange={selected => {
+                                                                if (selected && selected.value === '+Add new') {
+                                                                    agentModal.openModal();
+                                                                } else {
+                                                                    setFieldValue('Agency', selected ? selected.value : '');
+                                                                }
+                                                            }}
+                                                            isClearable
+                                                        />
+                                                    </div>
+                                                    <ErrorMessage name="Agency" component="p" className="text-red-500 text-xs mt-1" />
+                                                </div>
+                                            )}
                                             <div>
                                                 <Label>Eway Bill Number</Label>
                                                 <Field
@@ -497,32 +504,32 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                                                 <ErrorMessage name="EwayBill" component="p" className="text-red-500 text-xs mt-1" />
                                             </div>
                                         </div>
-                                         
+
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
-                                            <Label>Special Instructions</Label>
-                                            <Field
-                                                as={TextArea}
-                                                name="Instructions"
-                                                value={values.Instructions}
-                                                onChange={(val: string) => setFieldValue('Instructions', val)}
-                                                rows={5}
-                                            />
-                                            <ErrorMessage name="Instructions" component="p" className="text-red-500 text-xs mt-1" />
-                                            
-                                        </div>
-                                        <div>
-                                            <Label>Description</Label>
-                                            <Field
-                                                as={TextArea}
-                                                name="Description"
-                                                value={values.Description}
-                                                onChange={(val: string) => setFieldValue('Description', val)}
-                                                rows={5}
-                                            />
-                                            <ErrorMessage name="Description" component="p" className="text-red-500 text-xs mt-1" />
-                                        </div>
-                                        
+                                                <Label>Special Instructions</Label>
+                                                <Field
+                                                    as={TextArea}
+                                                    name="Instructions"
+                                                    value={values.Instructions}
+                                                    onChange={(val: string) => setFieldValue('Instructions', val)}
+                                                    rows={5}
+                                                />
+                                                <ErrorMessage name="Instructions" component="p" className="text-red-500 text-xs mt-1" />
+
+                                            </div>
+                                            <div>
+                                                <Label>Description</Label>
+                                                <Field
+                                                    as={TextArea}
+                                                    name="Description"
+                                                    value={values.Description}
+                                                    onChange={(val: string) => setFieldValue('Description', val)}
+                                                    rows={5}
+                                                />
+                                                <ErrorMessage name="Description" component="p" className="text-red-500 text-xs mt-1" />
+                                            </div>
+
                                         </div>
                                         <div className="flex justify-end">
                                             <button
@@ -575,8 +582,8 @@ const EditShipment: React.FC<EditShipmentProps> = ({ onSave, onCancel, shipmentI
                             <SlideModal title='Add Vehicle' isOpen={vehicleModal.isOpen} onClose={vehicleModal.closeModal}>
                                 <EditVehicle onSave={(data: Vehicle) => handleAddNewAndClose('Vehicle', data, setFieldValue)} onCancel={() => vehicleModal.closeModal()} />
                             </SlideModal>
-                             <SlideModal title='Add Agent' isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
-                                <EditAgent onSave={(data: Agent) => handleAddNewAndClose('Agent', data, setFieldValue)} onCancel={() => agentModal.closeModal()}/>
+                            <SlideModal title='Add Agent' isOpen={agentModal.isOpen} onClose={agentModal.closeModal}>
+                                <EditAgent onSave={(data: Agent) => handleAddNewAndClose('Agent', data, setFieldValue)} onCancel={() => agentModal.closeModal()} />
                             </SlideModal>
                         </div>
                     )}

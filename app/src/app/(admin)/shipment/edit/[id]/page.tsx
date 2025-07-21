@@ -9,12 +9,12 @@ const ShipmentEditPage: React.FC = () => {
   const router = useRouter();
   const params = useParams();
   const shipmentId = typeof params?.id === 'string' ? params.id : undefined;
-  
+
 
   useEffect(() => {
     if (!shipmentId) {
       toast.error('Shipment ID is required to edit a shipment.');
-      router.push('/shipment');
+      router.push('/shipment/tracking');
     }
   }, [shipmentId, router]);
 
@@ -23,11 +23,11 @@ const ShipmentEditPage: React.FC = () => {
       {shipmentId && (
         <EditShipment
           shipmentId={shipmentId}
-          onCancel={() => router.push('/shipment')}
+          onCancel={() => router.push('/shipment/tracking')}
           onSave={(updatedShipment) => {
             // handle save and redirect or toast
             toast.success('Shipment updated successfully');
-            router.push('/shipment');
+            router.push('/shipment/tracking');
           }}
         />
       )}
