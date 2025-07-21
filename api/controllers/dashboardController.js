@@ -7,7 +7,7 @@ import Agent from '../models/Agent.js';
 
 export const getDashboardStats = async (req, res) => {
   try {
-    const organizationId = req.user.organization_id;
+    const organizationId = req.user.account_id;
 
     const [
       shipmentCount,
