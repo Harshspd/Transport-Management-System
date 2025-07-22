@@ -15,6 +15,7 @@ const consignerSchema = new mongoose.Schema({
     city: { type: String },
     country: { type: String },
   },
+  description : { type: String },
   gstin: { type: String },
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
