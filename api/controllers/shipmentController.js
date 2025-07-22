@@ -78,18 +78,20 @@ export const getAllShipments = async (req, res) => {
     const filter = { organization_id: req.user.account_id };
 
     // Add status filter if query param is present
-    if (req.query.status) {
-      const allowedStatuses = ['Open', 'In-Transit', 'Delivered'];
-      if (!allowedStatuses.includes(req.query.status)) {
-        return res.status(400).json({
-          message: `Invalid status. Allowed: ${allowedStatuses.join(', ')}`,
-          error: true,
-        });
-      }
-      filter.status = req.query.status;
-    }
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Canceled'];
 
-    // Query with filter
+if (req.query.status) {
+  if (!allowedStatuses.includes(req.query.status)) {
+    return res.status(400).json({
+      message: `Invalid status. Allowed: ${allowedStatuses.join(', ')}`,
+      error: true,
+    });
+  }
+  filter.status = req.query.status;
+} else {
+  filter.status = { $ne: 'Canceled' };
+}
+
     const shipments = await Shipment.find(filter)
       .populate('consigner')
       .populate('consignee')
@@ -136,8 +138,6 @@ export const getShipmentById = async (req, res) => {
   }
 };
 
-
-// Update Shipment
 // Update Shipment
 export const updateShipment = async (req, res) => {
   try {
@@ -208,7 +208,7 @@ export const updateShipmentStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Canceled'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status value' });
     }
