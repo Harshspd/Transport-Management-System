@@ -32,6 +32,7 @@ import agentRoutes from './routes/agentRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import rateRouter from './routes/rateRouter.js';
 import dashboardRouter from './routes/dashboardRouter.js';
+import transportModeRoutes from './routes/transportModeRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -85,6 +86,7 @@ app.use('/api/agents', agentRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/rates', rateRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/transport-modes', transportModeRoutes);
 
 
 // Error handling middleware

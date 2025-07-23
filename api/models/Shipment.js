@@ -11,6 +11,10 @@ const shipmentSchema = new mongoose.Schema({
     ref: 'Consignee',
     required: true,
   },
+  transport_mode: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'TransportMode',
+  },
   delivery_location: { type: String, required: true },
   expected_delivery_date_and_time: { type: Date },
 
@@ -23,7 +27,6 @@ const shipmentSchema = new mongoose.Schema({
     mode: { type: String },
     actual_dimensions: { type: Number },
     charged_dimensions: { type: Number },
-    unit_of_weight: { type: String },
     actual_weight: { type: Number },
     charged_weight: { type: Number },
     special_instructions: { type: String },

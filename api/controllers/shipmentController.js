@@ -14,7 +14,7 @@ import { serverError } from '../helpers/responseUtility.mjs';
 // Create Shipment
 export const createShipment = async (req, res) => {
   try {
-    const { consigner, consignee, driver, vehicle,agent, ...rest } = req.body;
+    const { consigner, consignee, driver, vehicle,agent,transport_mode, ...rest } = req.body;
 
     //  Step 1: Required Fields Check
     const requiredFields = ['consigner', 'consignee', 'delivery_location'];
@@ -28,7 +28,7 @@ export const createShipment = async (req, res) => {
     }
 
     //  Step 2: ObjectId Validations
-    const idFields = ['consigner', 'consignee', 'driver', 'vehicle'];
+    const idFields = ['consigner', 'consignee', 'driver', 'vehicle','transport_mode'];
     if (agent) idFields.push('agent'); 
     const invalidFields = validateObjectIdFields(idFields, req.body);
 
@@ -56,6 +56,8 @@ const bility_no = latestShipment?.bility_no
       driver: driver ? new mongoose.Types.ObjectId(driver) : undefined,
       vehicle: vehicle ? new mongoose.Types.ObjectId(vehicle) : undefined,
       agent: agent ? new mongoose.Types.ObjectId(agent) : undefined, 
+      transport_mode: transport_mode ? new mongoose.Types.ObjectId(transport_mode) : undefined,
+
       bility_no,
       ...rest,
       created_by: req.user._id,
@@ -78,7 +80,7 @@ export const getAllShipments = async (req, res) => {
     const filter = { organization_id: req.user.account_id };
 
     // Add status filter if query param is present
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Canceled'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled'];
 
 if (req.query.status) {
   if (!allowedStatuses.includes(req.query.status)) {
@@ -98,6 +100,7 @@ if (req.query.status) {
       .populate('driver')
       .populate('vehicle')
       .populate('agent') 
+      .populate('transport_mode')
       .populate('created_by', 'email');
 
     res.status(200).json({
@@ -122,6 +125,7 @@ export const getShipmentById = async (req, res) => {
       .populate('driver')
       .populate('vehicle')
       .populate('agent')
+      .populate('transport_mode')
       .populate('created_by', 'email');
 
     if (!shipment) {
@@ -141,7 +145,7 @@ export const getShipmentById = async (req, res) => {
 // Update Shipment
 export const updateShipment = async (req, res) => {
   try {
-    const objectIdFields = ['consigner', 'consignee', 'driver', 'vehicle', 'agent'];
+    const objectIdFields = ['consigner', 'consignee', 'driver', 'vehicle', 'agent','transport_mode'];
 
     for (const field of objectIdFields) {
       const value = req.body[field];
@@ -208,7 +212,7 @@ export const updateShipmentStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Canceled'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Cancelled'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status value' });
     }
