@@ -80,7 +80,7 @@ export const getAllShipments = async (req, res) => {
     const filter = { organization_id: req.user.account_id };
 
     // Add status filter if query param is present
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled','Completed'];
 
 if (req.query.status) {
   if (!allowedStatuses.includes(req.query.status)) {
@@ -90,9 +90,7 @@ if (req.query.status) {
     });
   }
   filter.status = req.query.status;
-} else {
-  filter.status = { $ne: 'Canceled' };
-}
+} 
 
     const shipments = await Shipment.find(filter)
       .populate('consigner')
@@ -212,7 +210,7 @@ export const updateShipmentStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Cancelled'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Cancelled','Completed'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status value' });
     }

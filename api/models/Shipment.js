@@ -40,7 +40,7 @@ const shipmentSchema = new mongoose.Schema({
   eway_bill_number: { type: String },
   status: {
     type: String,
-    enum: ['Open', 'In-Transit', 'Delivered', 'Cancelled'],
+    enum: ['Open', 'In-Transit', 'Delivered', 'Cancelled','Completed'],
     default: 'Open',
   },
 
