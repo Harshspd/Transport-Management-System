@@ -23,23 +23,18 @@ export const getAllRates = async (req, res) => {
       {
         $unwind: {
           path: '$rate_info',
-          preserveNullAndEmptyArrays: true, 
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          provider_rate: '$rate_info.provider_rate',
+          consigner_rate: '$rate_info.consigner_rate',
         },
       },
       {
         $project: {
-          _id: 1,
-          bility_no: 1,
-          bill_date: 1,
-          expected_delivery_date_and_time: 1,
-          consigner_id: 1,
-          consignee_id: 1,
-          vehicle_id: 1,
-          driver_id: 1,
-          shipment_type: 1,
-          status: 1,
-          provider_rate: '$rate_info.provider_rate',
-          consigner_rate: '$rate_info.consigner_rate',
+          rate_info: 0,
         },
       },
     ]);
@@ -54,7 +49,6 @@ export const getAllRates = async (req, res) => {
     serverError(res);
   }
 };
-
 
 
 
