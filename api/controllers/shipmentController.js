@@ -38,16 +38,34 @@ export const createShipment = async (req, res) => {
         error: true,
       });
     }
-      // organisation level bilityno
-     const latestShipment = await Shipment.findOne({
-    organization_id: req.user.account_id
-})
-  .sort({ bility_no: -1 })
-  .limit(1);
+    // Use bility_no from request if provided, else calculate the next one
+let bility_no = parseInt(req.body.bility_no);
 
-const bility_no = latestShipment?.bility_no
-  ? latestShipment.bility_no + 1
-  : parseInt(process.env.ShipmentBaseId) || 4000;
+if (!bility_no || isNaN(bility_no)) {
+  const latestShipment = await Shipment.findOne({
+    organization_id: req.user.account_id,
+  })
+    .sort({ bility_no: -1 })
+    .limit(1);
+
+  bility_no = latestShipment?.bility_no
+    ? latestShipment.bility_no + 1
+    : parseInt(process.env.ShipmentBaseId) || 4000;
+}
+
+// Check for duplicate bility number in the same organization
+const duplicate = await Shipment.findOne({
+  bility_no,
+  organization_id: req.user.account_id,
+});
+
+if (duplicate) {
+  return res.status(400).json({
+    message: `Bility Number ${bility_no} already exists.`,
+    error: true,
+  });
+}
+
 
     //  Step 3: Create Shipment
     const shipment = await Shipment.create({
