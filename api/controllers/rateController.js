@@ -10,37 +10,81 @@ export const getAllRates = async (req, res) => {
 
     const shipmentsWithRates = await Shipment.aggregate([
       {
-        $match: { organization_id: new mongoose.Types.ObjectId(organizationId) },
+        $match: {
+          organization_id: new mongoose.Types.ObjectId(organizationId),
+        },
       },
       {
         $lookup: {
           from: 'rates',
           localField: '_id',
           foreignField: 'shipment_id',
-          as: 'rate_info',
+          as: 'rate',
         },
       },
       {
         $unwind: {
-          path: '$rate_info',
+          path: '$rate',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'consigners',
+          localField: 'consigner',
+          foreignField: '_id',
+          as: 'consigner',
+        },
+      },
+      {
+        $unwind: {
+          path: '$consigner',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'consignees',
+          localField: 'consignee',
+          foreignField: '_id',
+          as: 'consignee',
+        },
+      },
+      {
+        $unwind: {
+          path: '$consignee',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'agents',
+          localField: 'agent',
+          foreignField: '_id',
+          as: 'agent',
+        },
+      },
+      {
+        $unwind: {
+          path: '$agent',
           preserveNullAndEmptyArrays: true,
         },
       },
       {
         $addFields: {
-          provider_rate: '$rate_info.provider_rate',
-          consigner_rate: '$rate_info.consigner_rate',
+          provider_rate: '$rate.provider_rate',
+          consigner_rate: '$rate.consigner_rate',
         },
       },
       {
         $project: {
-          rate_info: 0,
+          rate: 0,
         },
       },
     ]);
 
     res.status(200).json({
-      message: 'Shipments with rate info fetched successfully',
+      message: 'Shipments with rate info and populated details fetched successfully',
       data: shipmentsWithRates,
       error: false,
     });
@@ -49,7 +93,6 @@ export const getAllRates = async (req, res) => {
     serverError(res);
   }
 };
-
 
 
 
