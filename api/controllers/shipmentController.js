@@ -12,7 +12,7 @@ import { serverError } from '../helpers/responseUtility.mjs';
 
 
 // Create Shipment
-export const createShipment = async (req, res) => {
+export let createShipment = async (req, res) => {
   try {
     const { consigner, consignee, driver, vehicle,agent,transport_mode, ...rest } = req.body;
 
@@ -38,22 +38,18 @@ export const createShipment = async (req, res) => {
         error: true,
       });
     }
-    // Use bility_no from request if provided, else calculate the next one
+    // Step 3: Validate and use bility_no from frontend
 let bility_no = parseInt(req.body.bility_no);
 
+// Check if it's a valid number
 if (!bility_no || isNaN(bility_no)) {
-  const latestShipment = await Shipment.findOne({
-    organization_id: req.user.account_id,
-  })
-    .sort({ bility_no: -1 })
-    .limit(1);
-
-  bility_no = latestShipment?.bility_no
-    ? latestShipment.bility_no + 1
-    : parseInt(process.env.ShipmentBaseId) || 4000;
+  return res.status(400).json({
+    message: 'Invalid or missing Bility Number. It must be a numeric value.',
+    error: true,
+  });
 }
 
-// Check for duplicate bility number in the same organization
+// Step 4: Check for duplicate Bility Number in same organization
 const duplicate = await Shipment.findOne({
   bility_no,
   organization_id: req.user.account_id,
@@ -65,6 +61,7 @@ if (duplicate) {
     error: true,
   });
 }
+
 
 
     //  Step 3: Create Shipment
@@ -85,6 +82,28 @@ if (duplicate) {
     res.status(201).json({
       message: 'Shipment created successfully',
       data: shipment,
+      error: false,
+    });
+  } catch (error) {
+    serverError(res, error);
+  }
+};
+
+
+
+export const getLastBilityNumberByOrganization = async (req, res) => {
+  try {
+    const latestShipment = await Shipment.findOne({
+      organization_id: req.user.account_id,
+    }).sort({ bility_no: -1 }).limit(1);
+
+    const nextBilityNo = latestShipment?.bility_no
+      ? latestShipment.bility_no + 1
+      : parseInt(process.env.ShipmentBaseId) || 4000;
+
+    res.status(200).json({
+      message: 'Next Bility Number fetched successfully',
+      bility_no: nextBilityNo,
       error: false,
     });
   } catch (error) {
