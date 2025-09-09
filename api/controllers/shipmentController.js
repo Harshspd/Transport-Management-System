@@ -1,22 +1,21 @@
 import mongoose from 'mongoose';
 import Shipment from '../models/Shipment.js';
 import { serverError } from '../helpers/responseUtility.mjs';
- import {
+import {
   validateRequiredFields,
-  validateObjectIdFields,checkDuplicate} from '../helpers/validationUtility.mjs';
-  
-   import dotenv from 'dotenv';
-   dotenv.config();
+  validateObjectIdFields,
+  checkDuplicate,
+} from '../helpers/validationUtility.mjs';
 
-
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Create Shipment
 export let createShipment = async (req, res) => {
   try {
-    const { consigner, consignee, driver, vehicle,agent,transport_mode, ...rest } = req.body;
+    const { consigner, consignee, driver, vehicle, agent, transport_mode, ...rest } = req.body;
 
-    //  Step 1: Required Fields Check
+    // Step 1: Required Fields Check
     const requiredFields = ['consigner', 'consignee', 'delivery_location'];
     const missingFields = validateRequiredFields(requiredFields, req.body);
 
@@ -27,9 +26,9 @@ export let createShipment = async (req, res) => {
       });
     }
 
-    //  Step 2: ObjectId Validations
-    const idFields = ['consigner', 'consignee', 'driver', 'vehicle','transport_mode'];
-    if (agent) idFields.push('agent'); 
+    // Step 2: ObjectId Validations
+    const idFields = ['consigner', 'consignee', 'driver', 'vehicle', 'transport_mode'];
+    if (agent) idFields.push('agent');
     const invalidFields = validateObjectIdFields(idFields, req.body);
 
     if (invalidFields.length > 0) {
@@ -38,42 +37,41 @@ export let createShipment = async (req, res) => {
         error: true,
       });
     }
-    // Step 3: Validate and use bility_no from frontend
-let bility_no = parseInt(req.body.bility_no);
 
-// Check if it's a valid number
-if (!bility_no || isNaN(bility_no)) {
-  return res.status(400).json({
-    message: 'Invalid or missing Bility Number. It must be a numeric value.',
-    error: true,
-  });
-}
+    // ✅ Step 3: Auto-generate bility_no
+    const latestShipment = await Shipment.findOne({
+      organization_id: req.user.account_id,
+    })
+      .sort({ bility_no: -1 })
+      .limit(1);
 
-// Step 4: Check for duplicate Bility Number in same organization
-const duplicate = await Shipment.findOne({
-  bility_no,
-  organization_id: req.user.account_id,
-});
+    const bility_no = latestShipment?.bility_no
+      ? latestShipment.bility_no + 1
+      : parseInt(process.env.ShipmentBaseId) || 4000;
 
-if (duplicate) {
-  return res.status(400).json({
-    message: `Bility Number ${bility_no} already exists.`,
-    error: true,
-  });
-}
+    // Step 4: Check for duplicate Bility Number in same organization
+    const duplicate = await Shipment.findOne({
+      bility_no,
+      organization_id: req.user.account_id,
+    });
 
+    if (duplicate) {
+      return res.status(400).json({
+        message: `Bility Number ${bility_no} already exists.`,
+        error: true,
+      });
+    }
 
-
-    //  Step 3: Create Shipment
+    // Step 5: Create Shipment
     const shipment = await Shipment.create({
       consigner: new mongoose.Types.ObjectId(consigner),
       consignee: new mongoose.Types.ObjectId(consignee),
       driver: driver ? new mongoose.Types.ObjectId(driver) : undefined,
       vehicle: vehicle ? new mongoose.Types.ObjectId(vehicle) : undefined,
-      agent: agent ? new mongoose.Types.ObjectId(agent) : undefined, 
+      agent: agent ? new mongoose.Types.ObjectId(agent) : undefined,
       transport_mode: transport_mode ? new mongoose.Types.ObjectId(transport_mode) : undefined,
 
-      bility_no,
+      bility_no, // ✅ always backend generated
       ...rest,
       created_by: req.user._id,
       organization_id: req.user.account_id,
@@ -89,13 +87,14 @@ if (duplicate) {
   }
 };
 
-
-
+// Get last Bility Number by organization
 export const getLastBilityNumberByOrganization = async (req, res) => {
   try {
     const latestShipment = await Shipment.findOne({
       organization_id: req.user.account_id,
-    }).sort({ bility_no: -1 }).limit(1);
+    })
+      .sort({ bility_no: -1 })
+      .limit(1);
 
     const nextBilityNo = latestShipment?.bility_no
       ? latestShipment.bility_no + 1
@@ -111,30 +110,30 @@ export const getLastBilityNumberByOrganization = async (req, res) => {
   }
 };
 
-// Get all Shipments under user's organization
+// Get all Shipments
 export const getAllShipments = async (req, res) => {
   try {
     const filter = { organization_id: req.user.account_id };
 
     // Add status filter if query param is present
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled','Completed'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled', 'Completed'];
 
-if (req.query.status) {
-  if (!allowedStatuses.includes(req.query.status)) {
-    return res.status(400).json({
-      message: `Invalid status. Allowed: ${allowedStatuses.join(', ')}`,
-      error: true,
-    });
-  }
-  filter.status = req.query.status;
-} 
+    if (req.query.status) {
+      if (!allowedStatuses.includes(req.query.status)) {
+        return res.status(400).json({
+          message: `Invalid status. Allowed: ${allowedStatuses.join(', ')}`,
+          error: true,
+        });
+      }
+      filter.status = req.query.status;
+    }
 
     const shipments = await Shipment.find(filter)
       .populate('consigner')
       .populate('consignee')
       .populate('driver')
       .populate('vehicle')
-      .populate('agent') 
+      .populate('agent')
       .populate('transport_mode')
       .populate('created_by', 'email');
 
@@ -180,13 +179,13 @@ export const getShipmentById = async (req, res) => {
 // Update Shipment
 export const updateShipment = async (req, res) => {
   try {
-    const objectIdFields = ['consigner', 'consignee', 'driver', 'vehicle', 'agent','transport_mode'];
+    const objectIdFields = ['consigner', 'consignee', 'driver', 'vehicle', 'agent', 'transport_mode'];
 
     for (const field of objectIdFields) {
       const value = req.body[field];
 
-      if (value === "" || value === null || value === undefined) {
-        delete req.body[field]; 
+      if (value === '' || value === null || value === undefined) {
+        delete req.body[field];
       } else if (mongoose.Types.ObjectId.isValid(value)) {
         req.body[field] = new mongoose.Types.ObjectId(value);
       } else {
@@ -247,7 +246,7 @@ export const updateShipmentStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowedStatuses = ['Open', 'In-Transit', 'Delivered','Cancelled','Completed'];
+    const allowedStatuses = ['Open', 'In-Transit', 'Delivered', 'Cancelled', 'Completed'];
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status value' });
     }

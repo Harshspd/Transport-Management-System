@@ -44,6 +44,7 @@ const shipmentSchema = new mongoose.Schema({
     default: 'Open',
   },
 
+     
   bility_no: {
     type: Number,
     required: true
